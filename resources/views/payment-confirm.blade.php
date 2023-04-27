@@ -23,22 +23,22 @@
                 <th>Payment method</th>
                 <th>Payment Screenshot</th>
                 <th>Ordered Date</th>
-                <th>Is confirmed</th>
+                <th>Is Confirmed</th>
                 <th>Confirmed Date</th>
             </tr>
-            @if (isset($confirmedOrders))
-            @foreach ($confirmedOrders as $conOrder)
+            @if (isset($confirmedOrder))
+            @foreach ($confirmedOrder as $corder)
             <tr>
                 <td>{{$no++}}</td>
-                <td>{{$conOrder->company->company_name}}</td>
-                <td>{{$conOrder->no_of_credit}}</td>
-                <td>{{$conOrder->creditPrice->price}}</td>
-                <td></td>
-                <td>{{$conOrder->paymentAccount->paymentMethod->name}}</td>
-                <td><img src="{{url('images/payment_methods/'.$conOrder->screenshot)}}" alt=""></td>
-                <td>{{$conOrder->created_at}}</td>
-                <td>{{$conOrder->orderConfirmation->is_confirmed}}</td>
-                <td>{{$conOrder->orderConfirmation->created_at}}</td>
+                <td>{{$corder->order->company->company_name}}</td>
+                <td>{{$corder->order->no_of_credit}}</td>
+                <td>{{$corder->order->creditPrice->price}}</td>
+                <td>{{$corder->order->no_of_credit*$corder->order->creditPrice->price}}</td>
+                <td>{{$corder->order->paymentAccount->paymentMethod->name}}</td>
+                <td><img src="{{url('images/payment_screenshots/'.$corder->order->screenshot)}}" alt=""></td>
+                <td>{{$corder->order->created_at}}</td>
+                <td>{{$corder->is_confirmed}}</td>   
+                <td>{{$corder->created_at}}</td>             
             </tr>
             @endforeach
             @endif

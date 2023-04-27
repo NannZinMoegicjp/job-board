@@ -17,11 +17,12 @@ return new class extends Migration
             $table->foreign('payment_account_id')->references('id')->on('payment_accounts');
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->unsignedBigInteger('price_id');
-            $table->foreign('price_id')->references('id')->on('credit_prices');
+            $table->unsignedBigInteger('credit_price_id');
+            $table->foreign('credit_price_id')->references('id')->on('credit_prices');
             $table->integer('no_of_credit');
             $table->string('screenshot');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

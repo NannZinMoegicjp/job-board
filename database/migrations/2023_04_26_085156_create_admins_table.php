@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('profile_image');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
