@@ -1,0 +1,15 @@
+.mynavbar{
+    background: #3f1e5f !important;
+}
+.navbarBrand{
+    font-weight: bold;
+    font-size: 1.5rem;
+    font-family: "Gotham-Medium";
+    color: white;
+}
+.mynavs a{
+  color: white !important;
+}
+.mynavs a:hover{
+  color: white;
+}

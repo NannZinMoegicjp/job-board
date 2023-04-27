@@ -1,0 +1,418 @@
+@import url('fonts.css');
+/* navbar */
+.mynavbar{
+    background: #3f1e5f !important;
+}
+.navbarBrand{
+    font-weight: bold;
+    font-size: 1.5rem;
+    font-family: "Gotham-Medium";
+    color: white;
+}
+.navbar ul li {
+	padding: 0px 10px; 
+} 
+.mynavs a{
+  color: white !important;
+}
+.mynavs a:hover{
+  color: white;
+}
+/* search */
+.bg-opacity{
+    position: relative;
+    background-color: rgba(129, 184, 2,0.1);
+}
+.bg-opacity::before{
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 1;
+    /* background:url("../images/widget-search-background (1).jpg") no-repeat center center; */
+    /* background:url("../images/hero-image-text-left-darker (1).jpg") no-repeat center center; */
+    /* background:url("../images/about-fullscreen-1-1920x700.jpg") no-repeat center center;   */
+    /* background:url("../images/searchbg1.jfif") no-repeat center center;    */
+    /* background-size: cover; */
+}
+.content{
+  position: relative;
+  width: 100%;
+  /* height: 200px; */
+}
+.searchbgcolor{
+  background-color: #3f1e5f;
+}
+/* industries css */
+.industries img{
+    width: 30px;
+    height: 30px;
+}
+.industries .circle{
+    padding: 18px;
+    box-shadow: 0px 0px 10px 1px #d9d2e9;
+    border-radius: 50%;
+}
+.industries{
+  transition: transform 0.4s;
+}
+.industries:hover{
+  transform: scale(1.05);
+}
+.borderColor1{
+  border: 2px solid lightgray;  
+}
+.borderColor2{
+  border: 2px solid #86a6ad;    
+}
+.borderColor3{
+  border: 2px solid #bddbb0;    
+}
+.borderColor3:hover{
+  border: 2px solid #93c47d;    
+}
+.borderColor4{
+  border: 2px solid #fce9ec;    
+}
+.borderColor5{
+  border: 2px solid #8e7cc3;    
+}
+/*others inside body */
+.pageContent{
+  min-height: 600px;
+}
+body{
+  margin: 0rem;
+  font-family: "Gotham-Medium";
+}
+.logoImg{
+  width: 50px;
+  height: auto;
+}
+.purplebg{
+  background-color: #d9d2e9;
+}
+.greybg{
+  background-color: #FDFDFD;
+}
+.greenbg{
+    background-color: #CBE9BF;
+}
+.yellowbg{
+  background: orange;
+}
+.location{
+    transition: transform 0.4s;
+}
+.location:hover{
+    transform: scale(1.05);
+}
+.cityName{
+    color: #3f1e5f;
+    font-size: 1.1rem;
+    font-family: "Gotham-Bold";
+}
+.noOfJobs{
+    color: #FF8D00;
+    font-family: "JosefinSans-Mediums";
+}
+.greenBtn{
+    background-color: #8FCE00 !important;
+    color: #3f1e5f !important;
+    min-width: 100px;
+}
+  .orangeBtn{
+    background-color: orange !important;
+    color: #3f1e5f !important;
+    min-width: 100px;
+}
+
+  .greenBtn:hover,.registerBtn:hover,.loginBtn:hover{
+    background-color: #75a604 !important;
+    color: #ffffff !important;
+  }
+  .orangeBtn:hover{
+    background-color: rgb(212, 140, 6) !important;
+    color: #ffffff !important;
+  }
+  .button-18 {  
+    border: 0;
+    align-items: center;
+    border-radius: 100px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 480px;
+    min-height: 40px;
+    min-width: 100px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    touch-action: manipulation;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+  }
+  .button-18:disabled { 
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, .08);
+    color: rgba(0, 0, 0, .3);
+  }
+  .myBtn:hover{
+    background-color: #81b802;
+    color: #ffffff;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+    font-family: "Inter", sans-serif;
+    color: #343a40;
+    line-height: 1;
+}
+
+.pagination,
+.page-numbers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.pagination {
+    margin: 10px 0px;
+}
+
+.btn-nav,
+.btn-page {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.btn-nav {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid #3f1e5f;
+    color: #d9d2e9;
+}
+
+.btn-nav i{
+  color: #3f1e5f;
+}
+.btn-nav:hover i{
+  color: white;
+}
+.btn-nav:hover,
+.btn-page:hover {
+    background-color: #3f1e5f;
+    color: #fff;
+}
+
+.btn-page {
+    border: none;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+}
+
+.btn-selected {
+    background-color: #3f1e5f;
+    color: #fff;
+}
+
+  /* footer */
+  footer{
+    background: #251239;
+    color: rgb(233, 227, 227);
+  }
+  .quickLinks{
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .quickLinks li{
+    line-height: 200%;
+  }
+  .quickLinks a{
+    text-decoration: none;
+    color: rgb(233, 227, 227);;
+  }
+  .quickLinks a:hover{
+    color: #8FCE00;
+  }
+  .socialMedia i{
+  color: white;
+  font-size: 1.2rem;
+  padding: 0rem 0.2rem;
+}
+.socialMedia i:hover,.address i{
+  color:#8FCE00;
+}
+.footerPbg{
+  background: #20124D;
+}
+/* categories */
+.categories .circle{
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px solid rgba(128, 0, 128, 0.25);
+}
+.category,.job,.company{
+  background-color: #ffffff;
+  border-bottom: 3px solid #ffffff;
+  border-radius: 5px;
+  transition: box-shadow 0.4s;
+}
+.center{
+  margin-left: auto;
+  margin-right: auto;
+}
+/* recent jobs */
+.job a{
+  color: black;
+}
+.job:hover a{
+  color: white;
+}
+/* jobs */
+.jobLink:hover,.companyLink:hover,.companyJobsLink:hover{
+  color: #81b802 !important;
+}
+.jobpost{
+  background: #ffffff;
+  transition: box-shadow 0.4s;
+}
+.jobpost:hover,.job:hover,.category:hover,.apply,.company:hover{
+  box-shadow: 1px 1px 15px #d9d2e9;
+  border-bottom: 3px solid #3f1e5f !important;
+}
+.jobpost img{
+  max-width: 90%;
+  height: auto;
+  transition: all 0.4s;
+}
+.jobpost img:hover{
+  transform: scale(1.1);
+}
+.gender{
+  color: #81b802;
+}
+.clock{
+  color: #93c47d;
+}
+.money,.industry{
+  color: #8e7cc3;
+}
+.location{
+  color: #ffd966;
+}
+.date{
+  color: #76a5af;
+}
+.comOverview i,.title{
+  color: #4E2476;
+}
+/* companies */
+.companies img{
+  max-width: 100px;
+  max-height: 100px;
+}
+.companies a{
+  text-decoration: none !important;
+  color: black !important;
+}
+.companies a:hover{
+  color: #3f1e5f !important;
+}
+/* company */
+.photo{
+  max-width: 250px;
+  border:1px solid #4E2476;
+}
+.mydiv{
+  padding: 1rem 0rem;
+}
+.position{
+  color: #682e9e;
+}
+.position:hover{
+  color: #81b802;
+}
+.param{
+  text-align: justify;
+}
+.fw{
+  font-weight: 600;
+}
+/* registration form css*/
+.forms {
+  color:  #7E468F !important;
+}
+input:not([type=submit]):focus {
+  border: none !important;
+  box-shadow: 0 0 0 2px #7E468F !important;
+}
+.registerBtn,.loginBtn {
+  background-color: #8FCE00 !important;
+}
+.registerBtnColor:hover {
+  background-color: #7E468F !important;
+  color: white !important;
+}
+.registerBtns{
+  /* width: 100px; */
+  padding: 10px;  
+  border: 1px solid #8FCE00 !important;          
+}
+.selected{
+  color: white !important;
+  background-color: #8FCE00 !important;
+}
+.notSelected{
+  background-color: white !important;
+  color: #8FCE00 !important;
+}
+#jobseekerBtn{
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+#employerBtn{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.loginContainer{
+  height: 500px;
+}
+.address{
+  height: 100px !important;
+}

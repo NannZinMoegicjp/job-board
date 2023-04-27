@@ -1,0 +1,19 @@
+.modalContainer{
+    /* display: none; */
+    background-color: rgba(197, 99, 99, 0.2);
+    width: 60%;
+    height: 500px;
+    position: absolute;
+}
+.modal{
+    /* background-color: rgb(40, 40, 40); */
+    color: white;
+    width: 80%;
+    min-height: 500px;
+    margin: auto;
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    display: flex;
+    z-index: 1;
+}

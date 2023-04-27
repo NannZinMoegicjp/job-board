@@ -1,0 +1,17 @@
+.industries img{
+    width: 30px;
+    height: 30px;
+}
+.industries .circle{
+    border: 1px solid lightgray;    
+    border-radius: 50%;
+    transition: all 0.4s;
+}
+.industries .circle:hover{
+    transform: scale(1.1);
+    border: 1px solid #4E2476;
+    box-shadow: 0px 0px 10px 1px white;
+}
+.industries p{
+    width: 97%;
+}

@@ -1,0 +1,25 @@
+.item img{
+    width: 60px;
+    height: 60px;
+}
+.item{
+    /* background-color: #fafbfa; */
+    height: 100px;
+    border: 1px solid #f3f6f4;
+    border-radius: 10px !important;
+}
+.orangeBorder{
+    border-left: 5px solid orange !important;
+}
+.greenBorder{
+    border-left: 5px solid #6aa84f !important;
+}
+.yellowBorder{
+    border-left: 5px solid #45818e !important;
+}
+.purpleBorder{
+    border-left: 5px solid #a64d79 !important;
+}
+.orange{
+    color: orange;
+}
