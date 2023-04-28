@@ -61,6 +61,10 @@ Route::post('/admin/pricing/update/{id}',[CreditPriceController::class,'updatePr
 
 Route::get('/admin/payment',[OrderController::class,'index']);
 Route::get('/admin/order',[OrderController::class,'getAwaitingOrder']);
+Route::get('/admin/order/approve/{id}',[OrderController::class,'acceptOrder']);
+Route::get('/admin/order/reject/{id}',[OrderController::class,'rejectOrder']);
+Route::get('/admin/order/confirmed/details/{id}',[OrderController::class,'confirmedOrderDetails']);
+Route::get('/admin/order/awaiting/details/{id}',[OrderController::class,'awaitingOrderDetails']);
 
 Route::get('/admin/companies',[CompanyController::class,'index']);
 Route::get('/admin/company/add',function(){

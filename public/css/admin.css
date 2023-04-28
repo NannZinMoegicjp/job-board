@@ -1,6 +1,9 @@
 .top{
     background: #CBE9BF;
 }
+/* .left{
+    height: 100vh;
+} */
 a{
     display: block;
     text-decoration: none !important;
@@ -28,16 +31,18 @@ a:hover i{
     padding-right: 10px;
     color: blue;
 }
-.confirm,.update{
+.confirm,.update,.info{
     padding-right: 10px;
-    color: green;
+}
+.info{
+    color:green;
 }
 .cancel{
     color: red;
 }
 .nav-item{
-    padding: 0.8rem 0rem;
-    border-bottom: 1px solid grey;
+    padding: 1.2rem 0 !important;
+    /* border-bottom: 1px solid grey; */
 }
 .myinput{
     padding: 5px 2px;
