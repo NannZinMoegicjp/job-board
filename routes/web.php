@@ -7,6 +7,7 @@ use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\AdminDashBoardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\JobSeekerController;
+use App\Http\Controllers\JobController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,6 +70,14 @@ Route::get('/admin/order/awaiting/details/{id}',[OrderController::class,'awaitin
 Route::get('/admin/job-seekers',[JobSeekerController::class,'index']);
 Route::get('/admin/job-seekers/add',[JobSeekerController::class,'insertGet']);
 Route::post('/admin/job-seekers/add',[JobSeekerController::class,'insert']);
+Route::get('/admin/job-seekers/update/{id}',[JobSeekerController::class,'updateSetData']);
+Route::post('/admin/job-seekers/update/{id}',[JobSeekerController::class,'update']);
+Route::post('/admin/job-seekers/update/image/{id}',[JobSeekerController::class,'updateImage']);
+Route::get('/admin/job-seekers/details/{id}',[JobSeekerController::class,'viewDetails']);
+Route::get('/admin/job-seekers/delete/{id}',[JobSeekerController::class,'delete']);
+
+Route::get('/admin/jobs',[JobController::class,'index']);
+Route::get('/admin/job/details/{id}',[JobController::class,'viewDetails']);
 
 Route::get('/admin/companies',[CompanyController::class,'index']);
 Route::get('/admin/company/add',[CompanyController::class,'insertGet']);

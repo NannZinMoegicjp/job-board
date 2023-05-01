@@ -167,7 +167,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         <input type="file" class="form-control mb-2" placeholder="Logo" name="newlogofile"
-                            id="newlogofile" value="{{old('logofile')}}">
+                            id="newlogofile" value="{{old('logofile')}}" required>
                         <input type="submit" class="btn btn-outline-primary" value="upload new logo">
                     </form>
                 </div>

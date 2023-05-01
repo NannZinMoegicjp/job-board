@@ -1,6 +1,6 @@
 @extends('master_admin')
 @section('content')
-<section class="container-fluid">
+<section>
     <div class="row text-end my-2">
         <a href="{{url('/admin/companies')}}">companies list<i class="bi bi-arrow-right"></i></a>
     </div>

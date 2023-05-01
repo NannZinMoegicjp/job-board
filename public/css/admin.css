@@ -87,3 +87,7 @@ a:hover i{
     top: -20px;
     right: 10px;
 }
+.profileImg{
+    width: 100px;
+    height: 100px;
+}

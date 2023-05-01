@@ -181,7 +181,6 @@ class CompanyController extends Controller
     {
         $company = Company::find($id);
         $company->delete();
-        $companies = Company::all();        
         return redirect('/admin/companies')->with('status', "deleted successfully");
     }
     public function viewDetails($id)

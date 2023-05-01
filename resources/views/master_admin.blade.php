@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{URL::asset('css/admin.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/order.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/dashboard.css')}}" />
+    @yield('css')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
@@ -19,6 +20,7 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<body>
 <div class="container-fluid">
     <div class="row border-bottom top">
         <div class="col-12">
@@ -66,7 +68,7 @@
                         <a href="{{url('/admin/job-seekers')}}"><i class="bi bi-person-workspace"></i> Job Seekers Management</a>
                         </li>
                         <li class="nav-item">
-                        <a href="#"><i class="bi bi-briefcase-fill"></i> Jobs Management</a>
+                        <a href="{{url('/admin/jobs')}}"><i class="bi bi-briefcase-fill"></i> Jobs Management</a>
                         </li>
                         <li class="nav-item">
                         <a href="{{url('/admin/payment-methods')}}"><i class="bi bi-credit-card-2-front-fill"></i> Payment Account Management</a>
@@ -85,8 +87,33 @@
         </div>
     </div>
 </div>
-<body>
+<!-- @stack('scripts') -->
+<script
 
+type="text/javascript"
+
+charset="utf8"
+
+src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"
+
+></script>
+
+<script
+
+type="text/javascript"
+
+charset="utf8"
+
+src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<script>
+
+ $(document).ready( function () {
+
+ $('#datatable').dataTable();
+
+ });
+
+</script>
 </body>
 
 </html>

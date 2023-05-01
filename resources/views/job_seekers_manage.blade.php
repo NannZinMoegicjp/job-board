@@ -27,27 +27,28 @@
             @endphp
             <tr>
                 <th>No</th>
-                <th>Profile image</th>
+                <!-- <th>Profile image</th> -->
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Address</th>
-                <th>Date of birth</th>
-                <th>Gender</th>
+                <!-- <th>Address</th> -->
+                <!-- <th>Date of birth</th> -->
+                <!-- <th>Gender</th> -->
                 <th>Actions</th>
             </tr>
             @foreach ($jobSeekers as $jobseeker)
             <tr>
                 <td>{{$no++}}</td>
-                <td><img src="{{URL::asset('images/jobseekers/'.$jobseeker->image)}}" alt="" class="myimg"></td>
+                <!-- <td><img src="{{URL::asset('images/jobseekers/'.$jobseeker->image)}}" alt="" class="myimg"></td> -->
                 <td>{{$jobseeker->name}}</td>
                 <td>{{$jobseeker->email}}</td>
                 <td>{{$jobseeker->phone}}</td>
-                <td>{{$jobseeker->address}}</td>
+                <!-- <td>{{$jobseeker->address}}</td>
                 <td>{{$jobseeker->dob}}</td>
-                <td>{{$jobseeker->gender}}</td>                
+                <td>{{$jobseeker->gender}}</td>                 -->
                 <td>
-                    <div class="d-flex">                        
+                    <div class="d-flex">     
+                    <a href="{{url('/admin/job-seekers/details/'.$jobseeker->id)}}"><i class="bi bi-info-circle-fill info"></i></a>                   
                         <a href="{{url('/admin/job-seekers/update/'.$jobseeker->id)}}"><i
                                 class="bi bi-pencil-fill update"></i></a>
                         <a onclick='return confirm("Want to delete?")'

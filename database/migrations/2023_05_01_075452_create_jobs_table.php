@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('Jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('salary');
+            $table->string('gender');
             $table->integer('open_position');
-            $table->string('address');
             $table->unsignedBigInteger("job_category_id");            
             $table->foreign("job_category_id")->references('id')->on('job_categories');
             $table->unsignedBigInteger("experience_level_id");
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jobs');
+        Schema::dropIfExists('Jobs');
     }
 };
