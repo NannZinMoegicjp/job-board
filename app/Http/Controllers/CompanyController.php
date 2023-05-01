@@ -8,9 +8,11 @@ use App\Models\Image;
 use App\Models\Industry;
 use App\Models\State;
 use App\Models\Address;
+use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\Builder;
 class CompanyController extends Controller
 {
     public function index()
@@ -72,7 +74,9 @@ class CompanyController extends Controller
         //     $add->company_id=$company->id;
         //     $add->save();
         // }
-        return redirect('/admin/companies')->with('status', "added successfully");
+        
+        return redirect('/admin/company/details/'.$company->id);
+        // return redirect('/admin/companies')->with('status', "added successfully");
     }
     public function updateSetData($id)
     {
@@ -187,6 +191,8 @@ class CompanyController extends Controller
     {
         $company = Company::find($id);
         $addresses = Address::where('company_id',$id)->get();
-        return view('admin-company-detail')->with('company', $company)->with('addresses', $addresses);
+        $addrIDs = DB::table('addresses')->where('company_id', $id)->pluck('id')->toArray();
+        $jobCount = Job::whereIn('address_id', $addrIDs)->count();
+        return view('admin-company-detail')->with(['company'=> $company,'addresses'=> $addresses,'jobCount'=>$jobCount]);
     }
 }

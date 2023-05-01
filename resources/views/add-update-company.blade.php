@@ -530,8 +530,9 @@
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
                     </div>
-                    <div class="col-md-7 col-12">
-                        <input type="submit" class="form-control btn-primary btn" required value="Add">
+                    <div class="col-md-7 col-12 d-flex">
+                        <input type="submit" class="btn-primary btn me-2" required value="Add">
+                        <a href="{{url('/admin/companies')}}"><input type="button" class="btn-secondary btn" value="Cancel"></a>                        
                     </div>
                 </div>
             </form>

@@ -5,14 +5,14 @@
         <a href="{{url('/admin/companies')}}">companies list<i class="bi bi-arrow-right"></i></a>
     </div>
     @if(isset($company))
-    <div class="container bg-white">
-        <div class="d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="d-flex  align-items-center ">
             <img src="{{url('images/companies/'.$company['logo'])}}" alt="{{$company['company_name']}} logo"
-                class="companyDetailsLogo">
+                class="companyDetailsLogo me-2">
             <h3 class="text-center title py-2">{{$company["company_name"]}}</h3>
         </div>
         <div class="row">
-            <div class="col-md-5 offset-md-1">
+            <div class="col-md-5">
                 <div class="m-1">
                     <i class="bi bi-person-circle me-2"></i><span class="title">Contact Person </span> :
                     <span class="text-secondary">
@@ -42,11 +42,11 @@
                 </div>
                 <div class="m-1">
                     <i class="bi bi-send me-2"></i><span class="title">No of job posted </span> :
-                    <span class="text-secondary">
+                    <span class="text-secondary">{{$jobCount}}
                     </span>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-7">
                 <div class="m-1">
                     <i class="bi bi-bookmarks-fill me-2 industry"></i><span class="title">Industry</span> :
                     <span class="text-secondary">
@@ -84,8 +84,13 @@
                 <div class="m-1">
                     <i class="bi bi-building-fill"></i><span class="title">Other branches</span> : <span
                         class="text-secondary">
-                        @foreach ($branches as $add)                        
-                        <div>{{$add->city->name}}, {{$add->city->state->name}}</div>
+                        @foreach ($branches as $add)     
+                        @if ($loop->last)
+                        {{$add->city->name}}, {{$add->city->state->name}}
+                        @else
+                        {{$add->city->name}}, {{$add->city->state->name}} <br>
+                        @endif
+                        <span></span>
                         @endforeach</span>
                 </div>
 
