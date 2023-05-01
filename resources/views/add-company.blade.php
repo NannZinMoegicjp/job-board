@@ -134,7 +134,20 @@
                             name="address"></textarea>
                     </div>
                 </div>
-
+                <div class="row mb-2">
+                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
+                        <label for="cities">Branch cities</label>
+                    </div>
+                    <div class="col-md-7 col-12">
+                        <select name="cities[]" id="cities" class="form-select">
+                            @if(isset($cities))
+                            @foreach ($cities as $city)
+                            <option value="{{$city['id']}}">{{$city['name']}}</option>
+                            @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="industry">Main Industry</label>
@@ -149,7 +162,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="size">Number of employee</label>
@@ -180,28 +192,4 @@
         </div>
     </div>
 </div>
-
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-            $('#state').on('change', function () {
-                var stateId = this.value;
-                $("#city").html('');
-                $.ajax({
-                    url: "{{url('/api/fetch/cities')}}",
-                    type: "POST",
-                    data: {
-                        state_id: stateId,
-                        _token: '{{csrf_token()}}'
-                    },
-                    dataType: 'json',
-                    success: function (result) {
-                        $('#city').html('<option value="">-- Select city --</option>');
-                        $.each(result.cities, function (key, value) {
-                            $("#city").append('<option value="' + value
-                                .id + '">' + value.name + '</option>');
-                        });
-                    }
-                });
-            });}) --}}
-            @endsection
+@endsection

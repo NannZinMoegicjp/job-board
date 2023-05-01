@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
-    public function city(){
-        return $this->belongsTo(City::class);
+    public function addresses(){
+        return $this->hasMany(Address::class);
     } 
     public function industries(){
         return $this->belongsToMany(Industry::class);

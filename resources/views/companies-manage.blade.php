@@ -28,7 +28,6 @@
             <tr>
                 <th>No</th>
                 <th>Company name</th>
-                <th>City</th>
                 <th>Contact person</th>
                 <th>Email</th>
                 <th>Phone</th>
@@ -38,7 +37,6 @@
             <tr>
                 <td>{{$no++}}</td>
                 <td>{{$company->company_name}}</td>
-                <td>{{$company->city->name}}</td>
                 <td>{{$company->contact_person}}</td>
                 <td>{{$company->email}}</td>
                 <td>{{$company->phone}}</td>

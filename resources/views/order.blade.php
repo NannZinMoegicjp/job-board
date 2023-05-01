@@ -54,5 +54,6 @@
         </div>
     </div>
     @include('modal')
+    <script src="{{URL::asset('js/script.js')}}"></script>
 </div>
 @endsection

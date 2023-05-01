@@ -1,6 +1,13 @@
 @extends('master_admin')
 @section('content')
 <div class="container-fluid">
+    <div class="row my-2">
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        @endif
+    </div>
     <div class="row">
         @if ($errors->any())
         <div class="alert alert-danger">
@@ -13,9 +20,9 @@
     <div class="row text-end my-2">
         <a href="{{url('/admin/companies')}}">companies list<i class="bi bi-arrow-right"></i></a>
     </div>
-    <div class="row my-1">
-        <div class="col-md-8 offset-md-2 col-12">
-            @if(isset($updateId))
+    <div class="row my-3">
+        @if(isset($updateId))
+        <div class="col-md-7 col-12 mb-1">
             <form action="{{url('/admin/company/update/'.$updateId)}}" class="bg-white px-3 pb-2 rounded shadow"
                 method="post" enctype="multipart/form-data">
                 @csrf
@@ -43,11 +50,6 @@
                     <div class="col-md-7 col-12">
                         <input type="text" class="form-control" min="0" placeholder="Phone, eg. 09454096528" id="phone"
                             name="phone" value="{{$company['phone']}}">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-8 offset-md-2 col-12">
-
                     </div>
                 </div>
                 <hr>
@@ -84,31 +86,18 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="logofile" class="form-label">Company Logo</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <input type="file" class="form-control" placeholder="Logo" name="logofile" id="logofile">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="state">Division/state</label>
                     </div>
                     <div class="col-md-7 col-12">
                         <select name="state" id="state" class="form-select" placeholder="Your division/state">
                             @if(isset($states))
                             @foreach ($states as $state)
-                            @if ($state['name']==$company->city->state->name)
-                            <option value="{{$state['id']}}" selected>{{$state['name']}}</option>
-                            @else
                             <option value="{{$state['id']}}">{{$state['name']}}</option>
-                            @endif
                             @endforeach
                             @endif
                         </select>
                     </div>
                 </div>
-
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="city">City</label>
@@ -117,11 +106,7 @@
                         <select name="city" id="city" class="form-select">
                             @if(isset($cities))
                             @foreach ($cities as $city)
-                            @if ($city['name']==$company->city->name)
-                            <option value="{{$city['id']}}" selected>{{$city['name']}}</option>
-                            @else
                             <option value="{{$city['id']}}">{{$city['name']}}</option>
-                            @endif
                             @endforeach
                             @endif
                         </select>
@@ -132,37 +117,10 @@
                         <label for="address">Address</label>
                     </div>
                     <div class="col-md-7 col-12">
-                        <textarea class="form-control address" placeholder="Enter details address" id="address"
-                            name="address">{{$company['address']}}</textarea>
+                        <textarea class="form-control address" placeholder="Enter details address" required id="address"
+                            name="address">{{old('address')}}</textarea>
                     </div>
                 </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="industry">Main Industry</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <select name="industry[]" id="industry" class="form-select" multiple>
-                            @if(isset($industries))
-                            @php
-                            $industriesNames = [];
-                            @endphp
-                            @foreach($company->industries as $industry)
-                            @php
-                            array_push($industriesNames,$industry['name']);
-                            @endphp
-                            @endforeach
-                            @foreach ($industries as $industry)
-                            @if(in_array($industry['name'],$industriesNames))
-                            <option value="{{$industry['id']}}" selected>{{$industry['name']}}</option>
-                            @else
-                            <option value="{{$industry['id']}}">{{$industry['name']}}</option>
-                            @endif
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                </div>
-
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="size">Number of employee</label>
@@ -194,11 +152,173 @@
                     <div class="col-md-3 offset-md-1 col-12">
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="submit" class="form-control registerBtn btn" value="Update">
+                        <input type="submit" class="form-control btn-primary btn" value="Update">
                     </div>
                 </div>
             </form>
-            @else
+        </div>
+        <div class="col-md-5 col-12">
+            <div class="row mb-3 d-flex justify-content-center shadow p-2">
+                <div class="col-4">
+                    <img src="{{URL::asset('images/companies/'.$company->logo)}}" alt="" class="img img-fluid">
+                </div>
+                <div class="col-8">
+                    <form action="{{url('/admin/company/update/logo/'.$updateId)}}" method="post"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" class="form-control mb-2" placeholder="Logo" name="newlogofile"
+                            id="newlogofile" value="{{old('logofile')}}">
+                        <input type="submit" class="btn btn-outline-primary" value="upload new logo">
+                    </form>
+                </div>
+            </div>
+            <div class="row mb-3 shadow p-2">
+                <div class="col-4">
+                    <h6>Industry</h6>
+                </div>
+                <div class="col-8">
+                    @foreach ($company->industries as $industry)
+                    <div class="mb-2 d-flex">
+                        {{$industry->name}} <a
+                            href="{{url('/admin/company/delete/industry/'.$company->id.'/'.$industry->id)}}"><i
+                                class="bi bi-trash ms-2 text-warning"></i></a>
+                    </div>
+                    @endforeach
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#addIndustry">
+                        <i class="bi bi-plus"></i> Add more
+                    </button>
+                </div>
+            </div>
+            <div class="row mb-3 shadow p-2">
+                <div class="col-4">
+                    <h6>Branch city</h6>
+                </div>
+                <div class="col-8">
+                    @foreach ($company->addresses as $address)
+                    @if ($address->detail_address == null)
+                    <div class="mb-2 d-flex">
+                        {{$address->city->name}}<a
+                            href="{{url('/admin/company/delete/branch/'.$company->id.'/'.$address->id)}}"><i
+                                class="bi bi-trash ms-2 text-warning"></i></a>
+                    </div>
+                    @endif
+                    @endforeach
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#addBranchCity" onclick="add(this);">
+                        <i class="bi bi-plus"></i> Add more
+                    </button>
+                </div>
+            </div>
+            
+            <div class="modal fade" id="addIndustry" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"></h5>Add industry</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{url('/admin/company/add/industry/'.$company->id)}}" method="post"
+                                enctype="multipart/form-data" id="branchForm">
+                                @csrf
+                                <div class="row mb-2">
+                                    <div class="col-md-4 col-form-label">
+                                        <label for="industry">Industry</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <select name="industry" id="industry" class="form-select"
+                                            placeholder="Branch division/state">
+                                            @if(isset($industries))
+                                            @foreach ($industries as $industry)
+                                            <option value="{{$industry['id']}}">{{$industry['name']}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="submit" value="add industry" class="btn btn-primary me-1">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="addBranchCity" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"></h5>Add branch city</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{url('/admin/company/add/branch/'.$company->id)}}" method="post"
+                                enctype="multipart/form-data" id="branchForm">
+                                @csrf
+                                <div class="row mb-2">
+                                    <div class="col-md-4 col-form-label">
+                                        <label for="bState">Branch State</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <select name="bstate" id="bstate" class="form-select"
+                                            placeholder="Branch division/state">
+                                            @if(isset($states))
+                                            @foreach ($states as $state)
+                                            <option value="{{$state['id']}}">{{$state['name']}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-4 col-form-label">
+                                        <label for="bCity">Branch City</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <select name="bCity" id="bCity" class="form-select">
+                                            @if(isset($cities))
+                                            @foreach ($cities as $city)
+                                            <option value="{{$city['id']}}">{{$city['name']}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input type="submit" value="add branch city" class="btn btn-primary me-1">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>  
+        <div class="row py-4">
+            @foreach($company->images as $image)
+            <div class="col-lg-3 col-6 photoContainer mb-4" onmouseover="showDeleteIcon(this);" onmouseout="hideDeleteIcon(this);">
+                <img src="{{url('images/companies/'.$image['name'])}}" alt="" class="img img-fluid">   
+                <a href="{{url('/admin/company/remove/images/'.$company->id.'/'.$image->id)}}" class="d-none"><i class="bi bi-x-lg deleteIcon"></i></a>
+            </div>
+            @endforeach
+        </div>
+        <form action="{{url('/admin/company/add/images/'.$updateId)}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="file" class="form-control mb-2" placeholder="" name="newPhotos[]" id="newPhotos" multiple>
+            <input type="submit" class="btn btn-outline-primary" value="upload new photos">
+        </form>      
+        @else
+        <div class="col-md-8 offset-md-2 col-12">
             <form action="{{url('/admin/company/add')}}" class="bg-white px-3 pb-2 rounded shadow" method="post"
                 enctype="multipart/form-data">
                 @csrf
@@ -237,24 +357,6 @@
                             id="phone" name="phone" value="{{ old('phone') }}">
                     </div>
                 </div>
-                {{-- <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12">
-                        <label for="password">Password</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <input type="password" class="form-control" required placeholder="Password" name="password"
-                            id="password" value="{{old('password')}}">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12">
-                        <label for="conPass">Confirm Password</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <input type="password" class="form-control" required placeholder="Confirm password"
-                            name="conPass" id="conPass" value="{{old('conPass')}}">
-                    </div>
-                </div> --}}
                 <hr>
                 <div class="row mb-2">
                     <div class="col-md-10 offset-md-1 col-12  col-form-label">
@@ -344,6 +446,35 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
+                        <label for="states">Branch Division/states</label>
+                    </div>
+                    <div class="col-md-7 col-12">
+                        <select name="states[]" id="states" class="form-select" placeholder="Your division/state"
+                            multiple>
+                            @if(isset($states))
+                            @foreach ($states as $state)
+                            <option value="{{$state['id']}}">{{$state['name']}}</option>
+                            @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
+                        <label for="cities">Branch cities</label>
+                    </div>
+                    <div class="col-md-7 col-12">
+                        <select name="cities[]" id="cities" class="form-select" multiple>
+                            @if(isset($cities))
+                            @foreach ($cities as $city)
+                            <option value="{{$city['id']}}">{{$city['name']}}</option>
+                            @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="industry">Main Industry</label>
                     </div>
                     <div class="col-md-7 col-12">
@@ -379,36 +510,42 @@
                     <div class="col-md-3 offset-md-1 col-12">
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="submit" class="form-control registerBtn btn" required value="Add">
+                        <input type="submit" class="form-control btn-primary btn" required value="Add">
                     </div>
                 </div>
             </form>
             @endif
         </div>
     </div>
-</div>
+    {{-- <div class="row mb-3 mt-2">
 
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        @foreach ($addresses as $add)
+
+        <div class="col-md-8 offset-md-2 col-12  bg-white shadow p-2 my-2">
+            <div class="row">
+                <div class="col-10">
+                    {{$add->detail_address}}, {{$add->city->name}}, {{$add->city->state->name}}
+                </div>
+                <div class="col-2 d-flex">
+                    <a href="" class="me-2" onclick="edit(this);">edit</a>
+                    <a href="">delete</a>
+                </div>
+            </div>
+
+        </div>
+
+        @endforeach
+    </div>
+</div> --}}
+</div>
 <script>
-    $(document).ready(function () {
-            $('#state').on('change', function () {
-                var stateId = this.value;
-                $("#city").html('');
-                $.ajax({
-                    url: "{{url('/api/fetch/cities')}}",
-                    type: "POST",
-                    data: {
-                        state_id: stateId,
-                        _token: '{{csrf_token()}}'
-                    },
-                    dataType: 'json',
-                    success: function (result) {
-                        $('#city').html('<option value="">-- Select city --</option>');
-                        $.each(result.cities, function (key, value) {
-                            $("#city").append('<option value="' + value
-                                .id + '">' + value.name + '</option>');
-                        });
-                    }
-                });
-            });}) --}}
-            @endsection
+let showDeleteIcon=(photo)=>{
+    photo.children[1].classList.remove('d-none');
+    photo.children[1].classList.add('d-inline');
+}
+let hideDeleteIcon=(photo)=>{
+    photo.children[1].classList.remove('d-inline');
+    photo.children[1].classList.add('d-none');
+}
+</script>
+@endsection

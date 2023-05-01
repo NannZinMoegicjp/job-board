@@ -4,10 +4,11 @@
     <div class="row text-end my-2">
         <a href="{{url('/admin/companies')}}">companies list<i class="bi bi-arrow-right"></i></a>
     </div>
-    @if(isset($company))    
+    @if(isset($company))
     <div class="container bg-white">
         <div class="d-flex justify-content-center align-items-center">
-            <img src="{{url('images/companies/'.$company['logo'])}}" alt="{{$company['company_name']}} logo" class="companyDetailsLogo">
+            <img src="{{url('images/companies/'.$company['logo'])}}" alt="{{$company['company_name']}} logo"
+                class="companyDetailsLogo">
             <h3 class="text-center title py-2">{{$company["company_name"]}}</h3>
         </div>
         <div class="row">
@@ -15,7 +16,7 @@
                 <div class="m-1">
                     <i class="bi bi-person-circle me-2"></i><span class="title">Contact Person </span> :
                     <span class="text-secondary">
-                    {{$company["contact_person"]}}                       
+                        {{$company["contact_person"]}}
                     </span>
                 </div>
                 <div class="m-1">
@@ -31,7 +32,7 @@
                 <div class="m-1">
                     <i class="bi bi-clock me-2 clock"></i><span class="title">Member Since </span> :
                     <span class="text-secondary">
-                    {{$company["created_at"]->diffForHumans()}}                       
+                        {{$company["created_at"]->diffForHumans()}}
                     </span>
                 </div>
                 <div class="m-1">
@@ -62,11 +63,32 @@
                     <i class="bi bi-people-fill me-2 date"></i><span class="title">Total Employee </span> :
                     <span class="text-secondary">{{$company["no_of_employee"]}}</span>
                 </div>
-
+                @php
+                $branches = [];
+                $mainBranch = null;
+                foreach ($addresses as $add){
+                if ($add->detail_address != null)
+                {
+                    $mainBranch = $add;
+                }
+                else {
+                    array_push($branches,$add);
+                }}
+                @endphp
                 <div class="m-1">
                     <i class="bi bi-geo-alt-fill me-2 location"></i><span class="title">Address </span> :
-                    <span class="text-secondary">{{$company["address"], $company->city->name}}</span>
+                    <span class="text-secondary">
+                        {{$mainBranch->detail_address}}, {{$mainBranch->city->name}}, {{$mainBranch->city->state->name}}
+                    </span>
                 </div>
+                <div class="m-1">
+                    <i class="bi bi-building-fill"></i><span class="title">Other branches</span> : <span
+                        class="text-secondary">
+                        @foreach ($branches as $add)                        
+                        <div>{{$add->city->name}}, {{$add->city->state->name}}</div>
+                        @endforeach</span>
+                </div>
+
                 <div class="m-1">
                     <i class="bi bi-calendar2-week me-2"></i><span class="title">Established date</span> :
                     <span class="text-secondary">
@@ -80,7 +102,7 @@
                     <i class="bi bi-globe me-2"></i><span class="title">Website Link </span> : <span
                         class="text-secondary">{{$company["websitelink"]}}</span>
                 </div>
-            </div>            
+            </div>
         </div>
         <div class="row g-2 border-bottom py-4">
             @foreach($company->images as $image)

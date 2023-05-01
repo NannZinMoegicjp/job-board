@@ -103,4 +103,5 @@
     @endif
 </div>
 @include('modal')
+<script src="{{URL::asset('js/script.js')}}"></script>
 @endsection

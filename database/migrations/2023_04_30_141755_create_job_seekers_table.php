@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('job_seekers', function (Blueprint $table) {
             $table->id();
-            $table->string('contact_person');
+            $table->string('name');
             $table->string('email',250)->unique();
             $table->string('phone',20);
             $table->string('password',20);
-            $table->string('company_name');
-            $table->string('logo')->nullable();
-            $table->string('websitelink')->nullable();
-            $table->string('no_of_employee');
-            $table->integer('no_of_credit')->default('0');
-            $table->date('established_date');           
+            $table->date('dob');
+            $table->string('gender');
+            $table->string('image');
+            $table->unsignedBigInteger("city_id");
+            $table->foreign("city_id")->references('id')->on('cities');
+            $table->string('address');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('job_seekers');
     }
 };

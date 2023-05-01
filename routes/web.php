@@ -74,6 +74,14 @@ Route::get('/admin/company/add',[CompanyController::class,'insertGet']);
 Route::post('/admin/company/add',[CompanyController::class,'insert']);
 Route::get('/admin/company/update/{id}',[CompanyController::class,'updateSetData']);
 Route::post('/admin/company/update/{id}',[CompanyController::class,'update']);
+Route::post('/admin/company/update/logo/{id}',[CompanyController::class,'updateLogo']);
+Route::get('/admin/company/delete/industry/{cid}/{iid}',[CompanyController::class,'deleteIndustry']);
+Route::post('/admin/company/add/industry/{cid}',[CompanyController::class,'addIndustry']);
+
+Route::get('/admin/company/delete/branch/{cid}/{addId}',[CompanyController::class,'deleteBranchCity']);
+Route::post('/admin/company/add/branch/{cid}',[CompanyController::class,'addBranchCity']);
+Route::post('/admin/company/add/images/{cid}',[CompanyController::class,'addImages']);
+Route::get('/admin/company/remove/images/{cid}/{imageId}',[CompanyController::class,'removeImage']);
 
 Route::get('/admin/company/delete/{id}',[CompanyController::class,'delete']);
 Route::get('/admin/company/details/{id}',[CompanyController::class,'viewDetails']);
