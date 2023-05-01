@@ -13,7 +13,18 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            
+            $table->string('title');
+            $table->string('salary');
+            $table->integer('open_position');
+            $table->string('address');
+            $table->unsignedBigInteger("job_category_id");            
+            $table->foreign("job_category_id")->references('id')->on('job_categories');
+            $table->unsignedBigInteger("experience_level_id");
+            $table->foreign("experience_level_id")->references('id')->on('experience_levels');
+            $table->unsignedBigInteger("employment_type_id");
+            $table->foreign("employment_type_id")->references('id')->on('employment_types');
+            $table->unsignedBigInteger("address_id");
+            $table->foreign("address_id")->references('id')->on('addresses');
             $table->timestamps();
         });
     }

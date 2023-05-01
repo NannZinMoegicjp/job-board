@@ -51,7 +51,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav nav flex-column">
                         <li class="nav-item">
-                            <a href="{{url('/admin')}}"><i class="bi bi-house-fill"></i> Admin Dashboard</a>
+                            <a href="{{url('/admin')}}"><i class="bi bi-house-fill"></i> Dashboard</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{url('/admin/pricing')}}"><i class="bi bi-cash-coin"></i> Price Management</a>
@@ -63,7 +63,7 @@
                         <a href="{{url('/admin/companies')}}"><i class="bi bi-building"></i> Companies Management</a>
                         </li>
                         <li class="nav-item">
-                        <a href="#"><i class="bi bi-person-workspace"></i> Job Seekers Management</a>
+                        <a href="{{url('/admin/job-seekers')}}"><i class="bi bi-person-workspace"></i> Job Seekers Management</a>
                         </li>
                         <li class="nav-item">
                         <a href="#"><i class="bi bi-briefcase-fill"></i> Jobs Management</a>

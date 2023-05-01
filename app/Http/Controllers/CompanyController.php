@@ -72,7 +72,7 @@ class CompanyController extends Controller
             $add->company_id=$company->id;
             $add->save();
         }
-        return redirect('/admin/companies')->with('status', "registered successfully");
+        return redirect('/admin/companies')->with('status', "added successfully");
     }
     public function updateSetData($id)
     {

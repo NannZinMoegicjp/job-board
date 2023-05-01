@@ -6,7 +6,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\AdminDashBoardController;
 use App\Http\Controllers\OrderController;
-
+use App\Http\Controllers\JobSeekerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,10 +66,11 @@ Route::get('/admin/order/reject/{id}',[OrderController::class,'rejectOrder']);
 Route::get('/admin/order/confirmed/details/{id}',[OrderController::class,'confirmedOrderDetails']);
 Route::get('/admin/order/awaiting/details/{id}',[OrderController::class,'awaitingOrderDetails']);
 
+Route::get('/admin/job-seekers',[JobSeekerController::class,'index']);
+Route::get('/admin/job-seekers/add',[JobSeekerController::class,'insertGet']);
+Route::post('/admin/job-seekers/add',[JobSeekerController::class,'insert']);
+
 Route::get('/admin/companies',[CompanyController::class,'index']);
-Route::get('/admin/company/add',function(){
-    return view('add-company');
-});
 Route::get('/admin/company/add',[CompanyController::class,'insertGet']);
 Route::post('/admin/company/add',[CompanyController::class,'insert']);
 Route::get('/admin/company/update/{id}',[CompanyController::class,'updateSetData']);

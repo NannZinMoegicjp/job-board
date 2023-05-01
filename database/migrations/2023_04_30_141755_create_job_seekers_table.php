@@ -20,8 +20,6 @@ return new class extends Migration
             $table->date('dob');
             $table->string('gender');
             $table->string('image');
-            $table->unsignedBigInteger("city_id");
-            $table->foreign("city_id")->references('id')->on('cities');
             $table->string('address');
             $table->timestamps();
             $table->softDeletes();
