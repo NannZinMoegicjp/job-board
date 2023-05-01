@@ -20,9 +20,9 @@ class CompanyController extends Controller
     }
     public function insertGet()
     {
-        $industries = Industry::all();
-        $states = State::all();
-        $cities = City::all();
+        $industries = Industry::orderBy('name')->get();
+        $states = State::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
         return view('add-update-company')->with('industries', $industries)->with('states', $states)->with('cities', $cities);
     }
     public function insert(Request $request)
@@ -65,21 +65,21 @@ class CompanyController extends Controller
         $add->detail_address=$request->input('address');
         $add->company_id=$company->id;
         $add->save();
-        foreach($request->input('cities') as $city){
-            $add = new Address();
-            $add->city_id=$city;
-            $add->detail_address='';
-            $add->company_id=$company->id;
-            $add->save();
-        }
+        // foreach($request->input('cities') as $city){
+        //     $add = new Address();
+        //     $add->city_id=$city;
+        //     $add->detail_address='';
+        //     $add->company_id=$company->id;
+        //     $add->save();
+        // }
         return redirect('/admin/companies')->with('status', "added successfully");
     }
     public function updateSetData($id)
     {
         $company = Company::find($id);
-        $industries = Industry::all();
-        $states = State::all();
-        $cities = City::all();
+        $industries = Industry::orderBy('name')->get();
+        $states = State::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
         $addresses = Address::where('company_id',$id)->get();
         return view('add-update-company')->with('company', $company)->with('industries', $industries)->with('states', $states)->with('cities', $cities)->with('updateId', $id)->with('addresses', $addresses);
     }

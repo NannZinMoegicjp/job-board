@@ -84,6 +84,16 @@
                             placeholder="https://studyrightnow-mdy.com" value="{{$company['websitelink']}}">
                     </div>
                 </div>
+                @php
+                $address = null;
+                @endphp
+                @foreach ($company->addresses as $addr)
+                @if ($addr->detail_address != null)
+                @php
+                $address = $addr;
+                @endphp
+                @endif
+                @endforeach
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="state">Division/state</label>
@@ -92,7 +102,11 @@
                         <select name="state" id="state" class="form-select" placeholder="Your division/state">
                             @if(isset($states))
                             @foreach ($states as $state)
+                            @if($state['name'] == $address->city->state->name)
+                            <option value="{{$state['id']}}" selected>{{$state['name']}}</option>
+                            @else
                             <option value="{{$state['id']}}">{{$state['name']}}</option>
+                            @endif
                             @endforeach
                             @endif
                         </select>
@@ -106,19 +120,23 @@
                         <select name="city" id="city" class="form-select">
                             @if(isset($cities))
                             @foreach ($cities as $city)
+                            @if($city['name'] == $address->city->name)
+                            <option value="{{$city['id']}}" selected>{{$city['name']}}</option>
+                            @else
                             <option value="{{$city['id']}}">{{$city['name']}}</option>
+                            @endif                            
                             @endforeach
                             @endif
                         </select>
                     </div>
-                </div>
+                </div>                
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="address">Address</label>
                     </div>
                     <div class="col-md-7 col-12">
                         <textarea class="form-control address" placeholder="Enter details address" required id="address"
-                            name="address">{{old('address')}}</textarea>
+                            name="address">{{$address->detail_address}}</textarea>
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -151,8 +169,9 @@
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
                     </div>
-                    <div class="col-md-7 col-12">
-                        <input type="submit" class="form-control btn-primary btn" value="Update">
+                    <div class="col-md-7 col-12 d-flex">
+                        <input type="submit" class="btn-primary btn me-2" value="Update">
+                        <a href="{{url('/admin/companies')}}"><input type="button" class="btn-secondary btn" value="Cancel"></a>                        
                     </div>
                 </div>
             </form>
@@ -206,11 +225,11 @@
                     @endforeach
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                         data-bs-target="#addBranchCity" onclick="add(this);">
-                        <i class="bi bi-plus"></i> Add more
+                        <i class="bi bi-plus"></i>  Add more
                     </button>
                 </div>
             </div>
-            
+
             <div class="modal fade" id="addIndustry" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -302,13 +321,15 @@
                         </div>
                     </div>
                 </div>
-            </div>            
-        </div>  
+            </div>
+        </div>
         <div class="row py-4">
             @foreach($company->images as $image)
-            <div class="col-lg-3 col-6 photoContainer mb-4" onmouseover="showDeleteIcon(this);" onmouseout="hideDeleteIcon(this);">
-                <img src="{{url('images/companies/'.$image['name'])}}" alt="" class="img img-fluid">   
-                <a href="{{url('/admin/company/remove/images/'.$company->id.'/'.$image->id)}}" class="d-none"><i class="bi bi-x-lg deleteIcon"></i></a>
+            <div class="col-lg-3 col-6 photoContainer mb-4" onmouseover="showDeleteIcon(this);"
+                onmouseout="hideDeleteIcon(this);">
+                <img src="{{url('images/companies/'.$image['name'])}}" alt="" class="img img-fluid">
+                <a href="{{url('/admin/company/remove/images/'.$company->id.'/'.$image->id)}}" class="d-none"><i
+                        class="bi bi-x-lg deleteIcon"></i></a>
             </div>
             @endforeach
         </div>
@@ -316,7 +337,7 @@
             @csrf
             <input type="file" class="form-control mb-2" placeholder="" name="newPhotos[]" id="newPhotos" multiple>
             <input type="submit" class="btn btn-outline-primary" value="upload new photos">
-        </form>      
+        </form>
         @else
         <div class="col-md-8 offset-md-2 col-12">
             <form action="{{url('/admin/company/add')}}" class="bg-white px-3 pb-2 rounded shadow" method="post"
@@ -444,7 +465,7 @@
                             name="address">{{old('address')}}</textarea>
                     </div>
                 </div>
-                <div class="row mb-2">
+                {{-- <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="states">Branch Division/states</label>
                     </div>
@@ -472,7 +493,7 @@
                             @endif
                         </select>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="industry">Main Industry</label>
@@ -539,7 +560,7 @@
 </div> --}}
 </div>
 <script>
-let showDeleteIcon=(photo)=>{
+    let showDeleteIcon=(photo)=>{
     photo.children[1].classList.remove('d-none');
     photo.children[1].classList.add('d-inline');
 }
