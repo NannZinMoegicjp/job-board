@@ -26,11 +26,11 @@
         <div class="row border-bottom top">
             <div class="col-12">
                 <div class="text-warning p-2s d-flex justify-content-md-end">
-                    <img src="{{URL::asset('images/admin.png')}}" alt="admin image" class="adminImg m-2">
+                    <img src="{{URL::asset('images/companies/1682993125.o9SXyF4kPWv_4nhtaCnNLKCh5ySN9sCJBF3l61hQuN6ixDmWm0SLAa4tCISBfcceb7xiEIOir20=.png')}}" alt="admin image" class="adminImg m-2">
                     <div class="dropdown m-2">
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            admin@gmail.com
+                            company1@gmail.com
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                             <li><a class="dropdown-item" href="{{url('/admin/profile/1')}}"><i
@@ -83,8 +83,7 @@
                                         Management</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url('/admin/manage')}}"><i class="bi bi-person-fill-lock"></i> Admin
-                                        Management</a>
+                                    <a href=""><i class="bi bi-person-fill-lock"></i> Admin Management</a>
                                 </li>
                             </ul>
                         </div>
@@ -97,8 +96,19 @@
             </div>
         </div>
     </div>
-    @section('scripts')
-    @show
+    <!-- @stack('scripts') -->
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js">
+    </script>
+
+    <script type="text/javascript" charset="utf8"
+        src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+
+        $('#datatable').dataTable();
+
+    });
+    </script>
 </body>
 
 </html>

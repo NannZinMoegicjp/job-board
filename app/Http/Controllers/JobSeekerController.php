@@ -33,7 +33,8 @@ class JobSeekerController extends Controller
         $jobSeeker->address = $request->input('address');
         $jobSeeker->password = '12345678';
         $jobSeeker->save();
-        return redirect('/admin/job-seekers')->with('status', "added successfully");
+        return redirect('/admin/job-seekers/details/'.$jobSeeker->id);
+        // return redirect('/admin/job-seekers')->with('status', "added successfully");
     }
     public function updateSetData($id){
         $jobseeker = JobSeeker::find($id);

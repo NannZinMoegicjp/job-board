@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Jobs', function (Blueprint $table) {
+        Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('salary');
@@ -24,8 +24,10 @@ return new class extends Migration
             $table->unsignedBigInteger("employment_type_id");
             $table->foreign("employment_type_id")->references('id')->on('employment_types');
             $table->unsignedBigInteger("address_id");
-            $table->foreign("address_id")->references('id')->on('addresses');
+            $table->foreign("address_id")->references('id')->on('addresses');            
+            $table->string('status');            
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -34,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Jobs');
+        Schema::dropIfExists('jobs');
     }
 };

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Benefits', function (Blueprint $table) {
+        Schema::create('requirements', function (Blueprint $table) {
             $table->id();
-            $table->string('benefit');
+            $table->mediumText('requirement');
             $table->unsignedBigInteger("job_id");
-            $table->foreign("job_id")->references('id')->on("jobs")->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign("job_id")->references('id')->on("jobs");
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Benefits');
+        Schema::dropIfExists('requirements');
     }
 };

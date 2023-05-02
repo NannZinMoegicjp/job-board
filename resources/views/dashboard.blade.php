@@ -10,7 +10,7 @@
                     <img src="{{URL::asset('images/dashboard/suitcase.png')}}" alt="job">
                 </div>
                 <div>
-                    <h5>0</h5>
+                    <h5>{{$count["activeJobs"]}}</h5>
                     <h6 class="text-secondary">Active jobs</h6>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                     <img src="{{URL::asset('images/dashboard/employee.png')}}" alt="job">
                 </div>
                 <div>
-                    <h4>0</h4>
+                    <h4>{{$count["jobSeekers"]}}</h4>
                     <h6 class="text-secondary">Job Seekers</h6>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                     <img src="{{URL::asset('images/dashboard/message.png')}}" alt="job">
                 </div>
                 <div>
-                    <h4>0</h4>
+                    <h4>{{$count["applications"]}}</h4>
                     <h6 class="text-secondary">Applications</h6>
                 </div>
             </div>

@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Requirements', function (Blueprint $table) {
+        Schema::create('payment_accounts', function (Blueprint $table) {
             $table->id();
-            $table->mediumText('requirement');
-            $table->unsignedBigInteger("job_id");
-            $table->foreign("job_id")->references('id')->on("jobs")->onDelete('cascade')->onUpdate('cascade');
+            $table->string('account_name');
+            $table->string('account_no');
+            $table->unsignedBigInteger('payment_method_id');
+            $table->foreign('payment_method_id')->references('id')->on('payment_methods');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Requirements');
+        Schema::dropIfExists('payment_accounts');
     }
 };

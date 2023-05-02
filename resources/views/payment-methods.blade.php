@@ -1,4 +1,8 @@
 @extends('master_admin')
+@section('css')
+<link rel="stylesheet" type="text/css"
+    href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
+@endsection
 @section('content')
 <div class="container my-4">
     <div class="row">
@@ -20,8 +24,8 @@
         @endif
     </div>
     <!-- payment methods -->
-    <div class="row">
-        <div class="col-md-6 col-12">
+    <div class="row mb-3">
+        <div class="col">
             <div class="d-flex">
                 <div>
                     <h3>Payment methods</h3>
@@ -36,18 +40,21 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 col-12">
+        <div class="col">
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped" id="paymentMethodTable">
                     @php
                     $no=1;
                     @endphp
+                    <thead>
                     <tr>
                         <th>No</th>
                         <th>Name</th>
                         <th>Image</th>
                         <th>Actions</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     @foreach($data as $payment_method)
                     <tr>
                         <td>{{$no++}}</td>
@@ -69,13 +76,14 @@
                         </td>
                     </tr>
                     @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
 
     </div>
     <!-- payment account -->
-    <div class="row">
+    <div class="row mt-5 mb-3">
         <div class="col">
             <div class="d-flex">
                 <div>
@@ -93,10 +101,11 @@
     <div class="row">
         <div class="col">
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped" id="paymentAccountTable">
                     @php
                     $no=1;
                     @endphp
+                    <thead>
                     <tr>
                         <th>No</th>
                         <th>Name</th>
@@ -104,6 +113,8 @@
                         <th>Method</th>
                         <th>Actions</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     @foreach($accounts as $payment_account)
                     <tr>
                         <td>{{$no++}}</td>
@@ -124,6 +135,7 @@
                         </td>
                     </tr>
                     @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -340,4 +352,18 @@
     }
     </script>
 </div>
+@endsection
+@section('scripts')
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js">
+</script>
+<script type="text/javascript" charset="utf8"
+    src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#paymentMethodTable').dataTable();
+});
+$(document).ready(function() {
+    $('#paymentAccountTable').dataTable();
+});
+</script>
 @endsection

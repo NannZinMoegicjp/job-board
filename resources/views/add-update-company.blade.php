@@ -124,12 +124,12 @@
                             <option value="{{$city['id']}}" selected>{{$city['name']}}</option>
                             @else
                             <option value="{{$city['id']}}">{{$city['name']}}</option>
-                            @endif                            
+                            @endif
                             @endforeach
                             @endif
                         </select>
                     </div>
-                </div>                
+                </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="address">Address</label>
@@ -171,7 +171,8 @@
                     </div>
                     <div class="col-md-7 col-12 d-flex">
                         <input type="submit" class="btn-primary btn me-2" value="Update">
-                        <a href="{{url('/admin/companies')}}"><input type="button" class="btn-secondary btn" value="Cancel"></a>                        
+                        <a href="{{url('/admin/companies')}}"><input type="button" class="btn-secondary btn"
+                                value="Cancel"></a>
                     </div>
                 </div>
             </form>
@@ -217,15 +218,15 @@
                     @foreach ($company->addresses as $address)
                     @if ($address->detail_address == null)
                     <div class="mb-2 d-flex">
-                        {{$address->city->name}}<a
-                            href="{{url('/admin/company/delete/branch/'.$company->id.'/'.$address->id)}}"><i
+                        {{$address->city->name}},{{$address->city->state->name}}
+                        <a href="{{url('/admin/company/delete/branch/'.$company->id.'/'.$address->id)}}"><i
                                 class="bi bi-trash ms-2 text-warning"></i></a>
                     </div>
                     @endif
                     @endforeach
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                         data-bs-target="#addBranchCity" onclick="add(this);">
-                        <i class="bi bi-plus"></i>  Add more
+                        <i class="bi bi-plus"></i> Add more
                     </button>
                 </div>
             </div>
@@ -475,71 +476,71 @@
                             @if(isset($states))
                             @foreach ($states as $state)
                             <option value="{{$state['id']}}">{{$state['name']}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="cities">Branch cities</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <select name="cities[]" id="cities" class="form-select" multiple>
-                            @if(isset($cities))
-                            @foreach ($cities as $city)
-                            <option value="{{$city['id']}}">{{$city['name']}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                </div> --}}
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="industry">Main Industry</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <select name="industry[]" id="industry" class="form-select" multiple>
-                            @if(isset($industries))
-                            @foreach ($industries as $industry)
-                            <option value="{{$industry['id']}}">{{$industry['name']}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="size">Number of employee</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <select name="size" id="size" class="form-select">
-                            <option value="1-5">1-5</option>
-                            <option value="6-10">6-10</option>
-                            <option value="11-20">11-20</option>
-                            <option value="21-50">21-50</option>
-                            <option value="51-100">51-100</option>
-                            <option value="101-200">101-200</option>
-                            <option value="201-500">201-500</option>
-                            <option value="501-1000">501-1000</option>
-                            <option value="1001-5000">1001-5000</option>
-                            <option value="5000-10000">5000-10000</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12">
-                    </div>
-                    <div class="col-md-7 col-12 d-flex">
-                        <input type="submit" class="btn-primary btn me-2" required value="Add">
-                        <a href="{{url('/admin/companies')}}"><input type="button" class="btn-secondary btn" value="Cancel"></a>                        
-                    </div>
-                </div>
-            </form>
-            @endif
+                @endforeach
+                @endif
+                </select>
         </div>
     </div>
-    {{-- <div class="row mb-3 mt-2">
+    <div class="row mb-2">
+        <div class="col-md-3 offset-md-1 col-12  col-form-label">
+            <label for="cities">Branch cities</label>
+        </div>
+        <div class="col-md-7 col-12">
+            <select name="cities[]" id="cities" class="form-select" multiple>
+                @if(isset($cities))
+                @foreach ($cities as $city)
+                <option value="{{$city['id']}}">{{$city['name']}}</option>
+                @endforeach
+                @endif
+            </select>
+        </div>
+    </div> --}}
+    <div class="row mb-2">
+        <div class="col-md-3 offset-md-1 col-12  col-form-label">
+            <label for="industry">Main Industry</label>
+        </div>
+        <div class="col-md-7 col-12">
+            <select name="industry[]" id="industry" class="form-select" multiple>
+                @if(isset($industries))
+                @foreach ($industries as $industry)
+                <option value="{{$industry['id']}}">{{$industry['name']}}</option>
+                @endforeach
+                @endif
+            </select>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md-3 offset-md-1 col-12  col-form-label">
+            <label for="size">Number of employee</label>
+        </div>
+        <div class="col-md-7 col-12">
+            <select name="size" id="size" class="form-select">
+                <option value="1-5">1-5</option>
+                <option value="6-10">6-10</option>
+                <option value="11-20">11-20</option>
+                <option value="21-50">21-50</option>
+                <option value="51-100">51-100</option>
+                <option value="101-200">101-200</option>
+                <option value="201-500">201-500</option>
+                <option value="501-1000">501-1000</option>
+                <option value="1001-5000">1001-5000</option>
+                <option value="5000-10000">5000-10000</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md-3 offset-md-1 col-12">
+        </div>
+        <div class="col-md-7 col-12 d-flex">
+            <input type="submit" class="btn-primary btn me-2" required value="Add">
+            <a href="{{url('/admin/companies')}}"><input type="button" class="btn-secondary btn" value="Cancel"></a>
+        </div>
+    </div>
+    </form>
+    @endif
+</div>
+</div>
+{{-- <div class="row mb-3 mt-2">
 
         @foreach ($addresses as $add)
 
@@ -547,25 +548,25 @@
             <div class="row">
                 <div class="col-10">
                     {{$add->detail_address}}, {{$add->city->name}}, {{$add->city->state->name}}
-                </div>
-                <div class="col-2 d-flex">
-                    <a href="" class="me-2" onclick="edit(this);">edit</a>
-                    <a href="">delete</a>
-                </div>
-            </div>
+</div>
+<div class="col-2 d-flex">
+    <a href="" class="me-2" onclick="edit(this);">edit</a>
+    <a href="">delete</a>
+</div>
+</div>
 
-        </div>
+</div>
 
-        @endforeach
-    </div>
+@endforeach
+</div>
 </div> --}}
 </div>
 <script>
-    let showDeleteIcon=(photo)=>{
+let showDeleteIcon = (photo) => {
     photo.children[1].classList.remove('d-none');
     photo.children[1].classList.add('d-inline');
 }
-let hideDeleteIcon=(photo)=>{
+let hideDeleteIcon = (photo) => {
     photo.children[1].classList.remove('d-inline');
     photo.children[1].classList.add('d-none');
 }

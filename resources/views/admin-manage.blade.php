@@ -12,14 +12,14 @@
         </div>
         @endif
     </div>
-    <div class="d-flex mb-3">
+    <div class="d-flex my-4">
         <div>
-            <h3>Companies</h3>
+            <h3>Admins</h3>
         </div>
         <div class="ms-auto">
-            <a href="{{url('/admin/company/add')}}">
+            <a href="{{url('/admin/add')}}">
                 <button type="button" class="ms-auto btn btn-primary">
-                    <i class="bi bi-plus"></i> Add Companies
+                    <i class="bi bi-plus"></i> Add Admin
                 </button>
             </a>
         </div>
@@ -32,29 +32,27 @@
             <thead>
             <tr>
                 <th>No</th>
-                <th>Company name</th>
-                <th>Contact person</th>
+                <th>Profile Image</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Actions</th>
             </tr>
             </thead>           
             <tbody>
-            @foreach ($companies as $company)
+            @foreach ($admins as $admin)
             <tr>
                 <td>{{$no++}}</td>
-                <td>{{$company->company_name}}</td>
-                <td>{{$company->contact_person}}</td>
-                <td>{{$company->email}}</td>
-                <td>{{$company->phone}}</td>
+                <td><img src="{{URL::asset('/images/admins/'.$admin->profile_image)}}" alt="" class="myimg"></td>
+                <td>{{$admin->name}}</td>
+                <td>{{$admin->email}}</td>
+                <td>{{$admin->phone}}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{url('/admin/company/details/'.$company->id)}}"><i
+                        <a href="{{url('/admin/details/'.$admin->id)}}"><i
                                 class="bi bi-info-circle-fill info"></i></a>
-                        <a href="{{url('/admin/company/update/'.$company->id)}}"><i
-                                class="bi bi-pencil-fill update"></i></a>
                         <a onclick='return confirm("Want to delete?")'
-                            href="{{url('/admin/company/delete/'.$company->id)}}"><i
+                            href="{{url('/admin/delete/'.$admin->id)}}"><i
                                 class="bi bi-trash3-fill cancel"></i></a>
                     </div>
                 </td>

@@ -1,4 +1,8 @@
 @extends('master_admin')
+@section('css')
+<link rel="stylesheet" type="text/css"
+    href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
+@endsection
 @section('content')
 <div class="container my-4">
     <div class="row mb-3">
@@ -13,14 +17,14 @@
                 $latestPrice = 0;
                 @endphp
                 <div>
-                @foreach($data as $price)
-                @php
+                    @foreach($data as $price)
+                    @php
                     if(is_null($price["updated_at"])){
                     $latestPrice=$price["price"];
                     $id = $price["id"];
                     }
-                @endphp
-                @endforeach
+                    @endphp
+                    @endforeach
                     <h4>{{$latestPrice}}</h4>
                     <h6 class="text-secondary">Current Price</h6>
                 </div>
@@ -28,7 +32,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-md col-12">
             <h3>Price per credit</h3>
         </div>
@@ -46,22 +50,25 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-striped">
-            <tr>
-                <th>No</th>
-                <th>Price</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-            </tr>
-
-            @foreach($data as $price)
-            <tr>
-                <td>{{$no++}}</td>
-                <td>{{$price["price"]}}</td>
-                <td>{{$price["created_at"]}}</td>
-                <td>{{$price["updated_at"]}}</td>
-            </tr>
-            @endforeach
+        <table class="table table-striped" id="datatable">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Price</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($data as $price)
+                <tr>
+                    <td>{{$no++}}</td>
+                    <td>{{$price["price"]}}</td>
+                    <td>{{$price["created_at"]}}</td>
+                    <td>{{$price["updated_at"]}}</td>
+                </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 
@@ -136,4 +143,16 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js">
+</script>
+
+<script type="text/javascript" charset="utf8"
+    src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#datatable').dataTable();
+});
+</script>
 @endsection

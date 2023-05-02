@@ -6,10 +6,14 @@
     </div>
     @if(isset($company))
     <div class="container">
-        <div class="d-flex  align-items-center ">
+        <div class="d-flex  align-items-center">
             <img src="{{url('images/companies/'.$company['logo'])}}" alt="{{$company['company_name']}} logo"
                 class="companyDetailsLogo me-2">
-            <h3 class="text-center title py-2">{{$company["company_name"]}}</h3>
+            <h3 class="text-center title py-2 me-2">{{$company["company_name"]}}</h3>
+            <a href="{{url('/admin/company/update/'.$company->id)}}">
+                <button type="button" class="btn btn-primary">
+                    <i class="bi bi-pencil-fill update"></i>Edit</button>
+            </a>
         </div>
         <div class="row">
             <div class="col-md-5">
@@ -69,10 +73,10 @@
                 foreach ($addresses as $add){
                 if ($add->detail_address != null)
                 {
-                    $mainBranch = $add;
+                $mainBranch = $add;
                 }
                 else {
-                    array_push($branches,$add);
+                array_push($branches,$add);
                 }}
                 @endphp
                 <div class="m-1">
@@ -84,11 +88,11 @@
                 <div class="m-1">
                     <i class="bi bi-building-fill"></i><span class="title">Other branches</span> : <span
                         class="text-secondary">
-                        @foreach ($branches as $add)     
+                        @foreach ($branches as $add)
                         @if ($loop->last)
                         {{$add->city->name}}, {{$add->city->state->name}}
                         @else
-                        {{$add->city->name}}, {{$add->city->state->name}} <br>
+                        {{$add->city->name}}, {{$add->city->state->name}}/
                         @endif
                         <span></span>
                         @endforeach</span>

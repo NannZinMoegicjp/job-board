@@ -1,4 +1,8 @@
 @extends('master_admin')
+@section('css')
+<link rel="stylesheet" type="text/css"
+    href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
+@endsection
 @section('content')
 <div class="container-fluid my-4">
     <div class="row">
@@ -8,7 +12,7 @@
         </div>
         @endif
     </div>
-    <div class="d-flex">
+    <div class="d-flex mb-4">
         <div>
             <h3>Job seekers</h3>
         </div>
@@ -21,11 +25,12 @@
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped" id="datatable">
             @php
             $no=1;
             @endphp
-            <tr>
+          <thead>
+          <tr>
                 <th>No</th>
                 <!-- <th>Profile image</th> -->
                 <th>Name</th>
@@ -36,6 +41,8 @@
                 <!-- <th>Gender</th> -->
                 <th>Actions</th>
             </tr>
+          </thead>
+          <tbody>
             @foreach ($jobSeekers as $jobseeker)
             <tr>
                 <td>{{$no++}}</td>
@@ -58,7 +65,20 @@
                 </td>
             </tr>
             @endforeach
+            </tbody>
         </table>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js">
+</script>
+
+<script type="text/javascript" charset="utf8"
+    src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#datatable').dataTable();
+});
+</script>
 @endsection

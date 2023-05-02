@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('experience_levels', function (Blueprint $table) {
+        Schema::create('credit_prices', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->timestamps();   
-            $table->softDeletes();         
+            $table->integer('price');            
+            $table->timestamps();
         });
     }
 
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('experience_levels');
+        Schema::dropIfExists('credit_prices');
     }
 };

@@ -8,6 +8,8 @@ use App\Http\Controllers\AdminDashBoardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\JobSeekerController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,3 +105,11 @@ Route::get('/admin/payment-methods/delete/{id}',[PaymentMethodController::class,
 Route::post('/admin/payment-accounts/add',[PaymentMethodController::class,'insertPaymentAccount']);
 Route::post('/admin/payment-accounts/update/{id}',[PaymentMethodController::class,'updatePaymentAccount']);
 Route::get('/admin/payment-accounts/delete/{id}',[PaymentMethodController::class,'deletePaymentAccount']);
+
+Route::get('/employer',[EmployerController::class,'index']);
+
+Route::get('/admin/manage',[AdminController::class,'index'])->name('manage-admin');
+Route::get('/admin/add',[AdminController::class,'addGet']);
+Route::post('/admin/add',[AdminController::class,'add']);
+Route::get('/admin/delete/{id}',[AdminController::class,'delete']);
+Route::get('/admin/details/{id}',[AdminController::class,'viewDetails'])->name('admin-details');
