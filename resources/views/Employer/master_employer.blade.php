@@ -20,7 +20,6 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-
 <body>
     <div class="container-fluid">
         <div class="row border-bottom top">
@@ -57,33 +56,17 @@
                                 <li class="nav-item">
                                     <a href="{{url('/admin')}}"><i class="bi bi-house-fill"></i> Dashboard</a>
                                 </li>
+                                </li>
                                 <li class="nav-item">
-                                    <a href="{{url('/admin/pricing')}}"><i class="bi bi-cash-coin"></i> Price
+                                    <a href="{{url('/employer/jobs')}}"><i class="bi bi-briefcase-fill"></i> Jobs
                                         Management</a>
-                                </li>
+                                </li>                                
                                 <li class="nav-item">
-                                    <a href="{{url('/admin/payment')}}"><i class="bi bi-cart-plus-fill"></i> Order
-                                        Confirmation</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{url('/admin/companies')}}"><i class="bi bi-building"></i> Companies
-                                        Management</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{url('/admin/job-seekers')}}"><i class="bi bi-person-workspace"></i> Job
-                                        Seekers Management</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{url('/admin/jobs')}}"><i class="bi bi-briefcase-fill"></i> Jobs
-                                        Management</a>
+                                    <a href="{{url('/admin/payment')}}"><i class="bi bi-cart-plus-fill"></i> Purchase Credit</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{url('/admin/payment-methods')}}"><i
-                                            class="bi bi-credit-card-2-front-fill"></i> Payment Account
-                                        Management</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href=""><i class="bi bi-person-fill-lock"></i> Admin Management</a>
+                                            class="bi bi-credit-card-2-front-fill"></i> Application Management</a>
                                 </li>
                             </ul>
                         </div>
@@ -96,19 +79,7 @@
             </div>
         </div>
     </div>
-    <!-- @stack('scripts') -->
-    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js">
-    </script>
-
-    <script type="text/javascript" charset="utf8"
-        src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-    <script>
-    $(document).ready(function() {
-
-        $('#datatable').dataTable();
-
-    });
-    </script>
+   @yield('scripts')
 </body>
 
 </html>

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('salary');
+            $table->integer('min_salary');
+            $table->integer('max_salary');
             $table->string('gender');
             $table->integer('open_position');
             $table->unsignedBigInteger("job_category_id");            
@@ -24,7 +25,10 @@ return new class extends Migration
             $table->unsignedBigInteger("employment_type_id");
             $table->foreign("employment_type_id")->references('id')->on('employment_types');
             $table->unsignedBigInteger("address_id");
-            $table->foreign("address_id")->references('id')->on('addresses');            
+            $table->foreign("address_id")->references('id')->on('addresses');    
+            $table->mediumText('description');   
+            $table->mediumText('requirement'); 
+            $table->mediumText('benefit');   
             $table->string('status');            
             $table->timestamps();
             $table->softDeletes();

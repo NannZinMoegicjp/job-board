@@ -9,6 +9,6 @@ class Industry extends Model
 {
     use HasFactory;
     public function companies(){
-        return $this->HasMany(Company::class);
+        return $this->hasMany(Company::class);
     }
 }

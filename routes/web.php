@@ -10,6 +10,8 @@ use App\Http\Controllers\JobSeekerController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmployerJobController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +24,7 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('test');
 });
 Route::get('/jobs', function () {
     return view('jobs');
@@ -106,10 +108,20 @@ Route::post('/admin/payment-accounts/add',[PaymentMethodController::class,'inser
 Route::post('/admin/payment-accounts/update/{id}',[PaymentMethodController::class,'updatePaymentAccount']);
 Route::get('/admin/payment-accounts/delete/{id}',[PaymentMethodController::class,'deletePaymentAccount']);
 
-Route::get('/employer',[EmployerController::class,'index']);
-
 Route::get('/admin/manage',[AdminController::class,'index'])->name('manage-admin');
 Route::get('/admin/add',[AdminController::class,'addGet']);
 Route::post('/admin/add',[AdminController::class,'add']);
 Route::get('/admin/delete/{id}',[AdminController::class,'delete']);
 Route::get('/admin/details/{id}',[AdminController::class,'viewDetails'])->name('admin-details');
+
+Route::get('/employer',[EmployerController::class,'index']);
+Route::get('/employer/jobs',[EmployerJobController::class,'index']);
+Route::get('/employer/jobs/insert',[EmployerJobController::class,'insertGet']);
+Route::post('/employer/jobs/insert',[EmployerJobController::class,'insert']);
+Route::get('/employer/jobs/update/{id}',[EmployerJobController::class,'updateGet']);
+Route::post('/employer/jobs/update/{id}',[EmployerJobController::class,'update']);
+Route::get('/employer/jobs/delete/{id}',[EmployerJobController::class,'delete']);
+Route::get('/employer/jobs/details/{id}',[EmployerJobController::class,'viewDetails']);
+
+Route::get('/multiStepForm',[EmployerJobController::class,'insertGet']);
+Route::post('/multiStepForm/add',[EmployerJobController::class,'insert'])->name('multistepForm.add');
