@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\EmploymentType;
 use App\Models\ExperienceLevel;
 use App\Models\Job;
+use App\Models\Company;
 use App\Models\JobCategory;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class EmployerJobController extends Controller
 {
     public function index()
     {
-        $jobs = Job::all();
+        $jobs = Job::where('company_id', 8)->get();
         return view('Employer.job-manage')->with("jobs",$jobs);
     }
     public function insertGet()
@@ -50,5 +51,12 @@ class EmployerJobController extends Controller
         $job->status = 'active';
         $job->save();
         return $job;
+    }
+    public function checkCredit(){
+        $company = Company::find(8);
+        if($company->no_of_credit > 0){
+            return redirect()->route('insert.job');
+        }
+        return 
     }
 }

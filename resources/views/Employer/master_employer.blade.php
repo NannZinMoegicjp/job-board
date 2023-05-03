@@ -25,11 +25,11 @@
         <div class="row border-bottom top">
             <div class="col-12">
                 <div class="text-warning p-2s d-flex justify-content-md-end">
-                    <img src="{{URL::asset('images/companies/1682993125.o9SXyF4kPWv_4nhtaCnNLKCh5ySN9sCJBF3l61hQuN6ixDmWm0SLAa4tCISBfcceb7xiEIOir20=.png')}}" alt="admin image" class="adminImg m-2">
+                    @yield('image')
                     <div class="dropdown m-2">
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            company1@gmail.com
+                            @yield('name')
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                             <li><a class="dropdown-item" href="{{url('/admin/profile/1')}}"><i

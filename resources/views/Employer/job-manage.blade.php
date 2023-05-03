@@ -17,7 +17,7 @@
             <h3>Jobs</h3>
         </div>
         <div class="ms-auto">
-            <a href="{{url('/employer/jobs/insert')}}">
+            <a href="{{url('/employer/jobs/insert')}}" onclick="return hasCredit();">
                 <button type="button" class="ms-auto btn btn-primary">
                     <i class="bi bi-plus"></i> Post job
                 </button>
