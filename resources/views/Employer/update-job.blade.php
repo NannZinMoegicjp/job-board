@@ -12,8 +12,11 @@
     {{session('error')}}
 </div>
 @endif
-<h3 class="text-center" id="post">Post job</h3>
-<form id="signUpForm" action="{{url('/multiStepForm/add')}}" method="post">
+@php
+$job = $data['job'];
+@endphp
+<h3 class="text-center" id="update">Update job</h3>
+<form id="signUpForm" action="{{url('/employer/job/update/'.$job->id)}}" method="post">
     @csrf
     <!-- start step indicators -->
     <div class="form-header d-flex mb-4">
@@ -32,7 +35,7 @@
                 <label for="title">Title</label>
             </div>
             <div class="col-md-7 col-12">
-                <input type="text" class="form-control" required name="title" id="title" value="{{ old('title') }}"
+                <input type="text" class="form-control" required name="title" id="title" value="{{$job->title}}"
                     oninput="this.className = 'form-control'">
             </div>
         </div>
@@ -42,7 +45,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" required name="minSalary" id="minSalary"
-                    value="{{ old('minSalary') }}" oninput="this.className = 'form-control'">
+                    value="{{$job->min_salary}}" oninput="this.className = 'form-control'">
             </div>
         </div>
         <div class="row mb-2">
@@ -51,7 +54,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" required name="maxSalary" id="maxSalary"
-                    value="{{ old('maxSalary') }}" oninput="this.className = 'form-control'">
+                    value="{{$job->max_salary}}" oninput="this.className = 'form-control'">
             </div>
         </div>
         <div class="row mb-2">
@@ -60,7 +63,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" id="openPosition" name="openPosition"
-                    value="{{old('openPosition')}}" oninput="this.className = 'form-control'">
+                    value="{{$job->open_position}}" oninput="this.className = 'form-control'">
             </div>
         </div>
         <div class="row mb-2">
@@ -68,8 +71,22 @@
                 <label>Gender</label>
             </div>
             <div class="col-md-7 col-12 d-flex">
+                @if($job->gender == 'both')
                 <div class="form-check me-2">
-                    <input class="form-check-input" type="checkbox" value="female" id="female" name="female">
+                    <input class="form-check-input" type="checkbox" value="female" id="female" name="female" checked>
+                    <label class="form-check-label" for="female">
+                        Female
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="male" id="male" name="male" checked>
+                    <label class="form-check-label" for="male">
+                        Male
+                    </label>
+                </div>
+                @elseif($job->gender == 'female')
+                <div class="form-check me-2">
+                    <input class="form-check-input" type="checkbox" value="female" id="female" name="female" checked>
                     <label class="form-check-label" for="female">
                         Female
                     </label>
@@ -80,6 +97,20 @@
                         Male
                     </label>
                 </div>
+                @else
+                <div class="form-check me-2">
+                    <input class="form-check-input" type="checkbox" value="female" id="female" name="female">
+                    <label class="form-check-label" for="female">
+                        Female
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="male" id="male" name="male" checked>
+                    <label class="form-check-label" for="male">
+                        Male
+                    </label>
+                </div>
+                @endif
             </div>
         </div>
         <div class="row mb-2">
@@ -90,7 +121,11 @@
                 <select name="jobCategory" id="jobCategory" class="form-select">
                     @if(isset($data['jobCategories']))
                     @foreach ($data['jobCategories'] as $jobCat)
+                    @if($job->job_category_id == $jobCat->id)
+                    <option value="{{$jobCat['id']}}" selected>{{$jobCat['name']}}</option>
+                    @else
                     <option value="{{$jobCat['id']}}">{{$jobCat['name']}}</option>
+                    @endif
                     @endforeach
                     @endif
                 </select>
@@ -104,7 +139,11 @@
                 <select name="expLevel" id="expLevel" class="form-select">
                     @if(isset($data['expLevels']))
                     @foreach ($data['expLevels'] as $expLev)
+                    @if($job->experience_level_id == $expLev->id)
+                    <option value="{{$expLev['id']}}" selected>{{$expLev['name']}}</option>
+                    @else
                     <option value="{{$expLev['id']}}">{{$expLev['name']}}</option>
+                    @endif
                     @endforeach
                     @endif
                 </select>
@@ -118,7 +157,11 @@
                 <select name="empType" id="empType" class="form-select">
                     @if(isset($data['empTypes']))
                     @foreach ($data['empTypes'] as $empType)
+                    @if($job->employment_type_id == $empType->id)
+                    <option value="{{$empType['id']}}" selected>{{$empType['name']}}</option>
+                    @else
                     <option value="{{$empType['id']}}">{{$empType['name']}}</option>
+                    @endif
                     @endforeach
                     @endif
                 </select>
@@ -132,7 +175,11 @@
                 <select name="address" id="address" class="form-select">
                     @if(isset($data['addresses']))
                     @foreach ($data['addresses'] as $addr)
+                    @if($job->address_id == $addr->id)
+                    <option value="{{$addr['id']}}" selected>{{$addr->city->name}}/{{$addr->city->state->name}}</option>
+                    @else
                     <option value="{{$addr['id']}}">{{$addr->city->name}}/{{$addr->city->state->name}}</option>
+                    @endif
                     @endforeach
                     @endif
                 </select>
@@ -144,7 +191,7 @@
     <div class="step">
         <p class="text-center mb-4">Job descriptions</p>
         <div class="row mb-2">
-            <textarea id="myeditorinstance1" name="description" required>{{old('description')}}</textarea>
+            <textarea id="myeditorinstance1" name="description" required>{{$job->description}}</textarea>
         </div>
     </div>
 
@@ -152,14 +199,15 @@
     <div class="step">
         <p class="text-center mb-4">Job requirements</p>
         <div class="row mb-2">
-            <textarea id="myeditorinstance2" name="requirement"></textarea>
+            <textarea id="myeditorinstance2" name="requirement">{{$job->requirement}}</textarea>
         </div>
     </div>
 
+    <!-- step four -->
     <div class="step">
         <p class="text-center mb-4">Job benefits</p>
         <div class="row mb-2">
-            <textarea id="myeditorinstance3" name="benefit"></textarea>
+            <textarea id="myeditorinstance3" name="benefit">{{$job->benefit}}</textarea>
         </div>
     </div>
 

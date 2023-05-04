@@ -24,7 +24,7 @@ use App\Http\Controllers\EmployerJobController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin');
 });
 Route::get('/jobs', function () {
     return view('jobs');
@@ -117,12 +117,19 @@ Route::get('/admin/details/{id}',[AdminController::class,'viewDetails'])->name('
 
 Route::get('/employer',[EmployerController::class,'index']);
 Route::get('/employer/jobs',[EmployerJobController::class,'index'])->name('employer.jobs');
+Route::get('/employer/jobs/deactivated',[EmployerJobController::class,'deactivatedJobs'])->name('employer.deactivted-jobs');
+Route::get('/employer/jobs/expired',[EmployerJobController::class,'expiredJobs'])->name('employer.expired-jobs');
+Route::get('/employer/jobs/inactive',[EmployerJobController::class,'inactiveJobs'])->name('inactive-jobs');
+
 Route::get('/employer/jobs/insert',[EmployerJobController::class,'checkCredit']);
 Route::post('/employer/jobs/insert',[EmployerJobController::class,'insert']);
-Route::get('/employer/jobs/update/{id}',[EmployerJobController::class,'updateGet']);
-Route::post('/employer/jobs/update/{id}',[EmployerJobController::class,'update']);
-Route::get('/employer/jobs/delete/{id}',[EmployerJobController::class,'delete']);
-Route::get('/employer/jobs/details/{id}',[EmployerJobController::class,'viewDetails']);
+Route::get('/employer/job/update/{id}',[EmployerJobController::class,'updateGet']);
+Route::post('/employer/job/update/{id}',[EmployerJobController::class,'update']);
+Route::get('/employer/job/delete/{id}',[EmployerJobController::class,'delete']);
+Route::get('/employer/job/details/{id}',[EmployerJobController::class,'viewDetails'])->name('employer.job.detail');
+Route::get('/employer/job/deactivate/{id}',[EmployerJobController::class,'deactivate']);
+Route::get('/employer/job/activate/{id}',[EmployerJobController::class,'activate']);
 
 Route::get('/multiStepForm',[EmployerJobController::class,'insertGet'])->name('insert.job');
 Route::post('/multiStepForm/add',[EmployerJobController::class,'insert'])->name('multistepForm.add');
+Route::get('/employer/profile',[CompanyController::class,'viewDetails']);

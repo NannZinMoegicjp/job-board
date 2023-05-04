@@ -6,7 +6,7 @@
 @section('content')
 <div class="container-fluid my-4">
     <div class="row">
-        @if (session('status'))
+    @if (session('status'))
         <div class="alert alert-success">
             {{session('status')}}
         </div>
@@ -18,13 +18,8 @@
         @endif
     </div>
     <div class="d-flex">
-        <h3> Active Jobs</h3>
-        <div class="ms-auto">
-            <a href="{{url('/employer/jobs/insert')}}" onclick="return hasCredit();">
-                <button type="button" class="ms-auto btn btn-primary">
-                    <i class="bi bi-plus"></i> Post job
-                </button>
-            </a>
+        <div>
+            <h3>Inactive Jobs</h3>
         </div>
     </div>
     <div class="table-responsive">
@@ -38,7 +33,7 @@
                     <th>Title</th>
                     <th>Experience Level</th>
                     <th>Posted date</th>
-                    <th>Expired date</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -47,22 +42,24 @@
                 <tr>
                     <td>{{$no++}}</td>
                     <td>{{$job->title}}</td>
-                    <td>{{$job->experienceLevel->name}}</td>
+                    <td>{{$job->experienceLevel->name}}</td>                    
                     <td>{{$job->created_at}}</td>
-                    <td>{{Carbon\Carbon::create($job->created_at)->addMonths(6)}}</td>
+                    <td>
+                        @if($job->status == 'active')
+                        Expired
+                        @else
+                        Closed
+                        @endif
+                    </td>
                     <td>
                         <div class="d-flex">
-                            <a href="{{url('/employer/job/details/'.$job->id)}}"><i
-                                    class="bi bi-info-circle-fill info"></i></a>
-                            <a href="{{url('/employer/job/update/'.$job->id)}}"><i
-                                    class="bi bi-pencil-fill update"></i></a>
                             <a onclick='return confirm("Want to delete job?")'
                                 href="{{url('/employer/job/delete/'.$job->id)}}"><i
                                     class="bi bi-trash3-fill cancel me-2"></i></a>
-                            <a onclick='return confirm("Want to close job?")'
-                                href="{{url('/employer/job/deactivate/'.$job->id)}}"><i
-                                    class="bi bi-bell-slash-fill"></i></a>
+                                    <!-- <a onclick='return confirm("Want to open job?")'
+                                href="{{url('/employer/job/activate/'.$job->id)}}"><i class="bi bi-bell-fill"></i></a> -->
                         </div>
+                        
                     </td>
                 </tr>
                 @endforeach

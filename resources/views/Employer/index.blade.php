@@ -1,10 +1,4 @@
 @extends('Employer.master_employer')
-@section('image')
-<img src="{{URL::asset('images/companies/1683100605.o9SXyF4kPWv_4nhtaCnNLKCh5ySN9sCJBF3l61hQuN5JclYJK7yeL1pJv3yAsrBFcRjr1OdWMebh8AQBjS7z0Q==.png')}}" alt="admin image" class="adminImg m-2">
-@endsection
-@section('name')
-MPT
-@endsection
 @section('content')
 <div class="container my-2">
     <h3 class="py-3">Admin Dashboard</h3>

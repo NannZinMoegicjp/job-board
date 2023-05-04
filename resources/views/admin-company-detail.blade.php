@@ -86,7 +86,7 @@
                     </span>
                 </div>
                 <div class="m-1">
-                    <i class="bi bi-building-fill"></i><span class="title">Other branches</span> : <span
+                    <i class="bi bi-building-fill me-2"></i><span class="title">Other branches</span> : <span
                         class="text-secondary">
                         @foreach ($branches as $add)
                         @if ($loop->last)

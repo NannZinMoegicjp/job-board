@@ -1,9 +1,15 @@
-@extends('master_admin')
+@extends('Employer.master_employer')
 @section('content')
-<section class="]pb-4">
-    {{-- <h3 class="text-center title shadow py-2 mb">Job details</h3> --}}
+<section class="]pb-4">    
     <div class="row text-end my-2">
-        <a href="{{url('/admin/jobs')}}">job list<i class="bi bi-arrow-right"></i></a>
+        <a href="{{url('/employer/jobs')}}">job list<i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="m-2">
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        @endif
     </div>
     <div class="container bg-white">
         @if(isset($job))
@@ -28,7 +34,8 @@
                                 {{$job->address->city->state->name}}</div>
                             <div class="col-lg-3 col-6"><i class="bi bi-calendar-check-fill date"></i>
                                 {{$job->created_at}}</div>
-                            <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>Up to {{$job->max_salary}}
+                            <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>Up to
+                                {{$job->max_salary}}
                             </div>
                         </div>
                         <span>Experience level :</span> <span class="text-secondary">
@@ -58,39 +65,19 @@
             <div>
                 <h5 class="bg-success bg-gradient p-2 title">OpenTo</h5>
                 <i class="bi bi-check-circle-fill ps-2 gender"></i> <span class="text-secondary">
-                @if($job->gender == 'both')
-                   Male/ Female
-                @elseif($job->gender == 'female')
+                    @if($job->gender == 'both')
+                    Male/ Female
+                    @elseif($job->gender == 'female')
                     Female
-                @elseif($job->gender == 'male')
+                    @elseif($job->gender == 'male')
                     Male
-                @endif
+                    @endif
                 </span>
             </div>
-            <div>
+            <div class="my-2">
                 <h5 class="bg-success bg-gradient p-2 title">Benefits</h5>
                 {!!$job->benefit!!}
-            </div>
-            {{-- <div>
-                <h5 class="bg-success bg-gradient p-2 title">Company Overview</h5>
-                <div class="row comOverview">
-                    <div class="col-md-3 col-6">
-                        <p><i class="bi bi-building ps-2"></i> Ananda Myanamar Co., ltd</p>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <p><i class="bi bi-people-fill"></i> 201-500 employee</p>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <p><i class="bi bi-card-checklist ps-2"></i>
-                            <a href="" class="text-decoration-none companyJobsLink text-dark">13 current jobs
-                                openings</a>
-                        </p>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <p><i class="bi bi-geo-alt-fill ps-2"></i> Yangon</p>
-                    </div>
-                </div>
-            </div> --}}
+            </div>            
         </div>
         @endif
     </div>

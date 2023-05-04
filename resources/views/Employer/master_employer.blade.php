@@ -26,14 +26,14 @@
         <div class="row border-bottom top">
             <div class="col-12">
                 <div class="text-warning p-2s d-flex justify-content-md-end">
-                    @yield('image')
+                    <img src="{{URL::asset('images/companies/'.session('imgPath'))}}" alt="admin image" class="adminImg m-2">
                     <div class="dropdown m-2">
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            @yield('name')
+                            {{session('name')}}
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a class="dropdown-item" href="{{url('/admin/profile/1')}}"><i
+                            <li><a class="dropdown-item" href="{{url('/employer/profile/1')}}"><i
                                         class="fa-solid fa-user"></i> profile</a></li>
                             <li><a class="dropdown-item" href=""><i class="fa-solid fa-right-from-bracket"></i>
                                     logout</a>
@@ -55,7 +55,7 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav nav flex-column">
                                 <li class="nav-item">
-                                    <a href="{{url('/admin')}}"><i class="bi bi-house-fill"></i> Dashboard</a>
+                                    <a href="{{url('/employer')}}"><i class="bi bi-house-fill"></i> Dashboard</a>
                                 </li>
                                 </li>
                                 <li class="nav-item">
@@ -64,10 +64,14 @@
                                             <i class="bi bi-briefcase-fill"></i> Jobs
                                         </span>
                                         <ul class="list-unstyled">
-                                            <li><a class="dropdown-item" href="{{url('/employer/jobs')}}">Active
+                                            <li><a class="dropdown-item" href="{{url('/employer/jobs/insert')}}">Post
                                                     Jobs</a></li>
-                                            <li><a class="dropdown-item" href="#">Expired Jobs</a></li>
-                                            <li><a class="dropdown-item" href="#">Deactivated Jobs</a></li>
+                                            <li><a class="dropdown-item" href="{{url('/employer/jobs')}}">Active
+                                                    Jobs</a></li> 
+                                            <li><a class="dropdown-item" href="{{url('/employer/jobs/inactive')}}">Inactive
+                                                    Jobs</a></li> 
+                                            <!-- <li><a class="dropdown-item" href="{{url('/employer/jobs/expired')}}">Expired Jobs</a></li> -->
+                                            <!-- <li><a class="dropdown-item" href="{{route('employer.deactivted-jobs')}}">Closed Jobs</a></li> -->
                                         </ul>
                                     </div>
                                 </li>
