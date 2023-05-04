@@ -20,6 +20,7 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row border-bottom top">
@@ -58,11 +59,21 @@
                                 </li>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url('/employer/jobs')}}"><i class="bi bi-briefcase-fill"></i> Jobs
-                                        Management</a>
-                                </li>                                
+                                    <div class="dropdown">
+                                        <span>
+                                            <i class="bi bi-briefcase-fill"></i> Jobs
+                                        </span>
+                                        <ul class="list-unstyled">
+                                            <li><a class="dropdown-item" href="{{url('/employer/jobs')}}">Active
+                                                    Jobs</a></li>
+                                            <li><a class="dropdown-item" href="#">Expired Jobs</a></li>
+                                            <li><a class="dropdown-item" href="#">Deactivated Jobs</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
                                 <li class="nav-item">
-                                    <a href="{{url('/admin/payment')}}"><i class="bi bi-cart-plus-fill"></i> Purchase Credit</a>
+                                    <a href="{{url('/admin/payment')}}"><i class="bi bi-cart-plus-fill"></i> Purchase
+                                        Credit</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{url('/admin/payment-methods')}}"><i
@@ -79,7 +90,7 @@
             </div>
         </div>
     </div>
-   @yield('scripts')
+    @yield('scripts')
 </body>
 
 </html>

@@ -14,4 +14,9 @@ class JobController extends Controller
         $job = Job::find($id);
         return view('job-details')->with('job', $job);
     } 
+    public function delete($id){    
+        $job = Job::find($id);
+        $job->delete();
+        return redirect()->route('jobs-manage');
+    } 
 }

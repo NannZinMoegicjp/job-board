@@ -1,7 +1,7 @@
 @extends('master')
 @section('content')
 <section>
-    <h3 class="text-center title shadow py-2 mb">Job Listing</h3>
+    {{-- <h3 class="text-center title shadow py-2 mb">Job Listing</h3> --}}
 <div class="container rounded-1 py-2">
     <form action="" method="post" class="my-2 p-2">
         @csrf

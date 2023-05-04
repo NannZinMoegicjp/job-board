@@ -14,7 +14,8 @@ class EmployerJobController extends Controller
 {
     public function index()
     {
-        $jobs = Job::where('company_id', 8)->get();
+        $addrIDs = Address::select('id')->where('company_id', 8)->get();
+        $jobs = Job::whereIn('address_id',$addrIDs)->where('status','active')->get();
         return view('Employer.job-manage')->with("jobs",$jobs);
     }
     public function insertGet()
@@ -50,13 +51,17 @@ class EmployerJobController extends Controller
         $job->benefit = $request->benefit;
         $job->status = 'active';
         $job->save();
+        $company = Company::find(8);
+        $company->no_of_credit -= 1;
         return $job;
     }
     public function checkCredit(){
         $company = Company::find(8);
+        // dd($company->no_of_credit);
         if($company->no_of_credit > 0){
-            return redirect()->route('insert.job');
-        }
-        return 
+            return redirect()->route('insert.job');            
+        }else{
+            return redirect('Employer.multistepForm')->with('noCredit', 'please buy credit to post jobs!');
+        }        
     }
 }

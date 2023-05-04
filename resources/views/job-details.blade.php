@@ -1,15 +1,18 @@
-@extends('master')
+@extends('master_admin')
 @section('content')
-<section class="bg-light pb-4">
-    <h3 class="text-center title shadow py-2 mb">Job details</h3>
+<section class="]pb-4">
+    {{-- <h3 class="text-center title shadow py-2 mb">Job details</h3> --}}
+    <div class="row text-end my-2">
+        <a href="{{url('/admin/jobs')}}">job list<i class="bi bi-arrow-right"></i></a>
+    </div>
     <div class="container bg-white">
         @if(isset($job))
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-12">
                 <div class="row p-3 mx-3">
                     <div class="col-3 d-flex justify-content-center align-items-center">
-                        <a href=""><img src="{{url('images/companies/anandalogo.png')}}"
-                                alt="Ananda Digital Myanmar"></a>
+                        <a href=""><img src="{{url('images/companies/'.$job->address->company->logo)}}"
+                                alt="{{$job->address->company->company_name}} image"></a>
                     </div>
                     <div class="col-9">
                         <a href="" class="text-decoration-none text-dark">
@@ -25,7 +28,7 @@
                                 {{$job->address->city->state->name}}</div>
                             <div class="col-lg-3 col-6"><i class="bi bi-calendar-check-fill date"></i>
                                 {{$job->created_at}}</div>
-                            <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>{{$job->salary}}
+                            <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>Up to {{$job->max_salary}}
                             </div>
                         </div>
                         <span>Experience level :</span> <span class="text-secondary">
@@ -35,30 +38,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 d-none">
+            {{-- <div class="col-md-3 d-none">
                 <div class="m-md-2 m-3 p-3 apply">
                     <h5 class="title">APPLY FOR HERE</h5>
                     <hr>
                     <input type="submit" class="border form-control greenBtn btn" value="Apply">
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="p-3">
             <div>
                 <h5 class="bg-light p-2 title">Job Description</h5>
-                <ul class="list">
-                    @foreach($job->descriptions as $description)
-                    <li>{{$description->description}}</li>
-                    @endforeach
-                </ul>
+                {!!$job->description!!}
             </div>
             <div>
                 <h5 class="bg-light p-2 title">Job Requirements</h5>
-                <ul>
-                    @foreach($job->requirements as $requirement)
-                    <li>{{$requirement->requirement}}</li>
-                    @endforeach
-                </ul>
+                {!!$job->requirement!!}
             </div>
             <div>
                 <h5 class="bg-light p-2 title">OpenTo</h5>
@@ -74,13 +69,9 @@
             </div>
             <div>
                 <h5 class="bg-light p-2 title">Benefits</h5>
-                <ul>
-                @foreach($job->benefits as $benefit)
-                    <li>{{$benefit->benefit}}</li>
-                    @endforeach
-                </ul>
+                {!!$job->benefit!!}
             </div>
-            <div>
+            {{-- <div>
                 <h5 class="bg-light p-2 title">Company Overview</h5>
                 <div class="row comOverview">
                     <div class="col-md-3 col-6">
@@ -99,7 +90,7 @@
                         <p><i class="bi bi-geo-alt-fill ps-2"></i> Yangon</p>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         @endif
     </div>

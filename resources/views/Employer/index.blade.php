@@ -3,7 +3,7 @@
 <img src="{{URL::asset('images/companies/1683100605.o9SXyF4kPWv_4nhtaCnNLKCh5ySN9sCJBF3l61hQuN5JclYJK7yeL1pJv3yAsrBFcRjr1OdWMebh8AQBjS7z0Q==.png')}}" alt="admin image" class="adminImg m-2">
 @endsection
 @section('name')
-MPT - Myanma Posts & Telecommunications
+MPT
 @endsection
 @section('content')
 <div class="container my-2">

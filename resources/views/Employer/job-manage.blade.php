@@ -8,7 +8,12 @@
     <div class="row">
         @if (session('status'))
         <div class="alert alert-success">
-            {{ session('status') }}
+            {{session('status')}}
+        </div>
+        @endif
+        @if (session('noCredit'))
+        <div class="alert alert-danger">
+            {{session('noCredit')}}
         </div>
         @endif
     </div>

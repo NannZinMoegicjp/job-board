@@ -24,7 +24,7 @@ use App\Http\Controllers\EmployerJobController;
 */
 
 Route::get('/', function () {
-    return view('test');
+    return view('welcome');
 });
 Route::get('/jobs', function () {
     return view('jobs');
@@ -80,8 +80,9 @@ Route::post('/admin/job-seekers/update/image/{id}',[JobSeekerController::class,'
 Route::get('/admin/job-seekers/details/{id}',[JobSeekerController::class,'viewDetails']);
 Route::get('/admin/job-seekers/delete/{id}',[JobSeekerController::class,'delete']);
 
-Route::get('/admin/jobs',[JobController::class,'index']);
+Route::get('/admin/jobs',[JobController::class,'index'])->name('jobs-manage');
 Route::get('/admin/job/details/{id}',[JobController::class,'viewDetails']);
+Route::get('/admin/job/delete/{id}',[JobController::class,'delete']);
 
 Route::get('/admin/companies',[CompanyController::class,'index']);
 Route::get('/admin/company/add',[CompanyController::class,'insertGet']);
@@ -114,9 +115,9 @@ Route::post('/admin/add',[AdminController::class,'add']);
 Route::get('/admin/delete/{id}',[AdminController::class,'delete']);
 Route::get('/admin/details/{id}',[AdminController::class,'viewDetails'])->name('admin-details');
 
-Route::get('/employer',[EmployerController::class,'index'])->name('employer.jobs');
-Route::get('/employer/jobs',[EmployerJobController::class,'index']);
-Route::get('/employer/jobs/insert',[EmployerJobController::class,'insertGet']);
+Route::get('/employer',[EmployerController::class,'index']);
+Route::get('/employer/jobs',[EmployerJobController::class,'index'])->name('employer.jobs');
+Route::get('/employer/jobs/insert',[EmployerJobController::class,'checkCredit']);
 Route::post('/employer/jobs/insert',[EmployerJobController::class,'insert']);
 Route::get('/employer/jobs/update/{id}',[EmployerJobController::class,'updateGet']);
 Route::post('/employer/jobs/update/{id}',[EmployerJobController::class,'update']);

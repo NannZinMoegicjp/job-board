@@ -43,7 +43,7 @@
                 <td>
                     <div class="d-flex">
                         <a href="{{url('/admin/job/details/'.$job->id)}}"><i class="bi bi-info-circle-fill info"></i></a>
-                        <a href="{{url('/admin/job/update/'.$job->id)}}"><i class="bi bi-pencil-fill update"></i></a>
+                        {{-- <a href="{{url('/admin/job/update/'.$job->id)}}"><i class="bi bi-pencil-fill update"></i></a> --}}
                         <a onclick='return confirm("Want to delete?")'  href="{{url('/admin/job/delete/'.$job->id)}}"><i
                                 class="bi bi-trash3-fill cancel"></i></a>
                     </div>
