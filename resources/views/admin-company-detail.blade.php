@@ -4,15 +4,17 @@
     <div class="row text-end my-2">
         <a href="{{url('/admin/companies')}}">companies list<i class="bi bi-arrow-right"></i></a>
     </div>
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        @endif
     @if(isset($company))
     <div class="container">
         <div class="d-flex  align-items-center">
             <img src="{{url('images/companies/'.$company['logo'])}}" alt="{{$company['company_name']}} logo"
                 class="companyDetailsLogo me-2">
             <h3 class="text-center title py-2 me-2">{{$company["company_name"]}}</h3>
-            <a href="{{url('/admin/company/update/'.$company->id)}}">
-                <button type="button" class="btn btn-primary">
-                    <i class="bi bi-pencil-fill update"></i>Edit</button>
             </a>
         </div>
         <div class="row">

@@ -30,7 +30,7 @@
                     <div class="dropdown m-2">
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            admin@gmail.com
+                            {{session('name')}}
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                             <li><a class="dropdown-item" href="{{url('/admin/profile/1')}}"><i

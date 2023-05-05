@@ -26,7 +26,7 @@
         <div class="row border-bottom top">
             <div class="col-12">
                 <div class="text-warning p-2s d-flex justify-content-md-end">
-                    <img src="{{URL::asset('images/companies/'.session('imgPath'))}}" alt="admin image" class="adminImg m-2">
+                    <img src="{{URL::asset('images/companies/'.session('logo'))}}" alt="admin image" class="adminImg m-2">
                     <div class="dropdown m-2">
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,14 +70,15 @@
                                                     Jobs</a></li> 
                                             <li><a class="dropdown-item" href="{{url('/employer/jobs/inactive')}}">Inactive
                                                     Jobs</a></li> 
-                                            <!-- <li><a class="dropdown-item" href="{{url('/employer/jobs/expired')}}">Expired Jobs</a></li> -->
-                                            <!-- <li><a class="dropdown-item" href="{{route('employer.deactivted-jobs')}}">Closed Jobs</a></li> -->
                                         </ul>
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url('/admin/payment')}}"><i class="bi bi-cart-plus-fill"></i> Purchase
+                                    <a href="{{url('/employer/buy/credit')}}"><i class="bi bi-cart-plus-fill"></i> Purchase
                                         Credit</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url('/employer/order')}}"><i class="bi bi-cart-plus-fill"></i> Order</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{url('/admin/payment-methods')}}"><i

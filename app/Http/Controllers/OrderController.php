@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderConfirmation;
+use App\Models\Company;
 class OrderController extends Controller
 {
     public function index(){
@@ -17,25 +18,27 @@ class OrderController extends Controller
         $awaitingOrders = Order::whereNotIn('id', $confirmedOrderedIds)->get();
         return view('order')->with('awaitingOrders',$awaitingOrders);
     }
+   
+
     public function acceptOrder($id){
         $orderCon = new OrderConfirmation();
-        //need to get logged in admin id
-        $orderCon->admin_id = 1;
+        $orderCon->admin_id = session('id');
         $orderCon->order_id = $id;
         $orderCon->is_confirmed = true;
         $d=strtotime("today");
-        // $orderCon->created_at = date("Y-m-d h:i:s", $d);
         $orderCon->save();
-        return redirect('/admin/payment');
+        $order = Order::find($id);
+        $company = Company::find($order->company_id);
+        $company->no_of_credit += $order->no_of_credit;  
+        $company->save();        
+        return redirect('/admin/payment')->with("status","accepted order");
     }
     public function rejectOrder($id){
         $orderCon = new OrderConfirmation();
-        //need to get logged in admin id
-        $orderCon->admin_id = 1;
+        $orderCon->admin_id = session('id');
         $orderCon->order_id = $id;
         $orderCon->is_confirmed = false;
         $d=strtotime("today");
-        // $orderCon->created_at = date("Y-m-d h:i:s", $d);
         $orderCon->save();
         return redirect('/admin/payment');
     }

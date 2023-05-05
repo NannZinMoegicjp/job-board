@@ -71,7 +71,6 @@ class CompanyController extends Controller
             $add->detail_address=$request->input('address');
             $add->company_id=$company->id;
             $add->save();
-        
         return redirect('/admin/company/details/'.$company->id);
     }
     public function updateSetData($id)
@@ -81,30 +80,28 @@ class CompanyController extends Controller
         $states = State::orderBy('name')->get();
         $cities = City::orderBy('name')->get();
         $addresses = Address::where('company_id',$id)->get();
-        return view('add-update-company')->with('company', $company)->with('industries', $industries)->with('states', $states)->with('cities', $cities)->with('updateId', $id)->with('addresses', $addresses);
+        return view('Employer.update-profile')->with('company', $company)->with('industries', $industries)->with('states', $states)->with('cities', $cities)->with('updateId', $id)->with('addresses', $addresses);
     }
     public function update(Request $request, $id)
     {
         $company = Company::find($id);        
         $company->contact_person = $request->input('contactPerson');
         $company->phone = $request->input('phone');
-        $company->company_name = $request->input('comName');
+        $company->company_name = $request->input('comName');        
         $company->websitelink = $request->input('websiteLink');        
         $city_id=$request->input('bCity');
-        $add = Address::where('city_id',$city_id)->where('company_id',$id)->first();
+        $add = Address::where('company_id',$id)->whereNotNull('detail_address')->first();
         if($add != null){
+            $add->city_id = $request->input('city');
             $add->detail_address=$request->input('address');
-        }else{
-            $add = new Address();
-            $add->city_id=$request->input('city');
-            $add->detail_address=$request->input('address');
-            $add->company_id=$company->id;
-        }        
-        $add->save();
+            $add->save();
+        }
         $company->no_of_employee = $request->input('size');
         $company->established_date = $request->input('estDate');
         $company->save();
-        return redirect('/admin/companies')->with('status', "updated company successfully");
+        $request->session()->put('name',$company->company_name); 
+        return redirect('/employer/profile')->with('status', "updated profile successfully");
+        // return redirect('/employer/profile/update/'.$id)->with('status', "updated profile successfully");
     }
     public function updateLogo(Request $request, $id){
         $company = Company::find($id);
@@ -123,44 +120,51 @@ class CompanyController extends Controller
             $company->logo = $logoImg;
         }
         $company->save();
-        return redirect('/admin/company/update/'.$id)->with('status', "updated logo successfully");
+        $request->session()->put('logo',$company->logo);  
+        return redirect('/employer/profile')->with('status', "updated logo successfully");
+        // return redirect('/employer/profile/update/'.$id)->with('status', "updated logo successfully");
     }
     public function addIndustry(Request $request,$cid){        
         $iids = DB::table('company_industry')->where('company_id', $cid)->pluck('industry_id')->toArray();
         $company = Company::find($cid);
         if(in_array($request->industry,$iids)){
-            return redirect('/admin/company/update/'.$cid)->with('status', "industry already existed"); 
+            return redirect('/employer/profile/update/'.$cid)->with('error', "industry already existed"); 
         }
         $company->industries()->attach($request->industry);
-        return redirect('/admin/company/update/'.$cid)->with('status', "added industry successfully");
+        return redirect('/employer/profile')->with('status', "added industry successfully");
+        // return redirect('/employer/profile/update/'.$cid)->with('status', "added industry successfully");
     }
     public function deleteIndustry($cid,$iid){
-        $company = Company::find($cid);
+        $company = Company::find($cid);       
         $company->industries()->detach($iid);
-        return redirect('/admin/company/update/'.$cid)->with('status', "removed industry successfully");
+        return redirect('/employer/profile')->with('status', "removed industry successfully");
+        // return redirect('/employer/profile/update/'.$cid)->with('status', "removed industry successfully");
     }
     public function deleteBranchCity($cid,$addId){
         $add = Address::find($addId);
         $add->delete();
-        return redirect('/admin/company/update/'.$cid)->with('status', "removed branch city successfully");
+        return redirect('/employer/profile')->with('status', "removed branch city successfully");
+        // return redirect('/employer/profile/update/'.$cid)->with('status', "removed branch city successfully");
     }
     public function addBranchCity(Request $request,$cid){
         $city_id=$request->input('bCity');
         $rowCount = Address::where('city_id',$city_id)->where('company_id',$cid)->count();
         if($rowCount>0){
-            return redirect('/admin/company/update/'.$cid)->with('status', "branch city already existed"); 
+            return redirect('/employer/profile/update/'.$cid)->with('status', "branch city already existed"); 
         }
         $add = new Address();
         $add->city_id=$city_id;
         $add->detail_address='';
         $add->company_id=$cid;
         $add->save();
-        return redirect('/admin/company/update/'.$cid)->with('status', "added branch city successfully");
+        return redirect('/employer/profile')->with('status', "added branch city successfully");
+        // return redirect('/employer/profile/update/'.$cid)->with('status', "added branch city successfully");
     }
     public function removeImage($cid,$imageId){
         $image=Image::find($imageId);
         $image->delete();
-        return redirect('/admin/company/update/'.$cid)->with('status', "delete image successfully");
+        return redirect('/employer/profile')->with('status', "deleted image successfully");
+        // return redirect('/employer/profile/update/'.$cid)->with('status', "delete image successfully");
     }
     public function addImages(Request $request,$cid){
         $validator = validator(request()->all(), [
@@ -178,7 +182,8 @@ class CompanyController extends Controller
             $img->company_id = $cid;
             $img->save();
         }
-        return redirect('/admin/company/update/'.$cid)->with('status', "added images successfully");
+        return redirect('/employer/profile')->with('status', "added images successfully");
+        // return redirect('/employer/profile/update/'.$cid)->with('status', "added images successfully");
     }
     public function delete($id)
     {
@@ -204,4 +209,15 @@ class CompanyController extends Controller
         // $jobs = Job::whereIn('address_id',$addrIDs)->WhereDate('created_at','>',Carbon::today()->subMonths(6))->orWhere('status','active')->get();
         return view('Employer.profile')->with(['company'=> $company,'addresses'=> $addresses,'jobCount'=>$jobCount]);
     }
+    public function getCreditData($id){
+        $company = Company::find($id);
+        return view('add-credit')->with('company',$company);
+    }
+    public function addCredit(Request $request,$id){
+        $company = Company::find($id);
+        $company->no_of_credit += $request->input('noOfCredit');
+        $company->save();
+        return redirect('/admin/company/details/'.$id)->with('company',$company)->with('status',$request->input('noOfCredit')." credits added");
+    }
+    
 }

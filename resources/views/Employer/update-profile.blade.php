@@ -8,6 +8,13 @@
         </div>
         @endif
     </div>
+    <div class="row my-2">
+        @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
+    </div>
     <div class="row">
         @if ($errors->any())
         <div class="alert alert-danger">
@@ -19,7 +26,7 @@
     </div>
     <div class="row my-3">
         <div class="col-md-7 col-12 mb-1">
-            <form action="{{url('/admin/company/update/'.$updateId)}}" class="bg-white px-3 pb-2 rounded shadow"
+            <form action="{{url('/employer/profile/update/'.$company->id)}}" class="bg-white px-3 pb-2 rounded shadow"
                 method="post" enctype="multipart/form-data">
                 @csrf
                 <div>
@@ -179,7 +186,7 @@
                     <img src="{{URL::asset('images/companies/'.$company->logo)}}" alt="" class="img img-fluid">
                 </div>
                 <div class="col-8">
-                    <form action="{{url('/admin/company/update/logo/'.$updateId)}}" method="post"
+                    <form action="{{url('/employer/profile/update/logo/'.$updateId)}}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         <input type="file" class="form-control mb-2" placeholder="Logo" name="newlogofile"
@@ -194,11 +201,17 @@
                 </div>
                 <div class="col-8">
                     @foreach ($company->industries as $industry)
+                    @if(count($company->industries)>1)
                     <div class="mb-2 d-flex">
                         {{$industry->name}} <a
-                            href="{{url('/admin/company/delete/industry/'.$company->id.'/'.$industry->id)}}"><i
+                            href="{{url('/employer/profile/delete/industry/'.$company->id.'/'.$industry->id)}}"><i
                                 class="bi bi-trash ms-2 text-warning"></i></a>
                     </div>
+                    @else
+                    <div class="mb-2 d-flex">
+                        {{$industry->name}}
+                    </div>
+                    @endif
                     @endforeach
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                         data-bs-target="#addIndustry">
@@ -215,7 +228,7 @@
                     @if ($address->detail_address == null)
                     <div class="mb-2 d-flex">
                         {{$address->city->name}},{{$address->city->state->name}}
-                        <a href="{{url('/admin/company/delete/branch/'.$company->id.'/'.$address->id)}}"><i
+                        <a href="{{url('/employer/profile/delete/branch/'.$company->id.'/'.$address->id)}}"><i
                                 class="bi bi-trash ms-2 text-warning"></i></a>
                     </div>
                     @endif
@@ -236,7 +249,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{url('/admin/company/add/industry/'.$company->id)}}" method="post"
+                            <form action="{{url('/employer/profile/add/industry/'.$company->id)}}" method="post"
                                 enctype="multipart/form-data" id="branchForm">
                                 @csrf
                                 <div class="row mb-2">
@@ -275,7 +288,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{url('/admin/company/add/branch/'.$company->id)}}" method="post"
+                            <form action="{{url('/employer/profile/add/branch/'.$company->id)}}" method="post"
                                 enctype="multipart/form-data" id="branchForm">
                                 @csrf
                                 <div class="row mb-2">
@@ -325,188 +338,16 @@
             <div class="col-lg-3 col-6 photoContainer mb-4" onmouseover="showDeleteIcon(this);"
                 onmouseout="hideDeleteIcon(this);">
                 <img src="{{url('images/companies/'.$image['name'])}}" alt="" class="img img-fluid">
-                <a href="{{url('/admin/company/remove/images/'.$company->id.'/'.$image->id)}}" class="d-none"><i
+                <a href="{{url('/employer/profile/remove/images/'.$company->id.'/'.$image->id)}}" class="d-none"><i
                         class="bi bi-x-lg deleteIcon"></i></a>
             </div>
             @endforeach
         </div>
-        <form action="{{url('/admin/company/add/images/'.$updateId)}}" method="post" enctype="multipart/form-data">
+        <form action="{{url('/employer/profile/add/images/'.$updateId)}}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="file" class="form-control mb-2" placeholder="" name="newPhotos[]" id="newPhotos" multiple>
             <input type="submit" class="btn btn-outline-primary" value="upload new photos">
-        </form>
-        @else
-        <div class="col-md-8 offset-md-2 col-12">
-            <form action="{{url('/admin/company/add')}}" class="bg-white px-3 pb-2 rounded shadow" method="post"
-                enctype="multipart/form-data">
-                @csrf
-                <div>
-                    <h4 class="text-center py-4">Add Company</h4>
-                </div>
-                <div class="row my-2">
-                    <div class="col-md-10 offset-md-1 col-12">
-                        <h6>Account information</h6>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12">
-                        <label for="contactPerson">Contact Person</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <input type="text" class="form-control" required name="contactPerson" id="contactPerson"
-                            value="{{ old('contactPerson') }}">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12">
-                        <label for="userEmail">Email</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <input type="email" class="form-control" required name="userEmail" id="userEmail"
-                            value="{{ old('userEmail') }}">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12">
-                        <label for="phone">Phone</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <input type="text" class="form-control" min="0" required placeholder="eg. 09454096528"
-                            id="phone" name="phone" value="{{ old('phone') }}">
-                    </div>
-                </div>
-                <hr>
-                <div class="row mb-2">
-                    <div class="col-md-10 offset-md-1 col-12  col-form-label">
-                        <h6>Company information</h6>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="comName">Company name</label>
-                    </div>
-                    <div class="col-md-7 col-12"> <input type="text" class="form-control" required id="comName"
-                            name="comName" value="{{old('comName')}}">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="estDate">Established date</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <input type="date" class="form-control" placeholder="eastablished date" id="estDate"
-                            name="estDate" value="{{old('estDate')}}">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="websiteLink">Website link</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <input type="text" class="form-control" name="websiteLink" id="websiteLink"
-                            placeholder="https://studyrightnow-mdy.com" value="{{old('websiteLink')}}">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="logofile" class="form-label">Company Logo</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <input type="file" class="form-control" required placeholder="Logo" name="logofile"
-                            id="logofile" value="{{old('logofile')}}">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="images" class="form-label">Company Photos</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <input type="file" class="form-control" placeholder="images" name="images[]" id="images"
-                            multiple value="{{old('images')}}">
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="state">Division/state</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <select name="state" id="state" class="form-select" placeholder="Your division/state">
-                            @if(isset($states))
-                            @foreach ($states as $state)
-                            <option value="{{$state['id']}}">{{$state['name']}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="city">City</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <select name="city" id="city" class="form-select">
-                            @if(isset($cities))
-                            @foreach ($cities as $city)
-                            <option value="{{$city['id']}}">{{$city['name']}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="address">Address</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <textarea class="form-control address" placeholder="Enter details address" required id="address"
-                            name="address">{{old('address')}}</textarea>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="industry">Main Industry</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <select name="industry[]" id="industry" class="form-select" multiple required>
-                            @if(isset($industries))
-                            @foreach ($industries as $industry)
-                            <option value="{{$industry['id']}}">{{$industry['name']}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="size">Number of employee</label>
-                    </div>
-                    <div class="col-md-7 col-12">
-                        <select name="size" id="size" class="form-select">
-                            <option value="1-5">1-5</option>
-                            <option value="6-10">6-10</option>
-                            <option value="11-20">11-20</option>
-                            <option value="21-50">21-50</option>
-                            <option value="51-100">51-100</option>
-                            <option value="101-200">101-200</option>
-                            <option value="201-500">201-500</option>
-                            <option value="501-1000">501-1000</option>
-                            <option value="1001-5000">1001-5000</option>
-                            <option value="5000-10000">5000-10000</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col-md-3 offset-md-1 col-12">
-                    </div>
-                    <div class="col-md-7 col-12 d-flex">
-                        <input type="submit" class="btn-primary btn me-2" required value="Add">
-                        <a href="{{url('/admin/companies')}}"><input type="button" class="btn-secondary btn"
-                                value="Cancel"></a>
-                    </div>
-                </div>
-            </form>
-            @endif
-        </div>
+        </form>        
     </div>
 </div>
 <script>

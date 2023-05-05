@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Company;
-use App\Models\Order;
-use App\Models\JobSeeker;
-use App\Models\Job;
-use App\Models\Application;
-use App\Models\OrderConfirmation;
-class AdminDashBoardController extends Controller
+
+class EmployerDashboardController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $admin = Admin::find(session('id'));
+        $request->session()->put('id',$admin->id);
+        $request->session()->put('email',$admin->email);
+        $request->session()->put('name',$admin->name);
+
         $companyCount = Company::where('deleted_at', NULL)->count();
         $jobSeekerCount = JobSeeker::where('deleted_at', NULL)->count();
         $applicationCount = Application::where('deleted_at', NULL)->count();
