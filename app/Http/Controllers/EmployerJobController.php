@@ -23,9 +23,9 @@ class EmployerJobController extends Controller
     {
         //need to get from logged in id
         $addrs = Address::where('company_id',  $request->session()->get('id'))->where('deleted_at',null)->get();
-        $jobCategories = JobCategory::all();
-        $empTypes = EmploymentType::all();
-        $expLevels = ExperienceLevel::all();
+        $jobCategories = JobCategory::orderBy('name')->get();
+        $empTypes = EmploymentType::orderBy('name')->get();
+        $expLevels = ExperienceLevel::orderBy('name')->get();
         $data = ['addresses' => $addrs, 'jobCategories' => $jobCategories, 'empTypes' => $empTypes, 'expLevels' => $expLevels];
         return view('Employer.multistepForm')->with('data', $data);
     }
@@ -50,17 +50,17 @@ class EmployerJobController extends Controller
         $job->experience_level_id = $request->expLevel;
         $job->employment_type_id = $request->empType;
         $job->address_id = $request->address;
-        if($request->has(description)){
+        if($request->has('description')){
             $job->description = $request->description;
         }else{
             return back()->with('error','please enter description')->withInput();
         }
-        if($request->has(requirement)){
+        if($request->has('requirement')){
             $job->requirement = $request->requirement;
         }else{
             return back()->with('error','please enter requirement')->withInput();
         }
-        if($request->has(benefit)){
+        if($request->has('benefit')){
             $job->benefit = $request->benefit;
         }  else{
             return back()->with('error','please enter benefit')->withInput();
@@ -155,7 +155,7 @@ class EmployerJobController extends Controller
     public function delete($id){    
         $job = Job::find($id);
         $job->delete();
-        return redirect()->route('employer.jobs')->with('status','deleted jobs successfully!');
+        return back()->with('status','deleted jobs successfully!');
     }
     public function deactivatedJobs(Request $request){
         $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->where('deleted_at',null)->get();
@@ -169,7 +169,8 @@ class EmployerJobController extends Controller
     }
     public function inactiveJobs(Request $request){
         $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->where('deleted_at',null)->get();
-        $jobs = Job::whereIn('address_id',$addrIDs)->orWhereDate('created_at','<',Carbon::today()->subMonths(6))->orWhere('status','inactive')->get();
+        // dd(Carbon::today()->subMonths(6));
+        $jobs = Job::whereIn('address_id',$addrIDs)->WhereDate('created_at','<',Carbon::today()->subMonths(6))->orWhere('status','inactive')->get();
         return view('Employer.inactive-jobs-manage')->with("jobs",$jobs);
     }    
 }

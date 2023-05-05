@@ -132,4 +132,8 @@ Route::get('/employer/job/activate/{id}',[EmployerJobController::class,'activate
 
 Route::get('/multiStepForm',[EmployerJobController::class,'insertGet'])->name('insert.job');
 Route::post('/multiStepForm/add',[EmployerJobController::class,'insert'])->name('multistepForm.add');
-Route::get('/employer/profile',[CompanyController::class,'viewDetails']);
+Route::get('/employer/profile',[CompanyController::class,'viewProfile']);
+Route::get('/employer/profile/update',[CompanyController::class,'updateSetData']);
+Route::get('/employer/profile/update',[CompanyController::class,'updateSetData']);
+
+

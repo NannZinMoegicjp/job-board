@@ -1,4 +1,4 @@
-@extends('master_admin')
+@extends('Employer.master_employer')
 @section('content')
 <div class="container-fluid">
     <div class="row my-2">
@@ -17,11 +17,7 @@
         </div>
         @endif
     </div>
-    <div class="row text-end my-2">
-        <a href="{{url('/admin/companies')}}">companies list<i class="bi bi-arrow-right"></i></a>
-    </div>
     <div class="row my-3">
-        @if(isset($updateId))
         <div class="col-md-7 col-12 mb-1">
             <form action="{{url('/admin/company/update/'.$updateId)}}" class="bg-white px-3 pb-2 rounded shadow"
                 method="post" enctype="multipart/form-data">
@@ -512,26 +508,6 @@
             @endif
         </div>
     </div>
-    {{-- <div class="row mb-3 mt-2">
-
-        @foreach ($addresses as $add)
-
-        <div class="col-md-8 offset-md-2 col-12  bg-white shadow p-2 my-2">
-            <div class="row">
-                <div class="col-10">
-                    {{$add->detail_address}}, {{$add->city->name}}, {{$add->city->state->name}}
-                </div>
-                <div class="col-2 d-flex">
-                    <a href="" class="me-2" onclick="edit(this);">edit</a>
-                    <a href="">delete</a>
-                </div>
-            </div>
-
-        </div>
-
-        @endforeach
-    </div>
-</div> --}}
 </div>
 <script>
     let showDeleteIcon = (photo) => {

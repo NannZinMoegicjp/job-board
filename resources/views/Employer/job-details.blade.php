@@ -16,13 +16,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="row p-3 mx-3">
-                    <div class="col-3 d-flex justify-content-center align-items-center">
+                    <div class="col-3 d-flex justify-content-center align-items-center">                        
                         <a href=""><img src="{{url('images/companies/'.$job->address->company->logo)}}"
                                 alt="{{$job->address->company->company_name}} image"></a>
                     </div>
                     <div class="col-9">
                         <a href="" class="text-decoration-none text-dark">
-                            <h4 class="title fw">{{$job->title}}</h4>
+                            <h4 class="title fw">{{$job->title}}</h4>                            
                         </a>
                         <a href="" class="text-decoration-none text-dark">
                             <h5 class="companyLink title fw">{{$job->address->company->company_name}}</h5>

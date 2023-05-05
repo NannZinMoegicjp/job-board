@@ -33,7 +33,7 @@
                             {{session('name')}}
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a class="dropdown-item" href="{{url('/employer/profile/1')}}"><i
+                            <li><a class="dropdown-item" href="{{url('/employer/profile')}}"><i
                                         class="fa-solid fa-user"></i> profile</a></li>
                             <li><a class="dropdown-item" href=""><i class="fa-solid fa-right-from-bracket"></i>
                                     logout</a>

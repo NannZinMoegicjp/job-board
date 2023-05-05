@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
+use Carbon\Carbon;
 class CompanyController extends Controller
 {
     public function index()
@@ -34,49 +35,44 @@ class CompanyController extends Controller
         // }
         $company = new Company();
         $validator = validator(request()->all(), [
-            'logofile' => 'mimes:jpeg,jpg,svg,gif,png|max:2048',
+            'logofile' => 'required|mimes:jpeg,jpg,svg,gif,png|max:2048',
+            'estDate' =>'nullable|date|before:today',
+            'userEmail' => 'email|unique:companies,email'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        $company->contact_person = $request->input('contactPerson');
-        $company->email = $request->input('userEmail');
-        $company->phone = $request->input('phone');
-        $company->password = "12345678";
-        $company->company_name = $request->input('comName');
-        $logoImg = time() . "." . $request->file('logofile')->getClientOriginalName();
-        $request->logofile->move(public_path('images/companies'), $logoImg);
-        $company->logo = $logoImg;
-        $company->websitelink = $request->input('websiteLink');      
-        $company->no_of_employee = $request->input('size');
-        $company->established_date = $request->input('estDate');
-        $company->save();
-        $company->industries()->attach($request->input('industry'));
-        if ($request->file('images')) {
-            foreach ($request->file('images') as $key => $image) {
-                $imageName = time() . '.' . $image->getClientOriginalName();
-                $image->move(public_path('images/companies'), $imageName);
-                $img = new Image();
-                $img->name = $imageName;
-                $img->company_id = $company->id;
-                $img->save();
+            $company->contact_person = $request->input('contactPerson');
+            $company->email = $request->input('userEmail');
+            $company->phone = $request->input('phone');
+            $company->password = "12345678";
+            $company->company_name = $request->input('comName');
+            $logoImg = time() . "." . $request->file('logofile')->getClientOriginalName();
+            $request->logofile->move(public_path('images/companies'), $logoImg);
+            $company->logo = $logoImg;
+            $company->websitelink = $request->input('websiteLink');      
+            $company->no_of_employee = $request->input('size');
+            $company->no_of_credit = 1;
+            $company->established_date = $request->input('estDate');      
+            $company->save();
+            $company->industries()->attach($request->input('industry'));
+            if ($request->file('images')) {
+                foreach ($request->file('images') as $key => $image) {
+                    $imageName = time() . '.' . $image->getClientOriginalName();
+                    $image->move(public_path('images/companies'), $imageName);
+                    $img = new Image();
+                    $img->name = $imageName;
+                    $img->company_id = $company->id;
+                    $img->save();
+                }
             }
-        }
-        $add = new Address();
-        $add->city_id=$request->input('city');
-        $add->detail_address=$request->input('address');
-        $add->company_id=$company->id;
-        $add->save();
-        // foreach($request->input('cities') as $city){
-        //     $add = new Address();
-        //     $add->city_id=$city;
-        //     $add->detail_address='';
-        //     $add->company_id=$company->id;
-        //     $add->save();
-        // }
+            $add = new Address();
+            $add->city_id=$request->input('city');
+            $add->detail_address=$request->input('address');
+            $add->company_id=$company->id;
+            $add->save();
         
         return redirect('/admin/company/details/'.$company->id);
-        // return redirect('/admin/companies')->with('status', "added successfully");
     }
     public function updateSetData($id)
     {
@@ -113,8 +109,11 @@ class CompanyController extends Controller
     public function updateLogo(Request $request, $id){
         $company = Company::find($id);
         $validator = validator(request()->all(), [
-            'newlogofile' => 'mimes:jpeg,jpg,svg,gif,png|max:20',
+            'newlogofile' => 'required|mimes:jpeg,jpg,svg,gif,png|max:2048',
         ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
         if ($request->hasFile('newlogofile')) {
             if (file_exists(public_path('images/companies/' . $company->logo))) {
                 unlink(public_path('images/companies/' . $company->logo));
@@ -194,5 +193,15 @@ class CompanyController extends Controller
         $addrIDs = DB::table('addresses')->where('company_id', $id)->pluck('id')->toArray();
         $jobCount = Job::whereIn('address_id', $addrIDs)->count();
         return view('admin-company-detail')->with(['company'=> $company,'addresses'=> $addresses,'jobCount'=>$jobCount]);
+    }
+    public function viewProfile()
+    {
+        $id = session('id');
+        $company = Company::find($id);
+        $addresses = Address::where('company_id',$id)->get();
+        $addrIDs = DB::table('addresses')->where('company_id', $id)->pluck('id')->toArray();
+        $jobCount = Job::whereIn('address_id', $addrIDs)->count();
+        // $jobs = Job::whereIn('address_id',$addrIDs)->WhereDate('created_at','>',Carbon::today()->subMonths(6))->orWhere('status','active')->get();
+        return view('Employer.profile')->with(['company'=> $company,'addresses'=> $addresses,'jobCount'=>$jobCount]);
     }
 }

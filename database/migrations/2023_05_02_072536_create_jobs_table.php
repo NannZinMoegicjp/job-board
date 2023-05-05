@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('gender');
             $table->integer('open_position');
             $table->unsignedBigInteger("job_category_id");            
-            $table->foreign("job_category_id")->references('id')->on('job_categories');
+            $table->foreign("job_category_id")->references('id')->on('job_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger("experience_level_id");
-            $table->foreign("experience_level_id")->references('id')->on('experience_levels');
+            $table->foreign("experience_level_id")->references('id')->on('experience_levels')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger("employment_type_id");
-            $table->foreign("employment_type_id")->references('id')->on('employment_types');
+            $table->foreign("employment_type_id")->references('id')->on('employment_types')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger("address_id");
-            $table->foreign("address_id")->references('id')->on('addresses');    
+            $table->foreign("address_id")->references('id')->on('addresses')->onDelete('cascade')->onUpdate('cascade');   
             $table->mediumText('description');   
             $table->mediumText('requirement'); 
             $table->mediumText('benefit');   

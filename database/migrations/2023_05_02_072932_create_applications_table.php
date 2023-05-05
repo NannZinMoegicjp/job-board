@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("job_id");
-            $table->foreign("job_id")->references('id')->on("jobs");
+            $table->foreign("job_id")->references('id')->on("jobs")->onDelete('cascade')->onUpdate('cascade');;
             $table->unsignedBigInteger("job_seeker_id");
-            $table->foreign("job_seeker_id")->references('id')->on('job_seekers');
+            $table->foreign("job_seeker_id")->references('id')->on('job_seekers')->onDelete('cascade')->onUpdate('cascade');
             $table->string("cvfile");
             $table->string("status");
             $table->timestamps();

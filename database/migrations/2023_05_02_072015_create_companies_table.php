@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('websitelink')->nullable();
             $table->string('no_of_employee');
             $table->integer('no_of_credit')->default('0');
-            $table->date('established_date');           
+            $table->date('established_date')->nullable();         
             $table->timestamps();
             $table->softDeletes();
         });
