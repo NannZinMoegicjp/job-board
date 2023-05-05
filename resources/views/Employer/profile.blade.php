@@ -6,7 +6,7 @@
             <img src="{{url('images/companies/'.$company['logo'])}}" alt="{{$company['company_name']}} logo"
                 class="companyDetailsLogo me-2">
             <h3 class="text-center title py-2 me-2">{{$company["company_name"]}}</h3>
-            <a href="{{url('/admin/company/update/'.$company->id)}}">
+            <a href="{{url('/employer/profile/update/'.$company->id)}}">
                 <button type="button" class="btn btn-primary">
                     <i class="bi bi-pencil-fill update"></i>Update</button>
             </a>

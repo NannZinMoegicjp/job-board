@@ -45,9 +45,10 @@
                 <!-- <td>{{$order->no_of_credit*$order->creditPrice->price}}</td> -->
                 
                 <!-- <td><img src="{{URL::asset('images/payment_screenshots/'.$order->screenshot)}}" alt="" id="imageBox1" -->
-                        class="myimg"></td>
-                        <td><img src="{{url('images/payment_methods/'.$order->paymentAccount->paymentMethod->image)}}"
-                                alt="" class="myimg"></td>
+                        <!-- class="myimg"></td> -->
+                        <!-- <td><img src="{{url('images/payment_methods/'.$order->paymentAccount->paymentMethod->image)}}"
+                                alt="" class="myimg"></td> -->
+                                <td>{{$order->paymentAccount->paymentMethod->name}}</td>
                         <td>{{$order->created_at}}</td>
                         <td>
                             <a href="{{url('/admin/order/awaiting/details/'.$order->id)}}"><button type="button"

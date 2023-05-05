@@ -1,9 +1,7 @@
 @extends('master')
 @section('content')
 <section class="bg-light pb-4">
-    {{-- <h3 class="text-center title shadow py-2 mb-4">Company details</h3> --}}
     <h3 class="text-center title shadow py-2 mb-4">Unilever Myanmar</h3>
-
     <div class="container bg-white">        
         <div class="row g-2 border-bottom py-2">
             <div class="col-4 d-flex justify-content-center align-items-center p-3 border-end">

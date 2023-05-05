@@ -51,7 +51,7 @@
                     <div class="d-flex">
                         <a href="{{url('/admin/company/details/'.$company->id)}}"><i
                                 class="bi bi-info-circle-fill info"></i></a>
-                        <a href="{{url('/admin/company/update/'.$company->id)}}"><i
+                        <a href="{{url('/admin/company/add/credit/'.$company->id)}}"><i
                                 class="bi bi-pencil-fill update"></i></a>
                         <a onclick='return confirm("Want to delete?")'
                             href="{{url('/admin/company/delete/'.$company->id)}}"><i
