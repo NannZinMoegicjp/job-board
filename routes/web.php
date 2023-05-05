@@ -117,7 +117,7 @@ Route::get('/admin/details/{id}',[AdminController::class,'viewDetails'])->name('
 
 Route::get('/employer',[EmployerController::class,'index']);
 Route::get('/employer/jobs',[EmployerJobController::class,'index'])->name('employer.jobs');
-Route::get('/employer/jobs/deactivated',[EmployerJobController::class,'deactivatedJobs'])->name('employer.deactivted-jobs');
+Route::get('/employer/jobs/deactivated',[EmployerJobController::class,'deactivatedJobs'])->name('employer.deactivated-jobs');
 Route::get('/employer/jobs/expired',[EmployerJobController::class,'expiredJobs'])->name('employer.expired-jobs');
 Route::get('/employer/jobs/inactive',[EmployerJobController::class,'inactiveJobs'])->name('inactive-jobs');
 
