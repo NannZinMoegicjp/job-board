@@ -37,6 +37,7 @@
                 </div>
                 <div class="col-md-6 col-12">
                     <select name="paymentMethod" id="paymentMethod" class="form-select">
+                        <option value="">-- Select payment method --</option>
                         @foreach($data['paymentMethods'] as $paymentMethod)
                         <option value="{{$paymentMethod['id']}}">{{$paymentMethod['name']}}</option>
                         @endforeach
@@ -49,9 +50,10 @@
                 </div>
                 <div class="col-md-6 col-12">
                     <select name="paymentAccount" id="paymentAccount" class="form-select">
-                        @foreach($data['paymentAccounts'] as $paymentAccount)
+                        <option value="">-- Select payment account --</option>
+                        {{-- @foreach($data['paymentAccounts'] as $paymentAccount)
                         <option value="{{$paymentAccount['id']}}">{{$paymentAccount['account_no']}} ({{$paymentAccount['account_name']}})</option>
-                        @endforeach
+                        @endforeach --}}
                     </select>
                 </div>
             </div>
@@ -85,6 +87,7 @@
 </div>
 @endsection
 @section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 let calculateTotal=()=> {
     var price = parseInt(document.getElementById('price').innerHTML);
@@ -92,5 +95,22 @@ let calculateTotal=()=> {
     var total = document.getElementById('totalAmount');
     total.innerHTML = price * no_of_credit;
 }
+$(document).ready(function () {
+$('#paymentMethod').on('change', function () {
+                var paymentMethodId = this.value;
+                $("#paymentAccount").html('<option value="">-- Select paymentAccount --</option>');
+                $.ajax({
+                    url: "/api/fetch-payment-accounts/" + paymentMethodId,
+                    type: "GET",
+                    dataType: 'json',
+                    success: function(result) {
+                        $.each(result, function (key, value) {
+                            $("#paymentAccount").append('<option value="' + value
+                                .id + '">' + value.account_name + '/'+ value.account_no + '</option>');
+                        });
+                    },
+                });
+            });
+            });
 </script>
 @endsection

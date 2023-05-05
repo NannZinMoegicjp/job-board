@@ -20,13 +20,7 @@ class Job extends Model
     public function jobCategory(){
         return $this->belongsTo(JobCategory::class);
     }
-    public function descriptions(){
-        return $this->hasMany(Description::class);
-    }
-    public function requirements(){ 
-        return $this->hasMany(Requirement::class);
-    }
-    public function benefits(){
-        return $this->hasMany(Benefit::class);
+    public function applications(){
+        return $this->hasMany(Application::class);
     }
 }

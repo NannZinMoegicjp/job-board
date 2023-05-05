@@ -450,6 +450,7 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <select name="city" id="city" class="form-select">
+                            <option value="">-- Select city --</option>
                             {{-- @if(isset($cities))
                             @foreach ($cities as $city)
                             <option value="{{$city['id']}}">{{$city['name']}}</option>
@@ -529,8 +530,7 @@ let hideDeleteIcon = (photo) => {
 $(document).ready(function () {
 $('#state').on('change', function () {
                 var stateId = this.value;
-                alert(stateId);
-                $("#city").html('');
+                $("#city").html('<option value="">-- Select city --</option>');
                 $.ajax({
                     url: "/api/fetch-cities/" + stateId,
                     type: "GET",

@@ -81,7 +81,7 @@
                                     <a href="{{url('/employer/order')}}"><i class="bi bi-cart-plus-fill"></i> Order</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url('/admin/payment-methods')}}"><i
+                                    <a href="{{url('/employer/applications')}}"><i
                                             class="bi bi-credit-card-2-front-fill"></i> Application Management</a>
                                 </li>
                             </ul>

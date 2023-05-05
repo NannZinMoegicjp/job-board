@@ -150,3 +150,6 @@ Route::post('/employer/profile/add/images/{cid}',[CompanyController::class,'addI
 Route::get('/employer/profile/remove/images/{cid}/{imageId}',[CompanyController::class,'removeImage']);
 
 Route::get('api/fetch-cities/{id}', [DropdownController::class, 'fetchCities']);
+Route::get('api/fetch-payment-accounts/{id}', [DropdownController::class, 'fetchPaymentAccounts']);
+
+Route::get('/employer/applications',[EmployerController::class,'getApplications']);

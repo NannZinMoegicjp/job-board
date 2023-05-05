@@ -28,7 +28,6 @@ class EmployerController extends Controller
         $count = ["activeJobs"=>$activeJob,"inactiveJob"=>$inactiveJobs,"credits"=>$company->no_of_credit,"applications"=>$applications];
         return view('Employer.index')->with('count',$count);
     }
-
     public function buyCreditGet(Request $request){
         $company = Company::find($request->session()->get('id'));
         $creditPrice = CreditPrice::whereNull('deleted_at')->first();
@@ -55,5 +54,15 @@ class EmployerController extends Controller
         $order->screenshot = $screenshot;
         $order->save();
         return redirect('/employer/buy/credit')->with('status','your order has been sent');
+    }
+    public function getApplications(Request $request){
+        DB::table('applications')
+            ->select('applications.*')
+            ->join('jobs', 'jobs.id', '=', 'application_id')
+            ->join('addresses', 'addresses.id', '=', 'jobs.address_id')
+            ->join('companies', 'companies.id', '=', 'addresses.company_id')
+            ->where('company_id',$request->session()->get('id'))            
+            ->get();
+        return view('Employer.applications-manage')->with('applications',$applications);
     }
 }
