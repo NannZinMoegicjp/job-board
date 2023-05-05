@@ -234,6 +234,18 @@
                         @csrf
                         <div class="row mb-2">
                             <div class="col-md-4 col-form-label">
+                                <label for="payMethod">Payment Method</label>
+                            </div>
+                            <div class="col-md-7">
+                                <select name="payMethod" id="payMethod" class="form-select">
+                                    @foreach($data as $payment_method)
+                                    <option value="{{$payment_method['id']}}">{{$payment_method["name"]}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-4 col-form-label">
                                 <label for="accName">Account Name</label>
                             </div>
                             <div class="col-md-7">
@@ -247,19 +259,7 @@
                             <div class="col-md-7">
                                 <input type="number" required name="accNo" id="accNo" class="form-control">
                             </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-md-4 col-form-label">
-                                <label for="payMethod">Payment Method</label>
-                            </div>
-                            <div class="col-md-7">
-                                <select name="payMethod" id="payMethod" class="form-select">
-                                    @foreach($data as $payment_method)
-                                    <option value="{{$payment_method['id']}}">{{$payment_method["name"]}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                        </div>                        
                         <div class="row">
                             <div class="col-md-4">
                             </div>

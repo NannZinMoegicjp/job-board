@@ -435,6 +435,7 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <select name="state" id="state" class="form-select" placeholder="Your division/state">
+                            <option value="">-- Select State --</option>
                             @if(isset($states))
                             @foreach ($states as $state)
                             <option value="{{$state['id']}}">{{$state['name']}}</option>
@@ -449,11 +450,11 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <select name="city" id="city" class="form-select">
-                            @if(isset($cities))
+                            {{-- @if(isset($cities))
                             @foreach ($cities as $city)
                             <option value="{{$city['id']}}">{{$city['name']}}</option>
                             @endforeach
-                            @endif
+                            @endif --}}
                         </select>
                     </div>
                 </div>
@@ -472,6 +473,7 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <select name="industry[]" id="industry" class="form-select" multiple required>
+                            <option value="">-- Select industry --</option>
                             @if(isset($industries))
                             @foreach ($industries as $industry)
                             <option value="{{$industry['id']}}">{{$industry['name']}}</option>
@@ -486,6 +488,7 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <select name="size" id="size" class="form-select">
+                            <option value="">-- Select no of employee --</option>
                             <option value="1-5">1-5</option>
                             <option value="6-10">6-10</option>
                             <option value="11-20">11-20</option>
@@ -512,27 +515,8 @@
             @endif
         </div>
     </div>
-    {{-- <div class="row mb-3 mt-2">
-
-        @foreach ($addresses as $add)
-
-        <div class="col-md-8 offset-md-2 col-12  bg-white shadow p-2 my-2">
-            <div class="row">
-                <div class="col-10">
-                    {{$add->detail_address}}, {{$add->city->name}}, {{$add->city->state->name}}
-                </div>
-                <div class="col-2 d-flex">
-                    <a href="" class="me-2" onclick="edit(this);">edit</a>
-                    <a href="">delete</a>
-                </div>
-            </div>
-
-        </div>
-
-        @endforeach
-    </div>
-</div> --}}
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     let showDeleteIcon = (photo) => {
     photo.children[1].classList.remove('d-none');
@@ -542,5 +526,23 @@ let hideDeleteIcon = (photo) => {
     photo.children[1].classList.remove('d-inline');
     photo.children[1].classList.add('d-none');
 }
+$(document).ready(function () {
+$('#state').on('change', function () {
+                var stateId = this.value;
+                alert(stateId);
+                $("#city").html('');
+                $.ajax({
+                    url: "/api/fetch-cities/" + stateId,
+                    type: "GET",
+                    dataType: 'json',
+                    success: function(result) {
+                        $.each(result, function (key, value) {
+                            $("#city").append('<option value="' + value
+                                .id + '">' + value.name + '</option>');
+                        });
+                    },
+                });
+            });
+            });
 </script>
 @endsection

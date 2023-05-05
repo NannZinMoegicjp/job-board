@@ -13,7 +13,7 @@ use App\Models\OrderConfirmation;
 class AdminDashBoardController extends Controller
 {
     public function index(Request $request){
-        $admin = Admin::find(1);
+        $admin = Admin::find(2);
         $request->session()->put('id',$admin->id);
         $request->session()->put('email',$admin->email);
         $request->session()->put('name',$admin->name);

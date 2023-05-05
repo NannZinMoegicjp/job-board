@@ -15,7 +15,7 @@ use Carbon\Carbon;
 class EmployerController extends Controller
 {
     public function index(Request $request){
-        $company = Company::find(session('id'));
+        $company = Company::find(1);
         $request->session()->put('id',$company->id);     
         $request->session()->put('logo',$company->logo);  
         $request->session()->put('name',$company->company_name);        

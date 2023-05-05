@@ -16,10 +16,8 @@ class AdminController extends Controller
     public function add(Request $request){
         $email = $request->input('userEmail');
         if (Admin::where('email', '=', $email)->exists()) {
-            return back()->withInput();
-        } else {
-            return back()->withInput();
-        }
+            return back()->withInput()->with('error','email already existed');
+        } 
         $validator = validator(request()->all(), [
             'profileImage' => 'mimes:jpeg,jpg,svg,gif,png|max:2048',
             'name' => 'Regex:/^[\D]+$/i|max:100',
@@ -32,7 +30,6 @@ class AdminController extends Controller
         $admin->name = $request->input('name');
         $admin->password = '12345678';
         $admin->email = $request->input('userEmail');
-        // dd(strlen($request->input('phone')));
         $admin->phone = $request->input('phone');
         if($request->hasFile('profileImage')){
             $profileImg = time() . "." . $request->file('profileImage')->getClientOriginalName();

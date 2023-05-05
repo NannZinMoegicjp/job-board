@@ -61,7 +61,7 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="file" class="form-control" placeholder="profileImage" name="profileImage"
-                            id="profileImage" value="{{old('profileImage')}}">
+                            id="profileImage" value="{{old('profileImage')}}" required>
                     </div>
                 </div>
                 <div class="row mb-2">

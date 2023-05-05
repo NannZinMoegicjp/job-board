@@ -13,7 +13,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployerOrderController;
 use App\Http\Controllers\EmployerJobController;
 use App\Http\Controllers\EmployerDashboardController;
-
+use App\Http\Controllers\DropdownController;
 
 /*
 |--------------------------------------------------------------------------
@@ -149,4 +149,4 @@ Route::post('/employer/profile/add/branch/{cid}',[CompanyController::class,'addB
 Route::post('/employer/profile/add/images/{cid}',[CompanyController::class,'addImages']);
 Route::get('/employer/profile/remove/images/{cid}/{imageId}',[CompanyController::class,'removeImage']);
 
-
+Route::get('api/fetch-cities/{id}', [DropdownController::class, 'fetchCities']);
