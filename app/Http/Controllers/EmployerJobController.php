@@ -16,7 +16,7 @@ class EmployerJobController extends Controller
     public function index(Request $request)
     {
         $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->whereNull('deleted_at')->get();
-        $jobs = Job::whereIn('address_id',$addrIDs)->where('status','active')->where('created_at','>',Carbon::today()->subMonths(6))->get();
+        $jobs = Job::whereIn('address_id',$addrIDs)->where('status','active')->where('created_at','>',Carbon::today()->subMonths(6))->orderBy('created_at','desc')->get();
         return view('Employer.job-manage')->with("jobs",$jobs);
     }
     public function insertGet(Request $request)
@@ -70,7 +70,8 @@ class EmployerJobController extends Controller
         $company = Company::find($request->session()->get('id'));
         $company->no_of_credit -= 1;
         $company->save();
-        return redirect()->route('employer.jobs')->with('status','posted job successfully!');
+        return redirect('/employer/job/details/'.$job->id)->with('status','posted job successfully!');
+        // return redirect()->route('employer.jobs')->with('status','posted job successfully!');
     }
     public function updateGet(Request $request,$id)
     {
@@ -122,6 +123,7 @@ class EmployerJobController extends Controller
         return redirect('/employer/job/details/'.$job->id)->with('status','updated job successfully!');
     }
     public function checkCredit(Request $request){
+        // dd($request->session()->get('id'));
         $company = Company::find($request->session()->get('id'));
         if($company->no_of_credit > 0){
             return redirect()->route('insert.job');            

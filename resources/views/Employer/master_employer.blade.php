@@ -26,7 +26,7 @@
         <div class="row border-bottom top">
             <div class="col-12">
                 <div class="text-warning p-2s d-flex justify-content-md-end">
-                    <img src="{{URL::asset('images/companies/'.session('logo'))}}" alt="admin image" class="adminImg m-2">
+                    <img src="{{URL::asset('images/companies/'.session('logo'))}}" alt="employer image" class="adminImg m-2">
                     <div class="dropdown m-2">
                         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -74,15 +74,23 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url('/employer/buy/credit')}}"><i class="bi bi-cart-plus-fill"></i> Purchase
+                                    <a href="{{url('/employer/buy/credit')}}"><i class="bi bi-coin"></i> Purchase
                                         Credit</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{url('/employer/order')}}"><i class="bi bi-cart-plus-fill"></i> Order</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url('/employer/applications')}}"><i
-                                            class="bi bi-credit-card-2-front-fill"></i> Application Management</a>
+                                    <div class="dropdown">
+                                        <span>
+                                            <i class="bi bi-credit-card-2-front-fill"></i> Application managment
+                                        </span>
+                                        <ul class="list-unstyled">
+                                            <li><a class="dropdown-item" href="{{url('/employer/applications')}}">Applications</a></li>
+                                            <li><a class="dropdown-item" href="{{url('/employer/applications/shortlisted')}}">Shortlisted application</a></li> 
+                                            <li><a class="dropdown-item" href="{{url('/employer/applications/rejected')}}">Rejected application</a></li> 
+                                        </ul>
+                                    </div>
                                 </li>
                             </ul>
                         </div>

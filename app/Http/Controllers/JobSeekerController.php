@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 use App\Models\JobSeeker;
+use App\Models\Application;
 use Illuminate\Http\Request;
 
 class JobSeekerController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $jobSeeker = JobSeeker::find(2);
+        $request->session()->put('id',$jobSeeker->id);     
+        $request->session()->put('profileImg',$jobSeeker->image);  
+        $request->session()->put('name',$jobSeeker->name);
+        $applications = Application::where('job_seeker_id',session('id'))->orderBy('created_at','desc')->get();
+        $shortListedApps = Application::where('job_seeker_id',session('id'))->where('status','shortlisted')->get();
+        $pendingApps = Application::where('job_seeker_id',session('id'))->where('status','pending')->get();
+        $rejectedApps = Application::where('job_seeker_id',session('id'))->where('status','rejected')->get();
+        $data = ["applications"=>$applications,"shortlistedApps"=>$shortListedApps,"rejectedApps"=>$rejectedApps,"pendingApps"=>$pendingApps];
+        return view('JobSeeker.master')->with('data',$data);   
+    }
+    public function allJobSeekers(){
         $jobSeekers = JobSeeker::all();
         return view('job_seekers_manage')->with('jobSeekers', $jobSeekers);
     }

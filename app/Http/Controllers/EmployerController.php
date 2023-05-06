@@ -11,17 +11,22 @@ use App\Models\Order;
 use App\Models\OrderConfirmation;
 use App\Models\Address;
 use App\Models\Job;
+use App\Models\Application;
 use Carbon\Carbon;
+use DB;
 class EmployerController extends Controller
 {
     public function index(Request $request){
-        $company = Company::find(1);
+        $company = Company::find(2);
         $request->session()->put('id',$company->id);     
         $request->session()->put('logo',$company->logo);  
-        $request->session()->put('name',$company->company_name);        
-        $applications = Company::join('addresses', 'addresses.company_id', '=', 'companies.id')
-        ->join('jobs', 'jobs.address_id', '=', 'addresses.id')
-        ->count();
+        $request->session()->put('name',$company->company_name);
+        $applications = DB::table('applications')
+            ->join('jobs', 'jobs.id', '=', 'applications.job_id')
+            ->join('addresses', 'addresses.id', '=', 'jobs.address_id')
+            ->where('addresses.company_id',$request->session()->get('id'))   
+            ->select('applications.id')            
+            ->count();
         $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->whereNull('deleted_at')->get();
         $activeJob = Job::whereIn('address_id',$addrIDs)->where('status','active')->where('created_at','>',Carbon::today()->subMonths(6))->count();
         $inactiveJobs = Job::whereIn('address_id',$addrIDs)->WhereDate('created_at','<',Carbon::today()->subMonths(6))->orWhere('status','inactive')->count();        
@@ -56,13 +61,41 @@ class EmployerController extends Controller
         return redirect('/employer/buy/credit')->with('status','your order has been sent');
     }
     public function getApplications(Request $request){
-        DB::table('applications')
-            ->select('applications.*')
-            ->join('jobs', 'jobs.id', '=', 'application_id')
-            ->join('addresses', 'addresses.id', '=', 'jobs.address_id')
-            ->join('companies', 'companies.id', '=', 'addresses.company_id')
-            ->where('company_id',$request->session()->get('id'))            
-            ->get();
+        $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->whereNull('deleted_at')->get();
+        $jobIDs = Job::select('id')->whereIn('address_id', $addrIDs)->whereNull('deleted_at')->where('status','active')->get();
+        $applications = Application::whereIn('job_id', $jobIDs)->whereNull('status')->whereNull('deleted_at')->get();
+        // return $applications;
+        // $applications = DB::table('applications')
+        //     ->select('applications.*')
+        //     ->join('jobs', 'jobs.id', '=', 'applications.id')
+        //     ->join('addresses', 'addresses.id', '=', 'jobs.address_id')
+        //     ->join('companies', 'companies.id', '=', 'addresses.company_id')
+        //     ->where('companies.id',$request->session()->get('id'))            
+        //     ->get();
         return view('Employer.applications-manage')->with('applications',$applications);
+    }
+    public function reject($id){
+        $application = Application::find($id);
+        $application->status = 'reject';
+        $application->save();
+        return redirect()->route('applications')->with('status','rejected application');
+    }
+    public function shortlist($id){
+        $application = Application::find($id);
+        $application->status = 'shortlist';
+        $application->save();
+        return redirect()->route('applications')->with('status','shortlisted application');
+    }
+    public function shortlistedApplications(Request $request){
+        $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->whereNull('deleted_at')->get();
+        $jobIDs = Job::select('id')->whereIn('address_id', $addrIDs)->whereNull('deleted_at')->where('status','active')->get();
+        $applications = Application::whereIn('job_id', $jobIDs)->where('status','shortlist')->whereNull('deleted_at')->get();
+        return view('Employer.shortlisted-applications')->with('applications',$applications);
+    }
+    public function rejectedApplications(Request $request){
+        $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->whereNull('deleted_at')->get();
+        $jobIDs = Job::select('id')->whereIn('address_id', $addrIDs)->whereNull('deleted_at')->where('status','active')->get();
+        $applications = Application::whereIn('job_id', $jobIDs)->where('status','reject')->whereNull('deleted_at')->get();
+        return view('Employer.rejected-applications')->with('applications',$applications);
     }
 }

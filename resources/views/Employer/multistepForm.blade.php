@@ -88,6 +88,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <select name="jobCategory" id="jobCategory" class="form-select">
+                    <option value="">-- Select job category --</option>
                     @if(isset($data['jobCategories']))
                     @foreach ($data['jobCategories'] as $jobCat)
                     <option value="{{$jobCat['id']}}">{{$jobCat['name']}}</option>
@@ -102,6 +103,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <select name="expLevel" id="expLevel" class="form-select">
+                    <option value="">-- Select experience level --</option>
                     @if(isset($data['expLevels']))
                     @foreach ($data['expLevels'] as $expLev)
                     <option value="{{$expLev['id']}}">{{$expLev['name']}}</option>
@@ -116,6 +118,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <select name="empType" id="empType" class="form-select">
+                    <option value="">-- Select employment type --</option>
                     @if(isset($data['empTypes']))
                     @foreach ($data['empTypes'] as $empType)
                     <option value="{{$empType['id']}}">{{$empType['name']}}</option>
@@ -130,6 +133,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <select name="address" id="address" class="form-select">
+                    <option value="">-- Select branch --</option>
                     @if(isset($data['addresses']))
                     @foreach ($data['addresses'] as $addr)
                     <option value="{{$addr['id']}}">{{$addr->city->name}}/{{$addr->city->state->name}}</option>

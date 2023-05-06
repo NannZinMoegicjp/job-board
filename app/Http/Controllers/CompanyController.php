@@ -194,10 +194,10 @@ class CompanyController extends Controller
     public function viewDetails($id)
     {
         $company = Company::find($id);
-        $addresses = Address::where('company_id',$id)->get();
+        // $addresses = Address::where('company_id',$id)->get();
         $addrIDs = DB::table('addresses')->where('company_id', $id)->pluck('id')->toArray();
         $jobCount = Job::whereIn('address_id', $addrIDs)->count();
-        return view('admin-company-detail')->with(['company'=> $company,'addresses'=> $addresses,'jobCount'=>$jobCount]);
+        return view('admin-company-detail')->with(['company'=> $company,'jobCount'=>$jobCount]);
     }
     public function viewProfile()
     {

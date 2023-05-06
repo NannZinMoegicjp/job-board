@@ -83,7 +83,7 @@
                 </div>
                 <div class="mb-2">
                     <i class="bi bi-building-fill me-2"></i><span class="title">Other branches</span> : <span
-                        class="text-secondary">
+                        class="text-secondary">                        
                         @foreach ($branches as $add)
                         @if ($loop->last)
                         {{$add->city->name}}, {{$add->city->state->name}}

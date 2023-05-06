@@ -72,7 +72,7 @@
                 @php
                 $branches = [];
                 $mainBranch = null;
-                foreach ($addresses as $add){
+                foreach ($company->addresses as $add){
                 if ($add->detail_address != null)
                 {
                 $mainBranch = $add;

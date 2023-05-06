@@ -361,3 +361,24 @@ let hideDeleteIcon = (photo) => {
 }
 </script>
 @endsection
+@section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>$(document).ready(function () {
+    $('#state').on('change', function () {
+                    var stateId = this.value;
+                    $("#city").html('<option value="">-- Select city --</option>');
+                    $.ajax({
+                        url: "/api/fetch-cities/" + stateId,
+                        type: "GET",
+                        dataType: 'json',
+                        success: function(result) {
+                            $.each(result, function (key, value) {
+                                $("#city").append('<option value="' + value
+                                    .id + '">' + value.name + '</option>');
+                            });
+                        },
+                    });
+                });
+                });
+</script>    
+@endsection

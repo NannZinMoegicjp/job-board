@@ -27,7 +27,7 @@ use App\Http\Controllers\DropdownController;
 */
 
 Route::get('/', function () {
-    return view('admin');
+    return view('welcome');
 });
 Route::get('/jobs', function () {
     return view('jobs');
@@ -74,7 +74,7 @@ Route::get('/admin/order/reject/{id}',[OrderController::class,'rejectOrder']);
 Route::get('/admin/order/confirmed/details/{id}',[OrderController::class,'confirmedOrderDetails']);
 Route::get('/admin/order/awaiting/details/{id}',[OrderController::class,'awaitingOrderDetails']);
 
-Route::get('/admin/job-seekers',[JobSeekerController::class,'index']);
+Route::get('/admin/job-seekers',[JobSeekerController::class,'allJobSeekers']);
 Route::get('/admin/job-seekers/add',[JobSeekerController::class,'insertGet']);
 Route::post('/admin/job-seekers/add',[JobSeekerController::class,'insert']);
 Route::get('/admin/job-seekers/update/{id}',[JobSeekerController::class,'updateSetData']);
@@ -152,4 +152,15 @@ Route::get('/employer/profile/remove/images/{cid}/{imageId}',[CompanyController:
 Route::get('api/fetch-cities/{id}', [DropdownController::class, 'fetchCities']);
 Route::get('api/fetch-payment-accounts/{id}', [DropdownController::class, 'fetchPaymentAccounts']);
 
-Route::get('/employer/applications',[EmployerController::class,'getApplications']);
+Route::get('/employer/applications',[EmployerController::class,'getApplications'])->name('applications');
+Route::get('/employer/application/reject/{id}',[EmployerController::class,'reject']);
+Route::get('/employer/application/shortlist/{id}',[EmployerController::class,'shortlist']);
+Route::get('/employer/applications/shortlisted',[EmployerController::class,'shortlistedApplications']);
+Route::get('/employer/applications/rejected',[EmployerController::class,'rejectedApplications']);
+
+// Route::get('/employer/view/cv',function(){
+//     return view('cv');
+// });
+Route::get('/job-seeker',[JobSeekerController::class,'index']);
+Route::get('/job-seeker/cancel/application/{id}',[JobSeekerController::class,'cancelApplication']);
+

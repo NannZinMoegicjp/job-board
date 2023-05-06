@@ -416,3 +416,15 @@ input:not([type=submit]):focus {
 .address{
   height: 100px !important;
 }
+.pending{
+  border-radius: 5px;
+  background-color: yellow;
+}
+.shortlist{
+  border-radius: 5px;
+  background-color: green;
+}
+.reject{
+  border-radius: 5px;
+  background-color: red;
+}

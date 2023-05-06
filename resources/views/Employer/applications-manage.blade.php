@@ -1,17 +1,22 @@
 @extends('Employer.master_employer')
+@section('css')
+<link rel="stylesheet" type="text/css"
+    href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
+@endsection
 @section('content')
 <div class="container-fluid my-4">
-    @if(session(status))
+    @if(session("status"))
         <div class="alert alert-success">
-
+            {{session("status")}}
         </div>                              
     @endif
-    @if(session(error))
+    @if(session("error"))
         <div class="alert alert-danger">
-
+            {{session("error")}}
         </div>
     @endif
-    div class="table-responsive">
+    <h3>Applications</h3>
+    <div class="table-responsive">
         <table class="table table-striped" id="datatable">
             @php
             $no=1;
@@ -33,19 +38,12 @@
                     <td>{{$application->job->title}}</td>
                     <td>{{$application->jobSeeker->name}}</td>
                     <td>{{$application->created_at}}</td>
-                    <td></td>
+                    {{-- <td><a href="{{url('/employer/view/cv')}}">{{$application->cvfile}}</a></td> --}}
+                    <td><a onclick="return confirm('Want to download cv file?')" href="{{URL::asset('/applications/'.$application->cvfile)}}" download="{{$application->cvfile}}">{{$application->cvfile}}</a></td>
                     <td>
                         <div class="d-flex">
-                            <a href="{{url('/employer/application/details/'.$application->id)}}"><i
-                                    class="bi bi-info-circle-fill info"></i></a>
-                            <a href="{{url('/employer/application/update/'.$application->id)}}"><i
-                                    class="bi bi-pencil-fill update"></i></a>
-                            <a onclick='return confirm("Want to delete application?")'
-                                href="{{url('/employer/application/delete/'.$application->id)}}"><i
-                                    class="bi bi-trash3-fill cancel me-2"></i></a>
-                            <a onclick='return confirm("Want to close application?")'
-                                href="{{url('/employer/application/deactivate/'.$application->id)}}"><i
-                                    class="bi bi-bell-slash-fill"></i></a>
+                            <a href="{{url('/employer/application/shortlist/'.$application->id)}}"><i class="bi bi-check-circle-fill fs-4 text-success me-2"></i></a>
+                            <a href="{{url('/employer/application/reject/'.$application->id)}}"><i class="bi bi-x-circle-fill fs-4 text-danger"></i></a>
                         </div>
                     </td>
                 </tr>
