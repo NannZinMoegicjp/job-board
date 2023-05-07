@@ -21,6 +21,9 @@ class CreditPriceController extends Controller
     }
     public function updatePrice(Request $request,$id){
         $price = CreditPrice::find($id);
+        if($price->price == $request->input('newPrice')){
+            return back()->with('error','your current price already '.$price->price);
+        }
         $price->updated_at =  date('Y-m-d H:i:s');
         $price->save();
         $newprice = new CreditPrice();

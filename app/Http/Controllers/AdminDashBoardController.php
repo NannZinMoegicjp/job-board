@@ -22,7 +22,7 @@ class AdminDashBoardController extends Controller
         $jobSeekerCount = JobSeeker::where('deleted_at', NULL)->count();
         $applicationCount = Application::where('deleted_at', NULL)->count();
         $companyCount = Company::where('deleted_at', NULL)->count();
-        $jobCount = Job::where('deleted_at', NULL)->count();
+        $jobCount = Job::where('deleted_at', NULL)->where('status','active')->count();
         $confirmedOrderCount = OrderConfirmation::where('deleted_at', NULL)->count();
         $confirmedOrderedIds = OrderConfirmation::select('order_id')->get();
         $awaitingOrderCount = Order::whereNotIn('id', $confirmedOrderedIds)->where('deleted_at', NULL)->count();

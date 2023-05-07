@@ -1,4 +1,4 @@
-@extends('master_admin')
+@extends('welcome')
 @section('content')
 <div class="container my-2">
     <h3 class="py-3">Admin Dashboard</h3>

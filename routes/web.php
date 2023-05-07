@@ -57,7 +57,7 @@ Route::get('/login',function(){
     return view('login');
 });
 Route::get('/admin',function(){
-    return view('master_admin');
+    return view('dashboard');
 });
 Route::get('/admin/profile/{id}',function(){
     return view('admin-profile');

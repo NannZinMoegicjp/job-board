@@ -1,4 +1,4 @@
-@extends('master_admin')
+@extends('welcome')
 @section('content')
 <section class="]pb-4">
     {{-- <h3 class="text-center title shadow py-2 mb">Job details</h3> --}}

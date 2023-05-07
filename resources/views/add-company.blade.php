@@ -1,4 +1,4 @@
-@extends('master_admin')
+@extends('welcome')
 @section('content')
 <div class="container-fluid ">
     <div class="row text-end">

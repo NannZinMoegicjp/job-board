@@ -19,88 +19,90 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('/css/style.css')}}">
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row border-bottom top">
-            <div class="col-12">
-                <div class="text-warning p-2s d-flex justify-content-md-end">
-                    <img src="{{URL::asset('images/companies/'.session('logo'))}}" alt="employer image" class="adminImg m-2">
-                    <div class="dropdown m-2">
-                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            {{session('name')}}
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a class="dropdown-item" href="{{url('/employer/profile')}}"><i
-                                        class="fa-solid fa-user"></i> profile</a></li>
-                            <li><a class="dropdown-item" href=""><i class="fa-solid fa-right-from-bracket"></i>
-                                    logout</a>
-                            </li>
-                        </ul>
-                    </div>
+    <div class="main-wrapper">
+        <div class="header">
+            <div class="header-left">
+                <a href="index-2.html" class="logo">
+                    <img src="{{URL::asset('/images/jobsearchicon1.png')}}" width="35" height="35" alt=""> <span>Job
+                        Board</span>
+                </a>
+            </div>
+            <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+            <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
+            <div class="text-warning d-flex justify-content-end align-items-center me-2">
+                <div class="dropdown">
+                    <span class="dropdown-toggle" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img style="background: white" src="{{URL::asset('images/companies/1683353822.o9SXyF4kPWv_4nhtaCnNLKCh5ySN9sCJBF3l61hQuN5JclYJK7yeL1pJv3yAsrBFcRjr1OdWMebh8AQBjS7z0Q==.png')}}" alt="admin image"
+                            class="adminImg m-2">
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><a class="dropdown-item" href="{{url('/employer/profile')}}"><i class="fa-solid fa-user"></i>
+                                profile</a></li>
+                        <li><a class="dropdown-item" href=""><i class="fa-solid fa-right-from-bracket"></i>
+                                logout</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-2 left border-end">
-                <nav class="navbar navbar-light navbar-expand-lg mynavbar position-lg-fixed">
-                    <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon text-white"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav nav flex-column">
-                                <li class="nav-item">
-                                    <a href="{{url('/employer')}}"><i class="bi bi-house-fill"></i> Dashboard</a>
-                                </li>
-                                </li>
-                                <li class="nav-item">
-                                    <div class="dropdown">
-                                        <span>
-                                            <i class="bi bi-briefcase-fill"></i> Jobs
-                                        </span>
-                                        <ul class="list-unstyled">
-                                            <li><a class="dropdown-item" href="{{url('/employer/jobs/insert')}}">Post
-                                                    Jobs</a></li>
-                                            <li><a class="dropdown-item" href="{{url('/employer/jobs')}}">Active
-                                                    Jobs</a></li> 
-                                            <li><a class="dropdown-item" href="{{url('/employer/jobs/inactive')}}">Inactive
-                                                    Jobs</a></li> 
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{url('/employer/buy/credit')}}"><i class="bi bi-coin"></i> Purchase
-                                        Credit</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{url('/employer/order')}}"><i class="bi bi-cart-plus-fill"></i> Order</a>
-                                </li>
-                                <li class="nav-item">
-                                    <div class="dropdown">
-                                        <span>
-                                            <i class="bi bi-credit-card-2-front-fill"></i> Application managment
-                                        </span>
-                                        <ul class="list-unstyled">
-                                            <li><a class="dropdown-item" href="{{url('/employer/applications')}}">Applications</a></li>
-                                            <li><a class="dropdown-item" href="{{url('/employer/applications/shortlisted')}}">Shortlisted application</a></li> 
-                                            <li><a class="dropdown-item" href="{{url('/employer/applications/rejected')}}">Rejected application</a></li> 
-                                        </ul>
-                                    </div>
-                                </li>
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul class="mynav">
+                        <li>
+                            <a href="{{url('/employer')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="fa fa-user"></i><span>Jobs</span><span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="{{url('/employer/jobs/insert')}}">Post
+                                        Jobs</a></li>
+                                <li><a class="dropdown-item" href="{{url('/employer/jobs')}}">Active
+                                        Jobs</a></li>
+                                <li><a class="dropdown-item" href="{{url('/employer/jobs/inactive')}}">Inactive
+                                        Jobs</a></li>
                             </ul>
-                        </div>
-                    </div>
-                </nav>
+                        </li>
+                        <li>
+                            <a href="{{url('/employer/buy/credit')}}"><i class="bi bi-coin"></i><span>Purchase
+                                    Credit</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/employer/order')}}"><i class="bi bi-cart-plus-fill"></i>
+                                <span>Order</span></a>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="fa fa-user"></i><span>Applications</span><span
+                                    class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a class="dropdown-item" href="{{url('/employer/applications')}}">Applications</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                        href="{{url('/employer/applications/shortlisted')}}">Shortlisted application</a>
+                                </li>
+                                <li><a class="dropdown-item" href="{{url('/employer/applications/rejected')}}">Rejected
+                                        application</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-10">
-                @section('content')
-                @show
-            </div>
+        </div>
+        <div class="sidebar-overlay" data-reff=""></div>
+        <script src="{{URL::asset('/js/jquery-3.2.1.min.js')}}"></script>
+        <script src="{{URL::asset('/js/popper.min.js')}}"></script>
+        <script src="{{URL::asset('/js/jquery.slimscroll.js')}}"></script>
+        <script src="{{URL::asset('/js/Chart.bundle.js')}}"></script>
+        <script src="{{URL::asset('/js/chart.js')}}"></script>
+        <script src="{{URL::asset('/js/app.js')}}"></script>
+        <div class="page-wrapper">
+            @section('content')
+
+            @show
         </div>
     </div>
     @yield('scripts')

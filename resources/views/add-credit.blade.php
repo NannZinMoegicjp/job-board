@@ -1,4 +1,4 @@
-@extends('master_admin')
+@extends('welcome')
 @section('content')
 <div class="row my-3">
     <div class="col-md-8 offset-md-2 col-12">
@@ -29,7 +29,7 @@
                     No of credit
                 </div>
                 <div class="col-md-7 col-12">
-                   <input type="number" min='0' name="noOfCredit" id="noOfCredit" required class="form-control">
+                   <input type="number" min='1' name="noOfCredit" id="noOfCredit" required class="form-control">
                 </div>
             </div>
             <div class="row mb-3">

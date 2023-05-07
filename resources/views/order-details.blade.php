@@ -1,4 +1,4 @@
-@extends('master_admin')
+@extends('welcome')
 @section('content')
 <div class="row text-end my-2 me-2">
     <a href="{{url('/admin/payment')}}">Orders<i class="bi bi-arrow-right"></i></a>

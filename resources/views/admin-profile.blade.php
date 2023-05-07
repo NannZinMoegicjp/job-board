@@ -1,4 +1,4 @@
-@extends('master_admin')
+@extends('welcome')
 @section('content')
 <div class="row">
         <h5 class="text-center my-3">My profile</h5>

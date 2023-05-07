@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    
     <link rel="stylesheet" href="{{URL::asset('css/admin.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/order.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/dashboard.css')}}" />
@@ -49,7 +50,7 @@
             <div class="col-md-3 col-12">
                 <div class="item greenBorder d-flex justify-content-center align-items-center shadow-sm">
                     <div class="p-2">
-                        <img src="{{URL::asset('images/dashboard/rejected.png')}}" alt="job">
+                        <img src="{{URL::asset('images/dashboard/cancel.png')}}" alt="job">
                     </div>
                     <div>
                         <h4>{{count($data["rejectedApps"])}}</h4>

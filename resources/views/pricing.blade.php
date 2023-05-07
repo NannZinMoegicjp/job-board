@@ -1,10 +1,15 @@
-@extends('master_admin')
+@extends('welcome')
 @section('css')
 <link rel="stylesheet" type="text/css"
     href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
 @endsection
 @section('content')
 <div class="container my-4">
+    @if(session('error'))
+    <div class="alert alert-danger m-2">
+        {{session('error')}}
+    </div>
+    @endif
     <div class="row mb-3">
         <div class="col-md-3">
             <div class="item greenBorder d-flex justify-content-center align-items-center shadow-sm">
@@ -31,7 +36,6 @@
             </div>
         </div>
     </div>
-
     <div class="row mb-3">
         <div class="col-md col-12">
             <h3>Price per credit</h3>
@@ -145,13 +149,13 @@
 </div>
 @endsection
 @section('scripts')
-<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js">
-</script>
+{{-- <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js">
+</script> --}}
 
 <script type="text/javascript" charset="utf8"
     src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
     $('#datatable').dataTable();
 });
 </script>

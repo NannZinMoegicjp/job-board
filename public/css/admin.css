@@ -1,14 +1,17 @@
-.top{
+/* .top{
     background: #CBE9BF;
-}
+} */
 /* .left{
     height: 100vh;
 } */
 a{
     display: block;
     text-decoration: none !important;
-    color: #3f1e5f !important;
     line-height: 150%;
+    color: #3f1e5f !important;
+}
+.sidebar a{
+    color: #fff !important;
 }
 a:hover{
     color: #3B75A9 !important;
