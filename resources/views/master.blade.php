@@ -100,16 +100,5 @@
         </div>
         <p class="text-center text-secondary mb-0">Copyright © 2023 GIC. All Rights Reserved. Powered by: NZM</p>
     </footer>
-    <!-- <script>
-        let popup=()=>{
-            if(modalContainer.classList.contains("d-none")){
-                modalContainer.classList.remove("d-none");
-                modalContainer.classList.add("d-flex");
-            }else if(modalContainer.classList.contains("d-flex")){
-                modalContainer.classList.remove("d-flex");
-                modalContainer.classList.add("d-none");
-            }            
-        }
-    </script> -->
 </body>
 </html>

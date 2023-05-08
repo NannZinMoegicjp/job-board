@@ -1,19 +1,25 @@
-@extends('welcome')
+@extends('JobSeeker.master')
 @section('content')
 <section>
-    <div class="row text-end my-2">
-        <a href="{{url('/admin/job-seekers')}}">job seeker list<i class="bi bi-arrow-right"></i></a>
-    </div>
-    @if(isset($jobseeker))
-    <div class="container my-4">
-        <div class="row">
+    <div class="container">
+        @if(isset($jobseeker))
+        <div class="row my-4">
+            <div class="col-md-8 offset-md-2">
+                @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+                @endif
+            </div>
+        </div>
+        <div class="row my-4">
             <div class="col-md-8 offset-md-2  shadow-sm border">
                 <div class="row">
                     <div class="col-md-3 offset-md-1 p-2 d-flex flex-column justify-content-center align-items-center">
                         <img src="{{URL::asset('images/jobseekers/'.$jobseeker->image)}}" alt="" class="profileImg">
                         <h5>{{$jobseeker->name}}</h5>
-                        <!-- <a href="{{url('/admin/job-seekers/update/'.$jobseeker->id)}}"><button type="button"
-                                class="btn btn-primary"><i class="bi bi-pencil-fill update"></i>Edit</button></a> -->
+                        <a href="{{url('/job-seeker/update/profile/'.$jobseeker->id)}}"><button type="button"
+                                class="btn btn-primary"><i class="bi bi-pencil-fill update"></i>Edit</button></a>
                     </div>
                     <div class="col-md-7">
                         <div class="row border-bottom p-2">

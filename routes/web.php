@@ -14,7 +14,7 @@ use App\Http\Controllers\EmployerOrderController;
 use App\Http\Controllers\EmployerJobController;
 use App\Http\Controllers\EmployerDashboardController;
 use App\Http\Controllers\DropdownController;
-
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,9 +26,7 @@ use App\Http\Controllers\DropdownController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class,'index']);
 Route::get('/jobs', function () {
     return view('jobs');
 });
@@ -45,7 +43,7 @@ Route::get('/companies', function () {
     return view('companies');
 });
 Route::get('/job/details/{id}', function () {
-    return view('job-details');
+    return view('user-job-details');
 });
 Route::get('/company/details/{id}', function () {
     return view('company-details');
@@ -53,6 +51,10 @@ Route::get('/company/details/{id}', function () {
 Route::get('/register',function(){
     return view('register');
 });
+Route::get('/jobseeker/register',function(){
+    return view('register-jobseeker');
+});
+Route::post('/jobseeker/register',[JobSeekerController::class,'register']);
 Route::get('/login',function(){
     return view('login');
 });
@@ -75,11 +77,8 @@ Route::get('/admin/order/confirmed/details/{id}',[OrderController::class,'confir
 Route::get('/admin/order/awaiting/details/{id}',[OrderController::class,'awaitingOrderDetails']);
 
 Route::get('/admin/job-seekers',[JobSeekerController::class,'allJobSeekers']);
-Route::get('/admin/job-seekers/add',[JobSeekerController::class,'insertGet']);
-Route::post('/admin/job-seekers/add',[JobSeekerController::class,'insert']);
-Route::get('/admin/job-seekers/update/{id}',[JobSeekerController::class,'updateSetData']);
-Route::post('/admin/job-seekers/update/{id}',[JobSeekerController::class,'update']);
-Route::post('/admin/job-seekers/update/image/{id}',[JobSeekerController::class,'updateImage']);
+// Route::get('/admin/job-seekers/add',[JobSeekerController::class,'insertGet']);
+// Route::post('/admin/job-seekers/add',[JobSeekerController::class,'insert']);
 Route::get('/admin/job-seekers/details/{id}',[JobSeekerController::class,'viewDetails']);
 Route::get('/admin/job-seekers/delete/{id}',[JobSeekerController::class,'delete']);
 
@@ -94,7 +93,6 @@ Route::get('/admin/company/delete/{id}',[CompanyController::class,'delete']);
 Route::get('/admin/company/details/{id}',[CompanyController::class,'viewDetails']);
 Route::get('/admin/company/add/credit/{id}',[CompanyController::class,'getCreditData']);
 Route::post('/admin/company/add/credit/{id}',[CompanyController::class,'addCredit']);
-
 
 Route::get('/admin/payment-methods',[PaymentMethodController::class,'index']);
 Route::post('/admin/payment-methods/add',[PaymentMethodController::class,'insert']);
@@ -162,5 +160,10 @@ Route::get('/employer/applications/rejected',[EmployerController::class,'rejecte
 //     return view('cv');
 // });
 Route::get('/job-seeker',[JobSeekerController::class,'index']);
-Route::get('/job-seeker/cancel/application/{id}',[JobSeekerController::class,'cancelApplication']);
-
+Route::get('/job-seeker/applications/pending',[JobSeekerController::class,'pendingApplication']);
+Route::get('/job-seeker/applications/shortlisted',[JobSeekerController::class,'shortlistedApplication']);
+Route::get('/job-seeker/applications/rejected',[JobSeekerController::class,'rejectedApplication']);
+Route::get('/job-seeker/profile/{id}',[JobSeekerController::class,'viewDetails']);
+Route::post('/job-seeker/update/image/{id}',[JobSeekerController::class,'updateImage']);
+Route::get('/job-seeker/update/profile/{id}',[JobSeekerController::class,'getProfileData']);
+Route::post('/job-seeker/update/profile/{id}',[JobSeekerController::class,'update']);

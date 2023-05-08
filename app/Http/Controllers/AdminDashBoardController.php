@@ -14,6 +14,7 @@ class AdminDashBoardController extends Controller
 {
     public function index(Request $request){
         $admin = Admin::find(2);
+        $request->session()->put('role','admin');
         $request->session()->put('adminId',$admin->id);
         $request->session()->put('email',$admin->email);
         $request->session()->put('name',$admin->name);

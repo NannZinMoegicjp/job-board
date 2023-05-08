@@ -16,13 +16,13 @@
         <div>
             <h3>Job seekers</h3>
         </div>
-        <div class="ms-auto">
+        <!-- <div class="ms-auto">
             <a href="{{url('/admin/job-seekers/add')}}">
                 <button type="button" class="ms-auto btn btn-primary">
                     <i class="bi bi-plus"></i> Add Job Seeker
                 </button>
             </a>
-        </div>
+        </div> -->
     </div>
     <div class="table-responsive">
         <table class="table table-striped" id="datatable">
@@ -56,8 +56,8 @@
                 <td>
                     <div class="d-flex">     
                     <a href="{{url('/admin/job-seekers/details/'.$jobseeker->id)}}"><i class="bi bi-info-circle-fill info"></i></a>                   
-                        <a href="{{url('/admin/job-seekers/update/'.$jobseeker->id)}}"><i
-                                class="bi bi-pencil-fill update"></i></a>
+                        <!-- <a href="{{url('/admin/job-seekers/update/'.$jobseeker->id)}}"><i
+                                class="bi bi-pencil-fill update"></i></a> -->
                         <a onclick='return confirm("Want to delete?")'
                             href="{{url('/admin/job-seekers/delete/'.$jobseeker->id)}}"><i
                                 class="bi bi-trash3-fill cancel"></i></a>

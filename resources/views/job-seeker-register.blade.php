@@ -1,5 +1,6 @@
-<form action="register_success.php" method="post" class="bg-white px-3 pb-2 rounded shadow-lg"
+<form action="{{url('/jobseeker/register')}}" method="post" class="bg-white px-3 pb-2 rounded shadow-lg"
     onsubmit="return check();">
+    @csrf
     <div id="error"></div>
     <div>
         <h4 class="text-center py-4">Sign up for job seeker</h4>
@@ -8,7 +9,7 @@
         <div class="col-md-8 offset-md-2 col-12">
             <input type="text" class="form-control" required name="userName" id="userName" placeholder="Name">
         </div>
-        <!-- <div id="nameError" class="text-danger"></div>                       -->
+        <div id="nameError" class="text-danger"></div>                      
     </div>
     <div class="row mb-3">
         <div class="col-md-8 offset-md-2 col-12">
@@ -41,11 +42,32 @@
     </div>
     <div class="row mb-3">
         <div class="col-md-8 offset-md-2 col-12">
+            <input type="date" class="form-control" required placeholder="dob"
+                name="dob" id="dob">            
+        </div>
+        <div id="conPassError" class="text-danger"></div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-8 offset-md-2 col-12">
             <input type="password" class="form-control" required placeholder="Confirm password"
                 name="userConfirmPassword" id="userConfirmPassword">
-            <!-- <div id="validationConfirmPassFeedback" class="invalid-feedback d-none">
-                                password does not match
-                                </div> -->
+            
+        </div>
+        <div id="conPassError" class="text-danger"></div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-8 offset-md-2 col-12">
+            <input type="password" class="form-control" required placeholder="Confirm password"
+                name="userConfirmPassword" id="userConfirmPassword">
+            
+        </div>
+        <div id="conPassError" class="text-danger"></div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-8 offset-md-2 col-12">
+            <input type="password" class="form-control" required placeholder="Confirm password"
+                name="userConfirmPassword" id="userConfirmPassword">
+            
         </div>
         <div id="conPassError" class="text-danger"></div>
     </div>
@@ -61,3 +83,52 @@
         </div>
     </div>
 </form>
+<script>
+    let checkName=()=>{
+    let name = userName.value;
+    let pattern=/^[A-Z]{1}[a-z]*( [A-Z]{1}[a-z]+)*$/;
+    let err = document.querySelector('.nameErr');
+    if(pattern.test(name)){
+        err.innerHTML="";
+        return true;
+    }else{
+        err.innerHTML="wrong name format!eg., Su Myat";
+        userName.focus();
+        return false;
+    }
+}
+let checkPassword=()=>{
+    let password = userPassword.value;
+    let pattern=/((?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@%$#!*&])).{8,}/;
+    let err = document.querySelector('.passErr');
+    if(pattern.test(password)){
+        err.innerHTML="";
+        return true;
+    }else{
+        err.innerHTML="not strong password format!.(at least 8 characters that includes 1 letter,1 digit,1 special character(@%$#!*&))";
+        userPassword.focus();
+        return false;
+    }
+}
+let checkEmail=()=>{
+    let email = userEmail.value;
+    // let pattern=/[a-zA-Z0-9.-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+    let pattern=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g; 
+    let err = document.querySelector('.emailErr');
+    if(pattern.test(email)){
+        err.innerHTML="";
+        return true;
+    }else{
+        err.innerHTML="incorrect email format";
+        userEmail.focus();
+        return false;
+    }
+}
+let check=()=>{
+    let result = checkName() && checkPassword() && checkEmail();
+    return result;
+}
+document.getElementById("userName").addEventListener("change",checkName);
+document.getElementById("userPassword").addEventListener("change",checkPassword);
+document.getElementById("userEmail").addEventListener("change",checkEmail);
+</script>

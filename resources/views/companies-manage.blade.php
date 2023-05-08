@@ -16,13 +16,13 @@
         <div>
             <h3>Companies</h3>
         </div>
-        <div class="ms-auto">
+        <!-- <div class="ms-auto">
             <a href="{{url('/admin/company/add')}}">
                 <button type="button" class="ms-auto btn btn-primary">
                     <i class="bi bi-plus"></i> Add Companies
                 </button>
             </a>
-        </div>
+        </div> -->
     </div>
     <div class="table-responsive">
         <table class="table table-striped" id="datatable">

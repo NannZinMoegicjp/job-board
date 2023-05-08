@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('JobSeeker.master')
 @section('content')
 <div class="container-fluid">
     <div class="row my-2">
@@ -17,13 +17,10 @@
         </div>
         @endif
     </div>
-    <div class="row text-end my-2">
-        <a href="{{url('/admin/job-seekers')}}">job seeker list<i class="bi bi-arrow-right"></i></a>
-    </div>
     <div class="row my-3">
-        @if(isset($updateId) && isset($jobseeker))
+        <!-- @if(isset($updateId) && isset($jobseeker)) -->
         <div class="col-md-7 col-12 mb-1">
-            <form action="{{url('/admin/job-seekers/update/'.$updateId)}}" class="bg-white px-3 pb-2 rounded shadow"
+            <form action="{{url('/job-seeker/update/profile/'.$updateId)}}" class="bg-white px-3 pb-2 rounded shadow"
                 method="post" enctype="multipart/form-data">
                 @csrf
                 <div>
@@ -44,7 +41,7 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="email" class="form-control" required name="userEmail" id="userEmail"
-                            value="{{$jobseeker['email']}}">
+                            value="{{$jobseeker['email']}}" disabled>
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -52,7 +49,7 @@
                         <label for="phone">Phone</label>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="text" class="form-control" min="0" required placeholder="eg. 09454096528"
+                        <input type="number" class="form-control" min="0" required placeholder="eg. 09454096528"
                             id="phone" name="phone" value="{{$jobseeker['phone']}}">
                     </div>
                 </div>
@@ -105,7 +102,7 @@
                     <img src="{{URL::asset('images/jobseekers/'.$jobseeker->image)}}" alt="" class="img img-fluid">
                 </div>
                 <div class="col-8">
-                    <form action="{{url('/admin/job-seekers/update/image/'.$updateId)}}" method="post"
+                    <form action="{{url('/job-seeker/update/image/'.$updateId)}}" method="post"
                         enctype="multipart/form-data">
                         @csrf
                         <input type="file" class="form-control mb-2" placeholder="Logo" name="newProfileImage"
@@ -115,7 +112,7 @@
                 </div>
             </div>         
         </div>        
-        @else
+        <!-- @else
         <div class="col-md-8 offset-md-2 col-12">
             <form action="{{url('/admin/job-seekers/add')}}" class="bg-white px-3 pb-2 rounded shadow" method="post"
                 enctype="multipart/form-data">
@@ -195,9 +192,9 @@
                                 value="Cancel"></a>
                     </div>
                 </div>
-            </form>
-            @endif
+            </form>            
         </div>
+        @endif -->
     </div>
 </div>
 @endsection
