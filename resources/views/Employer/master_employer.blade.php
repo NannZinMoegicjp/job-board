@@ -36,7 +36,7 @@
             <div class="text-warning d-flex justify-content-end align-items-center me-2">
                 <div class="dropdown">
                     <span class="dropdown-toggle" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img style="background: white" src="{{URL::asset('images/companies/1683353822.o9SXyF4kPWv_4nhtaCnNLKCh5ySN9sCJBF3l61hQuN5JclYJK7yeL1pJv3yAsrBFcRjr1OdWMebh8AQBjS7z0Q==.png')}}" alt="admin image"
+                        <img style="background: white" src="{{URL::asset('images/companies/'.session('logo'))}}" alt="admin image"
                             class="adminImg m-2">
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -93,12 +93,11 @@
             </div>
         </div>
         <div class="sidebar-overlay" data-reff=""></div>
-        <script src="{{URL::asset('/js/jquery-3.2.1.min.js')}}"></script>
-        <script src="{{URL::asset('/js/popper.min.js')}}"></script>
-        <script src="{{URL::asset('/js/jquery.slimscroll.js')}}"></script>
-        <script src="{{URL::asset('/js/Chart.bundle.js')}}"></script>
-        <script src="{{URL::asset('/js/chart.js')}}"></script>
-        <script src="{{URL::asset('/js/app.js')}}"></script>
+        <script src="{{URL::asset('js/jquery-3.2.1.min.js')}}"></script>
+        <script src="{{URL::asset('js/popper.min.js')}}"></script>
+        <script src="{{URL::asset('js/jquery.slimscroll.js')}}"></script>
+        <script src="{{URL::asset('js/Chart.bundle.js')}}"></script>
+        <script src="{{URL::asset('js/app.js')}}"></script>
         <div class="page-wrapper">
             @section('content')
 
@@ -107,5 +106,4 @@
     </div>
     @yield('scripts')
 </body>
-
 </html>

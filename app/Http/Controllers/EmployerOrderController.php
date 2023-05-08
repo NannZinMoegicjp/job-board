@@ -10,8 +10,8 @@ class EmployerOrderController extends Controller
 {
     public function getOrders(){
         $oids = Order::select('id')->where('company_id', session('id'))->get();
-        $confirmedOrders = OrderConfirmation::whereIn('order_id',$oids)->get();
-        $confirmedOrderedIds = OrderConfirmation::select('order_id')->get();
+        $confirmedOrders = OrderConfirmation::whereIn('order_id',$oids)->orderBy('created_at','desc')->get();
+        $confirmedOrderedIds = OrderConfirmation::select('order_id')->orderBy('created_at','desc')->get();
         $awaitingOrders = Order::whereNotIn('id', $confirmedOrderedIds)->where('company_id', session('id'))->get();
         return view('Employer.order')->with('awaitingOrders',$awaitingOrders)->with('confirmedOrders',$confirmedOrders);
     }

@@ -14,10 +14,10 @@
                 </div>
                 <div class="col-9">
                     <a href="" class="text-decoration-none text-dark">
-                        <h4 class="title fw">{{$job->title}}</h4>
+                        <h4 class="jobAttribute border-0 fw">{{$job->title}}</h4>
                     </a>
                     <a href="" class="text-decoration-none text-dark">
-                        <h5 class="companyLink title fw">{{$job->address->company->company_name}}</h5>
+                        <h5 class="companyLink jobAttribute border-0 fw">{{$job->address->company->company_name}}</h5>
                     </a>
                     <div class="row my-1">
                         <div class="col-lg-3 col-6"><i class="bi bi-clock-fill clock"></i>
@@ -29,12 +29,9 @@
                         <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>Up to {{$job->max_salary}}
                         </div>
                     </div>
-                    <span>Experience level :</span> <span class="text-secondary">
-                        {{$job->experienceLevel->name}}</span> <br>
-                    <span>Functional Area : </span> <span class="text-secondary">
-                        {{$job->jobCategory->name}}</span><br>
-                        <span>Open position : </span> <span class="text-secondary">
-                            {{$job->open_position}}</span><br>
+                    <div class="mb-2">Experience level : {{$job->experienceLevel->name}}</div>
+                    <div class="mb-2">Functional Area : {{$job->jobCategory->name}}</div>
+                    <div class="mb-2">Open position : {{$job->open_position}}</div>
                 </div>
             </div>
             {{-- <div class="col-md-3 d-none">
@@ -46,15 +43,15 @@
             </div> --}}
         <div class="p-3">
             <div>
-                <h5 class="bg-success bg-gradient p-2 title">Job Description</h5>
+                <h5 class="jobAttribute p-2 title">Job Description</h5>
                 {!!$job->description!!}
             </div>
             <div>
-                <h5 class="bg-success bg-gradient p-2 title">Job Requirements</h5>
+                <h5 class="jobAttribute p-2 title">Job Requirements</h5>
                 {!!$job->requirement!!}
             </div>
             <div>
-                <h5 class="bg-success bg-gradient p-2 title">OpenTo</h5>
+                <h5 class="jobAttribute p-2 title">OpenTo</h5>
                 <i class="bi bi-check-circle-fill ps-2 gender"></i> <span class="text-secondary">
                 @if($job->gender == 'both')
                    Male/ Female
@@ -66,7 +63,7 @@
                 </span>
             </div>
             <div>
-                <h5 class="bg-success bg-gradient p-2 title">Benefits</h5>
+                <h5 class="jobAttribute p-2 title">Benefits</h5>
                 {!!$job->benefit!!}
             </div>
             {{-- <div>

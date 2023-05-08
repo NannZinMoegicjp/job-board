@@ -8,7 +8,7 @@ use App\Models\CreditPrice;
 class CreditPriceController extends Controller
 {
     public function index(){
-        $prices = CreditPrice::all();
+        $prices = CreditPrice::orderBy('created_at','desc')->get();
         return view('pricing')->with('data',$prices);
     }
     public function insertPrice(Request $request){
@@ -24,8 +24,7 @@ class CreditPriceController extends Controller
         if($price->price == $request->input('newPrice')){
             return back()->with('error','your current price already '.$price->price);
         }
-        $price->updated_at =  date('Y-m-d H:i:s');
-        $price->save();
+        $price->delete();
         $newprice = new CreditPrice();
         $newprice->price = $request->input('newPrice');
         $newprice->created_at = date('Y-m-d H:i:s');

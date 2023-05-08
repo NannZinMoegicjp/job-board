@@ -7,7 +7,7 @@
         {{session('status')}}
     </div>
     @endif
-    <div class="d-flex  align-items-center mb-4">
+    <div class="d-flex align-items-center mb-4">
         <img src="{{url('images/companies/'.$company['logo'])}}" alt="{{$company['company_name']}} logo"
             class="companyDetailsLogo me-2">
         <h3 class="text-center title py-2 me-2">{{$company["company_name"]}}</h3>
@@ -114,7 +114,7 @@
             </div>
         </div>
     </div>
-    <div class="row g-2 border-bottom py-4">
+    <div class="row g-2 py-4">
         @foreach($company->images as $image)
         <div class="col-lg-3 col-6">
             <img src="{{url('images/companies/'.$image['name'])}}" alt="" class="img-fluid">

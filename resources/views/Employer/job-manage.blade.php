@@ -4,7 +4,7 @@
     href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
 @endsection
 @section('content')
-<div class="container-fluid my-4">
+<div class="container my-4">
     <div class="row">
         @if (session('status'))
         <div class="alert alert-success">

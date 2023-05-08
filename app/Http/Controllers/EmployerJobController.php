@@ -77,7 +77,7 @@ class EmployerJobController extends Controller
     {
         $job = Job::find($id);
         $addrs = Address::where('company_id',$job->address->company_id)->get();
-        $jobCategories = JobCategory::all();
+        $jobCategories = JobCategory::orderBy('name')->get();
         $empTypes = EmploymentType::all();
         $expLevels = ExperienceLevel::all();
         $data = ['job'=>$job, 'addresses' => $addrs, 'jobCategories' => $jobCategories, 'empTypes' => $empTypes, 'expLevels' => $expLevels];

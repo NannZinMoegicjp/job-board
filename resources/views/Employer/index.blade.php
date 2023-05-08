@@ -1,6 +1,11 @@
 @extends('Employer.master_employer')
 @section('content')
 <div class="container my-2">
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{session('status')}}
+    </div>
+    @endif
     <h3 class="py-3">Employer Dashboard</h3>
     <div class="row g-2">
         <div class="col-md-3">

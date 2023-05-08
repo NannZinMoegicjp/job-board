@@ -4,7 +4,6 @@
     <h3 class="py-3">Admin Dashboard</h3>
     <div class="row g-2">
         <div class="col-md-3">
-            <a href="">
             <div class="item orangeBorder d-flex justify-content-center align-items-center shadow-sm">
                 <div class="p-2">
                     <img src="{{URL::asset('images/dashboard/suitcase.png')}}" alt="job">
@@ -14,7 +13,6 @@
                     <h6 class="text-secondary">Active jobs</h6>
                 </div>
             </div>
-            </a>
         </div>
         <div class="col-md-3">
             <div class="item yellowBorder d-flex justify-content-center align-items-center shadow-sm">
@@ -40,17 +38,15 @@
         </div>
         
         <div class="col-md-3">
-            <a href="{{url('/admin/companies')}}">
-                <div class="item greenBorder d-flex justify-content-center align-items-center shadow-sm">
-                    <div class="p-2">
-                        <img src="{{URL::asset('images/dashboard/office-building.png')}}" alt="job">
-                    </div>
-                    <div>                    
-                        <h4>{{$count["companies"]}}</h4>  
-                        <h6 class="text-secondary">Companies</h6>                                      
-                    </div>
+            <div class="item greenBorder d-flex justify-content-center align-items-center shadow-sm">
+                <div class="p-2">
+                    <img src="{{URL::asset('images/dashboard/office-building.png')}}" alt="job">
                 </div>
-            </a>              
+                <div>                    
+                    <h4>{{$count["companies"]}}</h4>  
+                    <h6 class="text-secondary">Companies</h6>                                      
+                </div>
+            </div>              
         </div>
         <div class="col-md-3">
             <div class="item yellowBorder d-flex justify-content-center align-items-center shadow-sm">

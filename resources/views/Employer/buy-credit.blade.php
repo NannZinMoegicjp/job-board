@@ -13,7 +13,7 @@
             <div>
                 <h4 class="text-center py-4">Order credit</h4>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-3">
                 <div class="col-md-4 offset-md-1 col-12">
                     <label for="price">Price</label>
                 </div>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-4 offset-md-1 col-12">
+                <div class="col-md-4 offset-md-1 col-12 col-form-label">
                     No of credit
                 </div>
                 <div class="col-md-6 col-12">
@@ -33,6 +33,14 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-4 offset-md-1 col-12">
+                    Total amount
+                </div>
+                <div class="col-md-6 col-12" id="totalAmount">
+                    0
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4 offset-md-1 col-12 col-form-label">
                     Payment method
                 </div>
                 <div class="col-md-6 col-12">
@@ -45,7 +53,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-4 offset-md-1 col-12">
+                <div class="col-md-4 offset-md-1 col-12 col-form-label">
                     Transfter to this account
                 </div>
                 <div class="col-md-6 col-12">
@@ -57,16 +65,9 @@
                     </select>
                 </div>
             </div>
+            
             <div class="row mb-3">
-                <div class="col-md-4 offset-md-1 col-12">
-                    Total amount
-                </div>
-                <div class="col-md-6 col-12" id="totalAmount">
-                    0
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-4 offset-md-1 col-12  col-form-label">
+                <div class="col-md-4 offset-md-1 col-12 col-form-label">
                     <label for="screenshot" class="form-label">Transferred screenshot</label>
                 </div>
                 <div class="col-md-6 col-12">

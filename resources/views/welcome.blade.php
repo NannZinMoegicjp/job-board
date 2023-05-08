@@ -57,24 +57,25 @@
                      <a href="{{url('/admin')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                   </li>
                   <li>
-                     <a href="{{url('/admin/pricing')}}"><i class="bi bi-cash-coin"></i> <span>Price
-                           Management</span></a>
+                     <a href="{{url('/admin/pricing')}}"><i class="bi bi-cash-coin"></i> <span>Price</span></a>
                   </li>
                   <li>
-                     <a href="{{url('/admin/payment')}}"><i class="bi bi-cart-plus-fill"></i> <span>Order
-                           Confirmation</span></a>
+                     <a href="{{url('/admin/payment')}}"><i class="bi bi-cart-plus-fill"></i> <span>Orders</span></a>
                   </li>
                   <li>
-                     <a href="{{url('/admin/companies')}}"><i class="bi bi-building"></i> <span>Companies
-                           Management</span></a>
+                     <a href="{{url('/admin/companies')}}"><i class="bi bi-building"></i> <span>Companies</span></a>
                   </li>
                   <li>
-                     <a href="{{url('/admin/jobs')}}"><i class="bi bi-briefcase-fill"></i> <span>Job
-                           Management</span></a>
+                     <a href="{{url('/admin/jobs')}}"><i class="bi bi-briefcase-fill"></i> <span>Jobs</span></a>
                   </li>
                   <li>
-                     <a href="{{url('/admin/job-seekers')}}"><i class="bi bi-person-workspace"></i> <span>Job Seeker
-                           Management</span></a>
+                     <a href="{{url('/admin/job-seekers')}}"><i class="bi bi-person-workspace"></i> <span>Job Seekers</span></a>
+                  </li>
+                  <li>
+                     <a href="{{url('/admin/payment-methods')}}"><i class="bi bi-credit-card-2-front-fill"></i> <span>Payment Accounts</span></a>
+                  </li>
+                  <li>
+                     {{-- <a href="{{url('/admin/job-seekers')}}"><i class="bi bi-person-workspace"></i> <span>Admin Management</span></a> --}}
                   </li>
                </ul>
             </div>
@@ -91,7 +92,6 @@
    <script src="{{URL::asset('/js/popper.min.js')}}"></script>
    <script src="{{URL::asset('/js/jquery.slimscroll.js')}}"></script>
    <script src="{{URL::asset('/js/Chart.bundle.js')}}"></script>
-   <script src="{{URL::asset('/js/chart.js')}}"></script>
    <script src="{{URL::asset('/js/app.js')}}"></script>
    @section('scripts')
 

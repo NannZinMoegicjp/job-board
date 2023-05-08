@@ -17,7 +17,7 @@ use DB;
 class EmployerController extends Controller
 {
     public function index(Request $request){
-        $company = Company::find(2);
+        $company = Company::find(3);
         $request->session()->put('id',$company->id);     
         $request->session()->put('logo',$company->logo);  
         $request->session()->put('name',$company->company_name);
@@ -36,6 +36,9 @@ class EmployerController extends Controller
     public function buyCreditGet(Request $request){
         $company = Company::find($request->session()->get('id'));
         $creditPrice = CreditPrice::whereNull('deleted_at')->first();
+        if($creditPrice == null){
+            return redirect('/employer')->with('status','credit not available yet');
+        }
         $paymentMethods = PaymentMethod::whereNull('deleted_at')->get();
         $paymentAccounts = PaymentAccount::whereNull('deleted_at')->get();
         $data = ['company'=>$company,'creditPrice'=>$creditPrice,'paymentMethods'=>$paymentMethods,'paymentAccounts'=>$paymentAccounts];

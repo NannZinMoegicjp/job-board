@@ -147,7 +147,7 @@ class CompanyController extends Controller
         // return redirect('/employer/profile/update/'.$cid)->with('status', "removed branch city successfully");
     }
     public function addBranchCity(Request $request,$cid){
-        $city_id=$request->input('bCity');
+        $city_id=$request->input('bcity');
         $rowCount = Address::where('city_id',$city_id)->where('company_id',$cid)->count();
         if($rowCount>0){
             return redirect('/employer/profile/update/'.$cid)->with('status', "branch city already existed"); 

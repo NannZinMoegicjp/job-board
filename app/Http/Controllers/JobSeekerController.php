@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class JobSeekerController extends Controller
 {
     public function index(Request $request){
-        $jobSeeker = JobSeeker::find(2);
+        $jobSeeker = JobSeeker::find(1);
         $request->session()->put('id',$jobSeeker->id);     
         $request->session()->put('profileImg',$jobSeeker->image);  
         $request->session()->put('name',$jobSeeker->name);

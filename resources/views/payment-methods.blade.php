@@ -23,10 +23,10 @@
         </div>
         @endif
     </div>
-    <!-- payment methods -->
-    <div class="row mb-3">
+    <div class="row">
         <div class="col">
-            <div class="d-flex">
+            <!-- payment methods -->
+            <div class="d-flex mb-3">
                 <div>
                     <h3>Payment methods</h3>
                 </div>
@@ -37,55 +37,49 @@
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
             <div class="table-responsive">
                 <table class="table table-striped" id="paymentMethodTable">
                     @php
                     $no=1;
                     @endphp
                     <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Actions</th>
-                    </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            {{-- <th>Actions</th> --}}
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach($data as $payment_method)
-                    <tr>
-                        <td>{{$no++}}</td>
-                        <td>{{$payment_method["name"]}}</td>
-                        <td>
-                            <img src="{{url('images/payment_methods/'.$payment_method['image'])}}" alt="" class="myimg">
-                        </td>
-                        <td>
-                            <div class="d-flex">
-                                <input type="hidden" value='{{$payment_method["id"]}}'>
-                                <a onclick="filldata(this);" data-bs-toggle="modal"
-                                    data-bs-target="#updatePaymentMethod">
-                                    <i class="bi bi-pencil-fill update"></i>
-                                </a>
-                                <a onclick='return confirm("Want to delete?")'
-                                    href="{{url('/admin/payment-methods/delete/'.$payment_method->id)}}"><i
-                                        class="bi bi-trash3-fill cancel"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
+                        @foreach($data as $payment_method)
+                        <tr>
+                            <td>{{$no++}}</td>
+                            <td>{{$payment_method["name"]}}</td>
+                            <td>
+                                <img src="{{url('images/payment_methods/'.$payment_method['image'])}}" alt=""
+                                    class="myimg">
+                            </td>
+                            {{-- <td>
+                                <div class="d-flex">
+                                    <input type="hidden" value='{{$payment_method["id"]}}'>
+                                    <a onclick="filldata(this);" data-bs-toggle="modal"
+                                        data-bs-target="#updatePaymentMethod">
+                                        <i class="bi bi-pencil-fill update"></i>
+                                    </a>
+                                    <a onclick='return confirm("Want to delete?")'
+                                        href="{{url('/admin/payment-methods/delete/'.$payment_method->id)}}"><i
+                                            class="bi bi-trash3-fill cancel"></i></a>
+                                </div>
+                            </td> --}}
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-
-    </div>
-    <!-- payment account -->
-    <div class="row mt-5 mb-3">
         <div class="col">
-            <div class="d-flex">
+            <!-- payment account -->
+            <div class="d-flex mb-3">
                 <div>
                     <h3>Accounts</h3>
                 </div>
@@ -96,45 +90,41 @@
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
             <div class="table-responsive">
                 <table class="table table-striped" id="paymentAccountTable">
                     @php
                     $no=1;
                     @endphp
                     <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Acc no</th>
-                        <th>Method</th>
-                        <th>Actions</th>
-                    </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Acc no</th>
+                            <th>Method</th>
+                            {{-- <th>Actions</th> --}}
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach($accounts as $payment_account)
-                    <tr>
-                        <td>{{$no++}}</td>
-                        <td>{{$payment_account["account_name"]}}</td>
-                        <td>{{$payment_account["account_no"]}}</td>
-                        <td>{{$payment_account->paymentMethod->name}}</td>
-                        <td>
-                            <div class="d-flex">
-                                <input type="hidden" value='{{$payment_account["id"]}}'>
-                                <a onclick="fillAccountData(this);" data-bs-toggle="modal"
-                                    data-bs-target="#updatePaymentAccount">
-                                    <i class="bi bi-pencil-fill update"></i>
-                                </a>
-                                <a onclick='return confirm("Want to delete?")'
-                                    href="{{url('/admin/payment-accounts/delete/'.$payment_account->id)}}"><i
-                                        class="bi bi-trash3-fill cancel"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
+                        @foreach($accounts as $payment_account)
+                        <tr>
+                            <td>{{$no++}}</td>
+                            <td>{{$payment_account["account_name"]}}</td>
+                            <td>{{$payment_account["account_no"]}}</td>
+                            <td>{{$payment_account->paymentMethod->name}}</td>
+                            {{-- <td>
+                                <div class="d-flex">
+                                    <input type="hidden" value='{{$payment_account["id"]}}'>
+                                    <a onclick="fillAccountData(this);" data-bs-toggle="modal"
+                                        data-bs-target="#updatePaymentAccount">
+                                        <i class="bi bi-pencil-fill update"></i>
+                                    </a>
+                                    <a onclick='return confirm("Want to delete?")'
+                                        href="{{url('/admin/payment-accounts/delete/'.$payment_account->id)}}"><i
+                                            class="bi bi-trash3-fill cancel"></i></a>
+                                </div>
+                            </td> --}}
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -194,7 +184,7 @@
                         @csrf
                         <div class="row mb-2">
                             <div class="col-md-3 offset-md-2 col-form-label">
-                                <label for="name">name</label>
+                                <label for="name">Name</label>
                             </div>
                             <div class="col-md-5">
                                 <input type="text" required name="name" id="name" class="myinput">
@@ -259,7 +249,7 @@
                             <div class="col-md-7">
                                 <input type="number" required name="accNo" id="accNo" class="form-control">
                             </div>
-                        </div>                        
+                        </div>
                         <div class="row">
                             <div class="col-md-4">
                             </div>
@@ -326,7 +316,7 @@
         </div>
     </div>
     <script>
-    let filldata = (a) => {
+        let filldata = (a) => {
         let td = a.parentNode.parentNode.parentNode.children;
         document.getElementById("updateName").value = td[1].innerHTML;
         let ch = a.parentNode.children;
@@ -359,7 +349,7 @@
 <script type="text/javascript" charset="utf8"
     src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
     $('#paymentMethodTable').dataTable();
 });
 $(document).ready(function() {

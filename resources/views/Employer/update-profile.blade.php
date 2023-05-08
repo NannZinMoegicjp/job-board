@@ -24,7 +24,7 @@
         </div>
         @endif
     </div>
-    <div class="row my-3">
+    <div class="row mb-3">
         <div class="col-md-7 col-12 mb-1">
             <form action="{{url('/employer/profile/update/'.$company->id)}}" class="bg-white px-3 pb-2 rounded shadow"
                 method="post" enctype="multipart/form-data">
@@ -174,14 +174,14 @@
                     </div>
                     <div class="col-md-7 col-12 d-flex">
                         <input type="submit" class="btn-primary btn me-2" value="Update">
-                        <a href="{{url('/admin/companies')}}"><input type="button" class="btn-secondary btn"
+                        <a href="{{url('/employer/profile')}}"><input type="button" class="btn-secondary btn"
                                 value="Cancel"></a>
                     </div>
                 </div>
             </form>
         </div>
         <div class="col-md-5 col-12">
-            <div class="row mb-3 d-flex justify-content-center shadow p-2">
+            <div class="row bg-white mb-3 d-flex justify-content-center shadow px-2 py-4">
                 <div class="col-4">
                     <img src="{{URL::asset('images/companies/'.$company->logo)}}" alt="" class="img img-fluid">
                 </div>
@@ -195,7 +195,7 @@
                     </form>
                 </div>
             </div>
-            <div class="row mb-3 shadow p-2">
+            <div class="row bg-white mb-3 shadow px-2 py-4">
                 <div class="col-4">
                     <h6>Industry</h6>
                 </div>
@@ -219,7 +219,7 @@
                     </button>
                 </div>
             </div>
-            <div class="row mb-3 shadow p-2">
+            <div class="row bg-white mb-3 shadow px-2 py-4">
                 <div class="col-4">
                     <h6>Branch city</h6>
                 </div>
@@ -233,13 +233,13 @@
                     </div>
                     @endif
                     @endforeach
+                    {{-- onclick="add(this);" --}}
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                        data-bs-target="#addBranchCity" onclick="add(this);">
+                        data-bs-target="#addBranchCity" >
                         <i class="bi bi-plus"></i> Add more
                     </button>
                 </div>
             </div>
-
             <div class="modal fade" id="addIndustry" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -293,11 +293,12 @@
                                 @csrf
                                 <div class="row mb-2">
                                     <div class="col-md-4 col-form-label">
-                                        <label for="bState">Branch State</label>
+                                        <label for="bstate">Branch State</label>
                                     </div>
                                     <div class="col-md-7">
                                         <select name="bstate" id="bstate" class="form-select"
                                             placeholder="Branch division/state">
+                                            <option value="">-- Select branch state --</option>
                                             @if(isset($states))
                                             @foreach ($states as $state)
                                             <option value="{{$state['id']}}">{{$state['name']}}</option>
@@ -308,10 +309,11 @@
                                 </div>
                                 <div class="row mb-2">
                                     <div class="col-md-4 col-form-label">
-                                        <label for="bCity">Branch City</label>
+                                        <label for="bcity">Branch City</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <select name="bCity" id="bCity" class="form-select">
+                                        <select name="bcity" id="bcity" class="form-select">
+                                            <option value="">-- Select branch city --</option>
                                             @if(isset($cities))
                                             @foreach ($cities as $city)
                                             <option value="{{$city['id']}}">{{$city['name']}}</option>
@@ -343,7 +345,7 @@
             </div>
             @endforeach
         </div>
-        <form action="{{url('/employer/profile/add/images/'.$updateId)}}" method="post" enctype="multipart/form-data">
+        <form action="{{url('/employer/profile/add/images/'.$updateId)}}" method="post" enctype="multipart/form-data" class="mb-5">
             @csrf
             <input type="file" class="form-control mb-2" placeholder="" name="newPhotos[]" id="newPhotos" multiple>
             <input type="submit" class="btn btn-outline-primary" value="upload new photos">
@@ -363,7 +365,8 @@ let hideDeleteIcon = (photo) => {
 @endsection
 @section('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>$(document).ready(function () {
+<script>
+$(document).ready(function () {
     $('#state').on('change', function () {
                     var stateId = this.value;
                     $("#city").html('<option value="">-- Select city --</option>');
@@ -376,9 +379,26 @@ let hideDeleteIcon = (photo) => {
                                 $("#city").append('<option value="' + value
                                     .id + '">' + value.name + '</option>');
                             });
-                        },
-                    });
-                });
-                });
+            },
+         });
+    });
+});
+$(document).ready(function () {
+    $('#bstate').on('change', function () {
+                    var stateId = this.value;
+                    $("#bcity").html('<option value="">-- Select branch city --</option>');
+                    $.ajax({
+                        url: "/api/fetch-cities/" + stateId,
+                        type: "GET",
+                        dataType: 'json',
+                        success: function(result) {
+                            $.each(result, function (key, value) {
+                                $("#bcity").append('<option value="' + value
+                                    .id + '">' + value.name + '</option>');
+                            });
+            },
+         });
+    });
+});
 </script>    
 @endsection

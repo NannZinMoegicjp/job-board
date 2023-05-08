@@ -22,7 +22,7 @@ class OrderController extends Controller
 
     public function acceptOrder($id){
         $orderCon = new OrderConfirmation();
-        $orderCon->admin_id = session('id');
+        $orderCon->admin_id = session('adminId');
         $orderCon->order_id = $id;
         $orderCon->is_confirmed = true;
         $d=strtotime("today");
@@ -35,7 +35,7 @@ class OrderController extends Controller
     }
     public function rejectOrder($id){
         $orderCon = new OrderConfirmation();
-        $orderCon->admin_id = session('id');
+        $orderCon->admin_id = session('adminId');
         $orderCon->order_id = $id;
         $orderCon->is_confirmed = false;
         $d=strtotime("today");
