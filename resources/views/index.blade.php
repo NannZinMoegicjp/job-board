@@ -49,8 +49,8 @@
                     @csrf
                     <div class="row g-lg-1 g-2">
                         <div class="col-lg-3 col-md-6">
-                            <input class="form-control" type="text" placeholder="Positions,Companies"
-                                aria-label="positions companies">
+                            <input class="form-control" type="text" placeholder="Positions"
+                                aria-label="positions">
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <select class="form-select" aria-label="job categories">
@@ -167,61 +167,29 @@
                 <a href="{{url('/industries')}}"><button class="button-18 myBtn mb-4" role="button">Job
                         industries</button></a>
                 <div class="w-75">
-                    <h4>Explore job by most popular industry</h4>
+                    <h4>Explore job by industry</h4>
                 </div>
                 <p class="text-secondary">Discover jobs most relevant to you by experience
                     level,salary,location,employment type, etc.</p>
             </div>
             <div class="col-md-6">
-                <div class="industries d-flex border-bottom my-1">
+            @if(isset($data["industries"]))
+            @foreach($data["industries"] as $industry)
+            <div class="industries d-flex border-bottom my-1">
                     <div
                         class="bg-white me-4 circle borderColor1 shadow p-3 mb-2 d-flex justify-content-center align-items-center">
-                        <img src="images/industries/o9SXyF4kPWv_4nhtaCnNLIHZvbkpWNN_R4gvPr13CNeZ-0lU0PgZXO9yhvuyC5lWKpFcn9yIfHo=.png"
-                            alt="it/computer">
-                    </div>
-                    <div>
-                        <p class="fs-5">Trading/Distribution/Import/Export</p>
-                        <!-- <a href="" class="text-decoration-none text-black">
-                            <small class="text-secondary">1200+ jobs</small>
-                            </a> -->
-                    </div>
-                </div>
-                <div class="industries d-flex border-bottom my-1">
-                    <div
-                        class="bg-white me-4 circle borderColor1 shadow p-3 mb-2 d-flex justify-content-center align-items-center">
-                        <img src="images/industries/education.png" alt="it/computer">
+                        <img src="{{URL::asset('images/industries/'.$industry->image)}}" alt="it/computer">
                     </div>
                     <div>
                         <a href="" class="text-decoration-none text-black">
-                            <h5>Education/Training</h5>
+                            <h5>{{$industry->name}}</h5>
                         </a>
-                        <small class="text-secondary">1200+ jobs</small>
+                        <small class="text-secondary">{{$industry->total_jobs}} jobs</small>
                     </div>
                 </div>
-                <div class="industries d-flex border-bottom my-1">
-                    <div
-                        class="bg-white me-4 circle borderColor1 shadow p-3 mb-2 d-flex justify-content-center align-items-center">
-                        <img src="images/industries/it.png" alt="it/computer">
-                    </div>
-                    <div>
-                        <a href="" class="text-decoration-none text-black">
-                            <h5>IT/Computer</h5>
-                        </a>
-                        <small class="text-secondary">1200+ jobs</small>
-                    </div>
-                </div>
-                <div class="industries d-flex border-bottom my-1">
-                    <div
-                        class="bg-white me-4 circle borderColor1 shadow p-3 mb-2 d-flex justify-content-center align-items-center">
-                        <img src="images/industries/food-and-beverage.png" alt="it/computer">
-                    </div>
-                    <div>
-                        <a href="" class="text-decoration-none text-black">
-                            <h5>Food and Beverage</h5>
-                        </a>
-                        <small class="text-secondary">1200+ jobs</small>
-                    </div>
-                </div>
+            @endforeach
+            @endif               
+               
             </div>
 
         </div>
@@ -233,44 +201,19 @@
         <h3 class="text-center"><span class="titleFirstPart">Featured</span> <span
                 class="titleSecondPart">Locations</span></h3>
         <div class="row g-4 py-2">
-            <div class="col-lg-3 col-md-4 col-6 col-xs-12">
-                <a href="" class="text-decoration-none">
-                    <div class="bg-white text-center shadow location position-relative">
-                        <img src="images/cities/mandalay.jpg" alt="" class="img-fluid">
-                        <p class="py-1">
-                            <span class="cityName">Mandalay</span>
-                            (<span class="noOfJobs">300 jobs</span>)
-                        </p>
-                    </div>
-                </a>
-            </div>
+        @if(isset($data["states"]))
+            @foreach($data["states"] as $state)
             <div class="col-lg-3 col-md-4 col-6 col-xs-12">
                 <div class="bg-white text-center shadow location position-relative">
-                    <img src="images/cities/yangon.jpg" alt="" class="img-fluid">
+                    <img src="{{URL::asset('images/states/'.$state->image)}}" alt="" class="img-fluid">
                     <p class="p-1">
-                        <span class="cityName">Mandalay</span>
-                        (<span class="noOfJobs">300 jobs</span>)
+                        <span class="cityName">{{$state->name}}</span>
+                        (<span class="noOfJobs">{{$state->job_count}} jobs</span>)
                     </p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-6 col-xs-12">
-                <div class="bg-white text-center shadow location position-relative">
-                    <img src="images/cities/innlaylake.jpg" alt="" class="img-fluid">
-                    <p class="p-1">
-                        <span class="cityName">Mandalay</span>
-                        (<span class="noOfJobs">300 jobs</span>)
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6 col-xs-12">
-                <div class="bg-white text-center shadow location position-relative">
-                    <img src="images/cities/naypyidaw.jpg" alt="" class="img-fluid">
-                    <p class="p-1">
-                        <span class="cityName">Mandalay</span>
-                        (<span class="noOfJobs">300 jobs</span>)
-                    </p>
-                </div>
-            </div>
+            @endforeach
+            @endif  
         </div>
         <div class="text-center">
             <a href="{{url('/locations')}}">
