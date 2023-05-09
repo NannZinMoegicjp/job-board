@@ -39,7 +39,7 @@
     </div>
 </section>
 {{--homepage search --}}
-<section>
+<!-- <section>
     <div class="bg-opacity py-5">
         <div class="content">
             <div class=" d-flex flex-column justify-content-center align-items-center h-100">
@@ -76,7 +76,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 {{-- recents jobs --}}
 <section class="">
     <div class="container py-4">
@@ -93,7 +93,7 @@
                     <p class="mb-2 text-center">{{$job->title}}</p>
                     <p class="mb-2 text-center">{{$job->address->city->name}}</p>
                     <p class="text-secondary mb-4 text-center">{{$job->employmentType->name}}</p>
-                    <a href="{{url('job/details/'.$job->id)}}">
+                    <a href="{{url('jobs/details/'.$job->id)}}">
                         <button class="button-18 greenBtn" role="button">view details</button>
                     </a>
                 </div>
@@ -102,12 +102,12 @@
             @endif
         </div>
         <div class="text-center mt-3">
-            <a href="" class="text-decoration-none text-dark">View more<i class="bi bi-arrow-right-short ms-2"></i></a>
+            <a href="{{url('/jobs')}}" class="text-decoration-none text-dark">View more<i class="bi bi-arrow-right-short ms-2"></i></a>
         </div>
     </div>
 </section>
 {{-- popular categories --}}
-<section class="bg-light">
+<!-- <section class="bg-light">
     <div class="container py-4 categories">
         <h3 class="text-center"><span class="titleFirstPart">Popular </span> <span
                 class="titleSecondPart">Categories</span> </h3>
@@ -136,9 +136,9 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 {{-- top employers --}}
-<section>
+<!-- <section>
     <div class="container py-4">
         <div class="row py-2 companies">
         @if(isset($data["companies"]))
@@ -158,9 +158,9 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 {{--popular industries --}}
-<section class="bg-light">
+<!-- <section class="bg-light">
     <div class="container py-5">
         <div class="row">
             <div class="col-md-5 p-3">
@@ -194,9 +194,17 @@
 
         </div>
     </div>
-</section>
+</section> -->
 {{-- featured locations --}}
-<section class="">
+
+<a href="{{route('all-industries')}}">all industries</a>
+<a href="{{route('all-categories')}}">all categories</a>
+<a href="{{route('all-locations')}}">all locations</a>
+<a href="{{route('jobs-by-industry',[1])}}">industry</a>
+<a href="{{route('jobs-by-company',[3])}}">company</a>
+<a href="{{route('jobs-by-state',[9])}}">mandalay</a>
+<a href="{{route('jobs-by-category',[12])}}">category</a>
+<!-- <section class="">
     <div class="container py-4">
         <h3 class="text-center"><span class="titleFirstPart">Featured</span> <span
                 class="titleSecondPart">Locations</span></h3>
@@ -221,5 +229,5 @@
             </a>
         </div>
     </div>
-</section>
+</section> -->
 @endsection

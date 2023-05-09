@@ -171,7 +171,6 @@ class EmployerJobController extends Controller
     }
     public function inactiveJobs(Request $request){
         $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->where('deleted_at',null)->get();
-        // dd(Carbon::today()->subMonths(6));
         $jobs = Job::whereIn('address_id',$addrIDs)->WhereDate('created_at','<',Carbon::today()->subMonths(6))->orWhere('status','inactive')->get();
         return view('Employer.inactive-jobs-manage')->with("jobs",$jobs);
     }    
