@@ -9,7 +9,7 @@
                 <img src="{{URL::asset('images/dashboard/message.png')}}" alt="job">
             </div>
             <div>
-                <h5>{{count($data["applications"])}}</h5>
+                <h5>{{$count["applications"]}}</h5>
                 <h6 class="text-secondary">Total Applications</h6>
             </div>
         </div>
@@ -20,7 +20,7 @@
                 <img src="{{URL::asset('images/dashboard/miscellaneous.png')}}" alt="job">
             </div>
             <div>
-                <h4>{{count($data["shortlistedApps"])}}</h4>
+                <h4>{{$count["shortlistedApps"]}}</h4>
                 <h6 class="text-secondary">Shortlisted applications</h6>
             </div>
         </div>
@@ -31,7 +31,7 @@
                 <img src="{{URL::asset('images/dashboard/cancel.png')}}" alt="job">
             </div>
             <div>
-                <h4>{{count($data["rejectedApps"])}}</h4>
+                <h4>{{$count["rejectedApps"]}}</h4>
                 <h6 class="text-secondary">Rejected applications</h6>
             </div>
         </div>
@@ -42,7 +42,7 @@
 
             </div>
             <div>
-                <h4>{{count($data["pendingApps"])}}</h4>
+                <h4>{{$count["pendingApps"]}}</h4>
                 <h6 class="text-secondary">Pending applications</h6>
             </div>
         </div>

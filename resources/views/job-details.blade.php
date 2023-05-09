@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="mb-2">Experience level : {{$job->experienceLevel->name}}</div>
-                    <div class="mb-2">Functional Area : {{$job->jobCategory->name}}</div>
+                    <div class="mb-2">Job Category : {{$job->jobCategory->name}}</div>
                     <div class="mb-2">Open position : {{$job->open_position}}</div>
                 </div>
             </div>
@@ -66,26 +66,6 @@
                 <h5 class="jobAttribute p-2 title">Benefits</h5>
                 {!!$job->benefit!!}
             </div>
-            {{-- <div>
-                <h5 class="bg-success bg-gradient p-2 title">Company Overview</h5>
-                <div class="row comOverview">
-                    <div class="col-md-3 col-6">
-                        <p><i class="bi bi-building ps-2"></i> Ananda Myanamar Co., ltd</p>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <p><i class="bi bi-people-fill"></i> 201-500 employee</p>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <p><i class="bi bi-card-checklist ps-2"></i>
-                            <a href="" class="text-decoration-none companyJobsLink text-dark">13 current jobs
-                                openings</a>
-                        </p>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <p><i class="bi bi-geo-alt-fill ps-2"></i> Yangon</p>
-                    </div>
-                </div>
-            </div> --}}
         </div>
         @endif
     </div>

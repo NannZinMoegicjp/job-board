@@ -95,7 +95,7 @@
                             <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>500000</div>
                         </div>                        
                         <span>Career level :</span> <span class="text-secondary"> Management level</span> <br>
-                        <span>Functional Area : </span> <span class="text-secondary">Business Development & Management</span><br>                              
+                        <span>Job Category : </span> <span class="text-secondary">Business Development & Management</span><br>                              
                 </div>
             </div> 
             <div class="row border rounded p-3 mx-3 my-2 jobpost">
@@ -112,7 +112,7 @@
                             <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>500000</div>
                         </div>                        
                         <span>Career level :</span> <span class="text-secondary"> Management level</span> <br>
-                        <span>Functional Area : </span> <span class="text-secondary">Business Development & Management</span><br>                              
+                        <span>Job Category : </span> <span class="text-secondary">Business Development & Management</span><br>                              
                 </div>
             </div> 
             <div class="row border rounded p-3 mx-3 my-2 jobpost">
@@ -129,7 +129,7 @@
                             <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>500000</div>
                         </div>                        
                         <span>Career level :</span> <span class="text-secondary"> Management level</span> <br>
-                        <span>Functional Area : </span> <span class="text-secondary">Business Development & Management</span><br>                              
+                        <span>Job Category : </span> <span class="text-secondary">Business Development & Management</span><br>                              
                 </div>
             </div> 
             <div class="row border rounded p-3 mx-3 my-2 jobpost">
@@ -146,7 +146,7 @@
                             <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>500000</div>
                         </div>                        
                         <span>Career level :</span> <span class="text-secondary"> Management level</span> <br>
-                        <span>Functional Area : </span> <span class="text-secondary">Business Development & Management</span><br>                              
+                        <span>Job Category : </span> <span class="text-secondary">Business Development & Management</span><br>                              
                 </div>
             </div> 
             <div class="row border rounded p-3 mx-3 my-2 jobpost">
@@ -163,7 +163,7 @@
                             <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>500000</div>
                         </div>                        
                         <span>Career level :</span> <span class="text-secondary"> Management level</span> <br>
-                        <span>Functional Area : </span> <span class="text-secondary">Business Development & Management</span><br>                              
+                        <span>Job Category : </span> <span class="text-secondary">Business Development & Management</span><br>                              
                 </div>
             </div> 
             <div class="row border rounded p-3 mx-3 my-2 jobpost">
@@ -180,7 +180,7 @@
                             <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>500000</div>
                         </div>                        
                         <span>Career level :</span> <span class="text-secondary"> Management level</span> <br>
-                        <span>Functional Area : </span> <span class="text-secondary">Business Development & Management</span><br>                              
+                        <span>Job Category : </span> <span class="text-secondary">Business Development & Management</span><br>                              
                 </div>
             </div> 
             <div class="pagination">

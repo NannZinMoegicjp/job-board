@@ -34,16 +34,16 @@
                             <a class="nav-link" href="{{url('/jobs')}}">Jobs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('/categories')}}">Categories</a>
+                            <a class="nav-link" href="{{route('all-categories')}}">Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('/locations')}}">Locations</a>
+                            <a class="nav-link" href="{{route('all-locations')}}">Locations</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('/industries')}}">Industries</a>
+                            <a class="nav-link" href="{{route('all-industries')}}">Industries</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Companies</a>
+                            <a class="nav-link" href="{{route('all-companies')}}">Companies</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/register')}}">Register</a>
@@ -83,11 +83,11 @@
             <div class="col-md-3">
                 <p class="text-white">QUICK LINKS</p>
                 <ul class="quickLinks">
-                    <li><a href="">Jobs</a></li>
-                    <li><a href="">Categories</a></li>
-                    <li><a href="">Companies</a></li>
-                    <li><a href="">Industries</a></li>
-                    <li><a href="">Locations</a></li>
+                    <li><a href="{{route('jobs')}}">Jobs</a></li>
+                    <li><a href="{{route('all-categories')}}">Categories</a></li>
+                    <li><a href="{{route('all-companies')}}">Companies</a></li>
+                    <li><a href="{{route('all-industries')}}">Industries</a></li>
+                    <li><a href="{{route('all-locations')}}">Locations</a></li>
                 </ul>
             </div> 
             <div class="col-md-4">                                

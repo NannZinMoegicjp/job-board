@@ -29,7 +29,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class,'index']);
 Route::get('/jobs', function () {
     return view('jobs');
-});
+})->name('jobs');
 Route::get('/categories', function () {
     return view('categories');
 });
@@ -42,12 +42,25 @@ Route::get('/locations', function () {
 Route::get('/companies', function () {
     return view('companies');
 });
-Route::get('/job/details/{id}', function () {
-    return view('user-job-details');
-});
-Route::get('/company/details/{id}', function () {
-    return view('company-details');
-});
+Route::get('/jobs/details/{id}', [HomeController::class,'jobDetails']);
+
+Route::get('/company/details/{id}', [HomeController::class,'companyDetails'])->name('company-details');
+
+Route::post('/jobs/apply/{id}', [HomeController::class,'applyJobs']);
+
+//get jobs by location(division/state)
+Route::get('/jobs/state/{stateId}', [HomeController::class,'getJobsByState'])->name('jobs-by-state');
+//get jobs by job category
+Route::get('/jobs/category/{categoryId}', [HomeController::class,'getJobsByCategory'])->name('jobs-by-category');
+//get jobs of company
+Route::get('/jobs/company/{companyId}', [HomeController::class,'getJobsByCompany'])->name('jobs-by-company');
+//get jobs of industry
+Route::get('/jobs/industry/{industryId}', [HomeController::class,'getJobsByIndustry'])->name('jobs-by-industry');
+Route::get('/industries/all',[HomeController::class,'industries'])->name('all-industries');
+Route::get('/categories/all',[HomeController::class,'categories'])->name('all-categories');
+Route::get('/locations/all',[HomeController::class,'locations'])->name('all-locations');
+Route::get('/companies/all',[HomeController::class,'companies'])->name('all-companies');
+
 Route::get('/register',function(){
     return view('register');
 });

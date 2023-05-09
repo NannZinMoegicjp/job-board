@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="mb-2">Experience level : {{$job->experienceLevel->name}}</div>
-                    <div class="mb-2">Functional Area : {{$job->jobCategory->name}}</div>
+                    <div class="mb-2">Job Category : {{$job->jobCategory->name}}</div>
                     <div class="mb-2">Open position : {{$job->open_position}}</div>
                 </div>
             </div>

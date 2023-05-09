@@ -15,6 +15,6 @@ class Address extends Model
         return $this->belongsTo(Company::class);
     }
     public function job(){
-        return $this->belongsTo(Job::class);
+        return $this->hasOne(Job::class);
     }
 }
