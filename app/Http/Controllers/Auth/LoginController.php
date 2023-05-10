@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
     /*
@@ -40,18 +40,15 @@ class LoginController extends Controller
     }
     protected function authenticated(Request $request, $user)
     {
-        // if(Auth::user()->status == 'admin'){
-        //     return redirect('/admin/dashboard');
-        // }
-        if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => 
-        $request->password], $request->remember)) {
-            dd("here");
-        return redirect()->intended(route('admin.dashboard'));
-        }
-        // return redirect()->intended('/');
     }
-    // protected function guard()
-    // {
-    //     return Auth::guard('admin');
-    // }
+    public function authenticate(Request $request)
+    {
+        $email = $request->input('email');
+        $password = $request->input('password');
+        if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $password])) {
+            return redirect('/admin/dashboard');           
+        } else {
+            return "wrong password";
+        }
+    }
 }

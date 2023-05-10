@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'admin','jobseeker','employer',
+        'passwords' => 'admin','jobseeker','employer',
     ],
 
     /*
@@ -36,14 +36,20 @@ return [
     */
 
     'guards' => [
-        'web' => [
+    //     'web' => [
+    //     'driver' => 'session',
+    //     'provider' => 'users',
+    // ],
+    'admin' => [
         'driver' => 'session',
-        'provider' => 'users',
+        'provider' => 'admins',
+    ],'jobseeker' => [
+        'driver' => 'session',
+        'provider' => 'jobseekers',
+    ],'employer' => [
+        'driver' => 'session',
+        'provider' => 'employers',
     ],
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admin_users',
-        ],
     ],
 
     /*
@@ -64,15 +70,23 @@ return [
     */
 
     'providers' => [
-        'admin_users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\AdminUser::class,
-        ],
-
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
+        
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\AdminUser::class,
+    ], 
+    'jobseekers' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\JobHunter::class,
+    ], 
+    'employers' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Employer::class,
+    ],
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
+        // ],
     ],
 
     /*
@@ -95,8 +109,26 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        // 'users' => [
+        //     'provider' => 'users',
+        //     'table' => 'password_reset_tokens',
+        //     'expire' => 60,
+        //     'throttle' => 60,
+        // ],
+        'jobseeker' => [
+            'provider' => 'jobseekers',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'admin' => [
+            'provider' => 'admins',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'employer' => [
+            'provider' => 'employers',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

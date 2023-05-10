@@ -185,5 +185,9 @@ Route::post('/job-seeker/update/image/{id}',[JobSeekerController::class,'updateI
 Route::get('/job-seeker/update/profile/{id}',[JobSeekerController::class,'getProfileData']);
 Route::post('/job-seeker/update/profile/{id}',[JobSeekerController::class,'update']);
 Auth::routes();
+Auth::routes(['register' => false]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

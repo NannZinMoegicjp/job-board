@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-class AdminUser extends Authenticatable
+class JobHunter extends Authenticatable
 {
-    protected $table='admins';
+    protected $table='job_seekers';
      /**
      * The attributes that are mass assignable.
      *

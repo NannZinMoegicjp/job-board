@@ -10,10 +10,16 @@ use App\Models\Job;
 use App\Models\Admin;
 use App\Models\Application;
 use App\Models\OrderConfirmation;
+use Illuminate\Support\Facades\Auth;
+
 class AdminDashBoardController extends Controller
 {
     public function index(Request $request){
-        $admin = Admin::find(1);
+        $userId = null;
+        if (Auth::check()) {
+            $userId = Auth::user()->id;
+        }
+        $admin = Admin::find($userId);
         $request->session()->put('role','admin');
         $request->session()->put('adminId',$admin->id);
         $request->session()->put('email',$admin->email);
