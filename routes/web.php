@@ -26,7 +26,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class,'index']);
+Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('/jobs', [HomeController::class,'allJobs'])->name('all-jobs');
 Route::get('/jobs/filter', [HomeController::class,'filterJobs']);
 Route::get('/categories', function () {
@@ -70,55 +70,60 @@ Route::post('/jobseeker/register',[JobSeekerController::class,'register']);
 Route::get('/login',function(){
     return view('login');
 });
+
+Route::group(  ['prefix' => 'admin','middleware' => ['admin','auth']], function () {
+    Route::get('/dashboard',[AdminDashBoardController::class,'index'])->name('admin.dashboard');
+    Route::get('/pricing',[CreditPriceController::class,'index']);
+    Route::post('/pricing/insert',[CreditPriceController::class,'insertPrice']);
+    Route::post('/pricing/update/{id}',[CreditPriceController::class,'updatePrice']);
+
+    Route::get('/payment',[OrderController::class,'index']);
+    Route::get('/order',[OrderController::class,'getAwaitingOrder']);
+    Route::get('/order/approve/{id}',[OrderController::class,'acceptOrder']);
+    Route::get('/order/reject/{id}',[OrderController::class,'rejectOrder']);
+    Route::get('/order/confirmed/details/{id}',[OrderController::class,'confirmedOrderDetails']);
+    Route::get('/order/awaiting/details/{id}',[OrderController::class,'awaitingOrderDetails']);
+
+    Route::get('/job-seekers',[JobSeekerController::class,'allJobSeekers']);
+    // Route::get('/job-seekers/add',[JobSeekerController::class,'insertGet']);
+    // Route::post('/job-seekers/add',[JobSeekerController::class,'insert']);
+    Route::get('/job-seekers/details/{id}',[JobSeekerController::class,'viewDetails']);
+    Route::get('/job-seekers/delete/{id}',[JobSeekerController::class,'delete']);
+
+    Route::get('/jobs',[JobController::class,'index'])->name('jobs-manage');
+    Route::get('/job/details/{id}',[JobController::class,'viewDetails']);
+    Route::get('/job/delete/{id}',[JobController::class,'delete']);
+
+    Route::get('/companies',[CompanyController::class,'index']);
+    Route::get('/company/add',[CompanyController::class,'insertGet']);
+    Route::post('/company/add',[CompanyController::class,'insert']);
+    Route::get('/company/delete/{id}',[CompanyController::class,'delete']);
+    Route::get('/company/details/{id}',[CompanyController::class,'viewDetails']);
+    Route::get('/company/add/credit/{id}',[CompanyController::class,'getCreditData']);
+    Route::post('/company/add/credit/{id}',[CompanyController::class,'addCredit']);
+
+    Route::get('/payment-methods',[PaymentMethodController::class,'index']);
+    Route::post('/payment-methods/add',[PaymentMethodController::class,'insert']);
+    Route::post('/payment-methods/update/{id}',[PaymentMethodController::class,'update']);
+    Route::get('/payment-methods/delete/{id}',[PaymentMethodController::class,'delete']);
+    Route::post('/payment-accounts/add',[PaymentMethodController::class,'insertPaymentAccount']);
+    Route::post('/payment-accounts/update/{id}',[PaymentMethodController::class,'updatePaymentAccount']);
+    Route::get('/payment-accounts/delete/{id}',[PaymentMethodController::class,'deletePaymentAccount']);
+
+    Route::get('/manage',[AdminController::class,'index'])->name('manage-admin');
+    Route::get('/add',[AdminController::class,'addGet']);
+    Route::post('/add',[AdminController::class,'add']);
+    Route::get('/delete/{id}',[AdminController::class,'delete']);
+    Route::get('/details/{id}',[AdminController::class,'viewDetails'])->name('admin-details');
+});
+
+
 Route::get('/admin',function(){
     return view('dashboard');
 });
 Route::get('/admin/profile/{id}',function(){
     return view('admin-profile');
 });
-Route::get('/admin',[AdminDashBoardController::class,'index']);
-Route::get('/admin/pricing',[CreditPriceController::class,'index']);
-Route::post('/admin/pricing/insert',[CreditPriceController::class,'insertPrice']);
-Route::post('/admin/pricing/update/{id}',[CreditPriceController::class,'updatePrice']);
-
-Route::get('/admin/payment',[OrderController::class,'index']);
-Route::get('/admin/order',[OrderController::class,'getAwaitingOrder']);
-Route::get('/admin/order/approve/{id}',[OrderController::class,'acceptOrder']);
-Route::get('/admin/order/reject/{id}',[OrderController::class,'rejectOrder']);
-Route::get('/admin/order/confirmed/details/{id}',[OrderController::class,'confirmedOrderDetails']);
-Route::get('/admin/order/awaiting/details/{id}',[OrderController::class,'awaitingOrderDetails']);
-
-Route::get('/admin/job-seekers',[JobSeekerController::class,'allJobSeekers']);
-// Route::get('/admin/job-seekers/add',[JobSeekerController::class,'insertGet']);
-// Route::post('/admin/job-seekers/add',[JobSeekerController::class,'insert']);
-Route::get('/admin/job-seekers/details/{id}',[JobSeekerController::class,'viewDetails']);
-Route::get('/admin/job-seekers/delete/{id}',[JobSeekerController::class,'delete']);
-
-Route::get('/admin/jobs',[JobController::class,'index'])->name('jobs-manage');
-Route::get('/admin/job/details/{id}',[JobController::class,'viewDetails']);
-Route::get('/admin/job/delete/{id}',[JobController::class,'delete']);
-
-Route::get('/admin/companies',[CompanyController::class,'index']);
-Route::get('/admin/company/add',[CompanyController::class,'insertGet']);
-Route::post('/admin/company/add',[CompanyController::class,'insert']);
-Route::get('/admin/company/delete/{id}',[CompanyController::class,'delete']);
-Route::get('/admin/company/details/{id}',[CompanyController::class,'viewDetails']);
-Route::get('/admin/company/add/credit/{id}',[CompanyController::class,'getCreditData']);
-Route::post('/admin/company/add/credit/{id}',[CompanyController::class,'addCredit']);
-
-Route::get('/admin/payment-methods',[PaymentMethodController::class,'index']);
-Route::post('/admin/payment-methods/add',[PaymentMethodController::class,'insert']);
-Route::post('/admin/payment-methods/update/{id}',[PaymentMethodController::class,'update']);
-Route::get('/admin/payment-methods/delete/{id}',[PaymentMethodController::class,'delete']);
-Route::post('/admin/payment-accounts/add',[PaymentMethodController::class,'insertPaymentAccount']);
-Route::post('/admin/payment-accounts/update/{id}',[PaymentMethodController::class,'updatePaymentAccount']);
-Route::get('/admin/payment-accounts/delete/{id}',[PaymentMethodController::class,'deletePaymentAccount']);
-
-Route::get('/admin/manage',[AdminController::class,'index'])->name('manage-admin');
-Route::get('/admin/add',[AdminController::class,'addGet']);
-Route::post('/admin/add',[AdminController::class,'add']);
-Route::get('/admin/delete/{id}',[AdminController::class,'delete']);
-Route::get('/admin/details/{id}',[AdminController::class,'viewDetails'])->name('admin-details');
 
 Route::get('/employer',[EmployerController::class,'index']);
 Route::get('/employer/jobs',[EmployerJobController::class,'index'])->name('employer.jobs');
@@ -179,3 +184,6 @@ Route::get('/job-seeker/profile/{id}',[JobSeekerController::class,'viewDetails']
 Route::post('/job-seeker/update/image/{id}',[JobSeekerController::class,'updateImage']);
 Route::get('/job-seeker/update/profile/{id}',[JobSeekerController::class,'getProfileData']);
 Route::post('/job-seeker/update/profile/{id}',[JobSeekerController::class,'update']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
