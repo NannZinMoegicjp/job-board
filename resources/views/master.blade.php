@@ -31,7 +31,7 @@
                             <a class="nav-link" href="{{url('/')}}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('/jobs')}}">Jobs</a>
+                            <a class="nav-link" href="{{route('all-jobs')}}">Jobs</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('all-categories')}}">Categories</a>
@@ -83,7 +83,7 @@
             <div class="col-md-3">
                 <p class="text-white">QUICK LINKS</p>
                 <ul class="quickLinks">
-                    <li><a href="{{route('jobs')}}">Jobs</a></li>
+                    <li><a href="{{route('all-jobs')}}">Jobs</a></li>
                     <li><a href="{{route('all-categories')}}">Categories</a></li>
                     <li><a href="{{route('all-companies')}}">Companies</a></li>
                     <li><a href="{{route('all-industries')}}">Industries</a></li>

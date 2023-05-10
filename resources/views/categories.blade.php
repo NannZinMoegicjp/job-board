@@ -1,8 +1,8 @@
 @extends('master')
 @section('content')
-<section>
-    <h3 class="text-center title py-2 shadow mb">Top Job Categories</h3>
-    <div class="container my-3 categories">
+<section class="bg-light">
+    <h3 class="text-center title py-2">Top Job Categories</h3>
+    <div class="container categories">
         <div class="row g-3 py-2">
             @foreach($categories as $category)
             <div class="col-md-4 col-6 col-xs-12">

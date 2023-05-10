@@ -378,7 +378,7 @@ button {
 .forms {
   color:  #7E468F !important;
 }
-input:not([type=submit]):focus {
+input:not([type=submit]):focus,select:focus {
   border: none !important;
   box-shadow: 0 0 0 2px #7E468F !important;
 }

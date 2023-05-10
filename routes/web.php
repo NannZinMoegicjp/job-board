@@ -27,9 +27,8 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class,'index']);
-Route::get('/jobs', function () {
-    return view('jobs');
-})->name('jobs');
+Route::get('/jobs', [HomeController::class,'allJobs'])->name('all-jobs');
+Route::get('/jobs/filter', [HomeController::class,'filterJobs']);
 Route::get('/categories', function () {
     return view('categories');
 });
@@ -42,7 +41,7 @@ Route::get('/locations', function () {
 Route::get('/companies', function () {
     return view('companies');
 });
-Route::get('/jobs/details/{id}', [HomeController::class,'jobDetails']);
+Route::get('/jobs/details/{id}', [HomeController::class,'jobDetails'])->name('job-details');
 
 Route::get('/company/details/{id}', [HomeController::class,'companyDetails'])->name('company-details');
 

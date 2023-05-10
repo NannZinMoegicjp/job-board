@@ -52,7 +52,7 @@
                         {{$data['company']["created_at"]->diffForHumans()}}
                     </span>
                 </div>
-
+                @if(count($branches)>0)
                 <div class="mb-2">
                     <i class="bi bi-building-fill me-2"></i><span class="title">Branches</span> : <span
                         class="text-secondary">
@@ -62,9 +62,9 @@
                         @else
                         {{$add->city->name}}, {{$add->city->state->name}}/
                         @endif
-                        <span></span>
-                        @endforeach</span>
+                        @endforeach
                 </div>
+                @endif
                 <div class="mb-2">
                     <i class="bi bi-calendar2-week me-2"></i><span class="title">Established date</span> :
                     <span class="text-secondary">

@@ -39,47 +39,47 @@
     </div>
 </section>
 {{--homepage search --}}
-<!-- <section>
+<section>
     <div class="bg-opacity py-5">
         <div class="content">
             <div class=" d-flex flex-column justify-content-center align-items-center h-100">
                 <h1 class="text-center">The Easiest Way to Get Your Job</h1>
                 <h3 class="text-center">Find Jobs, Employment & Career Opportunities</h3>
-                <form action="" method="post" class="container my-3 searchbgcolor p-3 rounded-1">
+                <form action="{{url('/jobs/filter')}}" method="get" class="container my-3 searchbgcolor p-3 rounded-1">
                     @csrf
                     <div class="row g-lg-1 g-2">
-                        <div class="col-lg-3 col-md-6">
-                            <input class="form-control" type="text" placeholder="Positions"
+                        <div class="col-lg col-md-6">
+                            <input class="form-control" name="position" type="text" placeholder="Positions"
                                 aria-label="positions">
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <select class="form-select" aria-label="job categories">
-                                <option selected>All job categories</option>
-                                <option value="1">Sales, Business Development</option>
-                                <option value="2">IT Hardware, Software</option>
-                                <option value="3">Finance, Accounting, Audit</option>
+                        <div class="col-lg col-md-6">
+                            <select class="form-select" aria-label="job categories" name="category">
+                                <option value="0">All job categories</option>
+                                @foreach($data['categories'] as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
                             </select>
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <select class="form-select" aria-label="job locations">
-                                <option selected>All job locations</option>
-                                <option value="1">Yangon</option>
-                                <option value="2">Mandalay</option>
-                                <option value="3">Shan</option>
+                        <div class="col-lg col-md-6">
+                            <select class="form-select" aria-label="job locations" name="state" id="state">
+                                <option value="0">All locations</option>
+                                @foreach($data['states'] as $state)
+                                <option value="{{$state->id}}">{{$state->name}}</option>
+                                @endforeach
                             </select>
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <button class="border-0 form-control greenBtn" role="button">Find jobs</button>
+                        <div class="col-lg col-md-6">
+                            <input type="submit" class="border form-control greenBtn btn" value="Find jobs">
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</section> -->
+</section>
 {{-- recents jobs --}}
 <section class="">
-    <div class="container py-4">
+    <div class="container-fluid py-4">
         <h3 class="text-center"><span class="titleFirstPart">Recent</span> <span class="titleSecondPart">Jobs</span>
         </h3>
         <div class="row g-4 py-2">
@@ -89,9 +89,9 @@
                 <div class="shadow d-flex flex-column justify-content-center align-items-center py-5 job">
                     <img src="{{URL::asset('images/companies/'.$job->address->company->logo)}}" alt="company image"
                         class="me-2 p-1">
-                    <h5>{{$job->address->company->company_name}}</h5>
-                    <p class="mb-2 text-center">{{$job->title}}</p>
-                    <p class="mb-2 text-center">{{$job->address->city->name}}</p>
+                    {{-- <p class="text-center">{{$job->address->company->company_name}}</p> --}}
+                    <h5 class="text-center">{{$job->title}}</h5>
+                    <p class="mb-2 text-center">{{$job->address->city->state->name}}</p>
                     <p class="text-secondary mb-4 text-center">{{$job->employmentType->name}}</p>
                     <a href="{{url('jobs/details/'.$job->id)}}">
                         <button class="button-18 greenBtn" role="button">view details</button>
@@ -102,69 +102,72 @@
             @endif
         </div>
         <div class="text-center mt-3">
-            <a href="{{url('/jobs')}}" class="text-decoration-none text-dark">View more<i class="bi bi-arrow-right-short ms-2"></i></a>
+            <a href="{{url('/jobs')}}" class="text-decoration-none text-dark">View more<i
+                    class="bi bi-arrow-right-short ms-2"></i></a>
         </div>
     </div>
 </section>
 {{-- popular categories --}}
-<!-- <section class="bg-light">
-    <div class="container py-4 categories">
+<section class="bg-light">
+    <div class="container-fluid py-4 categories">
         <h3 class="text-center"><span class="titleFirstPart">Popular </span> <span
                 class="titleSecondPart">Categories</span> </h3>
-        <div class="row g-3 py-2">
-        @if(isset($data["popCategories"]))
+        <div class="row g-4 py-2">
+            @if(isset($data["popCategories"]))
             @foreach($data["popCategories"] as $category)
             <div class="col-md-4 col-6 col-xs-12">
-                <a href="" class="text-decoration-none">
+                <a href="{{route('jobs-by-category',[$category->id])}}" class="text-decoration-none">
                     <div class="category py-2 shadow">
                         <div class="d-flex p-2">
                             <div class="circle p-3 bg-white me-2">
                                 <img src="{{URL::asset('images/categories/'.$category->image)}}" alt="categor image">
                             </div>
-                            <p class="text-black">{{$category->name}}<br> <span class="text-secondary">{{$category->job_count}}
+                            <p class="text-black">{{$category->name}}<br> <span
+                                    class="text-secondary">{{$category->job_count}}
                                     jobs</span></p>
                         </div>
                     </div>
                 </a>
             </div>
             @endforeach
-            @endif            
+            @endif
             <div class="text-center mt-3">
-                <a href="{{url('')}}">
-                    <button class="button-18 greenBtn" role="button">View all categories</button>
-                </a>
+                <a href="{{route('all-categories')}}" class="text-decoration-none text-dark">View more<i
+                    class="bi bi-arrow-right-short ms-2"></i></a>
             </div>
         </div>
     </div>
-</section> -->
+</section>
 {{-- top employers --}}
-<!-- <section>
-    <div class="container py-4">
+<section>
+    <div class="container-fluid py-4">
         <div class="row py-2 companies">
-        @if(isset($data["companies"]))
+            @if(isset($data["companies"]))
             @foreach($data["companies"] as $company)
             <div class="col-md-2 col-6 col-xs-12 text-center">
-                <a href="">
+                <a href="{{route('company-details',[$company->id])}}">
                     <div class="company">
-                        <img src="{{URL::asset('images/companies/'.$company->logo)}}" alt="company image" class="img img-fluid">
+                        <img src="{{URL::asset('images/companies/'.$company->logo)}}" alt="company image"
+                            class="img img-fluid">
                         <h6 class="my-2">{{$company->company_name}}</h6>
                     </div>
                 </a>
             </div>
             @endforeach
-            @endif 
+            @endif
             <div class="col-md-2 col-6 col-xs-12 d-flex justify-content-center align-items-center">
-                <a href=""><button class="button-18 myBtn mb-4" role="button">All employers</button></a>
+                <a href="{{route('all-companies')}}"><button class="button-18 myBtn mb-4" role="button">Job
+                    all employers</button></a>
             </div>
         </div>
     </div>
-</section> -->
+</section>
 {{--popular industries --}}
-<!-- <section class="bg-light">
-    <div class="container py-5">
+<section class="bg-light">
+    <div class="container-fluid py-5">
         <div class="row">
             <div class="col-md-5 p-3">
-                <a href="{{url('/industries')}}"><button class="button-18 myBtn mb-4" role="button">Job
+                <a href="{{route('all-industries')}}"><button class="button-18 myBtn mb-4" role="button">Job
                         industries</button></a>
                 <div class="w-75">
                     <h4>Explore job by industry</h4>
@@ -173,9 +176,9 @@
                     level,salary,location,employment type, etc.</p>
             </div>
             <div class="col-md-6">
-            @if(isset($data["industries"]))
-            @foreach($data["industries"] as $industry)
-            <div class="industries d-flex border-bottom my-1">
+                @if(isset($data["industries"]))
+                @foreach($data["industries"] as $industry)
+                <div class="industries d-flex border-bottom my-1">
                     <div
                         class="bg-white me-4 circle borderColor1 shadow p-3 mb-2 d-flex justify-content-center align-items-center">
                         <img src="{{URL::asset('images/industries/'.$industry->image)}}" alt="it/computer">
@@ -187,30 +190,29 @@
                         <small class="text-secondary">{{$industry->total_jobs}} jobs</small>
                     </div>
                 </div>
-            @endforeach
-            @endif               
-               
+                @endforeach
+                @endif
+
             </div>
 
         </div>
     </div>
-</section> -->
+</section>
 {{-- featured locations --}}
-
-<a href="{{route('all-industries')}}">all industries</a>
+{{-- <a href="{{route('all-industries')}}">all industries</a>
 <a href="{{route('all-categories')}}">all categories</a>
 <a href="{{route('all-locations')}}">all locations</a>
 <a href="{{route('jobs-by-industry',[1])}}">industry</a>
 <a href="{{route('jobs-by-company',[3])}}">company</a>
 <a href="{{route('jobs-by-state',[9])}}">mandalay</a>
-<a href="{{route('jobs-by-category',[12])}}">category</a>
-<!-- <section class="">
+<a href="{{route('jobs-by-category',[12])}}">category</a> --}}
+<section class="">
     <div class="container py-4">
         <h3 class="text-center"><span class="titleFirstPart">Featured</span> <span
                 class="titleSecondPart">Locations</span></h3>
         <div class="row g-4 py-2">
-        @if(isset($data["states"]))
-            @foreach($data["states"] as $state)
+            @if(isset($data["popularStates"]))
+            @foreach($data["popularStates"] as $state)
             <div class="col-lg-3 col-md-4 col-6 col-xs-12">
                 <div class="bg-white text-center shadow location position-relative">
                     <img src="{{URL::asset('images/states/'.$state->image)}}" alt="" class="img-fluid">
@@ -221,10 +223,10 @@
                 </div>
             </div>
             @endforeach
-            @endif  
+            @endif
         </div>
         <div class="text-center">
-            <a href="{{url('/locations')}}">
+            <a href="{{route('all-locations')}}">
                 <button class="button-18 greenBtn" role="button">View all locations</button>
             </a>
         </div>
