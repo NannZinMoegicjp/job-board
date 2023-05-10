@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('gender');
             $table->string('image')->nullable();
             $table->string('address');
+            $table->string('status')->default('jobseeker')->change();
             $table->timestamps();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

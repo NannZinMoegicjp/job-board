@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class JobSeekerController extends Controller
 {
     public function index(Request $request){
-        $jobSeeker = JobSeeker::find(4);
+        $jobSeeker = JobSeeker::find(1);
         $request->session()->put('jobseekerId',$jobSeeker->id);     
         $request->session()->put('jobseekerEmail',$jobSeeker->email);     
         $request->session()->put('jobseekerName',$jobSeeker->name);
@@ -50,13 +50,13 @@ class JobSeekerController extends Controller
             $request->profileImage->move(public_path('images/jobseekers'), $profileImg);
             $jobSeeker->image = $profileImg;
         }                
-        $jobSeeker->name = $request->input('name');
+        $jobSeeker->name = $request->input('userName');
         $jobSeeker->email = $request->input('userEmail');
-        $jobSeeker->phone = $request->input('phone');
+        $jobSeeker->phone = $request->input('userPhoneNumber');
         $jobSeeker->dob = $request->input('dob');
         $jobSeeker->gender = $request->input('gender');        
         $jobSeeker->address = $request->input('address');
-        $jobSeeker->password = '12345678';
+        $jobSeeker->password = '';
         $jobSeeker->save();
         return "successfully registered";
         return redirect('/admin/job-seekers/details/'.$jobSeeker->id);

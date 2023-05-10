@@ -29,14 +29,14 @@
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
-                <a href="index-2.html" class="logo">
+                <a href="{{route('home')}}" class="logo">
                     <img src="{{URL::asset('/images/jobsearchicon1.png')}}" width="35" height="35" alt=""> <span>Job
                         Board</span>
                 </a>
             </div>
             <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
-            <div class="text-warning d-flex justify-content-end align-items-center me-2">
+            <!-- <div class="text-warning d-flex justify-content-end align-items-center me-2">
                 <div class="dropdown">
                     <span class="dropdown-toggle" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                         <img style="background: white" src="{{URL::asset('images/jobseekers/'.session('profileImg'))}}"
@@ -51,7 +51,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
@@ -75,6 +75,16 @@
                                         href="{{url('/job-seeker/applications/rejected')}}">Rejected
                                         application</a></li>
                             </ul>
+                        </li>
+                        <li>
+                            @if (auth()->check())
+                            <a>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button>logout</button>
+                                </form>
+                            </a>
+                            @endif
                         </li>
                     </ul>
                 </div>

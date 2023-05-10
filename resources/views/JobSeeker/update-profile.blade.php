@@ -58,7 +58,7 @@
                         <label for="dob">Date of birth</label>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="date" class="form-control" placeholder="eastablished date" id="dob"
+                        <input type="date" class="form-control" id="dob"
                             name="dob" value="{{$jobseeker['dob']}}">
                     </div>
                 </div>             

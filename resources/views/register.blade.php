@@ -1,27 +1,25 @@
 @extends('master')
 @section('content')
-
-<div class="container forms">
+<div class="container forms pageContent">
     <div class="row  my-5">
         <div class="col-md-8 offset-md-2 col-12">
             <div class="d-flex justify-content-center align-items-center">
                 <div class="btn-group m-3" role="group">                    
-                    <a href="{{url('/jobseeker/register')}}"><button class="registerBtns notSelected" id="jobseekerBtn">Job
-                        seeker</button></a>
-                    <a href=""><button class="registerBtns notSelected" id="employerBtn">Employer</button></a>
+                <button class="registerBtns notSelected" id="jobseekerBtn" onclick="showJobSeeker();">Job seeker</button>
+                <button class="registerBtns notSelected" id="employerBtn" onclick="showEmployer();">Employer</button>
                 </div>
             </div>
-            <!-- <div id="employer" class="d-none py-2">
+            <div id="employer" class="d-none py-2">
                 @include('company-register')
             </div>
             <div id="jobseeker" class="d-none py-2">
-                @include('register-jobseeker')
-            </div> -->
+                @include('job-seeker-register')
+            </div>
         </div>
     </div>
 </div>
 @endsection
-<!-- <script>
+<script>
 let showJobSeeker = (btn) => {
     jobseeker.classList.remove("d-none");
     jobseeker.classList.add("d-block");
@@ -54,4 +52,4 @@ let showEmployer = (btn) => {
     }
     employerBtn.classList.add("selected");
 }
-</script> -->
+</script>

@@ -65,9 +65,8 @@
     </div>
     <div class="row mb-3">
         <div class="col-md-8 offset-md-2 col-12">
-            <input type="password" class="form-control" required placeholder="Confirm password"
-                name="userConfirmPassword" id="userConfirmPassword">
-            
+        <textarea class="form-control address" placeholder="Enter details address" required id="address"
+                            name="address"></textarea>
         </div>
         <div id="conPassError" class="text-danger"></div>
     </div>
@@ -79,7 +78,7 @@
     </div>
     <div class="row">
         <div class="col-md-8 offset-md-2 col-12 text-black text-center">
-            <span>Already have account? <a href="Login.php" class="">Login here</a></span>
+            <span>Already have account? <a href="{{ route('login') }}" class="">Login here</a></span>
         </div>
     </div>
 </form>
