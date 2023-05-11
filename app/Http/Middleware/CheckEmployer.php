@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 class CheckEmployer{
     public function handle(Request $request, Closure $next):Response{
         if(Auth::user() && Auth::user()->status == 'employer'){
-            dd('u r employer');
             return $next($request);
         }
         return redirect('/');

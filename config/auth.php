@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web','admin','jobseeker','employer',
-        'passwords' => 'users','admin','jobseeker','employer',
+        'guard' => 'web',
+        'passwords' => 'users',
     ],
 
     /*
@@ -47,7 +47,8 @@ return [
     'jobseeker' => [
         'driver' => 'session',
         'provider' => 'jobseekers',
-    ],'employer' => [
+    ],
+    'employer' => [
         'driver' => 'session',
         'provider' => 'employers',
     ],

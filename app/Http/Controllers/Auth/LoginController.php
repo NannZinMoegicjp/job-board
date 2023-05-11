@@ -37,6 +37,9 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest:employer')->except('logout');
+        $this->middleware('guest:jobseeker')->except('logout');
     }
     protected function authenticated(Request $request, $user)
     {
@@ -45,12 +48,12 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        $remember = $request->input('remember', false);    
-        Auth::guard('admin')->attempt($credentials, $remember);    
+        $remember = $request->input('remember', false);     
         if (Auth::guard('admin')->attempt($credentials, $remember)) {
             return redirect('/admin'); 
         } 
         if(Auth::guard('employer')->attempt($credentials, $remember)) {
+            
             return redirect('/employer');           
         }
         if(Auth::guard('jobseeker')->attempt($credentials, $remember)) {
@@ -58,6 +61,6 @@ class LoginController extends Controller
         }
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
-        ]);        
+        ])->withInput();        
     }
 }

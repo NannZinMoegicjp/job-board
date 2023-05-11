@@ -51,6 +51,7 @@
                             <a class="nav-link" href="{{route('all-companies')}}">Companies</a>
                         </li>
                         <li>
+                            @if(auth()->guard('jobseeker')->check())                                
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                                     data-bs-toggle="dropdown" aria-expanded="false">                                    
@@ -70,7 +71,13 @@
                                     </li>
                                 </ul>
                             </div>
+                            @endif                            
                         </li>
+                        @if(!auth()->guard('jobseeker')->check() && !auth()->guard('employer')->check() && !auth()->guard('admin')->check())
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{route('login')}}">Login</a>
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </div>

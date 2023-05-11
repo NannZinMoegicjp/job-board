@@ -18,8 +18,7 @@ class HomeController extends Controller
 {
     //user home page
     public function index()
-    {       
-        
+    {  
         $jobs = Job::WhereDate('created_at', '>', Carbon::today()->subMonths(6))->orderBy('created_at', 'desc')->where('status', 'active')->whereNull('deleted_at')->limit(8)->get();
         $popularCategories = JobCategory::join('jobs', 'job_categories.id', '=', 'jobs.job_category_id')
             ->groupBy('job_categories.id', 'job_categories.name', 'job_categories.image')

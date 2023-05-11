@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class JobSeekerUser extends Authenticatable
 {
     protected $table='job_seekers';
+    protected $guard = 'jobseeker';
      /**
      * The attributes that are mass assignable.
      *

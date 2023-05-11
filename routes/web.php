@@ -33,7 +33,6 @@ Route::get('/jobs', [HomeController::class,'allJobs'])->name('all-jobs');
 Route::get('/jobs/filter', [HomeController::class,'filterJobs']);
 Route::get('/jobs/details/{id}', [HomeController::class,'jobDetails'])->name('job-details');
 Route::get('/company/details/{id}', [HomeController::class,'companyDetails'])->name('company-details');
-Route::post('/jobs/apply/{id}', [HomeController::class,'applyJobs']);
 //get jobs by location(division/state)
 Route::get('/jobs/state/{stateId}', [HomeController::class,'getJobsByState'])->name('jobs-by-state');
 //get jobs by job category
@@ -162,6 +161,7 @@ Route::group(  ['prefix' => 'job-seeker','middleware' => ['auth:jobseeker']], fu
     Route::post('/update/image/{id}',[JobSeekerController::class,'updateImage']);
     Route::get('/update/profile/{id}',[JobSeekerController::class,'getProfileData']);
     Route::post('/update/profile/{id}',[JobSeekerController::class,'update']);
+    Route::post('/jobs/apply/{id}', [HomeController::class,'applyJobs']);
 });
 
 Auth::routes(['register' => false]);

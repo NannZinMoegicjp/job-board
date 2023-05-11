@@ -3,9 +3,9 @@
 <section class="pb-4">
     <div class="container bg-white my-2">
         @if(session('error'))
-            <div class="alert alert-danger">
-                {{session('error')}}
-            </div>
+        <div class="alert alert-danger">
+            {{session('error')}}
+        </div>
         @endif
         @if ($errors->any())
         <div class="alert alert-danger my-2">
@@ -49,9 +49,13 @@
                 <div class="m-md-2 m-3 p-3 apply">
                     <h5 class="title">APPLY FOR HERE</h5>
                     <hr>
+                    @if(auth()->guard('jobseeker')->check())  
                     <button type="button" class="border form-control greenBtn btn" data-bs-toggle="modal"
                         data-bs-target="#applyJob"> Apply
                     </button>
+                    @else
+                    <a href="{{ route('login') }}"><button type="button" class="border form-control greenBtn btn">Login to Apply</button></a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -84,6 +88,7 @@
         @endif
         <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
     </div>
+    @if(auth()->guard('jobseeker')->check())  
     <div class="modal fade" id="applyJob" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -91,16 +96,19 @@
                 <div class="modal-header">
                     <h5 class="modal-title"></h5>Apply job</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                </div>                
                 <div class="modal-body">
                     <form action="{{url('/jobs/apply/'.$job->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @php
+                        $user = auth()->guard('jobseeker')->user();
+                        @endphp
                         <div class="row mb-2">
                             <div class="col-md-3">
                                 <label for="name">Name</label>
                             </div>
                             <div class="col-md-9">
-                                {{session('jobseekerName')}}
+                                {{$user->name}}
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -108,7 +116,7 @@
                                 <label for="email">Email</label>
                             </div>
                             <div class="col-md-9">
-                                {{session('jobseekerEmail')}}
+                            {{$user->email}}
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -116,7 +124,7 @@
                                 <label for="phone">Phone</label>
                             </div>
                             <div class="col-md-9">
-                                {{session('jobseekerPhone')}}
+                            {{$user->phone}}
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -131,9 +139,10 @@
                         </div>
                         <input type="submit" value="apply" class="border form-control greenBtn btn">
                     </form>
-                </div>
+                </div>                
             </div>
         </div>
     </div>
+    @endif
 </section>
 @endsection

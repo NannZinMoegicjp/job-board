@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class AdminUser extends Authenticatable
 {
     protected $table='admins';
+    protected $guard = 'admins';
      /**
      * The attributes that are mass assignable.
      *
