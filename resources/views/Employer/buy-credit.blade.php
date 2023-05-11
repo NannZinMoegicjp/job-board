@@ -15,7 +15,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-4 offset-md-1 col-12">
-                    <label for="price">Price</label>
+                    <label for="price">Price per credit</label>
                 </div>
                 <input type="hidden" value="{{$data['creditPrice']->id}}" name="priceId">
                 <div class="col-md-6 col-12" id="price">

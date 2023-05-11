@@ -14,10 +14,15 @@ use App\Models\Job;
 use App\Models\Application;
 use Carbon\Carbon;
 use DB;
+use Illuminate\Support\Facades\Auth;
 class EmployerController extends Controller
 {
     public function index(Request $request){
-        $company = Company::find(3);
+        $userId=0;
+        if (auth()->check()) {
+            $userId = auth()->id();
+        }
+        $company = Company::find($userId);
         $request->session()->put('id',$company->id);     
         $request->session()->put('logo',$company->logo);  
         $request->session()->put('name',$company->company_name);

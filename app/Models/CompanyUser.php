@@ -3,16 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-class JobHunter extends Authenticatable
+class CompanyUser extends Authenticatable
 {
-    protected $table='job_seekers';
+    protected $table='companies';
      /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+         'email', 'password',
     ];
 
     /**

@@ -12,10 +12,10 @@
 .navbar ul li {
 	padding: 0px 10px; 
 } 
-.mynavs a{
+.nav-item a{
   color: white !important;
 }
-.mynavs a:hover{
+.nav-item a:hover{
   color: white;
 }
 /* search */

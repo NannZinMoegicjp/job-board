@@ -22,29 +22,48 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="{{URL::asset('/css/style.css')}}">
 </head>
-
 <body>
     <div class="main-wrapper">
         <div class="header">
             <div class="header-left">
-                <a href="{{route('home')}}" class="logo">
-                    <img src="{{URL::asset('/images/jobsearchicon1.png')}}" width="35" height="35" alt=""> <span>Job
-                        Board</span>
-                </a>
+            <img src="{{URL::asset('/images/jobsearchicon1.png')}}" width="35" height="35" alt=""> <span class="text-white">Job
+                        Board</sp>
             </div>
             <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
+            <div class="text-warning d-flex justify-content-end align-items-center me-2">
+                <div class="dropdown">
+                    <span class="dropdown-toggle" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img style="background: white" src="{{URL::asset('images/admin.png')}}" alt="admin image"
+                            class="adminImg m-2">
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><a class="dropdown-item" href="{{url('/admin/profile/1')}}"><i class="fa-solid fa-user"></i>
+                                profile</a></li>
+                                <li>
+                            @if (auth()->check())
+                            <a>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button>logout</button>
+                                </form>
+                            </a>
+                            @endif
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul class="mynav">
-                        <li>
+                        <!-- <li>
                             <a href="{{url('/admin/profile/1')}}"><i class="fa-solid fa-user"></i>
                                 <span>profile</span></a>
-                        </li>
+                        </li> -->
                         <li>
-                            <a href="{{url('/admin')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            <a href="{{url('/admin')}}"><i class="fa fa-dashboard"></i> <span> Admin Dashboard</span></a>
                         </li>
                         <li>
                             <a href="{{url('/admin/pricing')}}"><i class="bi bi-cash-coin"></i> <span>Price</span></a>
@@ -72,16 +91,7 @@
                             {{-- <a href="{{url('/admin/job-seekers')}}"><i class="bi bi-person-workspace"></i>
                             <span>Admin Management</span></a> --}}
                         </li>
-                        <li>
-                            @if (auth()->check())
-                            <a>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button>logout</button>
-                                </form>
-                            </a>
-                            @endif
-                        </li>
+                        
                     </ul>
                 </div>
             </div>

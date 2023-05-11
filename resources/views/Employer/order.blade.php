@@ -33,7 +33,7 @@
                     <td>{{$no++}}</td>
                     <td>{{$awaitingOrder->no_of_credit}}</td>
                     <td>{{$awaitingOrder->creditPrice->price}}</td>
-                    <td>{{$awaitingOrder->created_at}}</td>
+                    <td>{{$awaitingOrder->created_at->todatestring()}}</td>
                     <td>
                         <div class="d-flex">
                             <a href="{{url('/employer/awaiting/order/details/'.$awaitingOrder->id)}}"><i
@@ -70,8 +70,8 @@
                     <td>{{$confirmedOrder->order->no_of_credit}}</td>
                     <td>{{$confirmedOrder->order->creditPrice->price}}</td>
                     <td>{{$confirmedOrder->order->no_of_credit*$confirmedOrder->order->creditPrice->price}}</td>
-                    <td>{{$confirmedOrder->order->created_at}}</td>
-                    <td>{{$confirmedOrder->created_at}}</td>
+                    <td>{{$confirmedOrder->order->created_at->todatestring()}}</td>
+                    <td>{{$confirmedOrder->created_at->todatestring()}}</td>
                     @if($confirmedOrder->is_confirmed) <td class="text-success">Accepted</td> @else <td class="text-danger">Rejected</td> @endif  
                     <td>
                         <div class="d-flex">

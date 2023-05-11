@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 use App\Models\JobSeeker;
 use App\Models\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JobSeekerController extends Controller
 {
     public function index(Request $request){
-        $jobSeeker = JobSeeker::find(1);
-        $request->session()->put('jobseekerId',$jobSeeker->id);     
-        $request->session()->put('jobseekerEmail',$jobSeeker->email);     
-        $request->session()->put('jobseekerName',$jobSeeker->name);
-        $request->session()->put('jobseekerPhone',$jobSeeker->name);    
-        $request->session()->put('profileImg',$jobSeeker->image);  
-        $request->session()->put('role','jobseeker');
+        if (auth()->check()) {
+            $userId = auth()->id();
+            $jobSeeker = JobSeeker::find($userId);
+            $request->session()->put('jobseekerId',$jobSeeker->id);     
+            $request->session()->put('jobseekerEmail',$jobSeeker->email);     
+            $request->session()->put('jobseekerName',$jobSeeker->name);
+            $request->session()->put('jobseekerPhone',$jobSeeker->name);    
+            $request->session()->put('profileImg',$jobSeeker->image);  
+            $request->session()->put('role','jobseeker');
+        }    
         $applications = Application::where('job_seeker_id',session('jobseekerId'))->orderBy('created_at','desc')->count();
         $shortListedApps = Application::where('job_seeker_id',session('jobseekerId'))->where('status','shortlisted')->count();
         $pendingApps = Application::where('job_seeker_id',session('jobseekerId'))->where('status','pending')->count();

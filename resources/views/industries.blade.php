@@ -9,7 +9,8 @@
                 class="categories col-md-3 col-4 text-center d-flex flex-column justify-content-center align-items-center">
                 <a href="{{route('jobs-by-industry',[$industry->id])}}" class="text-decoration-none">
                     <div class="circle mb-2 borderColor1 center bg-white">
-                        <img src="{{asset('images/industries/'.$industry->image)}}" alt="" class="img img-fluid">
+                    <img src="{{asset('images/categories/work.png')}}" alt="" class="img img-fluid">
+                        <!-- <img src="{{asset('images/industries/'.$industry->image)}}" alt="" class="img img-fluid"> -->
                     </div>
                     <p>
                         <span class="cityName">{{$industry->name}}</span>

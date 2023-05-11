@@ -37,7 +37,7 @@
                     <td>{{$no++}}</td>
                     <td>{{$application->job->title}}</td>
                     <td>{{$application->jobSeeker->name}}</td>
-                    <td>{{$application->created_at}}</td>
+                    <td>{{$application->created_at->todatestring()}}</td>
                     {{-- <td><a href="{{url('/employer/view/cv')}}">{{$application->cvfile}}</a></td> --}}
                     <td><a onclick="return confirm('Want to download cv file?')" href="{{URL::asset('/applications/'.$application->cvfile)}}" download="{{$application->cvfile}}">{{$application->cvfile}}</a></td>
                     <td>

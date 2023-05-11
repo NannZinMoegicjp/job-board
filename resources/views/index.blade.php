@@ -120,7 +120,9 @@
                     <div class="category py-2 shadow">
                         <div class="d-flex p-2">
                             <div class="circle p-3 bg-white me-2">
-                                <img src="{{URL::asset('images/categories/'.$category->image)}}" alt="categor image">
+                            <img src="{{URL::asset('images/categories/work.png')}}" alt="categor image">
+
+                                <!-- <img src="{{URL::asset('images/categories/'.$category->image)}}" alt="categor image"> -->
                             </div>
                             <p class="text-black">{{$category->name}}<br> <span
                                     class="text-secondary">{{$category->job_count}}
@@ -163,7 +165,7 @@
     </div>
 </section>
 {{--popular industries --}}
-<section class="bg-light">
+<!-- <section class="bg-light">
     <div class="container-fluid py-5">
         <div class="row">
             <div class="col-md-5 p-3">
@@ -197,15 +199,8 @@
 
         </div>
     </div>
-</section>
+</section> -->
 {{-- featured locations --}}
-{{-- <a href="{{route('all-industries')}}">all industries</a>
-<a href="{{route('all-categories')}}">all categories</a>
-<a href="{{route('all-locations')}}">all locations</a>
-<a href="{{route('jobs-by-industry',[1])}}">industry</a>
-<a href="{{route('jobs-by-company',[3])}}">company</a>
-<a href="{{route('jobs-by-state',[9])}}">mandalay</a>
-<a href="{{route('jobs-by-category',[12])}}">category</a> --}}
 <section class="">
     <div class="container py-4">
         <h3 class="text-center"><span class="titleFirstPart">Featured</span> <span
@@ -214,14 +209,16 @@
             @if(isset($data["popularStates"]))
             @foreach($data["popularStates"] as $state)
             <div class="col-lg-3 col-md-4 col-6 col-xs-12">
-                <div class="bg-white text-center shadow location position-relative">
+            <a href="{{ route('jobs-by-category',[$state->id]) }}" class="text-decoration-none">
+            <div class="bg-white text-center shadow location position-relative">
                     <img src="{{URL::asset('images/states/'.$state->image)}}" alt="" class="img-fluid">
                     <p class="p-1">
                         <span class="cityName">{{$state->name}}</span>
-                        (<span class="noOfJobs">{{$state->job_count}} jobs</span>)
+                        <!-- (<span class="noOfJobs">{{$state->job_count}} jobs</span>) -->
                     </p>
                 </div>
-            </div>
+           </a>                
+            </div>           
             @endforeach
             @endif
         </div>
@@ -231,5 +228,5 @@
             </a>
         </div>
     </div>
-</section> -->
+</section> 
 @endsection

@@ -40,15 +40,24 @@ class LoginController extends Controller
     }
     protected function authenticated(Request $request, $user)
     {
+        
     }
-    public function authenticate(Request $request)
+    public function login(Request $request)
     {
-        $email = $request->input('email');
-        $password = $request->input('password');
-        if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $password])) {
-            return redirect('/admin/dashboard');           
-        } else {
-            return "wrong password";
+        $credentials = $request->only('email', 'password');
+        $remember = $request->input('remember', false);    
+        Auth::guard('admin')->attempt($credentials, $remember);    
+        if (Auth::guard('admin')->attempt($credentials, $remember)) {
+            return redirect('/admin'); 
+        } 
+        if(Auth::guard('employer')->attempt($credentials, $remember)) {
+            return redirect('/employer');           
         }
+        if(Auth::guard('jobseeker')->attempt($credentials, $remember)) {
+            return redirect('/');           
+        }
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);        
     }
 }

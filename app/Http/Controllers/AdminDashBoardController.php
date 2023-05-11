@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Auth;
 class AdminDashBoardController extends Controller
 {
     public function index(Request $request){
-        $userId = null;
-        if (Auth::check()) {
-            $userId = Auth::user()->id;
+        $userId=0;
+        if (auth()->check()) {
+            $userId = auth()->id();
         }
         $admin = Admin::find($userId);
         $request->session()->put('role','admin');

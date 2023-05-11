@@ -26,7 +26,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-2 offset-md-2 text-end col-5">Order date</div>
-                <div class="col-md-5 col-7">{{$corder->order->created_at}}</div>
+                <div class="col-md-5 col-7">{{$corder->order->created_at->todatestring()}}</div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-2 offset-md-2 text-end col-5">Payment method</div>
@@ -41,7 +41,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-2 offset-md-2 text-end col-5">Confirmed date</div>
-                <div class="col-md-5 col-7">{{$corder->created_at}}</div>
+                <div class="col-md-5 col-7">{{$corder->created_at->todatestring()}}</div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-2 offset-md-2 text-end col-5">Screenshot</div>

@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'admin','jobseeker','employer',
-        'passwords' => 'admin','jobseeker','employer',
+        'guard' => 'web','admin','jobseeker','employer',
+        'passwords' => 'users','admin','jobseeker','employer',
     ],
 
     /*
@@ -36,14 +36,15 @@ return [
     */
 
     'guards' => [
-    //     'web' => [
-    //     'driver' => 'session',
-    //     'provider' => 'users',
-    // ],
+        'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
     'admin' => [
         'driver' => 'session',
         'provider' => 'admins',
-    ],'jobseeker' => [
+    ],
+    'jobseeker' => [
         'driver' => 'session',
         'provider' => 'jobseekers',
     ],'employer' => [
@@ -77,16 +78,16 @@ return [
     ], 
     'jobseekers' => [
         'driver' => 'eloquent',
-        'model' => App\Models\JobHunter::class,
+        'model' => App\Models\JobSeekerUser::class,
     ], 
     'employers' => [
         'driver' => 'eloquent',
-        'model' => App\Models\Employer::class,
+        'model' => App\Models\CompanyUser::class,
     ],
-        // 'users' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\User::class,
-        // ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
     ],
 
     /*

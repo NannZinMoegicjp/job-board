@@ -25,9 +25,9 @@
                         <td>{{$no++}}</td>
                         <td><a href="">{{$application->job->address->company->company_name}}</a></td>
                         <td><a href="">{{$application->job->title}}</a></td>
-                        <td>{{$application->created_at}}</td>
-                        <td>{{$application->job->created_at}}</td>
-                        <td>{{$application->updated_at}}</td>
+                        <td>{{$application->created_at->todatestring()}}</td>
+                        <td>{{$application->job->created_at->todatestring()}}</td>
+                        <td>{{$application->updated_at->todatestring()}}</td>
                         <!-- <td>@if($application->status == 'rejected') <span
                                 class="badge bg-danger align-middle pb-2">{{$application->status}}</span>
                             @elseif($application->status == 'shortlisted') <span

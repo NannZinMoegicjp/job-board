@@ -43,7 +43,7 @@
                     <td>{{$no++}}</td>
                     <td>{{$job->title}}</td>
                     <td>{{$job->experienceLevel->name}}</td>                    
-                    <td>{{$job->created_at}}</td>
+                    <td>{{$job->created_at->todatestring()}}</td>
                     <td>
                         @if($job->status == 'active')
                         Expired
