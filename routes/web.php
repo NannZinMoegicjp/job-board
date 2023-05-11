@@ -26,9 +26,6 @@ use App\Http\Controllers\HomeController;
 |
 */
 Route::get('/', [HomeController::class,'index'])->name('home');
-Route::get('/home', function(){
-    return view('after-login-home-page');
-})->name('logoutpage');
 Route::get('/jobs', [HomeController::class,'allJobs'])->name('all-jobs');
 Route::get('/jobs/filter', [HomeController::class,'filterJobs']);
 Route::get('/jobs/details/{id}', [HomeController::class,'jobDetails'])->name('job-details');
@@ -164,6 +161,6 @@ Route::group(  ['prefix' => 'job-seeker','middleware' => ['auth:jobseeker']], fu
     Route::post('/jobs/apply/{id}', [HomeController::class,'applyJobs']);
 });
 
-Auth::routes(['register' => false]);
+Auth::routes();
 
 
