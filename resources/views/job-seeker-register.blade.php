@@ -3,7 +3,7 @@
     @csrf
     <div id="error"></div>
     <div>
-        <h4 class="text-center py-4">Sign up for job seeker</h4>
+        <h4 class="text-center py-4">Job seeker registration</h4>
     </div>
     <div class="row mb-3">
         <div class="col-md-3 offset-md-1 col-12">
@@ -28,7 +28,7 @@
         <div class="col-md-3 offset-md-1 col-12">
             <label for="userPhoneNumber" class="col-form-label">Phone</label></div>
         <div class="col-md-7 col-12">
-            <input type="number" class="form-control @error('userPhoneNumber') is-invalid @enderror" min="0" required placeholder="Phone, eg. 09454096728"
+            <input type="number" class="form-control @error('userPhoneNumber') is-invalid @enderror" min="0" required placeholder="eg. 09454096728"
                 name="userPhoneNumber" id="userPhoneNumber" value="{{ old('userPhoneNumber') }}">
             <div id="phoneNoError" class="text-danger"></div>
         </div>
@@ -91,8 +91,8 @@
         <div class="col-md-3 offset-md-1 col-12"></div>
         <div class="col-md-7 col-12">
             <input type="hidden" name="register_type" value="job_seeker">
-            <input type="submit" name="btnRegister" id="btnRegister" class="form-control border-1 registerBtn"
-                value="Register">
+            <input type="submit" name="btnRegister" id="btnRegister" class="registerBtn btn me-2" required value="register">
+            <a href="{{route('home')}}"><input type="button" class="btn-secondary btn" value="Cancel"></a>
         </div>
     </div>
     <div class="row">

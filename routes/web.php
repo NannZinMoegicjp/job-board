@@ -46,6 +46,7 @@ Route::get('/register',function(){
     return view('register');
 })->name('register');
 Route::get('/reports',[AdminDashBoardController::class,'reports']);
+Route::post('/employer/register',[EmployerController::class,'register'])->name('register.employer');
 Route::post('/jobseeker/register',[JobSeekerController::class,'register'])->name('register.jobseeker');
 Route::get('api/fetch-cities/{id}', [DropdownController::class, 'fetchCities']);
 Route::get('api/fetch-payment-accounts/{id}', [DropdownController::class, 'fetchPaymentAccounts']);
