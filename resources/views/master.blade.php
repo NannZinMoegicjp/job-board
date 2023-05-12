@@ -17,12 +17,12 @@
 
 <body>
     {{-- navbar --}}
-    <section>
+    <section class="sticky-top">
         <nav class="navbar navbar-light navbar-expand-lg mynavbar">
             <div class="container-fluid">
                 <a class="navbar-brand" href="">
                     <div>
-                        <img src="images/jobsearchicon1.png" alt="" class="me-2 logoImg">
+                        <img src="{{ asset('images/jobsearchicon1.png') }}" alt="" class="me-2 logoImg">
                         <span class="navbarBrand">JOB BOARD</span>
                     </div>
                 </a>
@@ -96,7 +96,7 @@
             <div class="col-md-3 socialMedia d-flex flex-column justify-content-center">
                 <div class="mb-4">
                     <a href="#" class="text-decoration-none">
-                        <img src="images/jobsearchicon1.png" class="logoImg" alt="">
+                        <img src="{{ asset('images/jobsearchicon1.png') }}" class="logoImg" alt="">
                         <span class="navbarBrand">JOB BOARD</span>
                     </a>
                 </div>

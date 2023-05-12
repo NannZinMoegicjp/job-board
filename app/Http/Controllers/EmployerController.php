@@ -37,53 +37,7 @@ class EmployerController extends Controller
         $inactiveJobs = Job::whereIn('address_id',$addrIDs)->WhereDate('created_at','<',Carbon::today()->subMonths(6))->orWhere('status','inactive')->count();        
         $count = ["activeJobs"=>$activeJob,"inactiveJob"=>$inactiveJobs,"credits"=>$company->no_of_credit,"applications"=>$applications];
         return view('Employer.index')->with('count',$count);
-    }
-    public function register(Request $request){
-        
-        $validator = validator(request()->all(), [
-            'contactPerson'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
-            'userEmail'=> ['required','string','email','unique:job_seekers,email','unique:companies,email','unique:admins,email'],
-            'userPhoneNumber' => ['required','regex:/^(\+?959|09)[0-9]{9}$/'],
-            'password'=>['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
-            'comName'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
-            'estDate' =>'nullable|date|before:today',
-            'logofile' => ['required','mimes:jpeg,jpg,svg,gif,png','max:2048'],
-            'websiteLink'
-        ]);
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
-        $company = new Company();
-            $company->contact_person = $request->input('contactPerson');
-            $company->email = $request->input('userEmail');
-            $company->phone = $request->input('phone');
-            $company->password = "12345678";
-            $company->company_name = $request->input('comName');
-            $logoImg = time() . "." . $request->file('logofile')->getClientOriginalName();
-            $request->logofile->move(public_path('images/companies'), $logoImg);
-            $company->logo = $logoImg;
-            $company->websitelink = $request->input('websiteLink');      
-            $company->no_of_employee = $request->input('size');
-            $company->no_of_credit = 1;
-            $company->established_date = $request->input('estDate');      
-            $company->save();
-            $company->industries()->attach($request->input('industry'));
-            if ($request->file('images')) {
-                foreach ($request->file('images') as $key => $image) {
-                    $imageName = time() . '.' . $image->getClientOriginalName();
-                    $image->move(public_path('images/companies'), $imageName);
-                    $img = new Image();
-                    $img->name = $imageName;
-                    $img->company_id = $company->id;
-                    $img->save();
-                }
-            }
-            $add = new Address();
-            $add->city_id=$request->input('city');
-            $add->detail_address=$request->input('address');
-            $add->company_id=$company->id;
-            $add->save();
-    }
+    }   
     public function buyCreditGet(Request $request){
         $company = Company::find($request->session()->get('id'));
         $creditPrice = CreditPrice::whereNull('deleted_at')->first();

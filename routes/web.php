@@ -15,6 +15,7 @@ use App\Http\Controllers\EmployerJobController;
 use App\Http\Controllers\EmployerDashboardController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,8 +47,10 @@ Route::get('/register',function(){
     return view('register');
 })->name('register');
 Route::get('/reports',[AdminDashBoardController::class,'reports']);
-Route::post('/employer/register',[EmployerController::class,'register'])->name('register.employer');
-Route::post('/jobseeker/register',[JobSeekerController::class,'register'])->name('register.jobseeker');
+Route::get('/employer/register',[RegisterController::class,'showEmployerRegisterForm'])->name('register.employerform');
+Route::post('/employer/register',[RegisterController::class,'registerEmployer'])->name('register.employer');
+Route::get('/jobseeker/register',[RegisterController::class,'showJobseekerRegisterForm'])->name('register.jobseekerform');
+Route::post('/jobseeker/register',[RegisterController::class,'registerJobseeker'])->name('register.jobseeker');
 Route::get('api/fetch-cities/{id}', [DropdownController::class, 'fetchCities']);
 Route::get('api/fetch-payment-accounts/{id}', [DropdownController::class, 'fetchPaymentAccounts']);
 

@@ -13,6 +13,7 @@ use App\Models\Application;
 use App\Models\OrderConfirmation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 class AdminDashBoardController extends Controller
 {
     public function index(Request $request){
@@ -25,14 +26,14 @@ class AdminDashBoardController extends Controller
             $request->session()->put('email',$admin->email);
             $request->session()->put('name',$admin->name);
         }       
-        $companyCount = Company::where('deleted_at', NULL)->count();
-        $jobSeekerCount = JobSeeker::where('deleted_at', NULL)->count();
-        $applicationCount = Application::where('deleted_at', NULL)->count();
-        $companyCount = Company::where('deleted_at', NULL)->count();
-        $jobCount = Job::where('deleted_at', NULL)->where('status','active')->count();
-        $confirmedOrderCount = OrderConfirmation::where('deleted_at', NULL)->count();
+        $companyCount = Company::whereDate('created_at', Carbon::today())->count();
+        $jobSeekerCount = JobSeeker::count();
+        $applicationCount = Application::count();
+        $companyCount = Company::count();
+        $jobCount = Job::where('status','active')->count();
+        $confirmedOrderCount = OrderConfirmation::count();
         $confirmedOrderedIds = OrderConfirmation::select('order_id')->get();
-        $awaitingOrderCount = Order::whereNotIn('id', $confirmedOrderedIds)->where('deleted_at', NULL)->count();
+        $awaitingOrderCount = Order::whereNotIn('id', $confirmedOrderedIds)->count();
         $count = ["activeJobs"=>$jobCount,"companies"=>$companyCount,"conOrders"=>$confirmedOrderCount,"awaitOrders"=>$awaitingOrderCount,"jobSeekers"=>$jobSeekerCount,"applications"=>$applicationCount];
         return view('dashboard')->with('count',$count);
     }

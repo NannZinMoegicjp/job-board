@@ -1,7 +1,7 @@
 @extends('master')
 @section('content')
 <section>
-    <div class="container rounded-1 py-2">
+<div class="container rounded-1 py-2">
         <form action="{{url('/jobs/filter')}}" method="get" class="my-2 p-2">
             @csrf
             <div class="row g-lg-1 g-2">
