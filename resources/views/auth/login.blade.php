@@ -2,6 +2,11 @@
 @section('content')
 <div class="row my-5">
     <div class="col-md-6 offset-md-3 col-12 shadow">
+        @if(isset($status))
+        <div class="alert  alert-success">
+            {{ $status }}
+        </div>
+        @endif
         <form method="POST" action="{{ route('login') }}" class="my-5">
             @csrf
             <div>

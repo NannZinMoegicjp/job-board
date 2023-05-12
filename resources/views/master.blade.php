@@ -75,7 +75,10 @@
                         </li>
                         @if(!auth()->guard('jobseeker')->check() && !auth()->guard('employer')->check() && !auth()->guard('admin')->check())
                         <li class="nav-item">
-                        <a class="nav-link" href="{{route('login')}}">Login</a>
+                        <a href="{{route('register')}}"><button class="button-18 registerBtn mb-4" role="button">Register</button></a>
+                        </li>
+                        <li class="nav-item">
+                        <a href="{{route('login')}}"><button class="button-18 myBtn mb-4" role="button">login</button></a>
                         </li>
                         @endif
                     </ul>

@@ -11,6 +11,6 @@ class CheckJobSeeker{
         if(Auth::user() && Auth::user()->status == 'jobseeker'){
             return $next($request);
         }
-        return redirect('/');
+        return redirect()->route('login');
     }
 }

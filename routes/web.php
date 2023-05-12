@@ -44,7 +44,7 @@ Route::get('/locations/all',[HomeController::class,'locations'])->name('all-loca
 Route::get('/companies/all',[HomeController::class,'companies'])->name('all-companies');
 Route::get('/register',function(){
     return view('register');
-});
+})->name('register');
 Route::get('/reports',[AdminDashBoardController::class,'reports']);
 Route::post('/jobseeker/register',[JobSeekerController::class,'register'])->name('register.jobseeker');
 Route::get('api/fetch-cities/{id}', [DropdownController::class, 'fetchCities']);
@@ -156,7 +156,7 @@ Route::group(  ['prefix' => 'job-seeker','middleware' => ['auth:jobseeker']], fu
     Route::post('/update/image/{id}',[JobSeekerController::class,'updateImage']);
     Route::get('/update/profile/{id}',[JobSeekerController::class,'getProfileData']);
     Route::post('/update/profile/{id}',[JobSeekerController::class,'update']);
-    Route::post('/jobs/apply/{id}', [HomeController::class,'applyJobs']);
+    Route::post('/jobs/apply/{id}', [HomeController::class,'applyJobs'])->name('apply.job');
 });
 
 Auth::routes(['register' => false]);

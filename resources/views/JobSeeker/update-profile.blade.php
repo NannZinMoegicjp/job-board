@@ -105,7 +105,7 @@
                     <form action="{{url('/job-seeker/update/image/'.$updateId)}}" method="post"
                         enctype="multipart/form-data">
                         @csrf
-                        <input type="file" class="form-control mb-2" placeholder="Logo" name="newProfileImage"
+                        <input type="file" class="form-control mb-2" name="newProfileImage"
                             id="newProfileImage" value="{{old('logofile')}}" required>
                         <input type="submit" class="btn btn-outline-primary" value="upload new profile">
                     </form>

@@ -6,6 +6,7 @@ use App\Models\JobSeekerUser;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class JobSeekerController extends Controller
 {
@@ -36,38 +37,32 @@ class JobSeekerController extends Controller
     }
     public function register(Request $request){
         $validator = validator(request()->all(), [
-            'userName'=>'required',
-            'phone' => 'required|digits:11',
-            'profileImage' => 'nullable|mimes:jpeg,jpg,svg,gif,png|max:2048',
-            'dob' => [
-                'required',
-                'date',
-                'before_or_equal:' . now()->subYears(18)->format('Y-m-d'),
-            ],
-            'userEmail'=>'required|email|unique:job_seekers,email|unique:companies,email|unique:admins,email'
+            'userName'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
+            'userEmail'=> ['required','string','email','unique:job_seekers,email','unique:companies,email','unique:admins,email'],
+            'userPhoneNumber' => ['required','regex:/^(\+?959|09)[0-9]{9}$/'],
+            'dob' => ['required','date','before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
+            'password'=>['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
+            'profileImage' => ['required','mimes:jpeg,jpg,svg,gif,png','max:2048'],
         ]);
         if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput()->with('role','jobseeker');
-        }        
+            return back()->withErrors($validator)->withInput();
+        }      
+        
         $jobSeeker = new JobSeeker();
-        if($request->hasFile('prifileImage')){
-            $profileImg = time() . "." . $request->file('profileImage')->getClientOriginalName();
-            $request->profileImage->move(public_path('images/jobseekers'), $profileImg);
-            $jobSeeker->image = $profileImg;
-        }                
+        $profileImg = time() . "." . $request->file('profileImage')->getClientOriginalName();
+        $request->profileImage->move(public_path('images/jobseekers'), $profileImg);
+        $jobSeeker->image = $profileImg;                
         $jobSeeker->name = $request->input('userName');
         $jobSeeker->email = $request->input('userEmail');
         $jobSeeker->phone = $request->input('userPhoneNumber');
         $jobSeeker->dob = $request->input('dob');
         $jobSeeker->gender = $request->input('gender');        
         $jobSeeker->address = $request->input('address');
-        $jobSeeker->password = $request->input('password');
+        $jobSeeker->password = Hash::make($request->input('password'));
         $jobSeeker->save();
-        $jobSeeker = JobSeekerUser::find($jobSeeker->id);
-        Auth::guard('jobseeker')->login($jobSeeker);
-        return redirect('/');
-        // return redirect('/admin/job-seekers/details/'.$jobSeeker->id);
-        // return redirect('/admin/job-seekers')->with('status', "added successfully");
+        // $jobSeeker = JobSeekerUser::find($jobSeeker->id);
+        // Auth::guard('jobseeker')->login($jobSeeker);
+        return redirect()->route('login')->with('status','registered successfully');
     }
     public function getProfileData($id){
         $jobseeker = JobSeeker::find($id);

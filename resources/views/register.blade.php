@@ -1,7 +1,8 @@
 @extends('master')
 @section('content')
 <div class="container forms pageContent">
-    <div class="row  my-5">
+    <div class="row  my-5">      
+        <div class="col-md-8 offset-md-2 col-12">
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -11,8 +12,6 @@
             </ul>
         </div>
         @endif
-       
-        <div class="col-md-8 offset-md-2 col-12">
             <div class="d-flex justify-content-center align-items-center">
                 <div class="btn-group m-3" role="group">
                     <button class="registerBtns notSelected" id="jobseekerBtn" onclick="showJobSeeker();">Job

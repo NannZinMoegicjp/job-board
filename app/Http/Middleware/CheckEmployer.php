@@ -11,6 +11,6 @@ class CheckEmployer{
         if(Auth::user() && Auth::user()->status == 'employer'){
             return $next($request);
         }
-        return redirect('/');
+        return redirect()->route('login');
     }
 }
