@@ -1,83 +1,75 @@
-<form action="{{url('/jobseeker/register')}}" method="post" class="bg-white px-3 pb-2 rounded shadow-lg"
-    onsubmit="return check();">
+<form action="{{ route('register.jobseeker') }}" method="post" class="bg-white px-3 pb-2 rounded shadow-lg"
+    onsubmit="return check();" @if($errors->any() && old('form') === 'form1') style="display:block;" @endif>
     @csrf
     <div id="error"></div>
     <div>
         <h4 class="text-center py-4">Sign up for job seeker</h4>
     </div>
     <div class="row mb-3">
-        <div class="col-md-8 offset-md-2 col-12">
-            <input type="text" class="form-control" required name="userName" id="userName" placeholder="Name">
+        <div class="col-md-3 offset-md-1 col-12">
+            <label for="userName" class="col-form-label">Name</label></div>
+        <div class="col-md-7 col-12">
+            <input type="text" class="form-control" required name="userName" id="userName" placeholder="Name" value="{{ old('userName') }}">
         </div>
         <div id="nameError" class="text-danger"></div>                      
     </div>
     <div class="row mb-3">
-        <div class="col-md-8 offset-md-2 col-12">
-            <input type="email" class="form-control" required placeholder="Email" name="userEmail" id="userEmail">
-            <!-- <div id="validationEmailFeedback" class="invalid-feedback d-none">
-                                Incorrect email Format
-                                </div> -->
+       <div class="col-md-3 offset-md-1 col-12"><label for="userEmail" class="col-form-label">Email</label></div>
+        <div class="col-md-7 col-12">
+            <input type="email" class="form-control" required placeholder="Email" name="userEmail" id="userEmail" value="{{ old('userEmail') }}">
             <div id="emailError" class="text-danger"></div>
         </div>
     </div>
     <div class="row mb-3">
-        <div class="col-md-8 offset-md-2 col-12">
+       <div class="col-md-3 offset-md-1 col-12"><label for="userPhoneNumber" class="col-form-label">Phone</label></div>
+        <div class="col-md-7 col-12">
             <input type="number" class="form-control" min="0" required placeholder="Phone, eg. 09454096528"
-                name="userPhoneNumber" id="userPhoneNumber">
-            <!-- <div id="validationPhoneFeedback" class="invalid-feedback d-none">
-                                at least 8 characters <br> at least one of [a-z],one of [A-Z],one of [0-9],one of [@#$%&*!^-_]
-                                </div> -->
+                name="userPhoneNumber" id="userPhoneNumber"  value="{{ old('userPhoneNumber') }}">
             <div id="phoneNoError" class="text-danger"></div>
         </div>
     </div>
     <div class="row mb-3">
-        <div class="col-md-8 offset-md-2  col-12">
+       <div class="col-md-3 offset-md-1 col-12"><label for="dob" class="col-form-label">Date of birth</label></div>
+        <div class="col-md-7 col-12">
+            <input type="date" class="form-control" required placeholder="dob"
+                name="dob" id="dob" value="{{ old('dob') }}">            
+        </div>
+        <div id="conPassError" class="text-danger"></div>
+    </div>
+    <div class="row mb-3">
+    <div class="col-md-3 offset-md-1 col-12"><label for="password" class="col-form-label">Password</label></div>
+        <div class="col-md-7 col-12">
             <input type="password" class="form-control mypassword position-relative" required placeholder="Password"
-                name="userPassword" id="userPassword">
-            <!-- <div id="validationPassFeedback" class="invalid-feedback d-none">
-                                at least 8 characters <br> at least one of [a-z],one of [A-Z],one of [0-9],one of [@#$%&*!^-_]
-                                </div> -->
+                name="password" id="password" value="{{ old('password') }}">
             <div id="passError" class="text-danger"></div>
         </div>
     </div>
     <div class="row mb-3">
-        <div class="col-md-8 offset-md-2 col-12">
-            <input type="date" class="form-control" required placeholder="dob"
-                name="dob" id="dob">            
-        </div>
-        <div id="conPassError" class="text-danger"></div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-8 offset-md-2 col-12">
+       <div class="col-md-3 offset-md-1 col-12"><label for="password_confirmation" class="col-form-label">Confirm password</label></div>
+        <div class="col-md-7 col-12">
             <input type="password" class="form-control" required placeholder="Confirm password"
-                name="userConfirmPassword" id="userConfirmPassword">
-            
+                name="password_confirmation" id="password_confirmation"  value="{{ old('password_confirmation') }}">
         </div>
         <div id="conPassError" class="text-danger"></div>
     </div>
     <div class="row mb-3">
-        <div class="col-md-8 offset-md-2 col-12">
-            <input type="password" class="form-control" required placeholder="Confirm password"
-                name="userConfirmPassword" id="userConfirmPassword">
-            
-        </div>
-        <div id="conPassError" class="text-danger"></div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-8 offset-md-2 col-12">
+       <div class="col-md-3 offset-md-1 col-12"><label for="address" class="col-form-label">Address</label></div>
+        <div class="col-md-7 col-12">
         <textarea class="form-control address" placeholder="Enter details address" required id="address"
-                            name="address"></textarea>
+                            name="address">{{ old('address') }}</textarea>
         </div>
         <div id="conPassError" class="text-danger"></div>
     </div>
     <div class="row my-4">
-        <div class="col-md-8 offset-md-2 col-12">
+        <div class="col-md-3 offset-md-1 col-12"></div>
+        <div class="col-md-7 col-12">
+        <input type="hidden" name="register_type" value="job_seeker">
             <input type="submit" name="btnRegister" id="btnRegister" class="form-control border-1 registerBtn"
                 value="Register">
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8 offset-md-2 col-12 text-black text-center">
+        <div class="col-md-7 offset-md-2 col-12 text-black text-center">
             <span>Already have account? <a href="{{ route('login') }}" class="">Login here</a></span>
         </div>
     </div>

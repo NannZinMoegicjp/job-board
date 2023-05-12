@@ -2,11 +2,23 @@
 @section('content')
 <div class="container forms pageContent">
     <div class="row  my-5">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+       
         <div class="col-md-8 offset-md-2 col-12">
             <div class="d-flex justify-content-center align-items-center">
-                <div class="btn-group m-3" role="group">                    
-                <button class="registerBtns notSelected" id="jobseekerBtn" onclick="showJobSeeker();">Job seeker</button>
-                <button class="registerBtns notSelected" id="employerBtn" onclick="showEmployer();">Employer</button>
+                <div class="btn-group m-3" role="group">
+                    <button class="registerBtns notSelected" id="jobseekerBtn" onclick="showJobSeeker();">Job
+                        seeker</button>
+                    <button class="registerBtns notSelected" id="employerBtn"
+                        onclick="showEmployer();">Employer</button>
                 </div>
             </div>
             <div id="employer" class="d-none py-2">
@@ -20,7 +32,16 @@
 </div>
 @endsection
 <script>
-let showJobSeeker = (btn) => {
+    window.onload = function() {
+       @php
+       if(old('register_type') == 'job_seeker'){
+       @endphp
+       showJobSeeker();
+            @php
+       }
+        @endphp
+    }
+let showJobSeeker = () => {
     jobseeker.classList.remove("d-none");
     jobseeker.classList.add("d-block");
     if (employer.classList.contains("d-block")) {
@@ -36,7 +57,7 @@ let showJobSeeker = (btn) => {
     }
     jobseekerBtn.classList.add("selected");
 }
-let showEmployer = (btn) => {
+let showEmployer = () => {
     employer.classList.remove("d-none");
     employer.classList.add("d-block");
     if (jobseeker.classList.contains("d-block")) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\JobSeeker;
+use App\Models\JobSeekerUser;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,7 @@ class JobSeekerController extends Controller
     }
     public function register(Request $request){
         $validator = validator(request()->all(), [
-            'name'=>'required',
+            'userName'=>'required',
             'phone' => 'required|digits:11',
             'profileImage' => 'nullable|mimes:jpeg,jpg,svg,gif,png|max:2048',
             'dob' => [
@@ -46,7 +47,7 @@ class JobSeekerController extends Controller
             'userEmail'=>'required|email|unique:job_seekers,email|unique:companies,email|unique:admins,email'
         ]);
         if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput()->with('role','jobseeker');
         }        
         $jobSeeker = new JobSeeker();
         if($request->hasFile('prifileImage')){
@@ -60,10 +61,12 @@ class JobSeekerController extends Controller
         $jobSeeker->dob = $request->input('dob');
         $jobSeeker->gender = $request->input('gender');        
         $jobSeeker->address = $request->input('address');
-        $jobSeeker->password = '';
+        $jobSeeker->password = $request->input('password');
         $jobSeeker->save();
-        return "successfully registered";
-        return redirect('/admin/job-seekers/details/'.$jobSeeker->id);
+        $jobSeeker = JobSeekerUser::find($jobSeeker->id);
+        Auth::guard('jobseeker')->login($jobSeeker);
+        return redirect('/');
+        // return redirect('/admin/job-seekers/details/'.$jobSeeker->id);
         // return redirect('/admin/job-seekers')->with('status', "added successfully");
     }
     public function getProfileData($id){
