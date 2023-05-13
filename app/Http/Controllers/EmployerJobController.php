@@ -22,7 +22,7 @@ class EmployerJobController extends Controller
     public function insertGet(Request $request)
     {
         //need to get from logged in id
-        $addrs = Address::where('company_id',  $request->session()->get('id'))->where('deleted_at',null)->get();
+        $addrs = Address::where('company_id',  $request->session()->get('id'))->get();
         $jobCategories = JobCategory::orderBy('name')->get();
         $empTypes = EmploymentType::orderBy('name')->get();
         $expLevels = ExperienceLevel::orderBy('name')->get();
@@ -160,17 +160,18 @@ class EmployerJobController extends Controller
         return back()->with('status','deleted jobs successfully!');
     }
     public function deactivatedJobs(Request $request){
-        $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->where('deleted_at',null)->get();
+        $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->get();
         $jobs = Job::whereIn('address_id',$addrIDs)->where('status','inactive')->get();
         return view('Employer.deactivated-jobs-manage')->with("jobs",$jobs);
     }
     public function expiredJobs(Request $request){
-        $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->where('deleted_at',null)->get();
+        $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->get();
         $jobs = Job::whereIn('address_id',$addrIDs)->whereDate('created_at','<',Carbon::today()->subMonths(6))->get();
         return view('Employer.expired-jobs-manage')->with("jobs",$jobs);
     }
     public function inactiveJobs(Request $request){
-        $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->where('deleted_at',null)->get();
+        $addrIDs = Address::select('id')->where('company_id', auth()->id())->get();
+        return $addrIDs;
         $jobs = Job::whereIn('address_id',$addrIDs)->WhereDate('created_at','<',Carbon::today()->subMonths(6))->orWhere('status','inactive')->get();
         return view('Employer.inactive-jobs-manage')->with("jobs",$jobs);
     }    
