@@ -33,8 +33,8 @@ class EmployerController extends Controller
             ->select('applications.id')            
             ->count();
         $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->whereNull('deleted_at')->get();
-        $activeJob = Job::whereIn('address_id',$addrIDs)->where('status','active')->where('created_at','>',Carbon::today()->subMonths(6))->count();
-        $inactiveJobs = Job::whereIn('address_id',$addrIDs)->WhereDate('created_at','<',Carbon::today()->subMonths(6))->orWhere('status','inactive')->count();        
+        $activeJob = Job::where('status','active')->where('created_at','>',Carbon::today()->subMonths(6))->whereIn('address_id',$addrIDs)->count();
+        $inactiveJobs = Job::WhereDate('created_at','<',Carbon::today()->subMonths(6))->orWhere('status','inactive')->whereIn('address_id',$addrIDs)->count();        
         $count = ["activeJobs"=>$activeJob,"inactiveJob"=>$inactiveJobs,"credits"=>$company->no_of_credit,"applications"=>$applications];
         return view('Employer.index')->with('count',$count);
     }   

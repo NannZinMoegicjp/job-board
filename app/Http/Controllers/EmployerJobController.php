@@ -170,9 +170,8 @@ class EmployerJobController extends Controller
         return view('Employer.expired-jobs-manage')->with("jobs",$jobs);
     }
     public function inactiveJobs(Request $request){
-        $addrIDs = Address::select('id')->where('company_id', auth()->id())->get();
-        return $addrIDs;
-        $jobs = Job::whereIn('address_id',$addrIDs)->WhereDate('created_at','<',Carbon::today()->subMonths(6))->orWhere('status','inactive')->get();
+        $addrIDs = Address::select('id')->where('company_id', auth()->id())->pluck('id')->toArray();;
+        $jobs = Job::WhereDate('created_at','<',Carbon::today()->subMonths(6))->orWhere('status','inactive')->whereIn('address_id',$addrIDs)->get();
         return view('Employer.inactive-jobs-manage')->with("jobs",$jobs);
     }    
 }
