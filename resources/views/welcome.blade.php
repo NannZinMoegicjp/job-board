@@ -27,7 +27,7 @@
         <div class="header">
             <div class="header-left">
             <img src="{{URL::asset('/images/jobsearchicon1.png')}}" width="35" height="35" alt=""> <span class="text-white">Job
-                        Board</sp>
+                        Board</span>
             </div>
             <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
@@ -104,9 +104,7 @@
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="{{URL::asset('/js/jquery-3.2.1.min.js')}}"></script>
-    <script src="{{URL::asset('/js/popper.min.js')}}"></script>
     <script src="{{URL::asset('/js/jquery.slimscroll.js')}}"></script>
-    <script src="{{URL::asset('/js/Chart.bundle.js')}}"></script>
     <script src="{{URL::asset('/js/app.js')}}"></script>
     @section('scripts')
 
