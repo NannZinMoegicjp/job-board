@@ -113,7 +113,7 @@
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="file" class="form-control @error('logofile') is-invalid @enderror" required placeholder="Logo" name="logofile" id="logofile"
-                        value="{{old('logofile')}}" accept=".jpeg,.jpg,.svg,.gif,.png">
+                        value="{{old('logofile')}}" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp">
                 </div>
             </div>
             <div class="row mb-2">
@@ -122,7 +122,7 @@
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="file" class="form-control @error('images') is-invalid @enderror" placeholder="images" name="images[]" id="images" multiple
-                        value="{{old('images')}}" accept=".jpeg,.jpg,.svg,.gif,.png">
+                        value="{{old('images')}}">
                 </div>
             </div>
             <div class="row mb-2">

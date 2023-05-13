@@ -23,4 +23,7 @@ class CompanyUser extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function isEmployer(){
+        return true;
+    }
 }

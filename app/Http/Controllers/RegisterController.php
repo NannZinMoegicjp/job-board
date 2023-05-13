@@ -9,6 +9,7 @@ use App\Models\Industry;
 use App\Models\Company;
 use App\Models\Image;
 use App\Models\Address;
+use App\Models\JobSeeker;
 class RegisterController extends Controller
 {
     public function showEmployerRegisterForm(){
@@ -26,7 +27,7 @@ class RegisterController extends Controller
             'comName'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
             'estDate' =>['nullable','date','before_or_equal:today'],
             'websiteLink'=>['nullable','url','regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'],
-            'logofile' => ['required','mimes:jpeg,jpg,svg,gif,png','max:2048'],
+            'logofile' => ['required','mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp','max:2048'],
             'images'=>['nullable'],
             'images.*'=>['mimes:jpeg,jpg,svg,gif,png','max:2048'],
             'address'=>['required','string']
@@ -83,7 +84,7 @@ class RegisterController extends Controller
             'userPhoneNumber' => ['required','regex:/^(\+?959|09)[0-9]{9}$/'],
             'dob' => ['required','date','before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
             'password'=>['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
-            'profileImage' => ['required','mimes:jpeg,jpg,svg,gif,png','max:2048'],
+            'profileImage' => ['required','mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp','max:2048'],
         ],[
             'password.confirmed' => 'The password field confirmation does not match.',
         ]);

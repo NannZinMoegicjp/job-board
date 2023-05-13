@@ -51,15 +51,27 @@
                             <a class="nav-link" href="{{route('all-companies')}}">Companies</a>
                         </li>
                         <li>
-                            @if(auth()->guard('jobseeker')->check())                                
+                            @if(auth()->guard('jobseeker')->check() || auth()->guard('employer')->check() || auth()->guard('admin')->check())                                
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">                                    
-                                    jobseeker                                 
+                                    data-bs-toggle="dropdown" aria-expanded="false"> 
+                                    @if (auth()->guard('jobseeker')->check())
+                                    {{auth()->guard('jobseeker')->user()->name}}
+                                    @elseif(auth()->guard('employer')->check())
+                                    {{auth()->guard('employer')->user()->contact_person}}
+                                    @elseif(auth()->guard('admin')->check())
+                                    {{auth()->guard('admin')->user()->name}}
+                                    @endif                            
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li>
-                                    <a class="dashboard"href="{{ route('jobseeker.dashboard') }}" class="text-decoration-none text-dark">dashboard</a>
+                                    <li>   
+                                    @if (auth()->guard('jobseeker')->check())
+                                    <a  href="{{ route('jobseeker.dashboard') }}" class="text-decoration-none text-dark">dashboard</a>                                
+                                    @elseif(auth()->guard('employer')->check())
+                                    <a href="{{ route('employer.dashboard') }}" class="text-decoration-none text-dark">dashboard</a>
+                                    @elseif(auth()->guard('admin')->check())
+                                    <a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-dark">dashboard</a>                                    
+                                    @endif                                       
                                     </li>
                                     <li>
                                         <a class="nav-link">

@@ -78,7 +78,7 @@
     </div>
 </section>
 {{-- recents jobs --}}
-<section class="">
+<section>
     <div class="container-fluid py-4">
         <h3 class="text-center"><span class="titleFirstPart">Recent</span> <span class="titleSecondPart">Jobs</span>
         </h3>
@@ -163,44 +163,9 @@
         </div>
     </div>
 </section>
-{{--popular industries --}}
-<!-- <section class="bg-light">
-    <div class="container-fluid py-5">
-        <div class="row">
-            <div class="col-md-5 p-3">
-                <a href="{{route('all-industries')}}"><button class="button-18 myBtn mb-4" role="button">Job
-                        industries</button></a>
-                <div class="w-75">
-                    <h4>Explore job by industry</h4>
-                </div>
-                <p class="text-secondary">Discover jobs most relevant to you by experience
-                    level,salary,location,employment type, etc.</p>
-            </div>
-            <div class="col-md-6">
-                @if(isset($data["industries"]))
-                @foreach($data["industries"] as $industry)
-                <div class="industries d-flex border-bottom my-1">
-                    <div
-                        class="bg-white me-4 circle borderColor1 shadow p-3 mb-2 d-flex justify-content-center align-items-center">
-                        <img src="{{URL::asset('images/industries/'.$industry->image)}}" alt="it/computer">
-                    </div>
-                    <div>
-                        <a href="" class="text-decoration-none text-black">
-                            <h5>{{$industry->name}}</h5>
-                        </a>
-                        <small class="text-secondary">{{$industry->total_jobs}} jobs</small>
-                    </div>
-                </div>
-                @endforeach
-                @endif
 
-            </div>
-
-        </div>
-    </div>
-</section> -->
 {{-- featured locations --}}
-<section class="">
+<section>
     <div class="container py-4">
         <h3 class="text-center"><span class="titleFirstPart">Featured</span> <span
                 class="titleSecondPart">Locations</span></h3>

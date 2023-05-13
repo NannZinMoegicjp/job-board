@@ -56,6 +56,7 @@ Route::get('api/fetch-payment-accounts/{id}', [DropdownController::class, 'fetch
 
 Route::group(  ['prefix' => 'admin','middleware'=>['auth:admin']], function () {
     Route::get('/',[AdminDashBoardController::class,'index'])->name('admin.dashboard');
+    Route::post('/',[AdminDashBoardController::class,'index'])->name('admin.dashboard.filter');
     Route::get('/pricing',[CreditPriceController::class,'index']);
     Route::post('/pricing/insert',[CreditPriceController::class,'insertPrice']);
     Route::post('/pricing/update/{id}',[CreditPriceController::class,'updatePrice']);
@@ -92,9 +93,14 @@ Route::group(  ['prefix' => 'admin','middleware'=>['auth:admin']], function () {
     Route::post('/payment-accounts/add',[PaymentMethodController::class,'insertPaymentAccount']);
     Route::post('/payment-accounts/update/{id}',[PaymentMethodController::class,'updatePaymentAccount']);
     Route::get('/payment-accounts/delete/{id}',[PaymentMethodController::class,'deletePaymentAccount']);
-    Route::get('/profile/{id}',function(){
-        return view('admin-profile');
-    });
+    
+    Route::get('/profile',[AdminController::class,'profile']);
+    Route::get('/profile/update',[AdminController::class,'updateProfileForm'])->name('admin.profile');
+    Route::post('/profile/update',[AdminController::class,'updateProfile'])->name('admin-profile-update');
+    Route::post('/profile/update/image',[AdminController::class,'updateImage']);
+    Route::get('/change/password',[AdminController::class,'changePasswordForm']);
+    Route::post('/change/password',[AdminController::class,'changePassword'])->name('admin.change.password');
+   
     Route::get('/manage',[AdminController::class,'index'])->name('manage-admin');
     Route::get('/add',[AdminController::class,'addGet']);
     Route::post('/add',[AdminController::class,'add']);
@@ -114,11 +120,11 @@ Route::group(  ['prefix' => 'employer','middleware' => ['auth:employer']], funct
     Route::get('/confirmed/order/details/{oid}',[EmployerOrderController::class,'confirmedOrderDetails']);
     Route::get('/awaiting/order/details/{oid}',[EmployerOrderController::class,'awaitingOrderDetails']);
     
-    Route::get('/jobs/insert',[EmployerJobController::class,'checkCredit']);
-    Route::post('/jobs/insert',[EmployerJobController::class,'insert']);
-    Route::get('/job/update/{id}',[EmployerJobController::class,'updateGet']);
-    Route::post('/job/update/{id}',[EmployerJobController::class,'update']);
-    Route::get('/job/delete/{id}',[EmployerJobController::class,'delete']);
+    Route::get('/jobs/insert',[EmployerJobController::class,'checkCredit'])->name('job.insertForm');
+    Route::post('/jobs/insert',[EmployerJobController::class,'insert'])->name('job.insert');
+    Route::get('/job/update/{id}',[EmployerJobController::class,'updateGet'])->name('job.updateForm');
+    Route::post('/job/update/{id}',[EmployerJobController::class,'update'])->name('job.update');
+    Route::get('/job/delete/{id}',[EmployerJobController::class,'delete'])->name('job.delete');
     Route::get('/job/details/{id}',[EmployerJobController::class,'viewDetails'])->name('employer.job.detail');
     Route::get('/job/deactivate/{id}',[EmployerJobController::class,'deactivate']);
     Route::get('/job/activate/{id}',[EmployerJobController::class,'activate']);
@@ -141,7 +147,9 @@ Route::group(  ['prefix' => 'employer','middleware' => ['auth:employer']], funct
     Route::post('/profile/add/branch/{cid}',[CompanyController::class,'addBranchCity']);
     Route::post('/profile/add/images/{cid}',[CompanyController::class,'addImages']);
     Route::get('/profile/remove/images/{cid}/{imageId}',[CompanyController::class,'removeImage']);
-    
+ 
+    Route::get('/change/password',[CompanyController::class,'changePasswordForm']);
+    Route::post('/change/password',[CompanyController::class,'changePassword'])->name('employer.change.password');
  
     Route::get('/applications',[EmployerController::class,'getApplications'])->name('applications');
     Route::get('/application/reject/{id}',[EmployerController::class,'reject']);

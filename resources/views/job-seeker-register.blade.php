@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="file" class="form-control @error('profileImage') is-invalid @enderror"
-                        name="profileImage" accept=".jpeg,.jpg,.svg,.gif,.png" id="profileImage"
+                        name="profileImage" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp" id="profileImage"
                         value="{{old('profileImage')}}" required>
                 </div>
             </div>

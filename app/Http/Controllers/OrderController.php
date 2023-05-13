@@ -17,8 +17,7 @@ class OrderController extends Controller
         $confirmedOrderedIds = OrderConfirmation::select('order_id')->get();
         $awaitingOrders = Order::whereNotIn('id', $confirmedOrderedIds)->get();
         return view('order')->with('awaitingOrders',$awaitingOrders);
-    }
-   
+    }  
 
     public function acceptOrder($id){
         $orderCon = new OrderConfirmation();
@@ -31,7 +30,7 @@ class OrderController extends Controller
         $company = Company::find($order->company_id);
         $company->no_of_credit += $order->no_of_credit;  
         $company->save();        
-        return redirect('/admin/payment')->with("status","accepted order");
+        return redirect('/admin/order')->with("status","accepted order");
     }
     public function rejectOrder($id){
         $orderCon = new OrderConfirmation();
@@ -40,7 +39,7 @@ class OrderController extends Controller
         $orderCon->is_confirmed = false;
         $d=strtotime("today");
         $orderCon->save();
-        return redirect('/admin/payment');
+        return redirect('/admin/order')->with("status","rejected order");
     }
     public function confirmedOrderDetails($id){
         $corder =OrderConfirmation::find($id);

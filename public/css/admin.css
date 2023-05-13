@@ -4,6 +4,10 @@
 /* .left{
     height: 100vh;
 } */
+.canvas{
+    width: 504px;
+    height: 504px;
+}
 a{
     display: block;
     text-decoration: none !important;

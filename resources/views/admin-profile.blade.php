@@ -1,23 +1,44 @@
 @extends('welcome')
 @section('content')
-<div class="row">
-        <h5 class="text-center my-3">My profile</h5>
-        <form action="" method="post" class="p-2">
-            <div class="col-md-6 offset-md-3 mb-2">
-                <label for="userName">Name</label>
-                <input type="text" name="userName" id="userName" class="form-control">
+<section>
+    <div class="container">
+        @if(isset($admin))
+        <div class="row my-4">
+            <div class="col-md-8 offset-md-2">
+                @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+                @endif
             </div>
-            <div class="col-md-6 offset-md-3 mb-2">
-                <label for="userEmail">Email</label>
-                <input type="email" name="userEmail" id="userEmail" class="form-control" readonly disabled value="nannzinme.gicjp@gmail.com">
+        </div>
+        <div class="row my-4">
+            <div class="col-md-8 offset-md-2  shadow-sm border">
+                <div class="row">
+                    <div class="col-md-3 offset-md-1 p-2 d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{URL::asset('images/admins/'.$admin->profile_image)}}" alt="" class="profileImg">
+                        <h5>{{$admin->name}}</h5>
+                        <a href="{{url('/admin/profile/update')}}"><button type="button"
+                                class="btn btn-primary"><i class="bi bi-pencil-fill update"></i>Edit</button></a>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="row border-bottom p-2">
+                            <div class="col-md-4">Name</div>
+                            <div class="col-md-8">{{$admin->name}}</div>
+                        </div>
+                        <div class="row border-bottom p-2">
+                            <div class="col-md-4">Email</div>
+                            <div class="col-md-8">{{$admin->email}}</div>
+                        </div>
+                        <div class="row border-bottom p-2">
+                            <div class="col-md-4">Phone</div>
+                            <div class="col-md-8">{{$admin->phone}}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6 offset-md-3 mb-2">
-                <label for="phone">Phone</label>
-                <input type="text" name="phone" id="phone" class="form-control">
-            </div>  
-            <div class="col-md-6 offset-md-3 mb-2">               
-                <button class="btn btn-primary">Save</button>
-            </div>           
-        </form>
+        </div>
     </div>
+    @endif
+</section>
 @endsection

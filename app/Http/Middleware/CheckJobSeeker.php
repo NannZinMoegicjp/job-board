@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 class CheckJobSeeker{
     public function handle(Request $request, Closure $next):Response{
-        if(Auth::user() && Auth::user()->status == 'jobseeker'){
+        if(auth()->guard('jobseeker')->check()){
             return $next($request);
         }
         return redirect()->route('login');

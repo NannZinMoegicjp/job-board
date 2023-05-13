@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class JobSeekerController extends Controller
 {
     public function index(Request $request){
-        if (auth()->check()) {
-            $userId = auth()->id();
+        if (auth()->guard('jobseeker')->check()) {
+            $userId = auth()->guard('jobseeker')->id();
             $jobSeeker = JobSeeker::find($userId);
             $request->session()->put('jobseekerId',$jobSeeker->id);     
             $request->session()->put('jobseekerEmail',$jobSeeker->email);     

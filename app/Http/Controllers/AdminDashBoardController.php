@@ -20,8 +20,8 @@ class AdminDashBoardController extends Controller
     public function index(Request $request)
     {
         $userId = 0;
-        if (auth()->check()) {
-            $userId = auth()->id();
+        if (auth()->guard('admin')->check()) {
+            $userId = auth()->guard('admin')->id();
             $admin = Admin::find($userId);
             $request->session()->put('role', 'admin');
             $request->session()->put('adminId', $admin->id);
@@ -39,25 +39,72 @@ class AdminDashBoardController extends Controller
         $count = ["activeJobs" => $jobCount, "companies" => $companyCount, "conOrders" => $confirmedOrderCount, "awaitOrders" => $awaitingOrderCount, "jobSeekers" => $jobSeekerCount, "applications" => $applicationCount];
         $months = collect([
             'January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December'
+            'July', 'August', 'September', 'October', 'November', 'December',
         ]);
-        $monthlySales = OrderConfirmation::selectRaw(' MONTHNAME(order_confirmations.created_at) as month, SUM(orders.no_of_credit) as total_credit_point_sold')
+        $topHiringCompanies = Company::select('company_name', 'companies.id', DB::raw('COUNT(*) as job_count'))
+
+            ->join('addresses', 'companies.id', '=', 'addresses.company_id')
+
+            ->join('jobs', 'addresses.id', '=', 'jobs.address_id')
+
+            ->groupBy('companies.id', 'company_name')
+
+            ->orderByDesc('job_count', 'company_name')
+
+            ->limit(10)
+
+            ->get();
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+        if ($startDate && $endDate) {
+            $creditSold = OrderConfirmation::selectRaw(' MONTHNAME(order_confirmations.created_at) as month, SUM(orders.no_of_credit) as total_credit_point_sold')
+                ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
+                ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
+                ->whereBetween('order_confirmations.created_at', [$startDate, $endDate])
+                ->groupBy('month')
+                ->orderByDesc('month')
+                ->get();
+        } else {
+            $creditSold = OrderConfirmation::selectRaw(' MONTHNAME(order_confirmations.created_at) as month, SUM(orders.no_of_credit) as total_credit_point_sold')
+                ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
+                ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
+                ->whereYear('order_confirmations.created_at', '=', date('Y'))
+                ->groupBy('month')
+            // ->orderByDesc('month')
+                ->get();
+        }
+        $creditSold = $months->map(function ($month) use ($creditSold) {
+            $result = $creditSold->firstWhere('month', $month);
+            return $result ?? (object) ['month' => $month, 'total_credit_point_sold' => 0];
+        });
+        $monthlySales = OrderConfirmation::selectRaw(' MONTHNAME(order_confirmations.created_at) as month, SUM(credit_prices.price * orders.no_of_credit) as total_sale')
             ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
             ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
             ->whereYear('order_confirmations.created_at', '=', date('Y'))
+            ->where('is_confirmed', 1)
             ->groupBy('month')
             ->orderByDesc('month')
             ->get();
         $monthlySales = $months->map(function ($month) use ($monthlySales) {
             $result = $monthlySales->firstWhere('month', $month);
-            return $result ?? (object) ['month' => $month, 'total_credit_point_sold' => 0];
+            return $result ?? (object) ['month' => $month, 'total_sale' => 0];
         });
-        $data = ["monthlySales" => $monthlySales];
+        $categories = JobCategory::join('jobs', 'job_categories.id', '=', 'jobs.job_category_id')
+
+            ->select('job_categories.name', DB::raw('COUNT(*) as job_count'))
+
+            ->groupBy('job_categories.id', 'job_categories.name')
+
+            ->orderByDesc('job_count')
+
+            ->limit(10)
+
+            ->get();
+            $data = ["startDate" => $startDate, "endDate" => $endDate, "creditSold" => $creditSold, "monthlySales" => $monthlySales, "topHiringCompanies" => $topHiringCompanies];
         return view('dashboard')->with('count', $count)->with('data', $data);
     }
     public function reports(Request $request)
     {
-
         $companies = Company::select('company_name', 'companies.id', DB::raw('COUNT(*) as job_count'))
 
             ->join('addresses', 'companies.id', '=', 'addresses.company_id')

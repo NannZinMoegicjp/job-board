@@ -19,8 +19,8 @@ class EmployerController extends Controller
 {
     public function index(Request $request){
         $userId=0;
-        if (auth()->check()) {
-            $userId = auth()->id();
+        if (auth()->guard('employer')->check()) {
+            $userId = auth()->guard('employer')->id();
         }
         $company = Company::find($userId);
         $request->session()->put('id',$company->id);     

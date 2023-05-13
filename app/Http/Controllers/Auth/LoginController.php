@@ -51,8 +51,7 @@ class LoginController extends Controller
         if (Auth::guard('admin')->attempt($credentials, $remember)) {
             return redirect('/admin'); 
         } 
-        if(Auth::guard('employer')->attempt($credentials, $remember)) {
-            
+        if(Auth::guard('employer')->attempt($credentials, $remember)) {            
             return redirect('/employer');           
         }
         if(Auth::guard('jobseeker')->attempt($credentials, $remember)) {

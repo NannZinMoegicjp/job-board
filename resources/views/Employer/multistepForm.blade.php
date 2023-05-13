@@ -13,7 +13,7 @@
 </div>
 @endif
 <h3 class="text-center" id="post">Post job</h3>
-<form id="signUpForm" action="{{url('/multiStepForm/add')}}" method="post">
+<form id="signUpForm" action="{{ route('job.insert') }}" method="post">
     @csrf
     <!-- start step indicators -->
     <div class="form-header d-flex mb-4">
@@ -36,7 +36,8 @@
                     oninput="this.className = 'form-control'">
             </div>
         </div>
-        <div class="row mb-2">
+        
+         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12">
                 <label for="minSalary">Min Salary</label>
             </div>
@@ -53,7 +54,7 @@
                 <input type="number" min='1' class="form-control" required name="maxSalary" id="maxSalary"
                     value="{{ old('maxSalary') }}" oninput="this.className = 'form-control'">
             </div>
-        </div>
+        </div> 
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label for="openPosition">Open position</label>

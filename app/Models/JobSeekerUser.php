@@ -24,4 +24,7 @@ class JobSeekerUser extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function isJobSeeker(){
+        return true;
+    }
 }
