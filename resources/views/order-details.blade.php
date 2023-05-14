@@ -18,11 +18,11 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-2 offset-md-2 text-end col-5">Price per credit</div>
-                <div class="col-md-5 col-7">{{$creditPrice->price}}</div>
+                <div class="col-md-5 col-7">{{$corder->order->creditPrice->price}}</div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-2 offset-md-2 text-end col-5">Total amount</div>
-                <div class="col-md-5 col-7">{{$corder->order->no_of_credit*$creditPrice->price}}</div>
+                <div class="col-md-5 col-7">{{$corder->order->no_of_credit*$corder->order->creditPrice->price}}</div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-2 offset-md-2 text-end col-5">Order date</div>
