@@ -10,7 +10,7 @@
             <div class="row p-3 mx-3">
                 <div class="col-3 d-flex justify-content-center align-items-center">
                     <a href=""><img src="{{url('images/companies/'.$job->address->company->logo)}}"
-                            alt="{{$job->address->company->company_name}} image"></a>
+                            alt="{{$job->address->company->company_name}} image" class="companyImg"></a>
                 </div>
                 <div class="col-9">
                     <a href="" class="text-decoration-none text-dark">

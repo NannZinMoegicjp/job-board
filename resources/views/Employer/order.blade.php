@@ -24,6 +24,7 @@
                     <th>No of credit</th>
                     <th>Price</th>
                     <th>Ordered date</th>
+                    <th>Status</th>
                     <th>View</th>
                 </tr>
             </thead>
@@ -34,6 +35,7 @@
                     <td>{{$awaitingOrder->no_of_credit}}</td>
                     <td>{{$awaitingOrder->creditPrice->price}}</td>
                     <td>{{$awaitingOrder->created_at->todatestring()}}</td>
+                    <td>Pending</td>
                     <td>
                         <div class="d-flex">
                             <a href="{{url('/employer/awaiting/order/details/'.$awaitingOrder->id)}}"><i

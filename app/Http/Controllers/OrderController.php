@@ -43,10 +43,12 @@ class OrderController extends Controller
     }
     public function confirmedOrderDetails($id){
         $corder =OrderConfirmation::find($id);
-        return view('order-details')->with('corder',$corder);
+        $creditPrice = Price::find($corder->order->price->id);
+        return view('order-details')->with('corder',$corder)->with('creditPrice',$creditPrice);
     }
     public function awaitingOrderDetails($id){
         $order =Order::find($id);
-        return view('order-details')->with('order',$order);
+        $creditPrice = Price::find($corder->order->price->id);
+        return view('order-details')->with('order',$corder)->with('creditPrice',$creditPrice);
     }
 }

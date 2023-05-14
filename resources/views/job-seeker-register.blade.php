@@ -1,4 +1,3 @@
-<!-- login form for jobseeker -->
 @extends('master')
 @section('content')
 <div class="row my-3">

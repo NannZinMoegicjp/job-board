@@ -18,7 +18,7 @@
                     <div class="col-md-3 offset-md-1 p-2 d-flex flex-column justify-content-center align-items-center">
                         <img src="{{URL::asset('images/jobseekers/'.$jobseeker->image)}}" alt="" class="profileImg">
                         <h5>{{$jobseeker->name}}</h5>
-                        <a href="{{url('/job-seeker/update/profile/'.$jobseeker->id)}}"><button type="button"
+                        <a href="{{url('/job-seeker/update/profile')}}"><button type="button"
                                 class="btn btn-primary"><i class="bi bi-pencil-fill update"></i>Edit</button></a>
                     </div>
                     <div class="col-md-7">

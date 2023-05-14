@@ -37,6 +37,7 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Actions</th>
+                <th></th>
             </tr>
             </thead>           
             <tbody>
@@ -58,6 +59,7 @@
                                 class="bi bi-trash3-fill cancel"></i></a>
                     </div>
                 </td>
+                <td> <a href="{{route('reset.company.password',[$company->id])}}"  onclick='return confirm("Want to reset password?")'><button class="btn btn-primary">Reset password</button></a></td>
             </tr>            
             @endforeach
             </tbody>

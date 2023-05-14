@@ -14,9 +14,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
     <link rel="stylesheet" type="text/css" href="{{URL::asset('/css/style.css')}}">
 </head>
 <body>
@@ -28,8 +28,8 @@
                         Board</span>                
                 </a>
             </div>            
-            <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-            <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
+            <a id="toggle_btn" href="javascript:void(0);"><i class="bi bi-sliders text-white"></i></a>
+            <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="bi bi-sliders text-white"></i></a>
             <div class="text-warning d-flex justify-content-end align-items-center me-5 mt-1">
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -60,7 +60,7 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul class="mynav">
                         <li>
-                            <a href="{{url('/admin')}}"><i class="fa fa-dashboard"></i> <span> Admin Dashboard</span></a>
+                            <a href="{{url('/admin')}}"><i class="bi bi-speedometer2"></i> <span> Admin Dashboard</span></a>
                         </li>
                         <li>
                             <a href="{{url('/admin/pricing')}}"><i class="bi bi-cash-coin"></i> <span>Price</span></a>

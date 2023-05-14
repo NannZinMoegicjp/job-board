@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Company;
+use App\Models\JobSeeker;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -115,5 +117,19 @@ class AdminController extends Controller
         }
         $admin->delete();
         return redirect()->route('manage-admin');
+    }
+    public function resetCompanyPassword($id){
+        $company = Company::find($id);
+        $company->password = Hash::make('12345678');
+        $company->save();
+        $status = "reseted password for ".$company->company_name." successfully.";
+        return redirect('/admin/companies')->with('status',$status);
+    }
+    public function resetJobSeekerPassword($id){
+        $jobseeker = JobSeeker::find($id);
+        $jobseeker->password = Hash::make('12345678');
+        $jobseeker->save();
+        $status = "reseted password for ".$jobseeker->name." successfully.";
+        return redirect('/admin/job-seekers')->with('status',$status);
     }
 }

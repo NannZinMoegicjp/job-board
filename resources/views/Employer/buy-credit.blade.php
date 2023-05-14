@@ -44,7 +44,7 @@
                     Payment method
                 </div>
                 <div class="col-md-6 col-12">
-                    <select name="paymentMethod" id="paymentMethod" class="form-select">
+                    <select name="paymentMethod" id="paymentMethod" class="form-select" required>
                         <option value="">-- Select payment method --</option>
                         @foreach($data['paymentMethods'] as $paymentMethod)
                         <option value="{{$paymentMethod['id']}}">{{$paymentMethod['name']}}</option>
@@ -57,11 +57,8 @@
                     Transfter to this account
                 </div>
                 <div class="col-md-6 col-12">
-                    <select name="paymentAccount" id="paymentAccount" class="form-select">
+                    <select name="paymentAccount" id="paymentAccount" class="form-select" required>
                         <option value="">-- Select payment account --</option>
-                        {{-- @foreach($data['paymentAccounts'] as $paymentAccount)
-                        <option value="{{$paymentAccount['id']}}">{{$paymentAccount['account_no']}} ({{$paymentAccount['account_name']}})</option>
-                        @endforeach --}}
                     </select>
                 </div>
             </div>
@@ -72,7 +69,7 @@
                 </div>
                 <div class="col-md-6 col-12">
                     <input type="file" class="form-control" name="screenshot" id="screenshot"
-                        value="{{old('screenshot')}}" required>
+                        value="{{old('screenshot')}}" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp" required>
                 </div>
             </div>
             <div class="row mb-3">

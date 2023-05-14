@@ -23,8 +23,8 @@
                     @foreach ($data['applications'] as $application)
                     <tr>
                         <td>{{$no++}}</td>
-                        <td><a href="">{{$application->job->address->company->company_name}}</a></td>
-                        <td><a href="">{{$application->job->title}}</a></td>
+                        <td><a href="{{ route('company-details',[$application->job->address->company->id]) }}">{{$application->job->address->company->company_name}}</a></td>
+                        <td><a href="{{ route('job-details',[$application->job->id]) }}">{{$application->job->title}}</a></td>
                         <td>{{$application->created_at->todatestring()}}</td>
                         <td>{{$application->job->created_at->todatestring()}}</td>
                         <td>{{$application->updated_at->todatestring()}}</td>

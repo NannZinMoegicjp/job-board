@@ -48,8 +48,8 @@
                     <td>{{$no++}}</td>
                     <td>{{$job->title}}</td>
                     <td>{{$job->experienceLevel->name}}</td>
-                    <td>{{$job->created_at}}</td>
-                    <td>{{Carbon\Carbon::create($job->created_at)->addMonths(6)}}</td>
+                    <td>{{$job->created_at->toDateString()}}</td>
+                    <td>{{Carbon\Carbon::create($job->created_at)->addMonths(6)->toDateString()}}</td>
                     <td>
                         <div class="d-flex">
                             <a href="{{url('/employer/job/details/'.$job->id)}}"><i

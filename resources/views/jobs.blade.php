@@ -37,7 +37,7 @@
             <div class="row border rounded p-3 mx-3 my-2 jobpost">
                 <div class="col-3 d-flex justify-content-center align-items-center">
                     <img src="{{URL::asset('images/companies/'.$job->address->company->logo)}}"
-                        alt="{{$job->address->company->company_name}} image">
+                        alt="{{$job->address->company->company_name}} image" class="img img-fluid companyImg">
                 </div>
                 <div class="col-9">
                     <h4 class="title">{{$job->title}}</h4>

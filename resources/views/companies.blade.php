@@ -7,7 +7,7 @@
         <a href="{{route('company-details',[$company->id])}}" class="text-decoration-none">
             <div class="row border-bottom company mb-2 py-1">
                 <div class="col-2 d-flex justify-content-center align-items-center p-3">
-                    <img src="{{asset('images/companies/'.$company->logo)}}" alt="">
+                    <img src="{{asset('images/companies/'.$company->logo)}}" alt="company image" class="companyImg">
                 </div>
                 <div class="col-10 ps-lg-4">
                     <h4 class="title">{{$company->company_name}}</h4>

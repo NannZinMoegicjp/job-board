@@ -6,7 +6,7 @@ use App\Models\JobSeekerUser;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
 class JobSeekerController extends Controller
 {
     public function index(Request $request){
@@ -35,23 +35,22 @@ class JobSeekerController extends Controller
         return view('add-update-jobseeker');
     }
    
-    public function getProfileData($id){
-        $jobseeker = JobSeeker::find($id);
-        return view('JobSeeker.update-profile')->with('jobseeker', $jobseeker)->with('updateId', $id);
+    public function getProfileData(){
+        $jobseeker = JobSeeker::find(auth()->guard('jobseeker')->id());
+        return view('JobSeeker.update-profile')->with('jobseeker', $jobseeker)->with('updateId', auth()->guard('jobseeker')->id());
     }
-    public function update(Request $request,$id){
-        $jobSeeker = JobSeeker::find($id);
+    public function update(Request $request){
+        $jobSeeker = JobSeeker::find(auth()->guard('jobseeker')->id());
         $jobSeeker->name = $request->input('name');
-        $jobSeeker->email = $request->input('userEmail');
         $jobSeeker->phone = $request->input('phone');
         $jobSeeker->dob = $request->input('dob');
         $jobSeeker->gender = $request->input('gender');        
         $jobSeeker->address = $request->input('address');
         $jobSeeker->save();
-        return redirect('/job-seeker/profile/'.$id)->with('status', "updated successfully");
+        return redirect('/job-seeker/profile')->with('status', "updated successfully");
     }
-    public function updateImage(Request $request,$id){
-        $jobseeker = JobSeeker::find($id);       
+    public function updateImage(Request $request){
+        $jobseeker = JobSeeker::find(auth()->guard('jobseeker')->id());       
         $validator = validator(request()->all(), [
             'newProfileImage' => 'required|mimes:jpeg,jpg,svg,gif,png|max:2048',
         ]);
@@ -68,13 +67,13 @@ class JobSeekerController extends Controller
         $jobseeker->image = $profileImage;
         $jobseeker->save();
         $request->session()->put('profileImg',$jobseeker->image);  
-        return redirect('/job-seeker/profile/'.$id)->with('status', "updated profile photo successfully");
+        return redirect('/job-seeker/profile')->with('status', "updated profile photo successfully");
     }
-    public function viewDetails($id){
-        $jobseeker = JobSeeker::find($id);
-        if(session('role') == 'jobseeker')
-            return view('JobSeeker.profile')->with('jobseeker', $jobseeker)->with('updateId', $id);
-        else
+    public function viewDetails(){
+        $jobseeker = JobSeeker::find(auth()->guard('jobseeker')->id());
+        if(auth()->guard('jobseeker')->check())
+            return view('JobSeeker.profile')->with('jobseeker', $jobseeker)->with('updateId', auth()->guard('jobseeker')->id());
+        else if(auth()->guard('admin')->check())
             return view('admin-jobseeker-details')->with('jobseeker', $jobseeker);
     }
     public function delete($id){
@@ -101,5 +100,33 @@ class JobSeekerController extends Controller
         $applications = Application::where('job_seeker_id',session('jobseekerId'))->orderBy('created_at','desc')->where('status','rejected')->get();
         $data = ['applications'=>$applications];
         return view('JobSeeker.rejected-applications')->with('data',$data);
+    }
+    //show change password form
+    public function changePasswordForm(){
+        return view('JobSeeker.change-password');
+    }
+    //job seeker change password
+    public function changePassword(Request $request){
+        $validator = validator(request()->all(), [
+            'password'=>['bail','required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }  
+        $userId = auth()->guard('jobseeker')->id();
+        $jobseeker = JobSeeker::find($userId);        
+        if(Hash::check($request->input('currentPass'),$jobseeker->password)){
+            if(Hash::check($request->input('password'),$jobseeker->password)){
+                return back()->with('error','Current password and New password is same.Please use new one.')->withInput();
+            }else{
+                $jobseeker->password = Hash::make($request->input('password'));
+            }            
+        }else{
+            return back()->with('error','current password incorrect')->withInput();
+        }        
+        $jobseeker->save();
+        // Log out the user and redirect to the login page
+        Auth::logout();
+        return redirect('/login')->with('status', 'changed password successfully. please log in again.');
     }
 }

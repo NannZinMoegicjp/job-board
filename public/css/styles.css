@@ -1,4 +1,9 @@
 @import url('fonts.css');
+/* report button */
+.reportBtn{
+  height: 20px !important;
+  width: auto;
+}
 /* navbar */
 .mynavbar{
     background: #3f1e5f !important;
@@ -17,6 +22,10 @@
 }
 .nav-item a:hover{
   color: white;
+}
+.companyImg{
+  max-width: 80px;
+  max-height: 80px;
 }
 /* search */
 .bg-opacity{

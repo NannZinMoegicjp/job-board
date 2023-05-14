@@ -106,6 +106,9 @@ Route::group(  ['prefix' => 'admin','middleware'=>['auth:admin']], function () {
     Route::post('/add',[AdminController::class,'add']);
     Route::get('/delete/{id}',[AdminController::class,'delete']);
     Route::get('/details/{id}',[AdminController::class,'viewDetails'])->name('admin-details');
+    Route::get('/reset/company/password/{id}',[AdminController::class,'resetCompanyPassword'])->name('reset.company.password');
+    Route::get('/reset/jobseeker/password/{id}',[AdminController::class,'resetJobSeekerPassword'])->name('reset.jobseeker.password');
+
 });
 
 Route::group(  ['prefix' => 'employer','middleware' => ['auth:employer']], function () {
@@ -164,11 +167,14 @@ Route::group(  ['prefix' => 'job-seeker','middleware' => ['auth:jobseeker']], fu
     Route::get('/applications/pending',[JobSeekerController::class,'pendingApplication']);
     Route::get('/applications/shortlisted',[JobSeekerController::class,'shortlistedApplication']);
     Route::get('/applications/rejected',[JobSeekerController::class,'rejectedApplication']);
-    Route::get('/profile/{id}',[JobSeekerController::class,'viewDetails']);
-    Route::post('/update/image/{id}',[JobSeekerController::class,'updateImage']);
-    Route::get('/update/profile/{id}',[JobSeekerController::class,'getProfileData']);
-    Route::post('/update/profile/{id}',[JobSeekerController::class,'update']);
+    Route::get('/profile',[JobSeekerController::class,'viewDetails']);
+    Route::post('/update/image',[JobSeekerController::class,'updateImage']);
+    Route::get('/update/profile',[JobSeekerController::class,'getProfileData']);
+    Route::post('/update/profile',[JobSeekerController::class,'update']);
     Route::post('/jobs/apply/{id}', [HomeController::class,'applyJobs'])->name('apply.job');
+    Route::get('/change/password',[JobSeekerController::class,'changePasswordForm']);
+    Route::post('/change/password',[JobSeekerController::class,'changePassword'])->name('jobseeker.change.password');
+   
 });
 
 Auth::routes(['register' => false]);

@@ -25,7 +25,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-3">
             <div class="item greenBorder d-flex justify-content-center align-items-center shadow-sm">
                 <div class="p-2">
@@ -63,85 +62,124 @@
     </div>
 </div>
 <div class="my-5">
+    @php
+    use Carbon\Carbon;
+    @endphp
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <div class="my-2">
-        <h4 class="fw-bold text-primary text-center">Monthly sold credits<h4>
-                <form action="{{ route('admin.dashboard.filter') }}" method="POST">
-                    @csrf
-                    <div class="row">
-                        <div class="col text-end"><label for="start-date" class="form-label fs-6">Start Date:</label>
-                        </div>
-                        <div class="col">
-                            <input type="date" id="start-date" class="form-control" name="start_date" required
-                                value="{{$data['startDate']}}">
-                        </div>
-                        <div class="col text-end"><label for="end-date" class="form-label fs-6">End Date:</label></div>
-                        <div class="col">
-                            <input type="date" id="end-date" class="form-control" name="end_date" required
-                                value="{{$data['endDate']}}">
-                        </div>
-                        <div class="col">
-                            <button id="filter-button">Filter</button>
-                            <button onclick="clearData();" type="button">clear</button>
-                        </div>
+    {{-- for credits --}}
+    <div class="my-3">
+        {{-- for credit title and date form--}}
+        <div class="my-2">
+            <h4 class="fw-bold text-primary text-center">
+                @if($data["creditData"]["type"] == 1)
+                Daily
+                @elseif($data["creditData"]["type"] == 3)
+                Yearly
+                @else
+                Monthly
+                @endif sold credits
+            </h4>
+            <form action="{{ route('admin.dashboard.filter') }}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-md-2 text-md-end"><label for="start-date" class="form-label fs-6">Start
+                            Date:</label>
                     </div>
-                </form>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-12">
-            <canvas id="creditChart"></canvas>
+                    <div class="col-md-2">
+                        <input type="date" id="start-date" class="form-control" name="start_date" required
+                            value="{{$data["creditData"]['startDate']}}">
+                    </div>
+                    <div class="col-md-2 text-md-end"><label for="end-date" class="form-label fs-6">End
+                            Date:</label></div>
+                    <div class="col-md-2">
+                        <input type="date" id="end-date" class="form-control" name="end_date" required value="{{$data["creditData"]['endDate']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <select name="type" id="type" class="form-select" required>
+                            <option value="">--select time--</option>
+                            $data["creditData"]["type"]
+                            <option value="1" @if( $data["creditData"]["type"]==1) selected @endif>daily</option>
+                            <option value="2" @if( $data["creditData"]["type"]==2) selected @endif>monthly</option>
+                            <option value="3" @if( $data["creditData"]["type"]==3) selected @endif>yearly</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-flex">
+                        <a><button id="filter-button" class="btn btn-primary me-2 reportBtn">Filter</button></a>
+                        <a href="{{ route('admin.dashboard') }}"><button onclick="clearData();"
+                                class="btn btn-secondary reportBtn" type="button">clear</button></a>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="col-md-6 col-12">
-            @php
-            $no=1;
-            @endphp
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Month</th>
-                            <th>No of credit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data["creditSold"] as $credit)
-                        <tr>
-                            <td>{{$no++;}}</td>
-                            <td>{{$credit->month}}</td>
-                            <td>{{$credit->total_credit_point_sold}}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+        {{-- for credit chart and table --}}
+        <div class="row mx-2">
+            <div class="col-md-6">
+                <canvas id="creditChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                @php
+                $no=1;
+                @endphp
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>
+                                    @if($data["creditData"]["type"] == 1)
+                                    Date
+                                    @elseif($data["creditData"]["type"] == 3)
+                                    Year
+                                    @else
+                                    Month
+                                    @endif
+                                </th>
+                                <th>No of credit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data["creditData"]["creditSold"] as $credit)
+                            <tr>
+                                <td>{{$no++;}}</td>
+                                <td>@if($data["creditData"]["type"] == 1)
+                                    {{$credit->daily}}
+                                    @elseif($data["creditData"]["type"] == 2)
+                                    {{$credit->month}}
+                                    @else
+                                    {{$credit->year}}
+                                    @endif
+                                </td>
+                                <td>{{$credit->total_credit_point_sold}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row my-5">
-        <div class="col-6">
-            <h4 class="fw-bold text-primary text-center">Top 5 hiring companies<h4>
-                    <canvas id="companyChart"></canvas>
-        </div>
-        <div class="col-6">
-            <h4 class="fw-bold text-primary text-center">Monthly sales<h4>
-                    <canvas id="saleChart"></canvas>
-        </div>
-    </div>
-    @php
-    //monthly sold credit
-    $labels = [];
-    $values = [];
-    foreach ($data["creditSold"] as $credit){
-    array_push($labels,$credit->month);
-    array_push($values,$credit->total_credit_point_sold);
-    }
-    $chartData = [
-    'labels' => $labels,
-    'values' => $values,
-    ];
-    @endphp
-    <script>
-        var ctx = document.getElementById("creditChart");
+        {{-- credit chart data --}}
+        @php
+        $labels = [];
+        $values = [];
+        foreach ( $data["creditData"]["creditSold"] as $credit){
+        if($data["creditData"]["type"] == 1){
+        array_push($labels, $credit->daily);
+        }
+        elseif($data["creditData"]["type"] == 3){
+        array_push($labels,$credit->year);
+        }
+        else{
+        array_push($labels,$credit->month);
+        }
+        array_push($values,$credit->total_credit_point_sold);
+        }
+        $chartData = [
+        'labels' => $labels,
+        'values' => $values,
+        ];
+        @endphp
+        <script>
+            var ctx = document.getElementById("creditChart");
                     var chartData = {!! json_encode($chartData) !!};
                     var data = {
                         labels: chartData.labels,
@@ -164,22 +202,123 @@
                                 }
                             }
                         });
-    </script>
-    @php
-    //monthly sales
-    $labels = [];
-    $values = [];
-    foreach ($data["monthlySales"] as $sale){
-    array_push($labels,$sale->month);
-    array_push($values,$sale->total_sale);
-    }
-    $chartData = [
-    'labels' => $labels,
-    'values' => $values,
-    ];
-    @endphp
-    <script>
-        ctx = document.getElementById("saleChart");
+        </script>
+    </div>
+    {{-- for sales --}}
+    <div  class="my-3">
+        {{-- for sale title and date form--}}
+        <div class="my-2">
+            <h4 class="fw-bold text-primary text-center">
+                @if($data["salesData"]["type"] == 1)
+                Daily
+                @elseif($data["salesData"]["type"] == 3)
+                Yearly
+                @else
+                Monthly
+                @endif sales
+            </h4>
+            <form action="{{ route('admin.dashboard.filter') }}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-md-2 text-md-end"><label for="start-dateSale" class="form-label fs-6">Start
+                            Date:</label>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="date" id="start-dateSale" class="form-control" name="start_dateSale" required
+                            value="{{$data["salesData"]['startDate']}}">
+                    </div>
+                    <div class="col-md-2 text-md-end"><label for="end-dateSale" class="form-label fs-6">End
+                            Date:</label></div>
+                    <div class="col-md-2">
+                        <input type="date" id="end-dateSale" class="form-control" name="end_dateSale" required
+                            value="{{$data["salesData"]['endDate']}}">
+                    </div>
+                    <div class="col-md-2">
+                        <select name="typeSale" id="typeSale" class="form-select" required>
+                            <option value="">--select time--</option>
+                            <option value="1" @if( $data["salesData"]["type"]==1) selected @endif>daily</option>
+                            <option value="2" @if( $data["salesData"]["type"]==2) selected @endif>monthly</option>
+                            <option value="3" @if( $data["salesData"]["type"]==3) selected @endif>yearly</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-flex">
+                        <a><button id="filter-button" class="btn btn-primary me-2 reportBtn">Filter</button></a>
+                        <a href="{{ route('admin.dashboard') }}"><button onclick="clearData();"
+                                class="btn btn-secondary reportBtn" type="button">clear</button></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {{-- for sale chart and table --}}
+        <div class="row mx-2">
+            <div class="col-md-6">
+                <canvas id="saleChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                @php
+                $no=1;
+                @endphp
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>
+                                    @if($data["salesData"]["type"] == 1)
+                                    Date
+                                    @elseif($data["salesData"]["type"] == 3)
+                                    Year
+                                    @else
+                                    Month
+                                    @endif
+                                </th>
+                                <th>Sale amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data["salesData"]["sales"] as $sale)
+                            <tr>
+                                <td>{{$no++;}}</td>
+                                <td>@if($data["salesData"]["type"] == 1)
+                                    {{$sale->daily}}
+                                    @elseif($data["salesData"]["type"] == 3)
+                                    {{$sale->year}}
+                                    @else
+                                    {{$sale->month}}
+                                    @endif
+                                </td>
+                                <td>{{$sale->total_sale}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {{-- sales chart data --}}
+        @php
+        //monthly sales
+        $labels = [];
+        $values = [];
+        foreach ($data["salesData"]["sales"] as $sale){
+        if($data["salesData"]["type"] == 1){
+        array_push($labels, $sale->daily);
+        }
+        elseif($data["salesData"]["type"] == 3){
+        array_push($labels,$sale->year);
+        }
+        else{
+        array_push($labels,$sale->month);
+        }
+        array_push($values,$sale->total_sale);
+        }
+        $chartData = [
+        'labels' => $labels,
+        'values' => $values,
+        ];
+        @endphp
+        <script>
+            ctx = document.getElementById("saleChart");
                      chartData = {!! json_encode($chartData) !!};
                      data = {
                         labels: chartData.labels,
@@ -199,7 +338,7 @@
                                 '#40e0d0',
                                 '#8e3a59',
                                 '#00a7e1'
-    ],
+        ],
                             fill: false,
                             borderColor: 'rgb(75, 192, 192)',
                             tension: 0.1
@@ -216,59 +355,16 @@
                                 }
                             }
                         });
-    </script>
-    @php
-    //monthly sold credit
-    $labels = [];
-    $values = [];
-    foreach ($data["topHiringCompanies"] as $company){
-    array_push($labels,$company->company_name);
-    array_push($values,$company->job_count);
-    }
-    $chartData = [
-    'labels' => $labels,
-    'values' => $values,
-    ];
-    @endphp
-    <script>
-        var options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    aspectRatio: 1,
-    width: 500,
-    height: 500
-    };
-    chart = document.getElementById("companyChart");
-    chartData = {!! json_encode($chartData) !!};
-     data = {
-  labels: chartData.labels,
-  datasets: [{
-    label: 'Number of jobs',
-    data: chartData.values,
-    backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(54, 162, 235)',
-      'rgb(255, 205, 86)',
-      'green',
-        '#fd3412'
-    ],
-    hoverOffset: 4
-  }]
-    };
-    new Chart(chart, {
-        type: 'pie',
-        data: data,
-        options:options
-    });
-    </script>
-    <script>
+        </script>
+    </div>
+
+<script>
         let clearData=()=>{
-        alert('clear');
         var myStartDateInput = document.getElementById("start-date");
         var myEndDateInput = document.getElementById("end-date");
         myStartDateInput.value = null;
         myEndDateInput.value = null;
     }
-    </script>
+</script>
 </div>
 @endsection

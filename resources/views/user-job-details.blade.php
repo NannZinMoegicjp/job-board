@@ -21,7 +21,7 @@
             <div class="col-3 d-flex justify-content-center align-items-center">
                 <a href="{{url('/company/details/'.$job->address->company->id)}}"><img
                         src="{{url('images/companies/'.$job->address->company->logo)}}"
-                        alt="{{$job->address->company->company_name}} image"></a>
+                        alt="{{$job->address->company->company_name}} image" class="companyImg"></a>
             </div>
             <div class="col-6">
                 <h4 class="jobAttribute border-0 fw">{{$job->title}}</h4>

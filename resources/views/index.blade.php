@@ -88,8 +88,7 @@
             <div class="col-lg-3 col-md-4 col-6 col-xs-12">
                 <div class="shadow d-flex flex-column justify-content-center align-items-center py-5 job">
                     <img src="{{URL::asset('images/companies/'.$job->address->company->logo)}}" alt="company image"
-                        class="me-2 p-1">
-                    {{-- <p class="text-center">{{$job->address->company->company_name}}</p> --}}
+                        class="me-2 p-1 companyImg">
                     <h5 class="text-center">{{$job->title}}</h5>
                     <p class="mb-2 text-center">{{$job->address->city->state->name}}</p>
                     <p class="text-secondary mb-4 text-center">{{$job->employmentType->name}}</p>

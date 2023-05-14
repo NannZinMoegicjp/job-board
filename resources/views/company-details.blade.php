@@ -5,7 +5,7 @@
     <div class="container bg-white my-4">
         <div class="d-flex align-items-center mb-4">
             <img src="{{url('images/companies/'.$data['company']['logo'])}}"
-                alt="{{$data['company']['company_name']}} logo" class="companyDetailsLogo me-2">
+                alt="{{$data['company']['company_name']}} logo" class="companyImg me-2">
             <h3 class="text-center title py-2 me-2">{{$data['company']["company_name"]}}</h3>
         </div>
         <div class="row">

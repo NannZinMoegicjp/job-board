@@ -33,10 +33,9 @@ class AdminDashBoardController extends Controller
         $applicationCount = Application::count();
         $companyCount = Company::count();
         $jobCount = Job::where('status', 'active')->count();
-        $confirmedOrderCount = OrderConfirmation::count();
         $confirmedOrderedIds = OrderConfirmation::select('order_id')->get();
         $awaitingOrderCount = Order::whereNotIn('id', $confirmedOrderedIds)->count();
-        $count = ["activeJobs" => $jobCount, "companies" => $companyCount, "conOrders" => $confirmedOrderCount, "awaitOrders" => $awaitingOrderCount, "jobSeekers" => $jobSeekerCount, "applications" => $applicationCount];
+        $count = ["activeJobs" => $jobCount, "companies" => $companyCount, "awaitOrders" => $awaitingOrderCount, "jobSeekers" => $jobSeekerCount, "applications" => $applicationCount];
         $months = collect([
             'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December',
@@ -54,30 +53,97 @@ class AdminDashBoardController extends Controller
             ->limit(10)
 
             ->get();
+        // get credit sold by start date and end date
         $startDate = $request->start_date;
         $endDate = $request->end_date;
+        $end_datetime = date('Y-m-d H:i:s', strtotime($endDate.' 23:59:59'));
+        $type = $request->type;
         if ($startDate && $endDate) {
-            $creditSold = OrderConfirmation::selectRaw(' MONTHNAME(order_confirmations.created_at) as month, SUM(orders.no_of_credit) as total_credit_point_sold')
+            if($type==1){
+                $creditSold = OrderConfirmation::selectRaw('Date(order_confirmations.created_at) as daily, SUM(orders.no_of_credit) as total_credit_point_sold')
                 ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
                 ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
-                ->whereBetween('order_confirmations.created_at', [$startDate, $endDate])
+                ->whereBetween('order_confirmations.created_at', [$startDate, $end_datetime])
+                ->where('is_confirmed',1)
+                ->groupBy('daily')
+                ->orderByDesc('daily')
+                ->get();
+                
+            }elseif($type==3){
+                $creditSold = OrderConfirmation::selectRaw('Year(order_confirmations.created_at) as year, SUM(orders.no_of_credit) as total_credit_point_sold')
+                ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
+                ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
+                ->whereBetween('order_confirmations.created_at', [$startDate, $end_datetime])
+                ->where('is_confirmed',1)
+                ->groupBy('year')
+                ->orderByDesc('year')
+                ->get();      
+            }else{
+                $creditSold = OrderConfirmation::selectRaw('MONTHNAME(order_confirmations.created_at) as month, SUM(orders.no_of_credit) as total_credit_point_sold')
+                ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
+                ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
+                ->whereBetween('order_confirmations.created_at', [$startDate, $end_datetime])
+                ->where('is_confirmed',1)
                 ->groupBy('month')
                 ->orderByDesc('month')
                 ->get();
+                
+                // $creditSold = $months->map(function ($month) use ($creditSold) {
+                //     $result = $creditSold->firstWhere('month', $month);
+                //     return $result ?? (object) ['month' => $month, 'total_credit_point_sold' => 0];
+                // });
+            }           
         } else {
             $creditSold = OrderConfirmation::selectRaw(' MONTHNAME(order_confirmations.created_at) as month, SUM(orders.no_of_credit) as total_credit_point_sold')
                 ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
                 ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
                 ->whereYear('order_confirmations.created_at', '=', date('Y'))
                 ->groupBy('month')
-            // ->orderByDesc('month')
                 ->get();
+            // $creditSold = $months->map(function ($month) use ($creditSold) {
+            //     $result = $creditSold->firstWhere('month', $month);
+            //     return $result ?? (object) ['month' => $month, 'total_credit_point_sold' => 0];
+            // });
         }
-        $creditSold = $months->map(function ($month) use ($creditSold) {
-            $result = $creditSold->firstWhere('month', $month);
-            return $result ?? (object) ['month' => $month, 'total_credit_point_sold' => 0];
-        });
-        $monthlySales = OrderConfirmation::selectRaw(' MONTHNAME(order_confirmations.created_at) as month, SUM(credit_prices.price * orders.no_of_credit) as total_sale')
+        // get sales amount by start date and end date
+        $startDateSale = $request->start_dateSale;
+        $endDateSale = $request->end_dateSale;
+        $end_datetimeSale = date('Y-m-d H:i:s', strtotime($endDateSale.' 23:59:59'));
+        $typeSale = $request->typeSale;
+        if ($startDateSale && $endDateSale){
+            if($typeSale == 1){
+                $sales = OrderConfirmation::selectRaw(' Date(order_confirmations.created_at) as daily, SUM(credit_prices.price * orders.no_of_credit) as total_sale')
+                ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
+                ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
+                ->whereBetween('order_confirmations.created_at', [$startDateSale,$end_datetimeSale])
+                ->where('is_confirmed', 1)
+                ->groupBy('daily')
+                ->orderByDesc('daily')
+                ->get();
+            }elseif($typeSale == 3){
+                $sales = OrderConfirmation::selectRaw(' Year(order_confirmations.created_at) as year, SUM(credit_prices.price * orders.no_of_credit) as total_sale')
+                ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
+                ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
+                ->whereBetween('order_confirmations.created_at', [$startDateSale,$end_datetimeSale])
+                ->where('is_confirmed', 1)
+                ->groupBy('year')
+                ->orderByDesc('year')
+                ->get();
+            }else{
+                $sales = OrderConfirmation::selectRaw(' MONTHNAME(order_confirmations.created_at) as month, SUM(credit_prices.price * orders.no_of_credit) as total_sale')
+                ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
+                ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
+                ->whereBetween('order_confirmations.created_at', [$startDateSale,$end_datetimeSale])
+                ->where('is_confirmed', 1)
+                ->groupBy('month')
+                ->orderByDesc('month')
+                ->get();
+                // $sales = $months->map(function ($month) use ($sales) {
+                // $result = $sales->firstWhere('month', $month);
+                // return $result ?? (object) ['month' => $month, 'total_sale' => 0];});
+            }
+        }else{
+            $sales = OrderConfirmation::selectRaw(' MONTHNAME(order_confirmations.created_at) as month, SUM(credit_prices.price * orders.no_of_credit) as total_sale')
             ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
             ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
             ->whereYear('order_confirmations.created_at', '=', date('Y'))
@@ -85,75 +151,20 @@ class AdminDashBoardController extends Controller
             ->groupBy('month')
             ->orderByDesc('month')
             ->get();
-        $monthlySales = $months->map(function ($month) use ($monthlySales) {
-            $result = $monthlySales->firstWhere('month', $month);
-            return $result ?? (object) ['month' => $month, 'total_sale' => 0];
-        });
+            // $sales = $months->map(function ($month) use ($sales) {
+            // $result = $sales->firstWhere('month', $month);
+            // return $result ?? (object) ['month' => $month, 'total_sale' => 0];
+        // });
+        }        
         $categories = JobCategory::join('jobs', 'job_categories.id', '=', 'jobs.job_category_id')
-
             ->select('job_categories.name', DB::raw('COUNT(*) as job_count'))
-
             ->groupBy('job_categories.id', 'job_categories.name')
-
             ->orderByDesc('job_count')
-
             ->limit(10)
-
-            ->get();
-            $data = ["startDate" => $startDate, "endDate" => $endDate, "creditSold" => $creditSold, "monthlySales" => $monthlySales, "topHiringCompanies" => $topHiringCompanies];
+            ->get();        
+        $creditData = ["startDate" => $startDate, "endDate" => $endDate,"type"=>$type , "creditSold" => $creditSold];
+        $salesData = ["startDate" => $startDateSale, "endDate" => $endDateSale,"type"=>$typeSale , "sales" => $sales];
+        $data = ["creditData"=>$creditData, "salesData" => $salesData, "topHiringCompanies" => $topHiringCompanies];
         return view('dashboard')->with('count', $count)->with('data', $data);
-    }
-    public function reports(Request $request)
-    {
-        $companies = Company::select('company_name', 'companies.id', DB::raw('COUNT(*) as job_count'))
-
-            ->join('addresses', 'companies.id', '=', 'addresses.company_id')
-
-            ->join('jobs', 'addresses.id', '=', 'jobs.address_id')
-
-            ->groupBy('companies.id', 'company_name')
-
-            ->orderByDesc('job_count', 'company_name')
-
-            ->limit(10)
-
-            ->get();
-
-        // return $companies;
-
-        $categories = JobCategory::join('jobs', 'job_categories.id', '=', 'jobs.job_category_id')
-
-            ->select('job_categories.name', DB::raw('COUNT(*) as job_count'))
-
-            ->groupBy('job_categories.id', 'job_categories.name')
-
-            ->orderByDesc('job_count')
-
-            ->limit(10)
-
-            ->get();
-
-        // return $categories;
-
-        // total sales monthly(for current year)
-        $monthlySales = OrderConfirmation::selectRaw('YEAR(order_confirmations.created_at) as year, MONTH(order_confirmations.created_at) as month, SUM(credit_prices.price * orders.no_of_credit) as total_sale')
-            ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
-            ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
-            ->whereYear('order_confirmations.created_at', '=', date('Y'))
-            ->groupBy('year', 'month')
-            ->orderByDesc('month')
-            ->get();
-
-        // return $monthlySales;
-        // number of credit sold monthly(for current year)
-        $monthlySales = OrderConfirmation::selectRaw(' MONTH(order_confirmations.created_at) as month, SUM(orders.no_of_credit) as total_credit_point_sold')
-            ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
-            ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
-            ->whereYear('order_confirmations.created_at', '=', date('Y'))
-            ->groupBy('month')
-            ->orderByDesc('month')
-            ->get();
-        return $monthlySales;
-
     }
 }
