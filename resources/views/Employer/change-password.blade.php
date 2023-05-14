@@ -8,6 +8,11 @@
         </div>
         @endif
     </div>
+    @if (isset($status))
+        <div class="alert alert-success">
+            {{ $status }}
+        </div>
+        @endif
     <div class="row">
         @if ($errors->any())
         <div class="alert alert-danger">

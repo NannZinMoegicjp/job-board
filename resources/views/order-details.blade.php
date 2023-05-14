@@ -7,7 +7,7 @@
     @if(isset($corder))
     <div class="col-md-10 offset-md-1 col-12">
         <div class="bg-white shadow my-3 p-1">
-            <h3 class="text-center my-3">Order summary</h3>
+            <h3 class="text-center my-3">f summary</h3>
             <div class="row mb-3">
                 <div class="col-md-2 offset-md-2 text-end col-5">Customer</div>
                 <div class="col-md-5 col-7">{{$corder->order->company->company_name}}</div>

@@ -140,7 +140,7 @@ class HomeController extends Controller
             return redirect()->back()->with('error', 'you have already applied this job');
         }
         $application->job_id = $id;
-        $application->job_seeker_id = $request->session()->get('jobseekerId');
+        $application->job_seeker_id = auth()->guard('jobseeker')->id();
         $cvfile = time() . "." . $request->file('cvform')->getClientOriginalName();
         $request->cvform->move(public_path('applications'), $cvfile);
         $application->cvfile = $cvfile;

@@ -17,6 +17,11 @@
         </div>
         @endif
     </div>
+    @if (isset($status))
+        <div class="alert alert-success">
+            {{ $status }}
+        </div>
+        @endif
     <div class="row my-3">
         <div class="col-md-7 col-12 mb-1">
             <form action="{{route('jobseeker.change.password')}}" class="bg-white px-3 pb-2 rounded shadow"

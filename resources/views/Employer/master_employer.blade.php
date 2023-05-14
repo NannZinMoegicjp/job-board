@@ -86,7 +86,7 @@
                             <a href="#"><i class="bi bi-send-fill"></i><span>Applications</span><span
                                     class="bi bi-caret-right-fill"></span></a>
                             <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="{{url('/employer/applications')}}">Applications</a>
+                                <li><a class="dropdown-item" href="{{url('/employer/applications')}}">Pending Applications</a>
                                 </li>
                                 <li><a class="dropdown-item"
                                         href="{{url('/employer/applications/shortlisted')}}">Shortlisted application</a>

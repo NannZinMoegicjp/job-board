@@ -39,7 +39,7 @@
     <div class="col-md-3 col-12">
         <div class="item greenBorder d-flex justify-content-center align-items-center shadow-sm">
             <div class="p-2">
-
+                <img src="{{URL::asset('images/dashboard/checklist.png')}}" alt="job">
             </div>
             <div>
                 <h4>{{$count["pendingApps"]}}</h4>

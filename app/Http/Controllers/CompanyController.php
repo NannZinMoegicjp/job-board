@@ -47,7 +47,7 @@ class CompanyController extends Controller
         $company->save();
         // Log out the user and redirect to the login page
         // Auth::logout();
-        return view('Employer.change-password')->with('status', 'changed password successfully. please log in again.');
+        return view('Employer.change-password')->with('status', 'changed password successfully.');
     }
     public function insertGet()
     {

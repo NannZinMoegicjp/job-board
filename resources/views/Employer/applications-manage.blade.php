@@ -15,7 +15,7 @@
             {{session("error")}}
         </div>
     @endif
-    <h3>Applications</h3>
+    <h3>Pending Applications</h3>
     <div class="table-responsive">
         <table class="table table-striped" id="datatable">
             @php
