@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\CreditPrice;
 use App\Models\OrderConfirmation;
 use App\Models\Company;
 class OrderController extends Controller
@@ -43,12 +44,12 @@ class OrderController extends Controller
     }
     public function confirmedOrderDetails($id){
         $corder =OrderConfirmation::find($id);
-        $creditPrice = Price::find($corder->order->price->id);
+        $creditPrice = CreditPrice::withTrashed()->find($corder->order->credit_price_id);
         return view('order-details')->with('corder',$corder)->with('creditPrice',$creditPrice);
     }
     public function awaitingOrderDetails($id){
         $order =Order::find($id);
-        $creditPrice = Price::find($corder->order->price->id);
+        $creditPrice = CreditPrice::withTrashed()->find($corder->order->credit_price_id);
         return view('order-details')->with('order',$corder)->with('creditPrice',$creditPrice);
     }
 }
