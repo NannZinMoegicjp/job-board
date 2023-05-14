@@ -24,7 +24,7 @@
                 <div>
                     @foreach($data as $price)
                     @php
-                    if(is_null($price["updated_at"])){
+                    if(is_null($price["deleted_at"])){
                     $latestPrice=$price["price"];
                     $id = $price["id"];
                     }
@@ -69,7 +69,7 @@
                     <td>{{$no++}}</td>
                     <td>{{$price["price"]}}</td>
                     <td>{{$price["created_at"]}}</td>
-                    <td>{{$price["updated_at"]}}</td>
+                    <td>{{$price["deleted_at"]}}</td>
                 </tr>
                 @endforeach
             </tbody>

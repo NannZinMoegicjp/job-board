@@ -11,13 +11,9 @@
     </div>
     @endif
     <div class="d-flex justify-content-md-end align-items-md-center my-3">
-        <a href="{{url('/admin/payment')}}">Confirmed Orders<i class="bi bi-arrow-right"></i></a>
+        <a href="{{url('/admin/payment')}}">Credit transactions<i class="bi bi-arrow-right"></i></a>
     </div>
-    <div class="row mb-2">
-        <div class="col-md-3 col-12 d-flex align-items-center">
-            <h3>Awaiting Orders</h3>
-        </div>
-    </div>
+    <h3>Pending credit proposal</h3>
     <div class="row">
         <div class="col">
             <div class="table-responsive">

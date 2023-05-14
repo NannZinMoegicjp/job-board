@@ -6,13 +6,9 @@
 @section('content')
 <div class="container-fluid my-4">
     <div class="d-flex justify-content-md-end align-items-md-center my-3">
-        <a href="{{url('/admin/order')}}">Awaiting Orders<i class="bi bi-arrow-right"></i></a>
+        <a href="{{url('/admin/order')}}">Pending credit proposal<i class="bi bi-arrow-right"></i></a>
     </div>
-    <div class="row mb-2">
-        <div class="col-md-3 col-12 d-flex align-items-center">
-            <h3>Confirmed Orders</h3>
-        </div>
-    </div>
+    <h3>Credit transactions</h3>
     <div class="table-responsive">
         <table class="table table-striped" id="datatable">
             @php

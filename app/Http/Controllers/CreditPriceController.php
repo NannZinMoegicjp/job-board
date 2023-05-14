@@ -8,7 +8,7 @@ use App\Models\CreditPrice;
 class CreditPriceController extends Controller
 {
     public function index(){
-        $prices = CreditPrice::orderBy('created_at','desc')->get();
+        $prices = CreditPrice::withTrashed()->orderBy('created_at','desc')->get();
         return view('pricing')->with('data',$prices);
     }
     public function insertPrice(Request $request){

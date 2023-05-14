@@ -20,12 +20,16 @@ class PaymentMethodController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        $data->name = $request->input('name');
-        $logoImg = time() . "." . $request->file('image')->getClientOriginalName();
-        $request->image->move(public_path('images/payment_methods'),$logoImg);
-        $data->image = $logoImg;
-        $data->save();
-        return redirect('/admin/payment-methods')->with('status','added payment method successfully');
+        if(PaymentMethod::where('name', $request->input('name'))->count() < 1){
+            $data->name = $request->input('name');
+            $logoImg = time() . "." . $request->file('image')->getClientOriginalName();
+            $request->image->move(public_path('images/payment_methods'),$logoImg);
+            $data->image = $logoImg;
+            $data->save();
+            return redirect('/admin/payment-methods')->with('status','added payment method successfully');
+        }else{
+            return back()->with('error','payment method already existed');
+        }        
     }
     public function update(Request $request,$id){
         $data = PaymentMethod::find($id);        
@@ -56,12 +60,16 @@ class PaymentMethodController extends Controller
         return redirect('/admin/payment-methods')->with('status','deleted payment method successfully');        
     }
     public function insertPaymentAccount(Request $request){
-        $payment_account = new PaymentAccount();
-        $payment_account->account_name = $request->input('accName');
-        $payment_account->account_no = $request->input('accNo');
-        $payment_account->payment_method_id = $request->input('payMethod');
-        $payment_account->save();
-        return redirect('/admin/payment-methods')->with('status','added account successfully');
+        if(PaymentAccount::where('account_name', $request->input('account_name'))->where('account_no', $request->input('accNo'))->count() < 1){
+            $payment_account = new PaymentAccount();
+            $payment_account->account_name = $request->input('accName');
+            $payment_account->account_no = $request->input('accNo');
+            $payment_account->payment_method_id = $request->input('payMethod');
+            $payment_account->save();
+            return redirect('/admin/payment-methods')->with('status','added account successfully');
+        }else{
+            
+        }        
     }
     public function updatePaymentAccount(Request $request,$id){
         $payment_account = PaymentAccount::find($id);

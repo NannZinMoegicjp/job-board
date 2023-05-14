@@ -71,7 +71,7 @@
                         </li>
                         <li>
                             <a href="{{url('/admin/payment')}}"><i class="bi bi-cart-plus-fill"></i>
-                                <span>Orders</span></a>
+                                <span>Credit proposal</span></a>
                         </li>
                         <li>
                             <a href="{{url('/admin/companies')}}"><i class="bi bi-building"></i>
