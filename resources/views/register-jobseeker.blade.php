@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-md-7 col-12 d-flex">
                         <input type="submit" class="btn-primary btn me-2" value="Register">
-                        <a href="{{url('/')}}"><input type="button" class="btn-secondary btn" value="Cancel"></a>
+                        <a href="{{url('/home')}}"><input type="button" class="btn-secondary btn" value="Cancel"></a>
                     </div>
                 </div>
             </form>

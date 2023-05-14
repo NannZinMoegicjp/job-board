@@ -54,7 +54,17 @@ function validateForm() {
         // If a field is empty...
         if (y[i].value == "") {
             // add an "invalid" class to the field:
-            y[i].className += " invalid";
+            y[i].style.borderColor = "red";
+            // and set the current valid status to false
+            valid = false;
+        }
+    }
+    selectboxes = x[currentTab].getElementsByTagName("select");
+    for (i = 0; i < selectboxes.length; i++) {
+        // If a field is empty...
+        if (selectboxes[i].value == "") {
+            // add an "invalid" class to the field:
+            selectboxes[i].style.borderColor = "red";
             // and set the current valid status to false
             valid = false;
         }

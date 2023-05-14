@@ -26,6 +26,9 @@ use App\Http\Controllers\RegisterController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Route::get('',function(){
+//     return view('login');
+// });
 Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('/jobs', [HomeController::class,'allJobs'])->name('all-jobs');
 Route::get('/jobs/filter', [HomeController::class,'filterJobs']);

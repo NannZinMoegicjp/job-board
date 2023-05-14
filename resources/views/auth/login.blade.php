@@ -20,7 +20,7 @@
                           placeholder="email"  name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                         @error('email')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="invalid-feedback">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
@@ -31,12 +31,12 @@
                 <div class="col-md-6 offset-md-3 col-12">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1"><i class="bi bi-key-fill"></i></span>
-                        <input id="password" type="password" placeholder="password"
+                        <input id="password" type="password" placeholder="password" value="{{ old('password') }}"
                             class="form-control @error('password') is-invalid @enderror" name="password" required
                             autocomplete="current-password">
 
                         @error('password')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="invalid-feedback">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror

@@ -111,6 +111,11 @@
             @show
         </div>
     </div>
+    <script>
+        setTimeout(function() {
+          $('.alert').fadeOut('fast');
+         }, 5000); // 3 seconds (time is in milliseconds)
+    </script>
     @yield('scripts')
 </body>
 

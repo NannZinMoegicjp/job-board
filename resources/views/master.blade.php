@@ -33,7 +33,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav nav nav-underline ms-auto mynavs">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('/')}}">Home</a>
+                            <a class="nav-link" href="{{url('/home')}}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('all-jobs')}}">Jobs</a>
@@ -51,27 +51,31 @@
                             <a class="nav-link" href="{{route('all-companies')}}">Companies</a>
                         </li>
                         <li>
-                            @if(auth()->guard('jobseeker')->check() || auth()->guard('employer')->check() || auth()->guard('admin')->check())                                
+                            @if(auth()->guard('jobseeker')->check() || auth()->guard('employer')->check() ||
+                            auth()->guard('admin')->check())
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false"> 
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     @if (auth()->guard('jobseeker')->check())
                                     {{auth()->guard('jobseeker')->user()->name}}
                                     @elseif(auth()->guard('employer')->check())
                                     {{auth()->guard('employer')->user()->contact_person}}
                                     @elseif(auth()->guard('admin')->check())
                                     {{auth()->guard('admin')->user()->name}}
-                                    @endif                            
+                                    @endif
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li>   
-                                    @if (auth()->guard('jobseeker')->check())
-                                    <a  href="{{ route('jobseeker.dashboard') }}" class="text-decoration-none text-dark">dashboard</a>                                
-                                    @elseif(auth()->guard('employer')->check())
-                                    <a href="{{ route('employer.dashboard') }}" class="text-decoration-none text-dark">dashboard</a>
-                                    @elseif(auth()->guard('admin')->check())
-                                    <a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-dark">dashboard</a>                                    
-                                    @endif                                       
+                                    <li>
+                                        @if (auth()->guard('jobseeker')->check())
+                                        <a href="{{ route('jobseeker.dashboard') }}"
+                                            class="text-decoration-none text-dark">dashboard</a>
+                                        @elseif(auth()->guard('employer')->check())
+                                        <a href="{{ route('employer.dashboard') }}"
+                                            class="text-decoration-none text-dark">dashboard</a>
+                                        @elseif(auth()->guard('admin')->check())
+                                        <a href="{{ route('admin.dashboard') }}"
+                                            class="text-decoration-none text-dark">dashboard</a>
+                                        @endif
                                     </li>
                                     <li>
                                         <a class="nav-link">
@@ -83,14 +87,17 @@
                                     </li>
                                 </ul>
                             </div>
-                            @endif                            
+                            @endif
                         </li>
-                        @if(!auth()->guard('jobseeker')->check() && !auth()->guard('employer')->check() && !auth()->guard('admin')->check())
+                        @if(!auth()->guard('jobseeker')->check() && !auth()->guard('employer')->check() &&
+                        !auth()->guard('admin')->check())
                         <li class="nav-item">
-                        <a href="{{route('register')}}"><button class="button-18 registerBtn mb-4" role="button">Register</button></a>
+                            <a href="{{route('register')}}"><button class="button-18 registerBtn mb-4"
+                                    role="button">Register</button></a>
                         </li>
                         <li class="nav-item">
-                        <a href="{{route('login')}}"><button class="button-18 myBtn mb-4" role="button">login</button></a>
+                            <a href="{{route('login')}}"><button class="button-18 myBtn mb-4"
+                                    role="button">login</button></a>
                         </li>
                         @endif
                     </ul>
@@ -140,6 +147,11 @@
         </div>
         <p class="text-center text-secondary mb-0">Copyright © 2023 GIC. All Rights Reserved. Powered by: NZM</p>
     </footer>
+    <script>
+        setTimeout(function() {
+          $('.alert').fadeOut('fast');
+         }, 5000); // 3 seconds (time is in milliseconds)
+    </script>
 </body>
 
 </html>

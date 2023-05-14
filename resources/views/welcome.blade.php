@@ -103,6 +103,11 @@
     <script src="{{URL::asset('/js/jquery-3.2.1.min.js')}}"></script>
     <script src="{{URL::asset('/js/jquery.slimscroll.js')}}"></script>
     <script src="{{URL::asset('/js/app.js')}}"></script>
+    <script>
+        setTimeout(function() {
+          $('.alert').fadeOut('fast');
+         }, 5000); // 3 seconds (time is in milliseconds)
+    </script>
     @section('scripts')
 
     @show

@@ -45,6 +45,8 @@ class EmployerJobController extends Controller
             $job->gender = 'female';
         } else if( $request->male){
             $job->gender = 'male';
+        }else{
+            $job->gender = 'both';
         }
         $job->job_category_id = $request->jobCategory;
         $job->experience_level_id = $request->expLevel;

@@ -126,7 +126,7 @@ class JobSeekerController extends Controller
         }        
         $jobseeker->save();
         // Log out the user and redirect to the login page
-        Auth::logout();
-        return redirect('/login')->with('status', 'changed password successfully. please log in again.');
+        // Auth::logout();
+        return view('JobSeeker.change-password')->with('status', 'changed password successfully. please log in again.');
     }
 }

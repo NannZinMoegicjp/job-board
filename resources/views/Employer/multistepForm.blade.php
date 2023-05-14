@@ -33,7 +33,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <input type="text" class="form-control" required name="title" id="title" value="{{ old('title') }}"
-                    oninput="this.className = 'form-control'">
+                oninput="this.style.borderColor = 'grey'">
             </div>
         </div>
         
@@ -42,8 +42,8 @@
                 <label for="minSalary">Min Salary</label>
             </div>
             <div class="col-md-7 col-12">
-                <input type="number" min='1' class="form-control" required name="minSalary" id="minSalary"
-                    value="{{ old('minSalary') }}" oninput="this.className = 'form-control'">
+                <input type="number" min='0' step="10000" class="form-control" required name="minSalary" id="minSalary"
+                    value="{{ old('minSalary') }}" oninput="this.style.borderColor = 'grey'">
             </div>
         </div>
         <div class="row mb-2">
@@ -51,8 +51,8 @@
                 <label for="maxSalary">Max Salary</label>
             </div>
             <div class="col-md-7 col-12">
-                <input type="number" min='1' class="form-control" required name="maxSalary" id="maxSalary"
-                    value="{{ old('maxSalary') }}" oninput="this.className = 'form-control'">
+                <input type="number" min='0' step="10000" class="form-control" required name="maxSalary" id="maxSalary"
+                    value="{{ old('maxSalary') }}" oninput="this.style.borderColor = 'grey'">
             </div>
         </div> 
         <div class="row mb-2">
@@ -61,7 +61,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" id="openPosition" name="openPosition"
-                    value="{{old('openPosition')}}" oninput="this.className = 'form-control'">
+                    value="{{old('openPosition')}}" oninput="this.style.borderColor = 'grey'">
             </div>
         </div>
         <div class="row mb-2">
@@ -88,7 +88,7 @@
                 <label for="jobCategory">Job Category</label>
             </div>
             <div class="col-md-7 col-12">
-                <select name="jobCategory" id="jobCategory" class="form-select">
+                <select name="jobCategory" id="jobCategory" class="form-select" required oninput="this.style.borderColor = 'grey'">
                     <option value="">-- Select job category --</option>
                     @if(isset($data['jobCategories']))
                     @foreach ($data['jobCategories'] as $jobCat)
@@ -103,7 +103,7 @@
                 <label for="expLevel">Experience level</label>
             </div>
             <div class="col-md-7 col-12">
-                <select name="expLevel" id="expLevel" class="form-select">
+                <select name="expLevel" id="expLevel" class="form-select"  required oninput="this.style.borderColor = 'grey'">
                     <option value="">-- Select experience level --</option>
                     @if(isset($data['expLevels']))
                     @foreach ($data['expLevels'] as $expLev)
@@ -118,7 +118,7 @@
                 <label for="empType">Employment type</label>
             </div>
             <div class="col-md-7 col-12">
-                <select name="empType" id="empType" class="form-select">
+                <select name="empType" id="empType" class="form-select"  required oninput="this.style.borderColor = 'grey'">
                     <option value="">-- Select employment type --</option>
                     @if(isset($data['empTypes']))
                     @foreach ($data['empTypes'] as $empType)
@@ -133,7 +133,7 @@
                 <label for="address">Branch</label>
             </div>
             <div class="col-md-7 col-12">
-                <select name="address" id="address" class="form-select">
+                <select name="address" id="address" class="form-select"  required oninput="this.style.borderColor = 'grey'">
                     <option value="">-- Select branch --</option>
                     @if(isset($data['addresses']))
                     @foreach ($data['addresses'] as $addr)
@@ -157,14 +157,14 @@
     <div class="step">
         <p class="text-center mb-4">Job requirements</p>
         <div class="row mb-2">
-            <textarea id="myeditorinstance2" name="requirement"></textarea>
+            <textarea id="myeditorinstance2" name="requirement" required></textarea>
         </div>
     </div>
 
     <div class="step">
         <p class="text-center mb-4">Job benefits</p>
         <div class="row mb-2">
-            <textarea id="myeditorinstance3" name="benefit"></textarea>
+            <textarea id="myeditorinstance3" name="benefit" required></textarea>
         </div>
     </div>
 
