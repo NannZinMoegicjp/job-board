@@ -39,7 +39,7 @@
                 <td>{{$job->address->company->company_name}}</td>
                 <td>{{$job->title}}</td>
                 <!-- <td>{{$job->open_position}}</td> -->
-                <td>{{$job->created_at}}</td>
+                <td>{{$job->created_at->toDateString()}}</td>
                 <td>
                     <div class="d-flex">
                         <a href="{{url('/admin/job/details/'.$job->id)}}"><i class="bi bi-info-circle-fill info"></i></a>

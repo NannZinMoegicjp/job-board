@@ -60,15 +60,19 @@ class PaymentMethodController extends Controller
         return redirect('/admin/payment-methods')->with('status','deleted payment method successfully');        
     }
     public function insertPaymentAccount(Request $request){
-        if(PaymentAccount::where('account_name', $request->input('account_name'))->where('account_no', $request->input('accNo'))->count() < 1){
+        $name = $request->input('accName');
+        $accountNo = $request->input('accNo');
+        $pid  = $request->input('payMethod');
+        $count = PaymentAccount::where('account_name', $name)->where('account_no', $accountNo)->where('payment_method_id', $pid)->count();
+        if($count<1){
             $payment_account = new PaymentAccount();
-            $payment_account->account_name = $request->input('accName');
-            $payment_account->account_no = $request->input('accNo');
-            $payment_account->payment_method_id = $request->input('payMethod');
+            $payment_account->account_name = $name;
+            $payment_account->account_no = $accountNo;
+            $payment_account->payment_method_id = $pid;
             $payment_account->save();
             return redirect('/admin/payment-methods')->with('status','added account successfully');
         }else{
-            
+            return back()->with('error','payment account already existed');
         }        
     }
     public function updatePaymentAccount(Request $request,$id){

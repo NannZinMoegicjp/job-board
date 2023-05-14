@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 class CompanyController extends Controller
 {
@@ -20,6 +22,32 @@ class CompanyController extends Controller
     {
         $companies = Company::all();
         return view('companies-manage')->with('companies', $companies);
+    }
+    public function changePasswordForm(){
+        return view('Employer.change-password');
+    }
+    public function changePassword(Request $request){
+        $validator = validator(request()->all(), [
+            'password'=>['bail','required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }  
+        $userId = auth()->guard('employer')->id();
+        $company = Company::find($userId);        
+        if(Hash::check($request->input('currentPass'),$company->password)){
+            if(Hash::check($request->input('password'),$company->password)){
+                return back()->with('error','Current password and New password is same.Please use new one.')->withInput();
+            }else{
+                $company->password = Hash::make($request->input('password'));
+            }            
+        }else{
+            return back()->with('error','current password incorrect')->withInput();
+        }        
+        $company->save();
+        // Log out the user and redirect to the login page
+        Auth::logout();
+        return redirect('/login')->with('status', 'changed password successfully. please log in again.');
     }
     public function insertGet()
     {
@@ -84,6 +112,21 @@ class CompanyController extends Controller
     }
     public function update(Request $request, $id)
     {
+        $validator = validator(request()->all(), [
+            'contactPerson'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
+            'phone' => ['required','regex:/^(\+?959|09)[0-9]{9}$/'],
+            'comName'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
+            'estDate' =>['nullable','date','before_or_equal:today'],
+            'websiteLink'=>['nullable','url','regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'],
+            'address'=>['required','string']
+        ], [
+            'password.confirmed' => 'The password field confirmation does not match.',
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+        // 'images'=>['nullable'],
+        // 'images.*'=>['mimes:jpeg,jpg,svg,gif,png','max:2048'],
         $company = Company::find($id);        
         $company->contact_person = $request->input('contactPerson');
         $company->phone = $request->input('phone');
@@ -106,7 +149,7 @@ class CompanyController extends Controller
     public function updateLogo(Request $request, $id){
         $company = Company::find($id);
         $validator = validator(request()->all(), [
-            'newlogofile' => 'required|mimes:jpeg,jpg,svg,gif,png|max:2048',
+            'newlogofile' => 'required|mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp|max:2048',
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -169,7 +212,7 @@ class CompanyController extends Controller
     public function addImages(Request $request,$cid){
         $validator = validator(request()->all(), [
             'newPhotos'=>'required',
-            'newPhotos.*' => 'required|mimes:jpeg,jpg,svg,gif,png|max:2048',
+            'newPhotos.*' => 'required|mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp|max:2048',
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();

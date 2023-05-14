@@ -30,7 +30,7 @@ class OrderController extends Controller
         $company = Company::find($order->company_id);
         $company->no_of_credit += $order->no_of_credit;  
         $company->save();        
-        return redirect('/admin/order')->with("status","accepted order");
+        return redirect('/admin/order')->with("status","accepted credit proposal");
     }
     public function rejectOrder($id){
         $orderCon = new OrderConfirmation();
@@ -39,7 +39,7 @@ class OrderController extends Controller
         $orderCon->is_confirmed = false;
         $d=strtotime("today");
         $orderCon->save();
-        return redirect('/admin/order')->with("status","rejected order");
+        return redirect('/admin/order')->with("status","rejected credit proposal");
     }
     public function confirmedOrderDetails($id){
         $corder =OrderConfirmation::find($id);

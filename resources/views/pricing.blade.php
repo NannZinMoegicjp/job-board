@@ -68,8 +68,14 @@
                 <tr>
                     <td>{{$no++}}</td>
                     <td>{{$price["price"]}}</td>
-                    <td>{{$price["created_at"]}}</td>
-                    <td>{{$price["deleted_at"]}}</td>
+                    <td>{{$price["created_at"]->toDateString()}}</td>
+                    <td>
+                        @if($price["deleted_at"])
+                        {{$price["deleted_at"]->toDateString()}}
+                        @else
+                        {{$price["deleted_at"]}}
+                        @endif
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

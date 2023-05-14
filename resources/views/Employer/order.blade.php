@@ -12,7 +12,7 @@
         </div>
         @endif
     </div>
-    <h3 class="my-2">Awaiting orders</h3>
+    <h3 class="my-2">Pending credit proposal</h3>
     <div class="table-responsive">
         <table class="table table-striped" id="awaitingOrderTable">
             @php
@@ -45,7 +45,7 @@
             </tbody>
         </table>
     </div>
-    <h3 class="my-2 mt-3">Confirmed orders</h3>
+    <h3 class="my-2 mt-3">Credit transactions</h3>
     <div class="table-responsive">
         <table class="table table-striped" id="datatable">
             @php

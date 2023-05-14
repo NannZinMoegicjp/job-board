@@ -55,16 +55,18 @@ class AdminController extends Controller
     public function changePassword(Request $request){
         $validator = validator(request()->all(), [
             'password'=>['bail','required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
-        ],[
-            'password.confirmed' => 'The password field confirmation does not match.',
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }  
         $userId = auth()->guard('admin')->id();
-        $admin = Admin::find($userId);
-        if($admin->password == $request->input('currentPass')){
-            $admin->password = Hash::make($request->input('password'));
+        $admin = Admin::find($userId);        
+        if(Hash::check($request->input('currentPass'),$admin->password)){
+            if(Hash::check($request->input('password'),$admin->password)){
+                return back()->with('error','Current password and New password is same.Please use new one.')->withInput();
+            }else{
+                $admin->password = Hash::make($request->input('password'));
+            }            
         }else{
             return back()->with('error','current password incorrect')->withInput();
         }        

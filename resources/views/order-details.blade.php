@@ -93,7 +93,7 @@
                 <a href="{{url('/admin/order/approve/'.$order->id)}}">
                     <button class="btn btn-primary me-2" type="btn">accept</button>
                 </a>
-                    <a onclick='return confirm("Want to reject order?")'
+                    <a onclick='return confirm("Want to reject credit proposal?")'
                         href="{{url('/admin/order/reject/'.$order->id)}}">
                         <button class="btn btn-warning" type="btn">reject</button></a>
                 </div>

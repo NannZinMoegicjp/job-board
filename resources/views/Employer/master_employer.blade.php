@@ -22,13 +22,12 @@
 <body>
     <div class="main-wrapper">
         <div class="header">
-            <a href="{{route('home')}}">
-                <div class="header-left">
-                    <img src="{{URL::asset('/images/jobsearchicon1.png')}}" width="35" height="35" alt=""> <span
-                        class="text-white">Job
-                        Board</span>
-                </div>
-            </a>
+            <div class="header-left">
+                <a href="{{route('home')}}" class="mt-2 fs-4">
+                    <img src="{{URL::asset('/images/jobsearchicon1.png')}}" width="40" height="40" alt=""> <span class="text-white">Job
+                        Board</span>                
+                </a>
+            </div>            
             <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
             <div class="text-warning d-flex justify-content-end align-items-center me-5 mt-1">
@@ -81,7 +80,7 @@
                         </li>
                         <li>
                             <a href="{{url('/employer/order')}}"><i class="bi bi-cart-plus-fill"></i>
-                                <span>Order</span></a>
+                                <span>Purchase history</span></a>
                         </li>
                         <li class="submenu">
                             <a href="#"><i class="fa fa-user"></i><span>Applications</span><span

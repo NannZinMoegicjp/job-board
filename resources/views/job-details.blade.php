@@ -1,4 +1,4 @@
-@extends('master')
+@extends('welcome')
 @section('content')
 <section class="pb-4">
     {{-- <h3 class="text-center title shadow py-2 mb">Job details</h3> --}}
@@ -25,7 +25,7 @@
                         <div class="col-lg-3 col-6"><i class="bi bi-geo-alt-fill location"></i>
                             {{$job->address->city->state->name}}</div>
                         <div class="col-lg-3 col-6"><i class="bi bi-calendar-check-fill date"></i>
-                            {{$job->created_at}}</div>
+                            {{$job->created_at->toDateString()}}</div>
                         <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>Up to {{$job->max_salary}}
                         </div>
                     </div>

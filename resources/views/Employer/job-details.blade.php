@@ -17,7 +17,7 @@
             <div class="row p-3 mx-3">
                 <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">                        
                     <img src="{{url('images/companies/'.$job->address->company->logo)}}"
-                            alt="{{$job->address->company->company_name}} image">
+                            alt="{{$job->address->company->company_name}} image" class="img img-fluid">
                 </div>
                 <div class="col-md-9 col-12">
                     <h4 class="jobAttribute border-0 fw">{{$job->title}}</h4>

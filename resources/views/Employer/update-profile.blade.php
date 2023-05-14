@@ -42,7 +42,7 @@
                         <label for="contactPerson">Contact Person</label>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="text" class="form-control" required name="contactPerson" id="contactPerson"
+                        <input type="text" class="form-control @error('contactPerson') is-invalid @enderror" required name="contactPerson" id="contactPerson"
                             value="{{$company['contact_person']}}">
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                         <label for="phone">Phone</label>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="text" class="form-control" min="0" placeholder="Phone, eg. 09454096528" id="phone"
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror" min="0" placeholder="Phone, eg. 09454096528" id="phone"
                             name="phone" value="{{$company['phone']}}">
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="comName">Company name</label>
                     </div>
-                    <div class="col-md-7 col-12"> <input type="text" class="form-control" id="comName" name="comName"
+                    <div class="col-md-7 col-12"> <input type="text" class="form-control @error('comName') is-invalid @enderror" id="comName" name="comName"
                             value="{{$company['company_name']}}">
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                         <label for="estDate">Established date</label>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="date" class="form-control" placeholder="eastablished date" id="estDate"
+                        <input type="date" class="form-control @error('estDate') is-invalid @enderror" placeholder="eastablished date" id="estDate"
                             name="estDate" value="{{$company['established_date']}}">
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                         <label for="websiteLink">Website link</label>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="text" class="form-control" name="websiteLink" id="websiteLink"
+                        <input type="text" class="form-control @error('websiteLink') is-invalid @enderror" name="websiteLink" id="websiteLink"
                             placeholder="https://studyrightnow-mdy.com" value="{{$company['websitelink']}}">
                     </div>
                 </div>
@@ -189,8 +189,8 @@
                     <form action="{{url('/employer/profile/update/logo/'.$updateId)}}" method="post"
                         enctype="multipart/form-data">
                         @csrf
-                        <input type="file" class="form-control mb-2" placeholder="Logo" name="newlogofile"
-                            id="newlogofile" value="{{old('logofile')}}" required>
+                        <input type="file" class="form-control mb-2 @error('newlogofile') is-invalid @enderror" placeholder="Logo" name="newlogofile"
+                            id="newlogofile" value="{{old('newlogofile')}}" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp" required>
                         <input type="submit" class="btn btn-outline-primary" value="upload new logo">
                     </form>
                 </div>
@@ -347,7 +347,7 @@
         </div>
         <form action="{{url('/employer/profile/add/images/'.$updateId)}}" method="post" enctype="multipart/form-data" class="mb-5">
             @csrf
-            <input type="file" class="form-control mb-2" placeholder="" name="newPhotos[]" id="newPhotos" multiple>
+            <input type="file" class="form-control mb-2 @error('newPhotos') is-invalid @enderror" placeholder="" name="newPhotos[]" id="newPhotos" multiple accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp">
             <input type="submit" class="btn btn-outline-primary" value="upload new photos">
         </form>        
     </div>
