@@ -1,18 +1,16 @@
 @extends('Employer.master_employer')
 @section('content')
 <div class="container-fluid">
-    <div class="row my-2">
-        @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-        @endif
-    </div>
     @if (isset($status))
-        <div class="alert alert-success">
-            {{ $status }}
-        </div>
-        @endif
+    <div class="alert alert-success">
+        {{ $status }}
+    </div>
+    @endif
+    @if (isset($error))
+    <div class="alert alert-success">
+        {{ $error }}
+    </div>
+    @endif
     <div class="row">
         @if ($errors->any())
         <div class="alert alert-danger">
@@ -24,8 +22,8 @@
     </div>
     <div class="row my-3">
         <div class="col-md-7 col-12 mb-1">
-            <form action="{{route('employer.change.password')}}" class="bg-white px-3 pb-2 rounded shadow"
-                method="post" enctype="multipart/form-data">
+            <form action="{{route('employer.change.password')}}" class="bg-white px-3 pb-2 rounded shadow" method="post"
+                enctype="multipart/form-data">
                 @csrf
                 <div>
                     <h4 class="text-center py-4">Change password</h4>
@@ -36,7 +34,7 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="password" class="form-control" required name="currentPass" id="currentPass"
-                            value="{{old('currentPass')}}">
+                            value="{{old('currentPass')}}">                        
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -44,20 +42,21 @@
                         <label for="password">New password</label>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="password" class="form-control @error('password.confirmed') is-invalid @enderror" required name="password" id="password"
-                        value="{{old('password')}}">
+                        <input type="password" class="form-control  @error('password') is-invalid @enderror" required
+                            name="password" id="password" value="{{old('password')}}">
                     </div>
-                </div> 
+                </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
                         <label for="password_confirmation">Confirm password</label>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="password" class="form-control" required name="password_confirmation" id="password_confirmation"
-                        value="{{old('password_confirmation')}}">
-                        <span>***one lowercase letter, one uppercase letter, one digit, and one special character</span>                        
+                        <input type="password" class="form-control  @error('password.confirmed') is-invalid @enderror"
+                            required name="password_confirmation" id="password_confirmation"
+                            value="{{old('password_confirmation')}}">
+                        <span>***one lowercase letter, one uppercase letter, one digit, and one special character</span>
                     </div>
-                </div>   
+                </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
                     </div>
@@ -69,6 +68,6 @@
                 </div>
             </form>
         </div>
-       </div>
+    </div>
 </div>
 @endsection

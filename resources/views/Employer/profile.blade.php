@@ -53,7 +53,7 @@
         </div>
         <div class="col-md-7">
             <div class="mb-2">
-                <i class="bi bi-bookmarks-fill me-2 industry"></i><span class="title">Industry</span> :
+                <i class="bi bi-bookmarks-fill me-2"></i><span class="title">Industry</span> :
                 <span class="text-secondary">
                     @foreach($company->industries as $industry)
                     @if ($loop->last)
@@ -65,7 +65,7 @@
                 </span>
             </div>
             <div class="mb-2">
-                <i class="bi bi-people-fill me-2 date"></i><span class="title">Total Employee </span> :
+                <i class="bi bi-people-fill me-2"></i><span class="title">Total Employee </span> :
                 <span class="text-secondary">{{$company["no_of_employee"]}}</span>
             </div>
             @php
@@ -81,7 +81,7 @@
             }}
             @endphp
             <div class="mb-2">
-                <i class="bi bi-geo-alt-fill me-2 location"></i><span class="title">Address </span> :
+                <i class="bi bi-geo-alt-fill me-2"></i><span class="title">Address </span> :
                 <span class="text-secondary">
                     {{$mainBranch->detail_address}}, {{$mainBranch->city->name}}, {{$mainBranch->city->state->name}}
                 </span>

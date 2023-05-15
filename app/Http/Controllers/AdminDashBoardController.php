@@ -28,7 +28,6 @@ class AdminDashBoardController extends Controller
             $request->session()->put('email', $admin->email);
             $request->session()->put('name', $admin->name);
         }
-        $companyCount = Company::whereDate('created_at', Carbon::today())->count();
         $jobSeekerCount = JobSeeker::count();
         $applicationCount = Application::count();
         $companyCount = Company::count();
@@ -41,17 +40,11 @@ class AdminDashBoardController extends Controller
             'July', 'August', 'September', 'October', 'November', 'December',
         ]);
         $topHiringCompanies = Company::select('company_name', 'companies.id', DB::raw('COUNT(*) as job_count'))
-
             ->join('addresses', 'companies.id', '=', 'addresses.company_id')
-
             ->join('jobs', 'addresses.id', '=', 'jobs.address_id')
-
             ->groupBy('companies.id', 'company_name')
-
             ->orderByDesc('job_count', 'company_name')
-
             ->limit(10)
-
             ->get();
         // get credit sold by start date and end date
         $startDate = $request->start_date;
@@ -59,7 +52,7 @@ class AdminDashBoardController extends Controller
         $end_datetime = date('Y-m-d H:i:s', strtotime($endDate.' 23:59:59'));
         $type = $request->type;
         if ($startDate && $endDate) {
-            if($type==1){
+            if($type == 1){
                 $creditSold = OrderConfirmation::selectRaw('Date(order_confirmations.created_at) as daily, SUM(orders.no_of_credit) as total_credit_point_sold')
                 ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
                 ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
@@ -69,7 +62,7 @@ class AdminDashBoardController extends Controller
                 ->orderByDesc('daily')
                 ->get();
                 
-            }elseif($type==3){
+            }elseif($type == 3){
                 $creditSold = OrderConfirmation::selectRaw('Year(order_confirmations.created_at) as year, SUM(orders.no_of_credit) as total_credit_point_sold')
                 ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
                 ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
@@ -86,12 +79,7 @@ class AdminDashBoardController extends Controller
                 ->where('is_confirmed',1)
                 ->groupBy('month')
                 ->orderByDesc('month')
-                ->get();
-                
-                // $creditSold = $months->map(function ($month) use ($creditSold) {
-                //     $result = $creditSold->firstWhere('month', $month);
-                //     return $result ?? (object) ['month' => $month, 'total_credit_point_sold' => 0];
-                // });
+                ->get();                
             }           
         } else {
             $creditSold = OrderConfirmation::selectRaw(' MONTHNAME(order_confirmations.created_at) as month, SUM(orders.no_of_credit) as total_credit_point_sold')
@@ -100,10 +88,6 @@ class AdminDashBoardController extends Controller
                 ->whereYear('order_confirmations.created_at', '=', date('Y'))
                 ->groupBy('month')
                 ->get();
-            // $creditSold = $months->map(function ($month) use ($creditSold) {
-            //     $result = $creditSold->firstWhere('month', $month);
-            //     return $result ?? (object) ['month' => $month, 'total_credit_point_sold' => 0];
-            // });
         }
         // get sales amount by start date and end date
         $startDateSale = $request->start_dateSale;
@@ -151,10 +135,6 @@ class AdminDashBoardController extends Controller
             ->groupBy('month')
             ->orderByDesc('month')
             ->get();
-            // $sales = $months->map(function ($month) use ($sales) {
-            // $result = $sales->firstWhere('month', $month);
-            // return $result ?? (object) ['month' => $month, 'total_sale' => 0];
-        // });
         }        
         $categories = JobCategory::join('jobs', 'job_categories.id', '=', 'jobs.job_category_id')
             ->select('job_categories.name', DB::raw('COUNT(*) as job_count'))

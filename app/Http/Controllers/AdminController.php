@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function index(){
-        $admins = Admin::all();
-        return view('admin-manage')->with('admins',$admins);
-    }
     public function profile(){
         $userId = auth()->guard('admin')->id();
         $admin = Admin::find($userId);
@@ -29,7 +25,8 @@ class AdminController extends Controller
         $admin = Admin::find($userId);
         $admin->name = $request->input('name');
         $admin->phone = $request->input('phone');
-        return view('admin-profile')->with('admin',$admin);
+        $admin->save();
+        return redirect('/admin/profile')->with('status', "updated profile successfully");
     }
     public function updateImage(Request $request){
         $userId = auth()->guard('admin')->id();
@@ -49,7 +46,7 @@ class AdminController extends Controller
         $request->newProfileImage->move(public_path('images/admins'), $profileImage);
         $admin->profile_image = $profileImage;
         $admin->save();
-        return redirect()->route('admin.profile')->with('status', "updated profile photo successfully");
+        return redirect('/admin/profile')->with('status', "updated profile photo successfully");
     }
     public function changePasswordForm(){
         return view('change-password');
@@ -73,50 +70,7 @@ class AdminController extends Controller
             return back()->with('error','current password incorrect')->withInput();
         }        
         $admin->save();
-        // Log out the user and redirect to the login page
-        Auth::logout();
-        return redirect('/login')->with('status', 'changed password successfully. please log in again.');
-    }
-    public function addGet(){
-        return view('add-admin');
-    }
-    public function add(Request $request){
-        $email = $request->input('userEmail');
-        if (Admin::where('email', '=', $email)->exists()) {
-            return back()->withInput()->with('error','email already existed');
-        } 
-        $validator = validator(request()->all(), [
-            'profileImage' => 'mimes:jpeg,jpg,svg,gif,png|max:2048',
-            'name' => 'Regex:/^[\D]+$/i|max:100',
-            'phone'=> 'numeric'
-        ]);
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
-        $admin = new Admin();
-        $admin->name = $request->input('name');
-        $admin->password = '12345678';
-        $admin->email = $request->input('userEmail');
-        $admin->phone = $request->input('phone');
-        if($request->hasFile('profileImage')){
-            $profileImg = time() . "." . $request->file('profileImage')->getClientOriginalName();
-            $request->profileImage->move(public_path('images/admins'), $profileImg);
-            $admin->profile_image = $profileImg;
-        } 
-        $admin->save();
-        return redirect()->route('admin-details',$admin->id);
-    }
-    public function viewDetails($id){
-        $admin = Admin::find($id);
-        return view('admin-details')->with('admin', $admin);
-    }
-    public function delete($id){
-        $admin = Admin::find($id);
-        if (file_exists(public_path('images/admins/' . $admin->profile_image))) {
-            unlink(public_path('images/admins/' . $admin->profile_image));
-        }
-        $admin->delete();
-        return redirect()->route('manage-admin');
+        return view('change-password')->with('status', 'changed password successfully');
     }
     public function resetCompanyPassword($id){
         $company = Company::find($id);

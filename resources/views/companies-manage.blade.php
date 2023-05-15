@@ -27,6 +27,7 @@
                 <th>No</th>
                 <th>Company name</th>
                 <th>Contact person</th>
+                <th>Email</th>
                 <th>Phone</th>
                 <th>Actions</th>
                 <th></th>
@@ -38,6 +39,7 @@
                 <td>{{$no++}}</td>
                 <td>{{$company->company_name}}</td>
                 <td>{{$company->contact_person}}</td>
+                <td>{{$company->email}}</td>
                 <td>{{$company->phone}}</td>
                 <td>
                     <div class="d-flex">

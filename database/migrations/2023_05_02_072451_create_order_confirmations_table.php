@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');;
             $table->boolean('is_confirmed');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

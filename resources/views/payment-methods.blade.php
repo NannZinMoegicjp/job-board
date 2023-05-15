@@ -55,7 +55,7 @@
                         <th>No</th>
                         <th>Name</th>
                         <th>Image</th>
-                        {{-- <th>Actions</th> --}}
+                        <th>Actions</th>
                     </tr>
                     @foreach($data as $payment_method)
                     <tr>
@@ -64,18 +64,18 @@
                         <td>
                             <img src="{{url('images/payment_methods/'.$payment_method['image'])}}" alt="" class="myimg">
                         </td>
-                        {{-- <td>
+                        <td>
                             <div class="d-flex">
                                 <input type="hidden" value='{{$payment_method["id"]}}'>
                                 <a onclick="filldata(this);" data-bs-toggle="modal"
                                     data-bs-target="#updatePaymentMethod">
-                                    <i class="bi bi-pencil-fill update"></i>
+                                    <i class="bi bi-pencil-fill update" title="edit"></i>
                                 </a>
-                                <a onclick='return confirm("Want to delete?")'
+                                <a onclick='return confirm("Want to delete payment method?")'
                                     href="{{url('/admin/payment-methods/delete/'.$payment_method->id)}}"><i
-                                        class="bi bi-trash3-fill cancel"></i></a>
+                                        class="bi bi-trash3-fill cancel" title="delete"></i></a>
                             </div>
-                        </td> --}}
+                        </td>
                     </tr>
                     @endforeach
                 </table>
@@ -111,7 +111,7 @@
                         <th>Name</th>
                         <th>Acc no</th>
                         <th>Method</th>
-                        {{-- <th>Actions</th> --}}
+                        <th>Actions</th> 
                     </tr>
                     @foreach($accounts as $payment_account)
                     <tr>
@@ -119,18 +119,18 @@
                         <td>{{$payment_account["account_name"]}}</td>
                         <td>{{$payment_account["account_no"]}}</td>
                         <td>{{$payment_account->paymentMethod->name}}</td>
-                        {{-- <td>
+                        <td>
                             <div class="d-flex">
                                 <input type="hidden" value='{{$payment_account["id"]}}'>
                                 <a onclick="fillAccountData(this);" data-bs-toggle="modal"
                                     data-bs-target="#updatePaymentAccount">
-                                    <i class="bi bi-pencil-fill update"></i>
+                                    <i class="bi bi-pencil-fill update" title="edit"></i>
                                 </a>
-                                <a onclick='return confirm("Want to delete?")'
+                                <!-- <a onclick='return confirm("Want to delete payment account?")'
                                     href="{{url('/admin/payment-accounts/delete/'.$payment_account->id)}}"><i
-                                        class="bi bi-trash3-fill cancel"></i></a>
+                                        class="bi bi-trash3-fill cancel" title="delete"></i></a> -->
                             </div>
-                        </td> --}}
+                        </td>
                     </tr>
                     @endforeach
                 </table>

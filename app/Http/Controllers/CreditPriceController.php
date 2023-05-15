@@ -9,7 +9,7 @@ class CreditPriceController extends Controller
 {
     //get all prices of credit price
     public function index(){
-        $data = CreditPrice::withTrashed()->orderBy('created_at','desc')->get();
+        $data = CreditPrice::orderBy('created_at','desc')->get();
         return view('pricing')->with('data',$data);
     }
 
@@ -26,12 +26,13 @@ class CreditPriceController extends Controller
         if($price->price == $request->input('newPrice')){
             return back()->with('error','your current price already '.$price->price);
         }
-        $price->delete();
         $newprice = new CreditPrice();
         $newprice->price = $request->input('newPrice');
         $newprice->created_at = date('Y-m-d H:i:s');
+        $price->updated_at = date('Y-m-d H:i:s');
         $newprice->updated_at = null;
         $newprice->save();
+        $price->save();
         return redirect('/admin/pricing');
     }
 }

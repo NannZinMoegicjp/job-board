@@ -40,12 +40,12 @@ class EmployerController extends Controller
     }   
     public function buyCreditGet(Request $request){
         $company = Company::find($request->session()->get('id'));
-        $creditPrice = CreditPrice::whereNull('deleted_at')->first();
+        $creditPrice = CreditPrice::whereNull('updated_at')->first();
         if($creditPrice == null){
             return redirect('/employer')->with('status','credit not available yet');
         }
-        $paymentMethods = PaymentMethod::whereNull('deleted_at')->get();
-        $paymentAccounts = PaymentAccount::whereNull('deleted_at')->get();
+        $paymentMethods = PaymentMethod::get();
+        $paymentAccounts = PaymentAccount::get();
         $data = ['company'=>$company,'creditPrice'=>$creditPrice,'paymentMethods'=>$paymentMethods,'paymentAccounts'=>$paymentAccounts];
         return view('Employer.buy-credit')->with('data',$data);
     }

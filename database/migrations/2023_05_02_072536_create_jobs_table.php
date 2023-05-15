@@ -31,7 +31,6 @@ return new class extends Migration
             $table->mediumText('benefit')->nullable();     
             $table->string('status');            
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

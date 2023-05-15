@@ -1,5 +1,6 @@
 @extends('master')
 @section('content')
+<div class="container">
 <div class="row my-3">
     <div class="col-md-8 offset-md-2">
         @if ($errors->any())
@@ -128,5 +129,6 @@
             </div>
         </form>
     </div>
+</div>
 </div>
 @endsection

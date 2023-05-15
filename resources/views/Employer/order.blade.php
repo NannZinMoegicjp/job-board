@@ -23,7 +23,7 @@
                     <th>No</th>
                     <th>No of credit</th>
                     <th>Price</th>
-                    {{-- <th>Ordered date</th> --}}
+                    <th>Ordered date</th> 
                     <th>Status</th>
                     <th>View</th>
                 </tr>
@@ -31,9 +31,10 @@
             <tbody>
                 @foreach ($awaitingOrders as $awaitingOrder)
                 <tr>
+                    @if($awaitingOrder)
                     <td>{{$no++}}</td>
                     <td>{{$awaitingOrder->no_of_credit}}</td>
-                    {{-- <td>{{$awaitingOrder->creditPrice->price}}</td> --}}
+                    <td>{{$awaitingOrder->creditPrice->price}}</td>
                     <td>{{$awaitingOrder->created_at->todatestring()}}</td>
                     <td>Pending</td>
                     <td>
@@ -42,6 +43,7 @@
                                     class="bi bi-info-circle-fill info"></i></a>
                         </div>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
@@ -57,8 +59,8 @@
                 <tr>
                     <th>No</th>
                     <th>No of credit</th>
-                    {{-- <th>Price</th>
-                    <th>Total amount</th> --}}
+                    <th>Price</th>
+                    <th>Total amount</th>
                     <th>Ordered date</th>
                     <th>Confirmed date</th>
                     <th>Status</th>
@@ -68,10 +70,11 @@
             <tbody>
                 @foreach ($confirmedOrders as $confirmedOrder)
                 <tr>
+                    @if($confirmedOrder)
                     <td>{{$no++}}</td>
                     <td>{{$confirmedOrder->order->no_of_credit}}</td>
-                    {{-- <td>{{$confirmedOrder->order->creditPrice->price}}</td>
-                    <td>{{$confirmedOrder->order->no_of_credit*$confirmedOrder->order->creditPrice->price}}</td> --}}
+                    <td>{{$confirmedOrder->order->creditPrice->price}}</td>
+                    <td>{{$confirmedOrder->order->no_of_credit*$confirmedOrder->order->creditPrice->price}}</td>
                     <td>{{$confirmedOrder->order->created_at->todatestring()}}</td>
                     <td>{{$confirmedOrder->created_at->todatestring()}}</td>
                     @if($confirmedOrder->is_confirmed) <td class="text-success">Accepted</td> @else <td class="text-danger">Rejected</td> @endif  
@@ -81,6 +84,7 @@
                                     class="bi bi-info-circle-fill info"></i></a>
                         </div>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>

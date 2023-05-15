@@ -1,5 +1,6 @@
 @extends('master')
 @section('content')
+<div class="container">
 <div class="row my-3">
     <div class="col-md-8 offset-md-2">
         @if ($errors->any())
@@ -211,6 +212,7 @@
             </div>
         </form>
     </div>
+</div>
 </div>
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

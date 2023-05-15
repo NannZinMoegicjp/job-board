@@ -1,7 +1,8 @@
 @extends('master')
 @section('content')
+<div class="container">
 <div class="row my-5">
-    <div class="col-md-6 offset-md-3 col-12 shadow">
+    <div class="col-md-8 offset-md-2 col-12 shadow">
         @if(isset($status))
         <div class="alert  alert-success">
             {{ $status }}
@@ -53,5 +54,6 @@
             </div>
         </form>
     </div>
+</div>
 </div>
 @endsection

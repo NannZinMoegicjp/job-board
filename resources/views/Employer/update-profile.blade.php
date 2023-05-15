@@ -259,6 +259,7 @@
                                     <div class="col-md-7">
                                         <select name="industry" id="industry" class="form-select"
                                             placeholder="Branch division/state">
+                                            <option value="">--choose industry--</option>
                                             @if(isset($industries))
                                             @foreach ($industries as $industry)
                                             <option value="{{$industry['id']}}">{{$industry['name']}}</option>
@@ -297,7 +298,7 @@
                                     </div>
                                     <div class="col-md-7">
                                         <select name="bstate" id="bstate" class="form-select"
-                                            placeholder="Branch division/state">
+                                            placeholder="Branch division/state" required>
                                             <option value="">-- Select branch state --</option>
                                             @if(isset($states))
                                             @foreach ($states as $state)
@@ -312,7 +313,7 @@
                                         <label for="bcity">Branch City</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <select name="bcity" id="bcity" class="form-select">
+                                        <select name="bcity" id="bcity" class="form-select" required>
                                             <option value="">-- Select branch city --</option>
                                             @if(isset($cities))
                                             @foreach ($cities as $city)
@@ -347,7 +348,7 @@
         </div>
         <form action="{{url('/employer/profile/add/images/'.$updateId)}}" method="post" enctype="multipart/form-data" class="mb-5">
             @csrf
-            <input type="file" class="form-control mb-2 @error('newPhotos') is-invalid @enderror" placeholder="" name="newPhotos[]" id="newPhotos" multiple accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp">
+            <input type="file" class="form-control mb-2 @error('newPhotos') is-invalid @enderror" placeholder="" name="newPhotos[]" id="newPhotos" multiple accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp" required>
             <input type="submit" class="btn btn-outline-primary" value="upload new photos">
         </form>        
     </div>

@@ -51,8 +51,7 @@ class RegisterController extends Controller
                 }   
             $logoImg = time() . "." . $request->file('logofile')->getClientOriginalName();
             $request->logofile->move(public_path('images/companies'), $logoImg);
-            $company->logo = $logoImg; 
-                                 
+            $company->logo = $logoImg;                                  
             $company->no_of_employee = $request->input('size');
             $company->no_of_credit = 5;           
             $company->save();
@@ -73,7 +72,6 @@ class RegisterController extends Controller
             $add->company_id=$company->id;
             $add->save();
             return view('register-success');
-        // return redirect()->route('login')->with('status','registered successfully');
     }
     public function showJobseekerRegisterForm(){
         return view('job-seeker-register');
@@ -105,9 +103,6 @@ class RegisterController extends Controller
         $jobSeeker->address = $request->input('address');
         $jobSeeker->password = Hash::make($request->input('password'));
         $jobSeeker->save();
-        // $jobSeeker = JobSeekerUser::find($jobSeeker->id);
-        // Auth::guard('jobseeker')->login($jobSeeker);
         return view('register-success');
-        // return redirect()->route('login')->with('status','registered successfully');
     }
 }
