@@ -21,7 +21,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-3 offset-md-1 col-12">
-                    <label for="userName" class="col-form-label">Name</label>
+                    <label for="userName" class="col-form-label">Name</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="text" class="form-control @error('userName') is-invalid @enderror" required
@@ -31,7 +31,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-3 offset-md-1 col-12">
-                    <label for="userEmail" class="col-form-label">Email</label>
+                    <label for="userEmail" class="col-form-label">Email</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="email" class="form-control @error('userEmail') is-invalid @enderror" required
@@ -41,7 +41,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-3 offset-md-1 col-12">
-                    <label for="userPhoneNumber" class="col-form-label">Phone</label>
+                    <label for="userPhoneNumber" class="col-form-label">Phone</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="number" class="form-control @error('userPhoneNumber') is-invalid @enderror" min="0"
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-3 offset-md-1 col-12"><label for="dob" class="col-form-label">Date of birth</label>
+                <div class="col-md-3 offset-md-1 col-12"><label for="dob" class="col-form-label">Date of birth</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="date" class="form-control @error('dob') is-invalid @enderror" required
@@ -65,7 +65,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-3 offset-md-1 col-12">
-                    <label for="password" class="col-form-label">Password</label>
+                    <label for="password" class="col-form-label">Password</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="password" class="form-control @error('password') is-invalid @enderror" required
@@ -75,7 +75,7 @@
             <div class="row mb-3">
                 <div class="col-md-3 offset-md-1 col-12">
                     <label for="password_confirmation" class="col-form-label">Confirm
-                        password</label>
+                        password</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="password" class="form-control @error('password.confirmed') is-invalid @enderror"
@@ -88,7 +88,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-3 offset-md-1 col-12">
-                    <label for="profileImage" class="col-form-label">Profile Image</label>
+                    <label for="profileImage" class="col-form-label">Profile Image</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="file" class="form-control @error('profileImage') is-invalid @enderror"
@@ -98,7 +98,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                    <label for="gender">Gender</label>
+                    <label for="gender">Gender</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="radio" name="gender" id="female" value="female" required>Female
@@ -106,11 +106,11 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-3 offset-md-1 col-12"><label for="address" class="col-form-label">Address</label>
+                <div class="col-md-3 offset-md-1 col-12"><label for="address" class="col-form-label">Address</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <textarea class="form-control address" placeholder="Enter details address" required id="address"
-                        name="address">{{ old('address') }}</textarea>
+                        name="address" rows="4">{{ old('address') }}</textarea>
                 </div>
             </div>
             <div class="row my-4">

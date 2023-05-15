@@ -143,6 +143,7 @@ class AdminDashBoardController extends Controller
             ->get();        
         $creditData = ["startDate" => $startDate, "endDate" => $endDate,"type"=>$type , "creditSold" => $creditSold];
         $salesData = ["startDate" => $startDateSale, "endDate" => $endDateSale,"type"=>$typeSale , "sales" => $sales];
+        
         $data = ["creditData"=>$creditData, "salesData" => $salesData, "topHiringCompanies" => $topHiringCompanies];
         return view('dashboard')->with('count', $count)->with('data', $data);
     }

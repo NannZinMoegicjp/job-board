@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
 <div class="row my-3">
-    <div class="col-md-8 offset-md-2">
+    <div class="col-md-10 offset-md-1">
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -25,16 +25,21 @@
             </div>
             <div class="row mb-2">
                 <div class="col-md-3 offset-md-1 col-12">
-                    <label for="contactPerson">Contact Person</label>
+                    <label for="contactPerson">Contact Person Name</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="text" class="form-control @error('userName') is-invalid @enderror" required
                         name="contactPerson" id="contactPerson" value="{{ old('contactPerson') }}">
+                        @error('userName')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-md-3 offset-md-1 col-12">
-                    <label for="userEmail">Email</label>
+                    <label for="userEmail">Email</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="email" class="form-control @error('userEmail') is-invalid @enderror" required name="userEmail" id="userEmail"
@@ -44,7 +49,7 @@
 
             <div class="row mb-2">
                 <div class="col-md-3 offset-md-1 col-12">
-                    <label for="phone">Phone</label>
+                    <label for="phone">Phone</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="text" class="form-control @error('phone') is-invalid @enderror" min="0" required placeholder="eg. 09454096528" id="phone"
@@ -53,7 +58,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-3 offset-md-1 col-12">
-                    <label for="password" class="col-form-label">Password</label>
+                    <label for="password" class="col-form-label">Password</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="password" class="form-control @error('password') is-invalid @enderror" required
@@ -63,7 +68,7 @@
             <div class="row mb-3">
                 <div class="col-md-3 offset-md-1 col-12">
                     <label for="password_confirmation" class="col-form-label">Confirm
-                        password</label>
+                        password</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="password" class="form-control @error('password.confirmed') is-invalid @enderror"
@@ -83,7 +88,7 @@
             </div>
             <div class="row mb-2">
                 <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                    <label for="comName">Company name</label>
+                    <label for="comName">Company name</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12"> <input type="text" class="form-control @error('comName') is-invalid @enderror" required id="comName"
                         name="comName" value="{{old('comName')}}">
@@ -110,7 +115,7 @@
             </div>
             <div class="row mb-2">
                 <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                    <label for="logofile" class="form-label">Company Logo</label>
+                    <label for="logofile" class="form-label">Company Logo</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="file" class="form-control @error('logofile') is-invalid @enderror" required placeholder="Logo" name="logofile" id="logofile"
@@ -128,14 +133,14 @@
             </div>
             <div class="row mb-2">
                 <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                    <label for="state">Division/state</label>
+                    <label for="state">Division/state</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <select name="state" id="state" class="form-select" required>
                         <option value="">-- Select State --</option>
                         @if(isset($data["states"]))
                         @foreach ($data["states"] as $state)
-                        <option value="{{$state['id']}}">{{$state['name']}}</option>
+                        <option value="{{$state['id']}}" @if(old('state')==$state['id']) selected @endif>{{$state['name']}}</option>
                         @endforeach
                         @endif
                     </select>
@@ -143,7 +148,7 @@
             </div>
             <div class="row mb-2">
                 <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                    <label for="city">Township</label>
+                    <label for="city">Township</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <select name="city" id="city" class="form-select" required>
@@ -153,23 +158,23 @@
             </div>
             <div class="row mb-2">
                 <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                    <label for="address">Address</label>
+                    <label for="address">Address</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <textarea class="form-control address" placeholder="Enter details address" required id="address"
-                        name="address">{{old('address')}}</textarea>
+                       rows="4" name="address">{{old('address')}}</textarea>
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                    <label for="industry">Main Industry</label>
+                    <label for="industry">Main Industry</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <select name="industry[]" id="industry" class="form-select" multiple required>
                         <option value="">-- Select industry --</option>
                         @if(isset($data["industries"]))
                         @foreach ($data["industries"] as $industry)
-                        <option value="{{$industry['id']}}">{{$industry['name']}}</option>
+                        <option value="{{$industry['id']}}" @if(old('industry')==$industry['id']) selected @endif>{{$industry['name']}}</option>
                         @endforeach
                         @endif
                     </select>
@@ -177,21 +182,21 @@
             </div>
             <div class="row mb-2">
                 <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                    <label for="size">Number of employee</label>
+                    <label for="size">Number of employee</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
                     <select name="size" id="size" class="form-select" required>
                         <option value="">-- Select no of employee --</option>
-                        <option value="1-5">1-5</option>
-                        <option value="6-10">6-10</option>
-                        <option value="11-20">11-20</option>
-                        <option value="21-50">21-50</option>
-                        <option value="51-100">51-100</option>
-                        <option value="101-200">101-200</option>
-                        <option value="201-500">201-500</option>
-                        <option value="501-1000">501-1000</option>
-                        <option value="1001-5000">1001-5000</option>
-                        <option value="5000-10000">5000-10000</option>
+                        <option value="1-5" @if(old('size')=='1-5') selected @endif>1-5</option>
+                        <option value="6-10" @if(old('size')=='6-10') selected @endif>6-10</option>
+                        <option value="11-20" @if(old('size')=='11-20') selected @endif>11-20</option>
+                        <option value="21-50" @if(old('size')=='20-50') selected @endif>21-50</option>
+                        <option value="51-100" @if(old('size')=='51-100') selected @endif>51-100</option>
+                        <option value="101-200" @if(old('size')=='101-200') selected @endif>101-200</option>
+                        <option value="201-500" @if(old('size')=='201-500') selected @endif>201-500</option>
+                        <option value="501-1000" @if(old('size')=='501-1000') selected @endif>501-1000</option>
+                        <option value="1001-5000" @if(old('size')=='1001-5000') selected @endif>1001-5000</option>
+                        <option value="5000-10000" @if(old('size')=='5000-10000') selected @endif>5000-10000</option>
                     </select>
                 </div>
             </div>
