@@ -25,13 +25,15 @@ use App\Http\Controllers\RegisterController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Route::get('',function(){
-//     return view('login');
-// });
+//home page
 Route::get('/', [HomeController::class,'index'])->name('home');
+//get all jobs
 Route::get('/jobs', [HomeController::class,'allJobs'])->name('all-jobs');
+//filter job by position,job category and location
 Route::get('/jobs/filter', [HomeController::class,'filterJobs']);
+//get job data by id
 Route::get('/jobs/details/{id}', [HomeController::class,'jobDetails'])->name('job-details');
+//get company data by id
 Route::get('/company/details/{id}', [HomeController::class,'companyDetails'])->name('company-details');
 //get jobs by location(division/state)
 Route::get('/jobs/state/{stateId}', [HomeController::class,'getJobsByState'])->name('jobs-by-state');
@@ -48,7 +50,6 @@ Route::get('/companies/all',[HomeController::class,'companies'])->name('all-comp
 Route::get('/register',function(){
     return view('register');
 })->name('register');
-Route::get('/reports',[AdminDashBoardController::class,'reports']);
 Route::get('/employer/register',[RegisterController::class,'showEmployerRegisterForm'])->name('register.employerform');
 Route::post('/employer/register',[RegisterController::class,'registerEmployer'])->name('register.employer');
 Route::get('/jobseeker/register',[RegisterController::class,'showJobseekerRegisterForm'])->name('register.jobseekerform');
@@ -71,8 +72,6 @@ Route::group(  ['prefix' => 'admin','middleware'=>['auth:admin']], function () {
     Route::get('/order/awaiting/details/{id}',[OrderController::class,'awaitingOrderDetails']);
 
     Route::get('/job-seekers',[JobSeekerController::class,'allJobSeekers']);
-    // Route::get('/job-seekers/add',[JobSeekerController::class,'insertGet']);
-    // Route::post('/job-seekers/add',[JobSeekerController::class,'insert']);
     Route::get('/job-seekers/details/{id}',[JobSeekerController::class,'viewDetails']);
     Route::get('/job-seekers/delete/{id}',[JobSeekerController::class,'delete']);
 
@@ -103,19 +102,13 @@ Route::group(  ['prefix' => 'admin','middleware'=>['auth:admin']], function () {
     Route::get('/change/password',[AdminController::class,'changePasswordForm']);
     Route::post('/change/password',[AdminController::class,'changePassword'])->name('admin.change.password');
    
-    Route::get('/manage',[AdminController::class,'index'])->name('manage-admin');
-    Route::get('/add',[AdminController::class,'addGet']);
-    Route::post('/add',[AdminController::class,'add']);
-    Route::get('/delete/{id}',[AdminController::class,'delete']);
-    Route::get('/details/{id}',[AdminController::class,'viewDetails'])->name('admin-details');
     Route::get('/reset/company/password/{id}',[AdminController::class,'resetCompanyPassword'])->name('reset.company.password');
     Route::get('/reset/jobseeker/password/{id}',[AdminController::class,'resetJobSeekerPassword'])->name('reset.jobseeker.password');
-
 });
 
 Route::group(  ['prefix' => 'employer','middleware' => ['auth:employer']], function () {
     Route::get('/',[EmployerController::class,'index'])->name('employer.dashboard');
-    Route::get('/jobs',[EmployerJobController::class,'index'])->name('employer.jobs');
+    Route::get('/jobs',[EmployerJobController::class,'index'])->name('employer.jobs')->name('active-jobs');
     Route::get('/jobs/deactivated',[EmployerJobController::class,'deactivatedJobs'])->name('employer.deactivated-jobs');
     Route::get('/jobs/expired',[EmployerJobController::class,'expiredJobs'])->name('employer.expired-jobs');
     Route::get('/jobs/inactive',[EmployerJobController::class,'inactiveJobs'])->name('inactive-jobs');
@@ -126,6 +119,7 @@ Route::group(  ['prefix' => 'employer','middleware' => ['auth:employer']], funct
     Route::get('/awaiting/order/details/{oid}',[EmployerOrderController::class,'awaitingOrderDetails']);
     
     Route::get('/jobs/insert',[EmployerJobController::class,'checkCredit'])->name('job.insertForm');
+    Route::get('/add/job',[EmployerJobController::class,'insertGet'])->name('insert.job');
     Route::post('/jobs/insert',[EmployerJobController::class,'insert'])->name('job.insert');
     Route::get('/job/update/{id}',[EmployerJobController::class,'updateGet'])->name('job.updateForm');
     Route::post('/job/update/{id}',[EmployerJobController::class,'update'])->name('job.update');
@@ -133,9 +127,7 @@ Route::group(  ['prefix' => 'employer','middleware' => ['auth:employer']], funct
     Route::get('/job/details/{id}',[EmployerJobController::class,'viewDetails'])->name('employer.job.detail');
     Route::get('/job/deactivate/{id}',[EmployerJobController::class,'deactivate']);
     Route::get('/job/activate/{id}',[EmployerJobController::class,'activate']);
-    
-    Route::get('/add/job',[EmployerJobController::class,'insertGet'])->name('insert.job');
-    Route::post('/add/add',[EmployerJobController::class,'insert'])->name('add.job');
+
     Route::get('/profile',[CompanyController::class,'viewProfile']);
     Route::get('/profile/update/{id}',[CompanyController::class,'updateSetData']);
     Route::post('/profile/update/{id}',[CompanyController::class,'update']);
@@ -143,11 +135,6 @@ Route::group(  ['prefix' => 'employer','middleware' => ['auth:employer']], funct
     Route::post('/profile/update/logo/{id}',[CompanyController::class,'updateLogo']);
     Route::post('/profile/add/industry/{cid}',[CompanyController::class,'addIndustry']);
     Route::get('/profile/delete/industry/{cid}/{iid}',[CompanyController::class,'deleteIndustry']);
-    
-    Route::post('/profile/update/logo/{id}',[CompanyController::class,'updateLogo']);
-    Route::post('/profile/update/logo/{id}',[CompanyController::class,'updateLogo']);
-    Route::post('/profile/update/logo/{id}',[CompanyController::class,'updateLogo']);
-    
     Route::get('/profile/delete/branch/{cid}/{addId}',[CompanyController::class,'deleteBranchCity']);
     Route::post('/profile/add/branch/{cid}',[CompanyController::class,'addBranchCity']);
     Route::post('/profile/add/images/{cid}',[CompanyController::class,'addImages']);

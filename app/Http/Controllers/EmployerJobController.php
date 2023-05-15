@@ -10,25 +10,28 @@ use App\Models\Company;
 use App\Models\JobCategory;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+//for employer
 class EmployerJobController extends Controller
 {
+    //get all jobs
     public function index(Request $request)
     {
-        $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->whereNull('deleted_at')->get();
+        $addrIDs = Address::select('id')->where('company_id', auth()->guard('employer')->id())->whereNull('deleted_at')->get();
         $jobs = Job::whereIn('address_id',$addrIDs)->where('status','active')->where('created_at','>',Carbon::today()->subMonths(6))->orderBy('created_at','desc')->get();
         return view('Employer.job-manage')->with("jobs",$jobs);
     }
+    //show form to add job
     public function insertGet(Request $request)
     {
         //need to get from logged in id
-        $addrs = Address::where('company_id',  $request->session()->get('id'))->get();
+        $addrs = Address::where('company_id',  auth()->guard('employer')->id())->get();
         $jobCategories = JobCategory::orderBy('name')->get();
         $empTypes = EmploymentType::orderBy('name')->get();
         $expLevels = ExperienceLevel::orderBy('name')->get();
         $data = ['addresses' => $addrs, 'jobCategories' => $jobCategories, 'empTypes' => $empTypes, 'expLevels' => $expLevels];
         return view('Employer.add-job')->with('data', $data);
     }
+    //add job
     public function insert(Request $request)
     {
         $job = new Job();
@@ -69,12 +72,12 @@ class EmployerJobController extends Controller
         }
         $job->status = 'active';
         $job->save();
-        $company = Company::find($request->session()->get('id'));
+        $company = Company::find(auth()->guard('employer')->id());
         $company->no_of_credit -= 1;
         $company->save();
         return redirect('/employer/job/details/'.$job->id)->with('status','posted job successfully!');
-        // return redirect()->route('employer.jobs')->with('status','posted job successfully!');
     }
+    //show job data and show in update form
     public function updateGet(Request $request,$id)
     {
         $job = Job::find($id);
@@ -85,6 +88,7 @@ class EmployerJobController extends Controller
         $data = ['job'=>$job, 'addresses' => $addrs, 'jobCategories' => $jobCategories, 'empTypes' => $empTypes, 'expLevels' => $expLevels];
         return view('Employer.update-job')->with('data', $data);
     }
+    //update job
     public function update(Request $request,$id)
     {
         $job = Job::find($id);
@@ -124,31 +128,34 @@ class EmployerJobController extends Controller
         $job->save();
         return redirect('/employer/job/details/'.$job->id)->with('status','updated job successfully!');
     }
+    //check if company has credits
     public function checkCredit(Request $request){
-        // dd($request->session()->get('id'));
-        $company = Company::find($request->session()->get('id'));
+        $company = Company::find(auth()->guard('employer')->id());
         if($company->no_of_credit > 0){
             return redirect()->route('insert.job');            
         }else{
             return redirect()->route('employer.jobs')->with('noCredit', 'please buy credit to post jobs!');
         }        
     }
+    //view job detail
     public function viewDetails($id){    
         $job = Job::find($id);
         return view('Employer.job-details')->with('job', $job);
     }
+    //close job
     public function deactivate($id){    
         $job = Job::find($id);
         $job->status='inactive';
         $job->save();
         return redirect()->route('employer.jobs')->with('status','closed job successfully!');
     }
+    //open job
     public function activate(Request $request,$id){    
         $job = Job::find($id);
         $current = Carbon::now();
         $posted_date = new Carbon($job->created_at);       
         if($current>$posted_date->addMonthWithoutOverflow(6)){
-            $company = Company::find($request->session()->get('id'));
+            $company = Company::find(auth()->guard('employer')->id());
             $company->no_of_credit -= 1;
             $company->save();
         }
@@ -156,21 +163,25 @@ class EmployerJobController extends Controller
         $job->save();
         return redirect()->route('employer.deactivted-jobs')->with('status','opened job successfully!');
     }
+    //delet job
     public function delete($id){    
         $job = Job::find($id);
         $job->delete();
         return back()->with('status','deleted jobs successfully!');
     }
+    //get closed jobs
     public function deactivatedJobs(Request $request){
-        $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->get();
+        $addrIDs = Address::select('id')->where('company_id', auth()->guard('employer')->id())->get();
         $jobs = Job::whereIn('address_id',$addrIDs)->where('status','inactive')->get();
         return view('Employer.deactivated-jobs-manage')->with("jobs",$jobs);
     }
+    //get expired jobs
     public function expiredJobs(Request $request){
-        $addrIDs = Address::select('id')->where('company_id', $request->session()->get('id'))->get();
+        $addrIDs = Address::select('id')->where('company_id', auth()->guard('employer')->id())->get();
         $jobs = Job::whereIn('address_id',$addrIDs)->whereDate('created_at','<',Carbon::today()->subMonths(6))->get();
         return view('Employer.expired-jobs-manage')->with("jobs",$jobs);
     }
+    //get closed,expired jobs
     public function inactiveJobs(Request $request){
         $addrIDs = Address::select('id')->where('company_id', auth()->id())->pluck('id')->toArray();;
         $jobs = Job::WhereDate('created_at','<',Carbon::today()->subMonths(6))->orWhere('status','inactive')->whereIn('address_id',$addrIDs)->get();
