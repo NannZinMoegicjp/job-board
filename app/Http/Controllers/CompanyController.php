@@ -20,7 +20,7 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        $companies = Company::all();
+        $companies = Company::orderByDesc('created_at')->get();;
         return view('companies-manage')->with('companies', $companies);
     }
     public function changePasswordForm(){

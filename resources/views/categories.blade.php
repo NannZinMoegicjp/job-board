@@ -10,9 +10,7 @@
                     <div class="category py-2">                        
                         <div class="d-flex p-2 align-items-center">
                             <div class="circle p-3 bg-white me-2">
-                            <img src="{{asset('images/categories/work.png')}}" alt="">
-
-                                <!-- <img src="{{asset('images/categories/'.$category->image)}}" alt=""> -->
+                                <img src="{{asset('images/categories/'.$category->image)}}" alt="">
                             </div>
                             <p class="text-black">{{$category->name}}</p>
                         </div>  

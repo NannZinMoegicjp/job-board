@@ -119,8 +119,7 @@
                     <div class="category py-2 shadow">
                         <div class="d-flex p-2">
                             <div class="circle p-3 bg-white me-2">
-                            <img src="{{URL::asset('images/categories/work.png')}}" alt="categor image">
-                                <!-- <img src="{{URL::asset('images/categories/'.$category->image)}}" alt="categor image"> -->
+                                <img src="{{URL::asset('images/categories/'.$category->image)}}" alt="categor image">
                             </div>
                             <p class="text-black">{{$category->name}}<br> <span
                                     class="text-secondary">{{$category->job_count}}

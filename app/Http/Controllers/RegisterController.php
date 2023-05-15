@@ -54,7 +54,7 @@ class RegisterController extends Controller
             $company->logo = $logoImg; 
                                  
             $company->no_of_employee = $request->input('size');
-            $company->no_of_credit = 1;           
+            $company->no_of_credit = 5;           
             $company->save();
             $company->industries()->attach($request->input('industry'));    
             if ($request->file('images')) {
@@ -72,7 +72,8 @@ class RegisterController extends Controller
             $add->detail_address=$request->input('address');
             $add->company_id=$company->id;
             $add->save();
-        return redirect()->route('login')->with('status','registered successfully');
+            return view('register-success');
+        // return redirect()->route('login')->with('status','registered successfully');
     }
     public function showJobseekerRegisterForm(){
         return view('job-seeker-register');
@@ -106,6 +107,7 @@ class RegisterController extends Controller
         $jobSeeker->save();
         // $jobSeeker = JobSeekerUser::find($jobSeeker->id);
         // Auth::guard('jobseeker')->login($jobSeeker);
-        return redirect()->route('login')->with('status','registered successfully');
+        return view('register-success');
+        // return redirect()->route('login')->with('status','registered successfully');
     }
 }

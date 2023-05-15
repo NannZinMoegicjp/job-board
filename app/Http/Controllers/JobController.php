@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 use App\Models\Job;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class JobController extends Controller
 {
     public function index(){
-        $jobs = Job::where('status','active')->whereNull('deleted_at')->orderBy('created_at')->get();
+        $jobs = Job::WhereDate('created_at','>',Carbon::today()->subMonths(6))->Where('status','active')->whereNull('deleted_at')->orderBy('created_at','desc')->get();      
         return view('jobs-manage')->with('jobs', $jobs);
     }
     public function viewDetails($id){    

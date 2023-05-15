@@ -142,7 +142,7 @@
             </div>
             <div class="row mb-2">
                 <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                    <label for="city">City</label>
+                    <label for="city">Township</label>
                 </div>
                 <div class="col-md-7 col-12">
                     <select name="city" id="city" class="form-select" required>

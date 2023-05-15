@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Job board</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -33,7 +33,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav nav nav-underline ms-auto mynavs">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('/home')}}">Home</a>
+                            <a class="nav-link" href="{{url('/')}}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('all-jobs')}}">Jobs</a>
@@ -120,10 +120,10 @@
                     </a>
                 </div>
                 <div>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
-                    <a href=""><i class="bi bi-twitter"></i></a>
-                    <a href=""><i class="bi bi-telegram"></i></a>
+                    <a href="https://www.facebook.com"><i class="bi bi-facebook"></i></a>
+                    <a href="https://www.linkedin.com"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://www.twitter.com"><i class="bi bi-twitter"></i></a>
+                    <a href="https://www.telegram.com"><i class="bi bi-telegram"></i></a>
                 </div>
             </div>
             <div class="col-md-3">
