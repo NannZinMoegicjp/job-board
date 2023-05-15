@@ -9,17 +9,18 @@ use App\Models\OrderConfirmation;
 use App\Models\Company;
 class OrderController extends Controller
 {
+    //get confirmed payment
     public function index(){
         $confirmedOrders = OrderConfirmation::orderByDesc('created_at')->get();
-        // echo $confirmedOrders;
         return view('payment-confirm')->with('confirmedOrders',$confirmedOrders);
     }
+    //get pending payment
     public function getAwaitingOrder(){
         $confirmedOrderedIds = OrderConfirmation::select('order_id')->get();
         $awaitingOrders = Order::whereNotIn('id', $confirmedOrderedIds)->orderByDesc('created_at')->get();
         return view('order')->with('awaitingOrders',$awaitingOrders);
     }  
-
+    //accept payment
     public function acceptOrder($id){
         $orderCon = new OrderConfirmation();
         $orderCon->admin_id = session('adminId');
@@ -33,6 +34,7 @@ class OrderController extends Controller
         $company->save();        
         return redirect('/admin/order')->with("status","accepted credit proposal");
     }
+    //reject payment
     public function rejectOrder($id){
         $orderCon = new OrderConfirmation();
         $orderCon->admin_id = session('adminId');
@@ -42,10 +44,12 @@ class OrderController extends Controller
         $orderCon->save();
         return redirect('/admin/order')->with("status","rejected credit proposal");
     }
+    //view accepeted payment details
     public function confirmedOrderDetails($id){
         $corder =OrderConfirmation::find($id);
         return view('order-details')->with('corder',$corder);
     }
+    //view rejected payment details
     public function awaitingOrderDetails($id){
         $order =Order::find($id);
         return view('order-details')->with('order',$order);

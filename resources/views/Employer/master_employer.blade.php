@@ -80,7 +80,7 @@
                         </li>
                         <li>
                             <a href="{{url('/employer/order')}}"><i class="bi bi-cart-plus-fill"></i>
-                                <span>Purchase history</span></a>
+                                <span>Purchasement history</span></a>
                         </li>
                         <li class="submenu">
                             <a href="#"><i class="bi bi-send-fill"></i><span>Applications</span><span

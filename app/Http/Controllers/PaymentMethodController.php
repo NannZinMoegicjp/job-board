@@ -7,11 +7,13 @@ use App\Models\PaymentMethod;
 use App\Models\PaymentAccount;
 class PaymentMethodController extends Controller
 {
+    //get all payment methods and accounts
     public function index(){
         $data = PaymentMethod::all();
         $accounts = PaymentAccount::all();
         return view('payment-methods')->with('data',$data)->with('accounts',$accounts);
     }
+    //insert payment method
     public function insert(Request $request){
         $data = new PaymentMethod();
         $validator = validator(request()->all(), [
@@ -31,6 +33,7 @@ class PaymentMethodController extends Controller
             return back()->with('error','payment method already existed');
         }        
     }
+    //update payment method
     public function update(Request $request,$id){
         $data = PaymentMethod::find($id);        
         $data->name = $request->input('updateName');
@@ -51,6 +54,7 @@ class PaymentMethodController extends Controller
         $data->save();
         return redirect('/admin/payment-methods')->with('status','updated payment method successfully');
     }
+    //delete payment method
     public function delete($id){
         $data = PaymentMethod::find($id);        
         if(file_exists(public_path('images/payment_methods/'.$data->image))){
@@ -59,6 +63,7 @@ class PaymentMethodController extends Controller
         $data->delete();
         return redirect('/admin/payment-methods')->with('status','deleted payment method successfully');        
     }
+    //insert payment account
     public function insertPaymentAccount(Request $request){
         $name = $request->input('accName');
         $accountNo = $request->input('accNo');
@@ -75,6 +80,7 @@ class PaymentMethodController extends Controller
             return back()->with('error','payment account already existed');
         }        
     }
+    //update payment account
     public function updatePaymentAccount(Request $request,$id){
         $payment_account = PaymentAccount::find($id);
         if($request->has('updateAccName')){
@@ -89,6 +95,7 @@ class PaymentMethodController extends Controller
         $payment_account->save();
         return redirect('/admin/payment-methods')->with('status','updated account successfully');
     }
+    //delete payment account
     public function deletePaymentAccount($id){
         $payment_account = PaymentAccount::find($id);
         $payment_account->delete();

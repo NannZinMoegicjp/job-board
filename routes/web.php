@@ -12,7 +12,6 @@ use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployerOrderController;
 use App\Http\Controllers\EmployerJobController;
-use App\Http\Controllers\EmployerDashboardController;
 use App\Http\Controllers\DropdownController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
@@ -135,8 +134,8 @@ Route::group(  ['prefix' => 'employer','middleware' => ['auth:employer']], funct
     Route::get('/job/deactivate/{id}',[EmployerJobController::class,'deactivate']);
     Route::get('/job/activate/{id}',[EmployerJobController::class,'activate']);
     
-    Route::get('/multiStepForm',[EmployerJobController::class,'insertGet'])->name('insert.job');
-    Route::post('/multiStepForm/add',[EmployerJobController::class,'insert'])->name('multistepForm.add');
+    Route::get('/add/job',[EmployerJobController::class,'insertGet'])->name('insert.job');
+    Route::post('/add/add',[EmployerJobController::class,'insert'])->name('add.job');
     Route::get('/profile',[CompanyController::class,'viewProfile']);
     Route::get('/profile/update/{id}',[CompanyController::class,'updateSetData']);
     Route::post('/profile/update/{id}',[CompanyController::class,'update']);

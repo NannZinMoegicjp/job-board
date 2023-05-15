@@ -70,13 +70,13 @@
             </div>
             <div class="col-md-7 col-12 d-flex">
                 <div class="form-check me-2">
-                    <input class="form-check-input" type="checkbox" value="female" id="female" name="female">
+                    <input class="form-check-input" type="checkbox" value="female" id="female" name="female" @if(old('female')=='female') checked @endif>
                     <label class="form-check-label" for="female">
                         Female
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="male" id="male" name="male">
+                    <input class="form-check-input" type="checkbox" value="male" id="male" name="male" @if(old('male')=='male') checked @endif>
                     <label class="form-check-label" for="male">
                         Male
                     </label>
@@ -92,7 +92,7 @@
                     <option value="">-- Select job category --</option>
                     @if(isset($data['jobCategories']))
                     @foreach ($data['jobCategories'] as $jobCat)
-                    <option value="{{$jobCat['id']}}">{{$jobCat['name']}}</option>
+                    <option value="{{$jobCat['id']}}" @if(old('jobCategory')==$jobCat['id']) selected @endif>{{$jobCat['name']}}</option>
                     @endforeach
                     @endif
                 </select>
@@ -107,7 +107,7 @@
                     <option value="">-- Select experience level --</option>
                     @if(isset($data['expLevels']))
                     @foreach ($data['expLevels'] as $expLev)
-                    <option value="{{$expLev['id']}}">{{$expLev['name']}}</option>
+                    <option value="{{$expLev['id']}}" @if(old('expLevel')==$expLev['id']) selected @endif>{{$expLev['name']}}</option>
                     @endforeach
                     @endif
                 </select>
@@ -122,7 +122,7 @@
                     <option value="">-- Select employment type --</option>
                     @if(isset($data['empTypes']))
                     @foreach ($data['empTypes'] as $empType)
-                    <option value="{{$empType['id']}}">{{$empType['name']}}</option>
+                    <option value="{{$empType['id']}}" @if(old('empType')==$empType['id']) selected @endif>{{$empType['name']}}</option>
                     @endforeach
                     @endif
                 </select>
@@ -137,7 +137,7 @@
                     <option value="">-- Select branch --</option>
                     @if(isset($data['addresses']))
                     @foreach ($data['addresses'] as $addr)
-                    <option value="{{$addr['id']}}">{{$addr->city->name}}/{{$addr->city->state->name}}</option>
+                    <option value="{{$addr['id']}}" @if(old('address')==$addr['id']) selected @endif>{{$addr->city->name}}/{{$addr->city->state->name}}</option>
                     @endforeach
                     @endif
                 </select>
@@ -157,14 +157,13 @@
     <div class="step">
         <p class="text-center mb-4">Job requirements</p>
         <div class="row mb-2">
-            <textarea id="myeditorinstance2" name="requirement" required></textarea>
+            <textarea id="myeditorinstance2" name="requirement" required>{{old('requirement')}}</textarea>
         </div>
     </div>
-
     <div class="step">
         <p class="text-center mb-4">Job benefits</p>
         <div class="row mb-2">
-            <textarea id="myeditorinstance3" name="benefit" required></textarea>
+            <textarea id="myeditorinstance3" name="benefit" required>{{old('benefit')}}</textarea>
         </div>
     </div>
 

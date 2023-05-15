@@ -182,9 +182,9 @@ class CompanyController extends Controller
     {
         $company = Company::find($id);
         $company->delete();
-        return redirect('/admin/companies')->with('status', "deleted successfully");
+        return redirect('/admin/companies')->with('status', "deleted company successfully");
     }
-    //view company details(by admin,jobseeker)
+    //view company details(by admin)
     public function viewDetails($id)
     {
         $company = Company::find($id);
@@ -195,7 +195,7 @@ class CompanyController extends Controller
     //view profile by company
     public function viewProfile()
     {
-        $id = session('id');
+        $id = auth()->guard('employer')->id();
         $company = Company::find($id);
         $addresses = Address::where('company_id',$id)->get();
         $addrIDs = DB::table('addresses')->where('company_id', $id)->pluck('id')->toArray();

@@ -112,7 +112,7 @@
     <footer class="container-fluid">
         <div class="row py-3">
             <div class="col-md-1"></div>
-            <div class="col-md-3 socialMedia d-flex flex-column justify-content-center">
+            <div class="col-md-3 col-12 socialMedia d-flex flex-column justify-content-center">
                 <div class="mb-4">
                     <a href="#" class="text-decoration-none">
                         <img src="{{ asset('images/jobsearchicon1.png') }}" class="logoImg" alt="">
@@ -126,7 +126,7 @@
                     <a href="https://www.telegram.com"><i class="bi bi-telegram"></i></a>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-12">
                 <p class="text-white">QUICK LINKS</p>
                 <ul class="quickLinks">
                     <li><a href="{{route('all-jobs')}}">Jobs</a></li>
@@ -136,7 +136,7 @@
                     <li><a href="{{route('all-locations')}}">Locations</a></li>
                 </ul>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-12">
                 <div class="address">
                     <p><i class="bi bi-geo-alt"></i> <br> No.220A,East Horse Racing Course Road, Room No.3A,Tamwe A
                         Wine Lay Condo,Tamwe Township,Yangon.</p>

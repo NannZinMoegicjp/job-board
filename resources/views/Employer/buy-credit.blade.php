@@ -1,14 +1,14 @@
 @extends('Employer.master_employer')
 @section('content')
-@if(session('status'))
-<div class="alert alert-success m-2">
-    {{session('status')}}
-</div>
-@endif
 <div class="row my-3">
     <div class="col-md-8 offset-md-2 col-12">
-        <form action="{{url('employer/buy/credit')}}"
-            class="bg-white px-3 pb-2 rounded shadow" method="post" enctype="multipart/form-data">
+        @if(session('status'))
+        <div class="alert alert-success">
+            {{session('status')}}
+        </div>
+        @endif
+        <form action="{{url('employer/buy/credit')}}" class="bg-white px-3 pb-2 rounded shadow" method="post"
+            enctype="multipart/form-data">
             @csrf
             <div>
                 <h4 class="text-center py-4">Order credit</h4>
@@ -62,14 +62,15 @@
                     </select>
                 </div>
             </div>
-            
+
             <div class="row mb-3">
                 <div class="col-md-4 offset-md-1 col-12 col-form-label">
                     <label for="screenshot" class="form-label">Transferred screenshot</label>
                 </div>
                 <div class="col-md-6 col-12">
                     <input type="file" class="form-control" name="screenshot" id="screenshot"
-                        value="{{old('screenshot')}}" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp" required>
+                        value="{{old('screenshot')}}" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp"
+                        required>
                 </div>
             </div>
             <div class="row mb-3">
@@ -87,28 +88,29 @@
 @section('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-let calculateTotal=()=> {
+let calculateTotal = () => {
     var price = parseInt(document.getElementById('price').innerHTML);
     var no_of_credit = document.getElementById('noOfCredit').value;
     var total = document.getElementById('totalAmount');
     total.innerHTML = price * no_of_credit;
 }
-$(document).ready(function () {
-$('#paymentMethod').on('change', function () {
-                var paymentMethodId = this.value;
-                $("#paymentAccount").html('<option value="">-- Select paymentAccount --</option>');
-                $.ajax({
-                    url: "/api/fetch-payment-accounts/" + paymentMethodId,
-                    type: "GET",
-                    dataType: 'json',
-                    success: function(result) {
-                        $.each(result, function (key, value) {
-                            $("#paymentAccount").append('<option value="' + value
-                                .id + '">' + value.account_name + '/'+ value.account_no + '</option>');
-                        });
-                    },
+$(document).ready(function() {
+    $('#paymentMethod').on('change', function() {
+        var paymentMethodId = this.value;
+        $("#paymentAccount").html('<option value="">-- Select paymentAccount --</option>');
+        $.ajax({
+            url: "/api/fetch-payment-accounts/" + paymentMethodId,
+            type: "GET",
+            dataType: 'json',
+            success: function(result) {
+                $.each(result, function(key, value) {
+                    $("#paymentAccount").append('<option value="' + value
+                        .id + '">' + value.account_name + '/' + value
+                        .account_no + '</option>');
                 });
-            });
-            });
+            },
+        });
+    });
+});
 </script>
 @endsection

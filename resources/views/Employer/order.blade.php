@@ -12,7 +12,7 @@
         </div>
         @endif
     </div>
-    <h3 class="my-2">Pending credit proposal</h3>
+    <h3 class="my-2">Pending purchasement</h3>
     <div class="table-responsive">
         <table class="table table-striped" id="awaitingOrderTable">
             @php
@@ -23,6 +23,7 @@
                     <th>No</th>
                     <th>No of credit</th>
                     <th>Price</th>
+                    <th>Total amount</th>
                     <th>Ordered date</th> 
                     <th>Status</th>
                     <th>View</th>
@@ -35,12 +36,12 @@
                     <td>{{$no++}}</td>
                     <td>{{$awaitingOrder->no_of_credit}}</td>
                     <td>{{$awaitingOrder->creditPrice->price}}</td>
+                    <td>{{$awaitingOrder->no_of_credit*$awaitingOrder->creditPrice->price}}</td>
                     <td>{{$awaitingOrder->created_at->todatestring()}}</td>
-                    <td>Pending</td>
+                    <td><span class="text-warning">Pending</span></td>
                     <td>
                         <div class="d-flex">
-                            <a href="{{url('/employer/awaiting/order/details/'.$awaitingOrder->id)}}"><i
-                                    class="bi bi-info-circle-fill info"></i></a>
+                            <a href="{{url('/employer/awaiting/order/details/'.$awaitingOrder->id)}}"><button class="btn btn-primary">view</button></a>
                         </div>
                     </td>
                     @endif
@@ -49,7 +50,7 @@
             </tbody>
         </table>
     </div>
-    <h3 class="my-2 mt-3">Credit transactions</h3>
+    <h3 class="my-2 mt-3">Purchasement history</h3>
     <div class="table-responsive">
         <table class="table table-striped" id="datatable">
             @php
@@ -80,8 +81,7 @@
                     @if($confirmedOrder->is_confirmed) <td class="text-success">Accepted</td> @else <td class="text-danger">Rejected</td> @endif  
                     <td>
                         <div class="d-flex">
-                            <a href="{{url('/employer/confirmed/order/details/'.$confirmedOrder->id)}}"><i
-                                    class="bi bi-info-circle-fill info"></i></a>
+                            <a href="{{url('/employer/confirmed/order/details/'.$confirmedOrder->id)}}"><button class="btn btn-primary">view</button></a>
                         </div>
                     </td>
                     @endif

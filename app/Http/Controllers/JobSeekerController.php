@@ -9,16 +9,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class JobSeekerController extends Controller
 {
+    //when job seeker log in, call this method
+    //get number of applictions(shortlised,rejected,pending)
     public function index(Request $request){
         if (auth()->guard('jobseeker')->check()) {
             $userId = auth()->guard('jobseeker')->id();
-            $jobSeeker = JobSeeker::find($userId);
-            $request->session()->put('jobseekerId',$jobSeeker->id);     
-            $request->session()->put('jobseekerEmail',$jobSeeker->email);     
-            $request->session()->put('jobseekerName',$jobSeeker->name);
-            $request->session()->put('jobseekerPhone',$jobSeeker->name);    
-            $request->session()->put('profileImg',$jobSeeker->image);  
-            $request->session()->put('role','jobseeker');
+            $jobSeeker = JobSeeker::find($userId);   
         }    
         $applications = Application::where('job_seeker_id',auth()->guard('jobseeker')->id())->orderBy('created_at','desc')->count();
         $shortListedApps = Application::where('job_seeker_id',auth()->guard('jobseeker')->id())->where('status','shortlisted')->count();
@@ -27,18 +23,21 @@ class JobSeekerController extends Controller
         $count = ["applications"=>$applications,"shortlistedApps"=>$shortListedApps,"rejectedApps"=>$rejectedApps,"pendingApps"=>$pendingApps];
         return view('JobSeeker.dashboard')->with('count',$count);   
     }
+    //get all job seekers(by admin)
     public function allJobSeekers(){
         $jobSeekers = JobSeeker::all();
         return view('job_seekers_manage')->with('jobSeekers', $jobSeekers);
     }
+    //add, delete job seeker by admin
     public function insertGet(){
         return view('add-update-jobseeker');
     }
-   
+   //get job seeker profile data to update(by jobseeker)
     public function getProfileData(){
         $jobseeker = JobSeeker::find(auth()->guard('jobseeker')->id());
         return view('JobSeeker.update-profile')->with('jobseeker', $jobseeker)->with('updateId', auth()->guard('jobseeker')->id());
     }
+    //update profile data
     public function update(Request $request){
         $jobSeeker = JobSeeker::find(auth()->guard('jobseeker')->id());
         $jobSeeker->name = $request->input('name');
@@ -66,7 +65,6 @@ class JobSeekerController extends Controller
         $request->newProfileImage->move(public_path('images/jobseekers'), $profileImage);
         $jobseeker->image = $profileImage;
         $jobseeker->save();
-        $request->session()->put('profileImg',$jobseeker->image);  
         return redirect('/job-seeker/profile')->with('status', "updated profile photo successfully");
     }
     public function viewDetails(){
@@ -125,8 +123,6 @@ class JobSeekerController extends Controller
             return back()->with('error','current password incorrect')->withInput();
         }        
         $jobseeker->save();
-        // Log out the user and redirect to the login page
-        // Auth::logout();
         return view('JobSeeker.change-password')->with('status', 'changed password successfully.');
     }
 }

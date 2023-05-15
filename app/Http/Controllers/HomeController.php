@@ -19,15 +19,18 @@ class HomeController extends Controller
     //user home page
     public function index()
     {  
-        $jobs = Job::WhereDate('created_at', '>', Carbon::today()->subMonths(6))->orderBy('created_at', 'desc')->where('status', 'active')->whereNull('deleted_at')->limit(8)->get();
+        //get 8 latest jobs
+        $jobs = Job::WhereDate('created_at', '>', Carbon::today()->subMonths(6))->orderBy('created_at', 'desc')->where('status', 'active')->limit(8)->get();
+        //get 6 popular categories and job count
         $popularCategories = JobCategory::join('jobs', 'job_categories.id', '=', 'jobs.job_category_id')
             ->groupBy('job_categories.id', 'job_categories.name', 'job_categories.image')
             ->whereDate('jobs.created_at', '>', Carbon::today()->subMonths(6))
-            ->where('jobs.status', 'active')->whereNull('jobs.deleted_at')
+            ->where('jobs.status', 'active')
             ->orderByRaw('COUNT(jobs.id) DESC')
             ->take(6)
             ->select('job_categories.id', 'job_categories.name', 'job_categories.image', DB::raw('COUNT(jobs.id) as job_count'))
             ->get();
+        //top 6 hiring companies
         $companies = DB::select('
                     SELECT companies.id, companies.company_name, companies.logo,COUNT(jobs.id) AS job_count
                     FROM companies
@@ -37,6 +40,7 @@ class HomeController extends Controller
                     ORDER BY job_count DESC
                     LIMIT 6
                 ');
+        //get 4 popular locations
         $popularStates = DB::table('states')
             ->select('states.id', 'states.name', 'states.image', DB::raw('COUNT(jobs.id) as job_count'))
             ->leftJoin('cities', 'states.id', '=', 'cities.state_id')
@@ -54,15 +58,14 @@ class HomeController extends Controller
     //get all jobs
     public function allJobs()
     {
-        $jobs = Job::WhereDate('created_at', '>', Carbon::today()->subMonths(6))->orderBy('created_at', 'desc')->where('status', 'active')->whereNull('deleted_at')->get();
+        $jobs = Job::WhereDate('created_at', '>', Carbon::today()->subMonths(6))->orderBy('created_at', 'desc')->where('status', 'active')->get();
         return $this->showJobs($jobs);
     }
     //show jobs
     public function showJobs($jobs){        
         $categories = JobCategory::orderBy('name')->get();
         $states = State::orderBy('name')->get();
-        $cities = City::orderBy('name')->get();
-        $data = ["jobs" => $jobs, "categories" => $categories, "states" => $states, "cities" => $cities];
+        $data = ["jobs" => $jobs, "categories" => $categories, "states" => $states];
         return view('jobs')->with('data', $data);
     }
     //filter jobs by position,category,state
@@ -117,7 +120,6 @@ class HomeController extends Controller
         $jobs = Job::join('addresses', 'jobs.address_id', '=', 'addresses.id')
             ->where('addresses.company_id', '=', $id)
             ->where('jobs.created_at','>',Carbon::today()->subMonths(6))
-            ->whereNull('jobs.deleted_at')
             ->where('jobs.status', '=', 'active')
             ->select('jobs.*')
             ->get();
@@ -154,7 +156,6 @@ class HomeController extends Controller
         $jobs = Job::join('addresses', 'jobs.address_id', '=', 'addresses.id')
             ->join('cities', 'cities.id', '=', 'addresses.city_id')
             ->where('cities.state_id', '=', $stateId)
-            ->whereNull('jobs.deleted_at')
             ->where('jobs.status', '=', 'active')
             ->WhereDate('jobs.created_at', '>', Carbon::today()->subMonths(6))
             ->select('jobs.*')
@@ -164,7 +165,7 @@ class HomeController extends Controller
     //get jobs by job category
     public function getJobsByCategory($categoryId)
     {
-        $jobs = Job::where('job_category_id', $categoryId)->WhereDate('created_at', '>', Carbon::today()->subMonths(6))->where('status', 'active')->whereNull('deleted_at')->get();
+        $jobs = Job::where('job_category_id', $categoryId)->WhereDate('created_at', '>', Carbon::today()->subMonths(6))->where('status', 'active')->get();
         return $this->showJobs($jobs);
     }
     //get jobs of company
@@ -172,7 +173,6 @@ class HomeController extends Controller
     {
         $jobs = Job::join('addresses', 'jobs.address_id', '=', 'addresses.id')
             ->where('addresses.company_id', '=', $companyId)
-            ->whereNull('jobs.deleted_at')
             ->where('jobs.status', '=', 'active')
             ->WhereDate('jobs.created_at', '>', Carbon::today()->subMonths(6))
             ->select('jobs.*')
@@ -186,7 +186,6 @@ class HomeController extends Controller
             ->join('companies', 'companies.id', '=', 'addresses.company_id')
             ->join('company_industry', 'company_industry.company_id', '=', 'companies.id')
             ->where('company_industry.industry_id', $industryId)
-            ->whereNull('jobs.deleted_at')
             ->where('jobs.status', '=', 'active')
             ->WhereDate('jobs.created_at', '>', Carbon::today()->subMonths(6))
             ->select('jobs.*')

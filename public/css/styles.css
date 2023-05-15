@@ -422,9 +422,6 @@ button {
 .loginContainer{
   height: 500px;
 }
-.address{
-  height: 100px !important;
-}
 .pending{
   border-radius: 5px;
   background-color: yellow;

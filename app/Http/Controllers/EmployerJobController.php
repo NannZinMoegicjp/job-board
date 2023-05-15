@@ -27,7 +27,7 @@ class EmployerJobController extends Controller
         $empTypes = EmploymentType::orderBy('name')->get();
         $expLevels = ExperienceLevel::orderBy('name')->get();
         $data = ['addresses' => $addrs, 'jobCategories' => $jobCategories, 'empTypes' => $empTypes, 'expLevels' => $expLevels];
-        return view('Employer.multistepForm')->with('data', $data);
+        return view('Employer.add-job')->with('data', $data);
     }
     public function insert(Request $request)
     {

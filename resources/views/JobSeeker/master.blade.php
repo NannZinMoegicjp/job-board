@@ -54,7 +54,7 @@
                             </a>
                             @endif
                         </li>
-                    </ul>
+                    </ul>                    
                   </div>
             </div>
         </div>
@@ -62,10 +62,6 @@
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul class="mynav">
-                        <!-- <li>
-                            <a href="{{url('/job-seeker/profile/1')}}"><i class="fa-solid fa-user"></i>
-                                <span>profile</span></a>
-                        </li> -->
                         <li>
                             <a href="{{url('/job-seeker')}}"><i class="bi bi-speedometer2"></i> <span>Jobseeker Dashboard</span></a>
                         </li>
@@ -84,6 +80,7 @@
                                         href="{{url('/job-seeker/applications/rejected')}}">Rejected
                                         application</a></li>
                             </ul>
+                            <li><a href="{{ route('all-jobs') }}"><button class="btn btn-primary">Search Jobs</button></a></li>
                         </li>
                         <li>                        
                             @if (Auth::guard('admin')->check())

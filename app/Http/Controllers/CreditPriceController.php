@@ -12,7 +12,7 @@ class CreditPriceController extends Controller
         $data = CreditPrice::orderBy('created_at','desc')->get();
         return view('pricing')->with('data',$data);
     }
-
+    //insert price(when no price in table)
     public function insertPrice(Request $request){
         $newprice = new CreditPrice();
         $newprice->price = $request->input('price');
@@ -21,6 +21,7 @@ class CreditPriceController extends Controller
         $newprice->save();
         return redirect('/admin/pricing');
     }
+    //update price
     public function updatePrice(Request $request,$id){
         $price = CreditPrice::find($id);
         if($price->price == $request->input('newPrice')){

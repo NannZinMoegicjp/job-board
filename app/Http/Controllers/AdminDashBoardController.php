@@ -17,16 +17,13 @@ use Illuminate\Support\Facades\DB;
 
 class AdminDashBoardController extends Controller
 {
+    //to get data for admin dashboard
     public function index(Request $request)
     {
         $userId = 0;
         if (auth()->guard('admin')->check()) {
             $userId = auth()->guard('admin')->id();
             $admin = Admin::find($userId);
-            $request->session()->put('role', 'admin');
-            $request->session()->put('adminId', $admin->id);
-            $request->session()->put('email', $admin->email);
-            $request->session()->put('name', $admin->name);
         }
         $jobSeekerCount = JobSeeker::count();
         $applicationCount = Application::count();
@@ -39,6 +36,7 @@ class AdminDashBoardController extends Controller
             'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December',
         ]);
+        //top 10 hiring companies
         $topHiringCompanies = Company::select('company_name', 'companies.id', DB::raw('COUNT(*) as job_count'))
             ->join('addresses', 'companies.id', '=', 'addresses.company_id')
             ->join('jobs', 'addresses.id', '=', 'jobs.address_id')
@@ -135,7 +133,8 @@ class AdminDashBoardController extends Controller
             ->groupBy('month')
             ->orderByDesc('month')
             ->get();
-        }        
+        }   
+        //top 10 job categories     
         $categories = JobCategory::join('jobs', 'job_categories.id', '=', 'jobs.job_category_id')
             ->select('job_categories.name', DB::raw('COUNT(*) as job_count'))
             ->groupBy('job_categories.id', 'job_categories.name')

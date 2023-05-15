@@ -10,16 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    //get admin data and show profile
     public function profile(){
         $userId = auth()->guard('admin')->id();
         $admin = Admin::find($userId);
         return view('admin-profile')->with('admin',$admin);
     }
+    //update admin profile form
     public function updateProfileForm(){
         $userId = auth()->guard('admin')->id();
         $admin = Admin::find($userId);
         return view('update-profile')->with('admin',$admin);
     }
+    //update admin profile
     public function updateProfile(Request $request){
         $userId = auth()->guard('admin')->id();
         $admin = Admin::find($userId);
@@ -28,6 +31,7 @@ class AdminController extends Controller
         $admin->save();
         return redirect('/admin/profile')->with('status', "updated profile successfully");
     }
+    //update admin profile image
     public function updateImage(Request $request){
         $userId = auth()->guard('admin')->id();
         $admin = Admin::find($userId);     
@@ -48,9 +52,11 @@ class AdminController extends Controller
         $admin->save();
         return redirect('/admin/profile')->with('status', "updated profile photo successfully");
     }
+    //show change password form
     public function changePasswordForm(){
         return view('change-password');
     }
+    //change password
     public function changePassword(Request $request){
         $validator = validator(request()->all(), [
             'password'=>['bail','required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
@@ -72,6 +78,7 @@ class AdminController extends Controller
         $admin->save();
         return view('change-password')->with('status', 'changed password successfully');
     }
+    //reset password for company
     public function resetCompanyPassword($id){
         $company = Company::find($id);
         $company->password = Hash::make('12345678');
@@ -79,6 +86,7 @@ class AdminController extends Controller
         $status = "reseted password for ".$company->company_name." successfully.";
         return redirect('/admin/companies')->with('status',$status);
     }
+    //reset password for jobseeker
     public function resetJobSeekerPassword($id){
         $jobseeker = JobSeeker::find($id);
         $jobseeker->password = Hash::make('12345678');

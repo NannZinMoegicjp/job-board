@@ -78,7 +78,7 @@
     </div>
 </section>
 {{-- recents jobs --}}
-<section>
+<section  class="bg-light">
     <div class="container-fluid py-4">
         <h3 class="text-center"><span class="titleFirstPart">Recent</span> <span class="titleSecondPart">Jobs</span>
         </h3>
@@ -163,7 +163,7 @@
 </section>
 
 {{-- featured locations --}}
-<section>
+<section class="bg-light">
     <div class="container py-4">
         <h3 class="text-center"><span class="titleFirstPart">Featured</span> <span
                 class="titleSecondPart">Locations</span></h3>

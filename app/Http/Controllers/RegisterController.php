@@ -12,12 +12,14 @@ use App\Models\Address;
 use App\Models\JobSeeker;
 class RegisterController extends Controller
 {
+    //show employer regristration form
     public function showEmployerRegisterForm(){
         $states = State::orderBy('name')->get();
         $industries = Industry::orderBy('name')->get();
         $data = ["states"=>$states,"industries"=>$industries];
         return view('company-register')->with("data",$data);
     }
+    //insert employer data
     public function registerEmployer(Request $request){        
         $validator = validator(request()->all(), [
             'contactPerson'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
@@ -73,9 +75,11 @@ class RegisterController extends Controller
             $add->save();
             return view('register-success');
     }
+    //show job seeker regristration form
     public function showJobseekerRegisterForm(){
         return view('job-seeker-register');
     }
+    //insert job seeker data
     public function registerJobseeker(Request $request){
         $validator = validator(request()->all(), [
             'userName'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
