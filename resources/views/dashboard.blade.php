@@ -143,10 +143,10 @@
                                 <td>{{$no++;}}</td>
                                 <td>@if($data["creditData"]["type"] == 1)
                                     {{$credit->daily}}
-                                    @elseif($data["creditData"]["type"] == 2)
-                                    {{$credit->month}}
-                                    @else
+                                    @elseif($data["creditData"]["type"] == 3)
                                     {{$credit->year}}
+                                    @else
+                                    {{$credit->month}}
                                     @endif
                                 </td>
                                 <td>{{$credit->total_credit_point_sold}}</td>

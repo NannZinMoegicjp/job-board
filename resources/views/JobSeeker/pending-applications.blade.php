@@ -1,7 +1,7 @@
 @extends('JobSeeker.master')
 @section('content')
 <div class="container my-2">
-    <h3>Pending applications</h3>
+    <h3>Shortlisted applications</h3>
     <div class="row g-2">
         <div class="table-responsive my-5">
             <table class="table table-striped" id="datatable">
@@ -21,6 +21,7 @@
                 <tbody>
                     @foreach ($data['applications'] as $application)
                     <tr>
+                        @if($application->job)
                         <td>{{$no++}}</td>
                         <td><a href="{{ route('company-details',[$application->job->address->company->id]) }}">{{$application->job->address->company->company_name}}</a></td>
                         <td><a href="{{ route('job-details',[$application->job->id]) }}">{{$application->job->title}}</a></td>
@@ -32,6 +33,7 @@
                                 class="badge bg-success  align-middle pb-2">{{$application->status}}</span> @else <span
                                 class="badge bg-warning  align-middle pb-2">{{$application->status}}</span> @endif</td> -->
                         <td>@if($application->job->status == 'active') Open @else Closed @endif</td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

@@ -20,10 +20,10 @@ class JobSeekerController extends Controller
             $request->session()->put('profileImg',$jobSeeker->image);  
             $request->session()->put('role','jobseeker');
         }    
-        $applications = Application::where('job_seeker_id',session('jobseekerId'))->orderBy('created_at','desc')->count();
-        $shortListedApps = Application::where('job_seeker_id',session('jobseekerId'))->where('status','shortlisted')->count();
-        $pendingApps = Application::where('job_seeker_id',session('jobseekerId'))->where('status','pending')->count();
-        $rejectedApps = Application::where('job_seeker_id',session('jobseekerId'))->where('status','rejected')->count();
+        $applications = Application::where('job_seeker_id',auth()->guard('jobseeker')->id())->orderBy('created_at','desc')->count();
+        $shortListedApps = Application::where('job_seeker_id',auth()->guard('jobseeker')->id())->where('status','shortlisted')->count();
+        $pendingApps = Application::where('job_seeker_id',auth()->guard('jobseeker')->id())->where('status','pending')->count();
+        $rejectedApps = Application::where('job_seeker_id',auth()->guard('jobseeker')->id())->where('status','rejected')->count();
         $count = ["applications"=>$applications,"shortlistedApps"=>$shortListedApps,"rejectedApps"=>$rejectedApps,"pendingApps"=>$pendingApps];
         return view('JobSeeker.dashboard')->with('count',$count);   
     }
@@ -87,17 +87,17 @@ class JobSeekerController extends Controller
         return redirect('/admin/job-seekers')->with('status', "deleted successfully");
     }
     public function pendingApplication(){
-        $applications = Application::where('job_seeker_id',session('jobseekerId'))->orderBy('created_at','desc')->where('status','pending')->get();
+        $applications = Application::where('job_seeker_id',auth()->guard('jobseeker')->id())->orderBy('created_at','desc')->where('status','pending')->get();
         $data = ['applications'=>$applications];
         return view('JobSeeker.pending-applications')->with('data',$data);
     }
     public function shortlistedApplication(){
-        $applications = Application::where('job_seeker_id',session('jobseekerId'))->orderBy('created_at','desc')->where('status','shortlisted')->get();
+        $applications = Application::where('job_seeker_id',auth()->guard('jobseeker')->id())->orderBy('created_at','desc')->where('status','shortlisted')->get();
         $data = ['applications'=>$applications];
         return view('JobSeeker.shortlisted-applications')->with('data',$data);
     }
     public function rejectedApplication(){
-        $applications = Application::where('job_seeker_id',session('jobseekerId'))->orderBy('created_at','desc')->where('status','rejected')->get();
+        $applications = Application::where('job_seeker_id',auth()->guard('jobseeker')->id())->orderBy('created_at','desc')->where('status','rejected')->get();
         $data = ['applications'=>$applications];
         return view('JobSeeker.rejected-applications')->with('data',$data);
     }
