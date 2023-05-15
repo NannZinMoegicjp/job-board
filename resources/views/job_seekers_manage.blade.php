@@ -47,21 +47,15 @@
             @foreach ($jobSeekers as $jobseeker)
             <tr>
                 <td>{{$no++}}</td>
-                <!-- <td><img src="{{URL::asset('images/jobseekers/'.$jobseeker->image)}}" alt="" class="myimg"></td> -->
                 <td>{{$jobseeker->name}}</td>
                 <td>{{$jobseeker->email}}</td>
                 <td>{{$jobseeker->phone}}</td>
-                <!-- <td>{{$jobseeker->address}}</td>
-                <td>{{$jobseeker->dob}}</td>
-                <td>{{$jobseeker->gender}}</td>                 -->
                 <td>
                     <div class="d-flex">     
-                    <a href="{{url('/admin/job-seekers/details/'.$jobseeker->id)}}"><i class="bi bi-info-circle-fill info"></i></a>                   
-                        <!-- <a href="{{url('/admin/job-seekers/update/'.$jobseeker->id)}}"><i
-                                class="bi bi-pencil-fill update"></i></a> -->
+                    <a href="{{url('/admin/job-seekers/details/'.$jobseeker->id)}}" class="me-2"><i class="bi bi-eye-fill" title="view job seeker details"></i></a>                   
                         <a onclick='return confirm("Want to delete?")'
                             href="{{url('/admin/job-seekers/delete/'.$jobseeker->id)}}"><i
-                                class="bi bi-trash3-fill cancel"></i></a>                            
+                                class="bi bi-trash3-fill cancel" title="delete job seeker"></i></a>                            
                     </div>
                 </td>
                 <td> <a href="{{route('reset.jobseeker.password',[$jobseeker->id])}}" onclick='return confirm("Want to reset password?")'><button class="btn btn-primary">Reset password</button></a></td>

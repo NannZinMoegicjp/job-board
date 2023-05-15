@@ -43,13 +43,13 @@
                 <td>{{$company->phone}}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{url('/admin/company/details/'.$company->id)}}"><i
-                                class="bi bi-info-circle-fill info"></i></a>
+                        <a href="{{url('/admin/company/details/'.$company->id)}}">
+                        <i class="bi bi-eye-fill text-secondary me-2"  title="view company detail"></i></a>
                         <a href="{{url('/admin/company/add/credit/'.$company->id)}}"><i
-                                class="bi bi-pencil-fill update"></i></a>
+                                class="bi bi-pencil-fill update" title="add credit to company"></i></a>
                         <a onclick='return confirm("Want to delete?")'
                             href="{{url('/admin/company/delete/'.$company->id)}}"><i
-                                class="bi bi-trash3-fill cancel"></i></a>
+                                class="bi bi-trash3-fill cancel" title="delete company"></i></a>
                     </div>
                 </td>
                 <td> <a href="{{route('reset.company.password',[$company->id])}}"  onclick='return confirm("Want to reset password?")'><button class="btn btn-primary">Reset password</button></a></td>

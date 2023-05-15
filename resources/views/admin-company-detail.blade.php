@@ -11,7 +11,7 @@
         @endif
     @if(isset($company))
     <div class="container">
-        <div class="d-flex  align-items-center">
+        <div class="d-flex  align-items-center mb-3">
             <img src="{{url('images/companies/'.$company['logo'])}}" alt="{{$company['company_name']}} logo"
                 class="companyDetailsLogo me-2">
             <h3 class="text-center title py-2 me-2">{{$company["company_name"]}}</h3>
@@ -19,42 +19,42 @@
         </div>
         <div class="row">
             <div class="col-md-5">
-                <div class="m-1">
+                <div class="mb-3">
                     <i class="bi bi-person-circle me-2"></i><span class="title">Contact Person </span> :
                     <span class="text-secondary">
                         {{$company["contact_person"]}}
                     </span>
                 </div>
-                <div class="m-1">
+                <div class="mb-3">
                     <i class="bi bi-telephone me-2"></i><span class="title">Phone </span> :
                     <span class="text-secondary">{{$company["phone"]}}
                     </span>
                 </div>
-                <div class="m-1">
+                <div class="mb-3">
                     <i class="bi bi-envelope-fill me-2"></i><span class="title">Email </span> :
                     <span class="text-secondary">{{$company["email"]}}
                     </span>
                 </div>
-                <div class="m-1">
-                    <i class="bi bi-clock me-2 clock"></i><span class="title">Member Since </span> :
+                <div class="mb-3">
+                    <i class="bi bi-clock me-2 "></i><span class="title">Member Since </span> :
                     <span class="text-secondary">
                         {{$company["created_at"]->diffForHumans()}}
                     </span>
                 </div>
-                <div class="m-1">
+                <div class="mb-3">
                     <i class="bi bi-coin me-2"></i><span class="title">No of credit </span> :
                     <span class="text-secondary">{{$company["no_of_credit"]}}
                     </span>
                 </div>
-                <div class="m-1">
+                <div class="mb-3">
                     <i class="bi bi-send me-2"></i><span class="title">No of job posted </span> :
                     <span class="text-secondary">{{$jobCount}}
                     </span>
                 </div>
             </div>
             <div class="col-md-7">
-                <div class="m-1">
-                    <i class="bi bi-bookmarks-fill me-2 industry"></i><span class="title">Industry</span> :
+                <div class="mb-3">
+                    <i class="bi bi-bookmarks-fill me-2"></i><span class="title">Industry</span> :
                     <span class="text-secondary">
                         @foreach($company->industries as $industry)
                         @if ($loop->last)
@@ -65,8 +65,8 @@
                         @endforeach
                     </span>
                 </div>
-                <div class="m-1">
-                    <i class="bi bi-people-fill me-2 date"></i><span class="title">Total Employee </span> :
+                <div class="mb-3">
+                    <i class="bi bi-people-fill me-2 "></i><span class="title">Total Employee </span> :
                     <span class="text-secondary">{{$company["no_of_employee"]}}</span>
                 </div>
                 @php
@@ -81,13 +81,13 @@
                 array_push($branches,$add);
                 }}
                 @endphp
-                <div class="m-1">
-                    <i class="bi bi-geo-alt-fill me-2 location"></i><span class="title">Address </span> :
+                <div class="mb-3">
+                    <i class="bi bi-geo-alt-fill me-2 "></i><span class="title">Address </span> :
                     <span class="text-secondary">
                         {{$mainBranch->detail_address}}, {{$mainBranch->city->name}}, {{$mainBranch->city->state->name}}
                     </span>
                 </div>
-                <div class="m-1">
+                <div class="mb-3">
                     <i class="bi bi-building-fill me-2"></i><span class="title">Other branches</span> : <span
                         class="text-secondary">
                         @foreach ($branches as $add)
@@ -100,7 +100,7 @@
                         @endforeach</span>
                 </div>
 
-                <div class="m-1">
+                <div class="mb-3">
                     <i class="bi bi-calendar2-week me-2"></i><span class="title">Established date</span> :
                     <span class="text-secondary">
                         @php
@@ -109,7 +109,7 @@
                         @endphp
                     </span>
                 </div>
-                <div class="m-1">
+                <div class="mb-3">
                     <i class="bi bi-globe me-2"></i><span class="title">Website Link </span> : <span
                         class="text-secondary">{{$company["websitelink"]}}</span>
                 </div>

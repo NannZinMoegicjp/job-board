@@ -27,7 +27,6 @@
                 <th>No</th>
                 <th>Company</th>
                 <th>Title</th>
-                <!-- <th>Opening positions</th> -->
                 <th>Posted date</th>
                 <th>Actions</th>
             </tr>
@@ -38,14 +37,12 @@
                 <td>{{$no++}}</td>
                 <td>{{$job->address->company->company_name}}</td>
                 <td>{{$job->title}}</td>
-                <!-- <td>{{$job->open_position}}</td> -->
                 <td>{{$job->created_at->toDateString()}}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{url('/admin/job/details/'.$job->id)}}"><i class="bi bi-info-circle-fill info"></i></a>
-                        {{-- <a href="{{url('/admin/job/update/'.$job->id)}}"><i class="bi bi-pencil-fill update"></i></a> --}}
+                        <a href="{{url('/admin/job/details/'.$job->id)}}" class="me-2"><i class="bi bi-eye-fill" title="view job details"></i></a>
                         <a onclick='return confirm("Want to delete?")'  href="{{url('/admin/job/delete/'.$job->id)}}"><i
-                                class="bi bi-trash3-fill cancel"></i></a>
+                                class="bi bi-trash3-fill cancel" title="delete job"></i></a>
                     </div>
                 </td>
             </tr>

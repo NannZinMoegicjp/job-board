@@ -69,11 +69,11 @@
                                 <input type="hidden" value='{{$payment_method["id"]}}'>
                                 <a onclick="filldata(this);" data-bs-toggle="modal"
                                     data-bs-target="#updatePaymentMethod">
-                                    <i class="bi bi-pencil-fill update" title="edit"></i>
+                                    <i class="bi bi-pencil-fill update" title="edit payment method"></i>
                                 </a>
                                 <a onclick='return confirm("Want to delete payment method?")'
                                     href="{{url('/admin/payment-methods/delete/'.$payment_method->id)}}"><i
-                                        class="bi bi-trash3-fill cancel" title="delete"></i></a>
+                                        class="bi bi-trash3-fill cancel" title="delete payment method"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -124,11 +124,11 @@
                                 <input type="hidden" value='{{$payment_account["id"]}}'>
                                 <a onclick="fillAccountData(this);" data-bs-toggle="modal"
                                     data-bs-target="#updatePaymentAccount">
-                                    <i class="bi bi-pencil-fill update" title="edit"></i>
+                                    <i class="bi bi-pencil-fill update" title="edit payment account"></i>
                                 </a>
-                                <!-- <a onclick='return confirm("Want to delete payment account?")'
+                                <a onclick='return confirm("Want to delete payment account?")'
                                     href="{{url('/admin/payment-accounts/delete/'.$payment_account->id)}}"><i
-                                        class="bi bi-trash3-fill cancel" title="delete"></i></a> -->
+                                        class="bi bi-trash3-fill cancel" title="delete payment account"></i></a>
                             </div>
                         </td>
                     </tr>
