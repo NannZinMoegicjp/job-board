@@ -242,7 +242,7 @@
                                 <label for="accNo">Account Number</label>
                             </div>
                             <div class="col-md-7">
-                                <input type="number" required name="accNo" id="accNo" class="form-control">
+                                <input type="number" required name="accNo" id="accNo" class="form-control"  min="1">
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -295,7 +295,7 @@
                                 <label for="updateAccNo">Account Number</label>
                             </div>
                             <div class="col-md-7">
-                                <input type="number" required name="updateAccNo" id="updateAccNo" class="form-control">
+                                <input type="number" required name="updateAccNo" id="updateAccNo" class="form-control" min="1">
                             </div>
                         </div>
                         <div class="row mb-2">

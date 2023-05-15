@@ -26,7 +26,7 @@ class RegisterController extends Controller
             'userEmail'=> ['required','string','email','unique:job_seekers,email','unique:companies,email','unique:admins,email'],
             'phone' => ['required','regex:/^(\+?959|09)[0-9]{9}$/'],
             'password'=>['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
-            'comName'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
+            'comName'=>['required','string'],
             'estDate' =>['nullable','date','before_or_equal:today'],
             'websiteLink'=>['nullable','url','regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'],
             'logofile' => ['required','mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp','max:2048'],

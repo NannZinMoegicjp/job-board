@@ -28,8 +28,8 @@
                     <label for="contactPerson">Contact Person Name</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
-                    <input type="text" class="form-control @error('userName') is-invalid @enderror" required
-                        name="contactPerson" id="contactPerson" value="{{ old('contactPerson') }}">
+                    <input type="text" class="form-control @error('userName') is-invalid @enderror" 
+                        name="contactPerson" id="contactPerson" required>
                         @error('userName')
                         <span class="invalid-feedback">
                             <strong>{{ $message }}</strong>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="password" class="form-control @error('password') is-invalid @enderror" required
-                        placeholder="Password" name="password" id="password" value="{{ old('password') }}">
+                         name="password" id="password" value="{{ old('password') }}">
                 </div>
             </div>
             <div class="row mb-3">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="password" class="form-control @error('password.confirmed') is-invalid @enderror"
-                        required placeholder="Confirm password" name="password_confirmation" id="password_confirmation"
+                        required  name="password_confirmation" id="password_confirmation"
                         value="{{ old('password_confirmation') }}">
                     <span class="text-secondary">***one lowercase letter, one uppercase letter, one digit, and one
                         special
@@ -110,7 +110,7 @@
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="url" class="form-control @error('websiteLink') is-invalid @enderror" name="websiteLink" id="websiteLink"
-                        placeholder="https://studyrightnow-mdy.com" value="{{old('websiteLink')}}">
+                        placeholder="eg., https://studyrightnow-mdy.com" value="{{old('websiteLink')}}">
                 </div>
             </div>
             <div class="row mb-2">

@@ -67,7 +67,7 @@
                 @foreach($data as $price)
                 <tr>
                     <td>{{$no++}}</td>
-                    <td>{{$price["price"]}}</td>
+                    <td>{{number_format($price["price"])}}</td>
                     <td>{{$price["created_at"]->toDateString()}}</td>
                     <td>
                         @if($price["updated_at"])

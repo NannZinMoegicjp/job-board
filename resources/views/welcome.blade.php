@@ -42,14 +42,14 @@
                         </li>
                         <li><a class="dropdown-item" href="{{ url('/admin/change/password') }}">change password</a></li>
                         <li>
+                            <div class="ms-2">
                             @if (auth()->check())
-                            <a class="dropdown-item">
-                                <form action="{{ route('logout') }}" method="POST">
+                            <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <input type="submit" value="logout">
                                 </form>
-                            </a>
                             @endif
+                            </div>
                         </li>
                     </ul>
                   </div>

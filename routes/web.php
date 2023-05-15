@@ -109,8 +109,6 @@ Route::group(  ['prefix' => 'admin','middleware'=>['auth:admin']], function () {
 Route::group(  ['prefix' => 'employer','middleware' => ['auth:employer']], function () {
     Route::get('/',[EmployerController::class,'index'])->name('employer.dashboard');
     Route::get('/jobs',[EmployerJobController::class,'index'])->name('employer.jobs')->name('active-jobs');
-    Route::get('/jobs/deactivated',[EmployerJobController::class,'deactivatedJobs'])->name('employer.deactivated-jobs');
-    Route::get('/jobs/expired',[EmployerJobController::class,'expiredJobs'])->name('employer.expired-jobs');
     Route::get('/jobs/inactive',[EmployerJobController::class,'inactiveJobs'])->name('inactive-jobs');
     Route::get('/buy/credit',[EmployerController::class,'buyCreditGet']);
     Route::post('/buy/credit',[EmployerController::class,'buyCredit']);

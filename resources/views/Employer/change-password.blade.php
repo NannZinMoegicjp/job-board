@@ -21,7 +21,7 @@
         @endif
     </div>
     <div class="row my-3">
-        <div class="col-md-7 col-12 mb-1">
+        <div class="col-md-8 offset-md-2 col-12 mb-1">
             <form action="{{route('employer.change.password')}}" class="bg-white px-3 pb-2 rounded shadow" method="post"
                 enctype="multipart/form-data">
                 @csrf

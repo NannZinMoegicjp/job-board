@@ -34,13 +34,13 @@ h6 {
 .date {
     color: #76a5af;
 }
-a:hover,
+/* a:hover,
 a:active,
 a:focus {
     text-decoration: none;
     color: #009ce7;
     outline: none;
-}
+} */
 .form-control,
 .form-select {
     border-radius: 0;
@@ -329,7 +329,7 @@ textarea.form-control {
     border-color: transparent;
     background-color: #009efb;
 }
-.btn-primary:hover,
+/* .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary.active,
 .btn-primary:active,
@@ -337,7 +337,7 @@ textarea.form-control {
     background-color: #009efb;
     border: 1px solid #009efb;
     color: #fff;
-}
+} */
 .btn-primary.active.focus,
 .btn-primary.active:focus,
 .btn-primary.active:hover,

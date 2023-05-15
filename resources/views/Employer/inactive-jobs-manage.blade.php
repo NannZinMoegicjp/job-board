@@ -58,8 +58,6 @@
                             <a onclick='return confirm("Want to delete job?")'
                                 href="{{url('/employer/job/delete/'.$job->id)}}"><i
                                     class="bi bi-trash3-fill cancel me-2" title="delete job"></i></a>
-                                    <!-- <a onclick='return confirm("Want to open job?")'
-                                href="{{url('/employer/job/activate/'.$job->id)}}"><i class="bi bi-bell-fill"></i></a> -->
                         </div>
                         
                     </td>

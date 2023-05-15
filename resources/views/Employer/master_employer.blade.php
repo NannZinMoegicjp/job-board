@@ -10,8 +10,11 @@
     <link rel="stylesheet" href="{{URL::asset('css/order.css')}}" />
     <link rel="stylesheet" href="{{URL::asset('css/dashboard.css')}}" />
     @yield('css')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" />
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -24,35 +27,42 @@
         <div class="header">
             <div class="header-left">
                 <a href="{{route('home')}}" class="mt-2 fs-4">
-                    <img src="{{URL::asset('/images/jobsearchicon1.png')}}" width="40" height="40" alt=""> <span class="text-white">Job
-                        Board</span>                
+                    <img src="{{URL::asset('/images/jobsearchicon1.png')}}" width="40" height="40" alt=""> <span
+                        class="text-white">Job
+                        Board</span>
                 </a>
-            </div>            
+            </div>
             <a id="toggle_btn" href="javascript:void(0);"><i class="bi bi-sliders  text-white"></i></a>
             <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="bi bi-sliders  text-white"></i></a>
             <div class="text-warning d-flex justify-content-end align-items-center me-5 mt-1">
                 <div class="dropdown">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img style="background: white" src="{{URL::asset('images/companies/'.auth()->guard('employer')->user()->logo)}}" alt="{{auth()->guard('employer')->user()->contact_person}}"
-                        class="adminImg">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img style="background: white"
+                            src="{{URL::asset('images/companies/'.auth()->guard('employer')->user()->logo)}}"
+                            alt="{{auth()->guard('employer')->user()->contact_person}}" class="adminImg">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="{{url('/employer/profile')}}">
-                            proflie</a>
+                                proflie</a>
                         </li>
-                        <li><a class="dropdown-item" href="{{ url('/employer/change/password') }}">change password</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/employer/change/password') }}">change password</a>
+                        </li>
                         <li>
+                        <li>
+                            <div class="ms-2">
                             @if (auth()->check())
-                            <a class="dropdown-item">
-                                <form action="{{ route('logout') }}" method="POST">
+                            <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <input type="submit" value="logout">
                                 </form>
-                            </a>
                             @endif
+                            </div>
+                        </li>
                         </li>
                     </ul>
-                  </div>
+
+                </div>
             </div>
         </div>
         <div class="sidebar" id="sidebar">
@@ -64,7 +74,8 @@
                                     Dashboard</span></a>
                         </li>
                         <li class="submenu">
-                            <a href="#"><i class="bi bi-briefcase-fill"></i><span>Jobs</span><span class="bi bi-caret-right-fill"></span></a>
+                            <a href="#"><i class="bi bi-briefcase-fill"></i><span>Jobs</span><span
+                                    class="bi bi-caret-right-fill"></span></a>
                             <ul class="list-unstyled">
                                 <li><a class="dropdown-item" href="{{url('/employer/jobs/insert')}}">Post
                                         Jobs</a></li>
@@ -86,7 +97,8 @@
                             <a href="#"><i class="bi bi-send-fill"></i><span>Applications</span><span
                                     class="bi bi-caret-right-fill"></span></a>
                             <ul class="list-unstyled">
-                                <li><a class="dropdown-item" href="{{url('/employer/applications')}}">Pending Applications</a>
+                                <li><a class="dropdown-item" href="{{url('/employer/applications')}}">Pending
+                                        Applications</a>
                                 </li>
                                 <li><a class="dropdown-item"
                                         href="{{url('/employer/applications/shortlisted')}}">Shortlisted application</a>
@@ -111,11 +123,11 @@
             @show
         </div>
     </div>
-    <!-- <script>
-        setTimeout(function() {
-          $('.alert').fadeOut('fast');
-         }, 5000); // 3 seconds (time is in milliseconds)
-    </script> -->
+    <script>
+    setTimeout(function() {
+        $('.alert').fadeOut('fast');
+    }, 30000); // 30 seconds (time is in milliseconds)
+    </script>
     @yield('scripts')
 </body>
 

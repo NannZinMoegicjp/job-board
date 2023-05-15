@@ -24,6 +24,13 @@ class AdminController extends Controller
     }
     //update admin profile
     public function updateProfile(Request $request){
+        $validator = validator(request()->all(), [
+            'name'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
+            'phone' => ['required','regex:/^(\+?959|09)[0-9]{9}$/'],
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
         $userId = auth()->guard('admin')->id();
         $admin = Admin::find($userId);
         $admin->name = $request->input('name');

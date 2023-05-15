@@ -41,7 +41,7 @@ $job = $data['job'];
         </div>
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12">
-                <label for="minSalary">Min Salary</label>
+                <label for="minSalary">Min Salary per month</label>
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" required name="minSalary" id="minSalary"
@@ -50,7 +50,7 @@ $job = $data['job'];
         </div>
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12">
-                <label for="maxSalary">Max Salary</label>
+                <label for="maxSalary">Max Salary per month</label>
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" required name="maxSalary" id="maxSalary"

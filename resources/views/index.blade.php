@@ -78,7 +78,7 @@
     </div>
 </section>
 {{-- recents jobs --}}
-<section  class="bg-light">
+<section class="bg-light">
     <div class="container-fluid py-4">
         <h3 class="text-center"><span class="titleFirstPart">Recent</span> <span class="titleSecondPart">Jobs</span>
         </h3>
@@ -132,7 +132,7 @@
             @endif
             <div class="text-center mt-3">
                 <a href="{{route('all-categories')}}" class="text-decoration-none text-dark">View more<i
-                    class="bi bi-arrow-right-short ms-2"></i></a>
+                        class="bi bi-arrow-right-short ms-2"></i></a>
             </div>
         </div>
     </div>
@@ -153,12 +153,12 @@
                 </a>
             </div>
             @endforeach
-            @endif
-            <div class="col-md-2 col-6 col-xs-12 d-flex justify-content-center align-items-center">
-                <a href="{{route('all-companies')}}"><button class="button-18 myBtn mb-4" role="button">Job
-                    all employers</button></a>
-            </div>
+            @endif            
         </div>
+        <div class="text-center">
+        <a href="{{route('all-companies')}}"><button class="button-18 greenBtn mb-4" role="button">view
+                        all employers</button></a>
+            </div>
     </div>
 </section>
 
@@ -171,16 +171,16 @@
             @if(isset($data["popularStates"]))
             @foreach($data["popularStates"] as $state)
             <div class="col-lg-3 col-md-4 col-6 col-xs-12">
-            <a href="{{ route('jobs-by-category',[$state->id]) }}" class="text-decoration-none">
-            <div class="bg-white text-center shadow location position-relative">
-                    <img src="{{URL::asset('images/states/'.$state->image)}}" alt="" class="img-fluid">
-                    <p class="p-1">
-                        <span class="cityName">{{$state->name}}</span>
-                        <!-- (<span class="noOfJobs">{{$state->job_count}} jobs</span>) -->
-                    </p>
-                </div>
-           </a>                
-            </div>           
+                <a href="{{ route('jobs-by-category',[$state->id]) }}" class="text-decoration-none">
+                    <div class="bg-white text-center shadow location position-relative">
+                        <img src="{{URL::asset('images/states/'.$state->image)}}" alt="" class="img-fluid">
+                        <p class="p-1">
+                            <span class="cityName">{{$state->name}}</span>
+                            <!-- (<span class="noOfJobs">{{$state->job_count}} jobs</span>) -->
+                        </p>
+                    </div>
+                </a>
+            </div>
             @endforeach
             @endif
         </div>
@@ -190,5 +190,5 @@
             </a>
         </div>
     </div>
-</section> 
+</section>
 @endsection

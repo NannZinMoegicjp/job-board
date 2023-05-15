@@ -26,7 +26,7 @@
                             {{$job->address->city->state->name}}</div>
                         <div class="col-lg-3 col-6"><i class="bi bi-calendar-check-fill date"></i>
                             {{$job->created_at->toDateString()}}</div>
-                        <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>Up to {{$job->max_salary}}
+                        <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>Up to {{number_format($job->max_salary)}}
                         </div>
                     </div>
                     <div class="mb-2">Experience level : {{$job->experienceLevel->name}}</div>

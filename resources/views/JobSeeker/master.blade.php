@@ -45,14 +45,16 @@
                         </li>
                         <li><a class="dropdown-item" href="{{ url('/job-seeker/change/password') }}">change password</a></li>
                         <li>
+                        <li>
+                            <div class="ms-2">
                             @if (auth()->check())
-                            <a class="dropdown-item">
-                                <form action="{{ route('logout') }}" method="POST">
+                            <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <input type="submit" value="logout">
                                 </form>
-                            </a>
                             @endif
+                            </div>
+                        </li>
                         </li>
                     </ul>                    
                   </div>
@@ -108,11 +110,11 @@
             @show
         </div>
     </div>
-    <!-- <script>
+    <script>
         setTimeout(function() {
           $('.alert').fadeOut('fast');
-         }, 5000); // 3 seconds (time is in milliseconds)
-    </script> -->
+         }, 30000); // 3 seconds (time is in milliseconds)
+    </script>
     @yield('scripts')
 </body>
 

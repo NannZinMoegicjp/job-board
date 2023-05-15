@@ -30,7 +30,7 @@
                         <div class="col-lg-3 col-6"><i class="bi bi-calendar-check-fill date"></i>
                             {{$job->created_at->todatestring()}}</div>
                         <div class="col-lg-3 col-6"><i class="bi bi-currency-dollar money"></i>Up to
-                            {{$job->max_salary}}
+                            {{number_format($job->max_salary)}}
                         </div>
                     </div>
                     <div class="mb-2">Experience level : {{$job->experienceLevel->name}}</div>

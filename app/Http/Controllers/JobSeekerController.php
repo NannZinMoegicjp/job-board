@@ -48,6 +48,7 @@ class JobSeekerController extends Controller
         $jobSeeker->save();
         return redirect('/job-seeker/profile')->with('status', "updated successfully");
     }
+    //update profile image
     public function updateImage(Request $request){
         $jobseeker = JobSeeker::find(auth()->guard('jobseeker')->id());       
         $validator = validator(request()->all(), [
@@ -67,10 +68,10 @@ class JobSeekerController extends Controller
         $jobseeker->save();
         return redirect('/job-seeker/profile')->with('status', "updated profile photo successfully");
     }
-    public function viewDetails(){
-        $jobseeker = JobSeeker::find(auth()->guard('jobseeker')->id());
+    public function viewDetails($id){
+        $jobseeker = JobSeeker::find($id);
         if(auth()->guard('jobseeker')->check())
-            return view('JobSeeker.profile')->with('jobseeker', $jobseeker)->with('updateId', auth()->guard('jobseeker')->id());
+            return view('JobSeeker.profile')->with('jobseeker', $jobseeker)->with('updateId', $id);
         else if(auth()->guard('admin')->check())
             return view('admin-jobseeker-details')->with('jobseeker', $jobseeker);
     }

@@ -69,7 +69,7 @@
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="password" class="form-control @error('password') is-invalid @enderror" required
-                        placeholder="Password" name="password" id="password" value="{{ old('password') }}">
+                        name="password" id="password" value="{{ old('password') }}">
                 </div>
             </div>
             <div class="row mb-3">
@@ -79,7 +79,7 @@
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="password" class="form-control @error('password.confirmed') is-invalid @enderror"
-                        required placeholder="Confirm password" name="password_confirmation" id="password_confirmation"
+                         name="password_confirmation" id="password_confirmation"
                         value="{{ old('password_confirmation') }}">
                     <span class="text-secondary">***one lowercase letter, one uppercase letter, one digit, and one
                         special
@@ -109,7 +109,7 @@
                 <div class="col-md-3 offset-md-1 col-12"><label for="address" class="col-form-label">Address</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
-                    <textarea class="form-control address" placeholder="Enter details address" required id="address"
+                    <textarea class="form-control address" required id="address"
                         name="address" rows="4">{{ old('address') }}</textarea>
                 </div>
             </div>

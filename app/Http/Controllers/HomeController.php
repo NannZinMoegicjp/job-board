@@ -58,15 +58,15 @@ class HomeController extends Controller
     //get all jobs
     public function allJobs()
     {
-        $jobs = Job::WhereDate('created_at', '>', Carbon::today()->subMonths(6))->orderBy('created_at', 'desc')->where('status', 'active')->get();
+        $jobs = Job::WhereDate('created_at', '>', Carbon::today()->subMonths(6))->orderBy('created_at', 'desc')->where('status', 'active')->paginate(5);
         return $this->showJobs($jobs);
     }
     //show jobs
     public function showJobs($jobs){        
         $categories = JobCategory::orderBy('name')->get();
         $states = State::orderBy('name')->get();
-        $data = ["jobs" => $jobs, "categories" => $categories, "states" => $states];
-        return view('jobs')->with('data', $data);
+        $data = ["categories" => $categories, "states" => $states];
+        return view('jobs')->with('data', $data)->with('jobs',$jobs);
     }
     //filter jobs by position,category,state
     public function filterJobs(Request $request)
@@ -77,34 +77,40 @@ class HomeController extends Controller
         if ($request->has('position')) {
             $position = $request->input("position");
             if ($categoryId == 0 && $stateId == 0) {
-                $jobs = Job::where('title', 'like', "%{$position}%")->get();
+                $jobs = Job::where('title', 'like', "%{$position}%")->paginate(5);
             } else if ($categoryId == 0 && $stateId != 0) {
                 $jobs = Job::whereHas('address.city.state', function ($query) use ($stateId) {
                     $query->where('id', '=', $stateId);
-                })->where('title', 'like', "%{$position}%")->get();
+                })->where('title', 'like', "%{$position}%")->paginate(5);
             } else if ($categoryId != 0 && $stateId == 0) {
-                $jobs = Job::where('job_category_id', $categoryId)->where('title', 'like', "%{$position}%")->get();
+                $jobs = Job::where('job_category_id', $categoryId)->where('title', 'like', "%{$position}%")->paginate(5);
             } else {
                 $jobs = Job::whereHas('address.city.state', function ($query) use ($stateId) {
                     $query->where('id', '=', $stateId);
-                })->where('job_category_id', $categoryId)->where('title', 'like', "%{$position}%")->get();
+                })->where('job_category_id', $categoryId)->where('title', 'like', "%{$position}%")->paginate(5);
             }
         } else {
             if ($categoryId == 0 && $stateId == 0) {
-                $jobs = Job::all();
+                $jobs = Job::paginate(5);
             } else if ($categoryId == 0 && $stateId != 0) {
                 $jobs = Job::whereHas('address.city.state', function ($query) use ($stateId) {
                     $query->where('id', '=', $stateId);
-                })->get();
+                })->paginate(5);
             } else if ($categoryId != 0 && $stateId == 0) {
-                $jobs = Job::where('job_category_id', $categoryId)->get();
+                $jobs = Job::where('job_category_id', $categoryId)->paginate(5);
             } else {
                 $jobs = Job::whereHas('address.city.state', function ($query) use ($stateId) {
                     $query->where('id', '=', $stateId);
-                })->where('job_category_id', $categoryId)->get();
+                })->where('job_category_id', $categoryId)->paginate(5);
             }
         }
-        return $this->showJobs($jobs);
+        $categories = JobCategory::orderBy('name')->get();
+        $states = State::orderBy('name')->get();
+        $data = ["categories" => $categories, "states" => $states, "categoryId"=>$categoryId,"stateId"=>$stateId];
+        if($request->has('position')){
+           $data["position"] = $request->input('position');
+        }     
+        return view('jobs')->with('data', $data)->with('jobs',$jobs);
     }
     
     //get job information by id
@@ -159,13 +165,13 @@ class HomeController extends Controller
             ->where('jobs.status', '=', 'active')
             ->WhereDate('jobs.created_at', '>', Carbon::today()->subMonths(6))
             ->select('jobs.*')
-            ->get();
+            ->paginate(5);
         return $this->showJobs($jobs);
     }
     //get jobs by job category
     public function getJobsByCategory($categoryId)
     {
-        $jobs = Job::where('job_category_id', $categoryId)->WhereDate('created_at', '>', Carbon::today()->subMonths(6))->where('status', 'active')->get();
+        $jobs = Job::where('job_category_id', $categoryId)->WhereDate('created_at', '>', Carbon::today()->subMonths(6))->where('status', 'active')->paginate(5);
         return $this->showJobs($jobs);
     }
     //get jobs of company
@@ -176,7 +182,7 @@ class HomeController extends Controller
             ->where('jobs.status', '=', 'active')
             ->WhereDate('jobs.created_at', '>', Carbon::today()->subMonths(6))
             ->select('jobs.*')
-            ->get();
+            ->paginate(5);
         return $this->showJobs($jobs);
     }
     //get jobs by industry
@@ -189,7 +195,7 @@ class HomeController extends Controller
             ->where('jobs.status', '=', 'active')
             ->WhereDate('jobs.created_at', '>', Carbon::today()->subMonths(6))
             ->select('jobs.*')
-            ->get();
+            ->paginate(5);
         return $this->showJobs($jobs);
     }
     //get categories
