@@ -7,10 +7,12 @@ use App\Models\CreditPrice;
 
 class CreditPriceController extends Controller
 {
+    //get all prices of credit price
     public function index(){
         $data = CreditPrice::withTrashed()->orderBy('created_at','desc')->get();
         return view('pricing')->with('data',$data);
     }
+
     public function insertPrice(Request $request){
         $newprice = new CreditPrice();
         $newprice->price = $request->input('price');
