@@ -24,7 +24,7 @@
                     <label for="userName" class="col-form-label">Name</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
-                    <input type="text" class="form-control @error('userName') is-invalid @enderror" required
+                    <input type="text" class="form-control @error('userName') is-invalid @enderror"
                         name="userName" id="userName" value="{{ old('userName') }}">
                 </div>
                 <div id="nameError" class="text-danger"></div>
@@ -34,7 +34,7 @@
                     <label for="userEmail" class="col-form-label">Email</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
-                    <input type="email" class="form-control @error('userEmail') is-invalid @enderror" required
+                    <input type="email" class="form-control @error('userEmail') is-invalid @enderror"
                         name="userEmail" id="userEmail" value="{{ old('userEmail') }}">
                     <div id="emailError" class="text-danger"></div>
                 </div>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-md-7 col-12">
                     <input type="number" class="form-control @error('userPhoneNumber') is-invalid @enderror" min="0"
-                        required placeholder="eg. 09454096728" name="userPhoneNumber" id="userPhoneNumber"
+                     placeholder="eg. 09454096728" name="userPhoneNumber" id="userPhoneNumber"
                         value="{{ old('userPhoneNumber') }}">
                     <div id="phoneNoError" class="text-danger"></div>
                 </div>
@@ -54,7 +54,7 @@
                 <div class="col-md-3 offset-md-1 col-12"><label for="dob" class="col-form-label">Date of birth</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
-                    <input type="date" class="form-control @error('dob') is-invalid @enderror" required
+                    <input type="date" class="form-control @error('dob') is-invalid @enderror"
                         placeholder="dob" name="dob" id="dob" value="{{ old('dob') }}">
                 </div>
                 @error('dob')
@@ -68,7 +68,7 @@
                     <label for="password" class="col-form-label">Password</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" required
+                    <input type="password" class="form-control @error('password') is-invalid @enderror"
                         name="password" id="password" value="{{ old('password') }}">
                 </div>
             </div>
@@ -93,7 +93,7 @@
                 <div class="col-md-7 col-12">
                     <input type="file" class="form-control @error('profileImage') is-invalid @enderror"
                         name="profileImage" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp" id="profileImage"
-                        value="{{old('profileImage')}}" required>
+                        value="{{old('profileImage')}}">
                 </div>
             </div>
             <div class="row mb-3">
@@ -101,7 +101,7 @@
                     <label for="gender">Gender</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
-                    <input type="radio" name="gender" id="female" value="female" required>Female
+                    <input type="radio" name="gender" id="female" value="female">Female
                     <input type="radio" name="gender" id="male" value="male">Male
                 </div>
             </div>
@@ -109,7 +109,7 @@
                 <div class="col-md-3 offset-md-1 col-12"><label for="address" class="col-form-label">Address</label><span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-7 col-12">
-                    <textarea class="form-control address" required id="address"
+                    <textarea class="form-control address @error('address') is-invalid @enderror" id="address"
                         name="address" rows="4">{{ old('address') }}</textarea>
                 </div>
             </div>
@@ -117,7 +117,7 @@
                 <div class="col-md-3 offset-md-1 col-12"></div>
                 <div class="col-md-7 col-12">
                     <input type="hidden" name="register_type" value="job_seeker">
-                    <input type="submit" name="btnRegister" id="btnRegister" class="registerBtn btn me-2" required
+                    <input type="submit" name="btnRegister" id="btnRegister" class="registerBtn btn me-2"
                         value="register">
                     <a href="{{route('home')}}"><input type="button" class="btn-secondary btn" value="Cancel"></a>
                 </div>
