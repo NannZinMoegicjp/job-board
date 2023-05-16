@@ -45,9 +45,6 @@
                             <a class="nav-link" href="{{route('all-locations')}}">Locations</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('all-industries')}}">Industries</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{{route('all-companies')}}">Companies</a>
                         </li>
                         <li>
@@ -132,7 +129,6 @@
                     <li><a href="{{route('all-jobs')}}">Jobs</a></li>
                     <li><a href="{{route('all-categories')}}">Categories</a></li>
                     <li><a href="{{route('all-companies')}}">Companies</a></li>
-                    <li><a href="{{route('all-industries')}}">Industries</a></li>
                     <li><a href="{{route('all-locations')}}">Locations</a></li>
                 </ul>
             </div>

@@ -30,9 +30,9 @@
             <tr>
                 <td>{{$no++}}</td>
                 <td>{{$corder->order->company->company_name}}</td>                
-                <td>{{$corder->order->created_at}}</td>
+                <td>{{$corder->order->created_at->todatestring()}}</td>
                 @if($corder->is_confirmed) <td class="text-success">Accepted</td> @else <td class="text-danger">Rejected</td> @endif  
-                <td>{{$corder->created_at}}</td> 
+                <td>{{$corder->created_at->todatestring()}}</td> 
                 <td>
                 <a href="{{url('/admin/order/confirmed/details/'.$corder->id)}}" class="text-center">
                 <button type="button" class="btn btn-primary">

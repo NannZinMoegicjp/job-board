@@ -27,9 +27,6 @@
                             <th>Company Name</th>
                             <th>No of credits</th>
                             <th>Price per credit</th>
-                            <!-- <th>Total Amount</th> -->
-
-                            <!-- <th>Payment Screenshot</th> -->
                             <th>Payment method</th>
                             <th>Ordered Date</th>
                             <th></th>
@@ -43,14 +40,8 @@
                             <td>{{$order->company->company_name}}</td>
                             <td>{{$order->no_of_credit}}</td>
                             <td>{{$order->creditPrice->price}}</td>
-                            <!-- <td>{{$order->no_of_credit*$order->creditPrice->price}}</td> -->
-
-                            <!-- <td><img src="{{URL::asset('images/payment_screenshots/'.$order->screenshot)}}" alt="" id="imageBox1" -->
-                            <!-- class="myimg"></td> -->
-                            <!-- <td><img src="{{url('images/payment_methods/'.$order->paymentAccount->paymentMethod->image)}}"
-                                alt="" class="myimg"></td> -->
                             <td>{{$order->paymentAccount->paymentMethod->name}}</td>
-                            <td>{{$order->created_at}}</td>
+                            <td>{{$order->created_at->todatestring()}}</td>
                             <td>
                                 <a href="{{url('/admin/order/awaiting/details/'.$order->id)}}"><button type="button"
                                         class="btn btn-primary">View</button></a>

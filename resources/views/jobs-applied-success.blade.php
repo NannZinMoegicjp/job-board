@@ -5,7 +5,6 @@
         <p>Your application has been submitted!</p>
         <img src="{{asset('images/applylogo.png')}}">
         <p class="mt-2"><a href="{{ url('/jobs') }}" class="btn btn-secondary">View more jobs</a></p>
-        <p class="mt-2"><a href="{{ url()->previous() }}" class="text-decoration-none text-dark">Back</a></p>
     </div>   
 </section>
 @endsection

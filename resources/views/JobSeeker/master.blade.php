@@ -40,7 +40,7 @@
                         class="adminImg">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="{{url('/job-seeker/profile')}}">
+                        <li><a class="dropdown-item" href="{{url('/job-seeker/profile/'.auth()->guard('jobseeker')->id())}}">
                             proflie</a>
                         </li>
                         <li><a class="dropdown-item" href="{{ url('/job-seeker/change/password') }}">change password</a></li>

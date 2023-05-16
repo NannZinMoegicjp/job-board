@@ -143,7 +143,7 @@ class HomeController extends Controller
             return redirect()->back()->withErrors($validator);
         }
         $application = new Application();
-        $count = Application::where('job_id', $id)->where('job_seeker_id', auth()->guard('jobseeker')->id())->count();
+        $count = Application::where('job_id', $id)->where('status', 'pending')->where('job_seeker_id', auth()->guard('jobseeker')->id())->count();
         if ($count > 0) {
             return redirect()->back()->with('error', 'you have already applied this job');
         }

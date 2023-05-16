@@ -108,7 +108,8 @@ Route::group(  ['prefix' => 'admin','middleware'=>['auth:admin']], function () {
 
 Route::group(  ['prefix' => 'employer','middleware' => ['auth:employer']], function () {
     Route::get('/',[EmployerController::class,'index'])->name('employer.dashboard');
-    Route::get('/jobs',[EmployerJobController::class,'index'])->name('employer.jobs')->name('active-jobs');
+    Route::get('/jobs',[EmployerJobController::class,'index'])->name('employer.jobs');
+    Route::get('/job/deactivate/{id}',[EmployerJobController::class,'deactivate']);
     Route::get('/jobs/inactive',[EmployerJobController::class,'inactiveJobs'])->name('inactive-jobs');
     Route::get('/buy/credit',[EmployerController::class,'buyCreditGet']);
     Route::post('/buy/credit',[EmployerController::class,'buyCredit']);
@@ -154,7 +155,7 @@ Route::group(  ['prefix' => 'job-seeker','middleware' => ['auth:jobseeker']], fu
     Route::get('/applications/pending',[JobSeekerController::class,'pendingApplication']);
     Route::get('/applications/shortlisted',[JobSeekerController::class,'shortlistedApplication']);
     Route::get('/applications/rejected',[JobSeekerController::class,'rejectedApplication']);
-    Route::get('/profile',[JobSeekerController::class,'viewDetails']);
+    Route::get('/profile/{id}',[JobSeekerController::class,'viewDetails']);
     Route::post('/update/image',[JobSeekerController::class,'updateImage']);
     Route::get('/update/profile',[JobSeekerController::class,'getProfileData']);
     Route::post('/update/profile',[JobSeekerController::class,'update']);

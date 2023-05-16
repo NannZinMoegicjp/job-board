@@ -67,7 +67,7 @@ class EmployerController extends Controller
         $request->screenshot->move(public_path('images/payment_screenshots'), $screenshot);
         $order->screenshot = $screenshot;
         $order->save();
-        return redirect('/employer/buy/credit')->with('status','your order has been sent');
+        return redirect('/employer/buy/credit')->with('status','your purchase has been made. please wait for confirmation.');
     }
     //get all applications to jobs of company
     public function getApplications(Request $request){

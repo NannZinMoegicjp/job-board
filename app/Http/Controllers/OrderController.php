@@ -23,7 +23,7 @@ class OrderController extends Controller
     //accept payment
     public function acceptOrder($id){
         $orderCon = new OrderConfirmation();
-        $orderCon->admin_id = session('adminId');
+        $orderCon->admin_id = auth()->guard('admin')->id();
         $orderCon->order_id = $id;
         $orderCon->is_confirmed = true;
         $d=strtotime("today");
@@ -37,7 +37,7 @@ class OrderController extends Controller
     //reject payment
     public function rejectOrder($id){
         $orderCon = new OrderConfirmation();
-        $orderCon->admin_id = session('adminId');
+        $orderCon->admin_id = auth()->guard('admin')->id();
         $orderCon->order_id = $id;
         $orderCon->is_confirmed = false;
         $d=strtotime("today");

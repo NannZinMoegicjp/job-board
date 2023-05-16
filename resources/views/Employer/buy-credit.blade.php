@@ -11,7 +11,7 @@
             enctype="multipart/form-data">
             @csrf
             <div>
-                <h4 class="text-center py-4">Order credit</h4>
+                <h4 class="text-center py-4">Buy credit</h4>
             </div>
             <div class="row mb-3">
                 <div class="col-md-4 offset-md-1 col-12">
@@ -77,7 +77,7 @@
                 <div class="col-md-4 offset-md-1 col-12">
                 </div>
                 <div class="col-md-6 col-12 d-flex">
-                    <input type="submit" class="btn-primary btn me-2" value="Order">
+                    <input type="submit" class="btn-primary btn me-2" value="Buy">
                     <a href="{{url('/employer')}}"><input type="button" class="btn-secondary btn" value="Cancel"></a>
                 </div>
             </div>

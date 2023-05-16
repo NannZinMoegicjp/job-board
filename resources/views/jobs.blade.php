@@ -2,7 +2,7 @@
 @section('content')
 <section>
     <div class="container pageContent">
-        <div class="bg-secondary"  style="position: sticky; top: 80px;">
+        <div class="bg-secondary"  style="position: sticky; top: 70px;">
         <form action="{{url('/jobs/filter')}}" method="get" class="p-3 mx-3 my-2">
             @csrf
             <div class="row g-lg-1 g-2">

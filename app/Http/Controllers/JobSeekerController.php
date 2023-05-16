@@ -46,7 +46,7 @@ class JobSeekerController extends Controller
         $jobSeeker->gender = $request->input('gender');        
         $jobSeeker->address = $request->input('address');
         $jobSeeker->save();
-        return redirect('/job-seeker/profile')->with('status', "updated successfully");
+        return redirect('/job-seeker/profile/'.auth()->guard('jobseeker')->id())->with('status', "updated successfully");
     }
     //update profile image
     public function updateImage(Request $request){
@@ -66,7 +66,7 @@ class JobSeekerController extends Controller
         $request->newProfileImage->move(public_path('images/jobseekers'), $profileImage);
         $jobseeker->image = $profileImage;
         $jobseeker->save();
-        return redirect('/job-seeker/profile')->with('status', "updated profile photo successfully");
+        return redirect('/job-seeker/profile/'.auth()->guard('jobseeker')->id())->with('status', "updated profile photo successfully");
     }
     public function viewDetails($id){
         $jobseeker = JobSeeker::find($id);
