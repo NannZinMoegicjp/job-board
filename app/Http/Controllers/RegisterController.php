@@ -22,19 +22,25 @@ class RegisterController extends Controller
     //insert employer data
     public function registerEmployer(Request $request){        
         $validator = validator(request()->all(), [
-            'contactPerson'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
-            'userEmail'=> ['required','string','email','unique:job_seekers,email','unique:companies,email','unique:admins,email'],
-            'phone' => ['required','regex:/^(\+?959|09)[0-9]{9}$/'],
-            'password'=>['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
-            'comName'=>['required','string'],
-            'estDate' =>['nullable','date','before_or_equal:today'],
-            'websiteLink'=>['nullable','url','regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'],
-            'logofile' => ['required','mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp','max:2048'],
-            'images'=>['nullable'],
-            'images.*'=>['mimes:jpeg,jpg,svg,gif,png','max:2048'],
-            'address'=>['required','string']
+            'contactPerson'=>['bail','required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
+            'userEmail'=> ['bail','required','string','email','unique:job_seekers,email','unique:companies,email','unique:admins,email'],
+            'phone' => ['bail','required','regex:/^(\+?959|09)[0-9]{9}$/'],
+            'password'=>['bail','required', 'string', 'min:8', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
+            'password_confirmation'=>['bail','required','same:password'],
+            'comName'=>['bail','required','string'],
+            'websiteLink'=>['bail','nullable','url','regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'],
+            'logofile' => ['bail','required','mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp','max:2048'],
+            'images'=>['bail','nullable'],
+            'images.*'=>['bail','mimes:jpeg,jpg,svg,gif,png','max:2048'],
+            'address'=>['bail','required','string']
         ], [
-            'password.confirmed' => 'The password field confirmation does not match.',
+            'contactPerson'=>'Name must contain alphabets only, no digits, no special characters',
+            'userEmail'=>'User with this email already existed',
+            'phone'=>'Phone number should start with 09/+959 and have a maximum length of 11 characters.',
+            'password' => 'The password should contain at least 8 characters',
+            'password_confirmation' => 'The password confirmation does not match.',
+            'logofile'=>'File type for profile image should be one of jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp',
+            'images'=>'Images file type should be one of jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -82,14 +88,21 @@ class RegisterController extends Controller
     //insert job seeker data
     public function registerJobseeker(Request $request){
         $validator = validator(request()->all(), [
-            'userName'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
-            'userEmail'=> ['required','string','email','unique:job_seekers,email','unique:companies,email','unique:admins,email'],
-            'userPhoneNumber' => ['required','regex:/^(\+?959|09)[0-9]{9}$/'],
-            'dob' => ['required','date','before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
-            'password'=>['required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
-            'profileImage' => ['required','mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp','max:2048'],
+            'userName'=>['bail','required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
+            'userEmail'=> ['bail','required','string','email','unique:job_seekers,email','unique:companies,email','unique:admins,email'],
+            'userPhoneNumber' => ['bail','required','regex:/^(\+?959|09)[0-9]{9}$/'],
+            'dob' => ['bail','required','date','before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
+            'password'=>['bail','required', 'string', 'min:8', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
+            'password_confirmation'=>['bail','required','same:password'],
+            'profileImage' => ['bail','required','mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp','max:2048'],
         ],[
-            'password.confirmed' => 'The password field confirmation does not match.',
+            'userName'=>'Name must contain alphabets only,  no digits, no special characters',
+            'userEmail'=>'User with this email already existed',
+            'userPhoneNumber'=>'Phone number should start with 09/+959 and have a length of 11 characters.',
+            'dob'=>'you must be at least 18 years old',
+            'password' => 'The password should contain at least 8 characters',
+            'password_confirmation' => 'The password confirmation does not match.',
+            'profileImage'=>'File type for profile image should be one of jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp'
         ]);
         
         if ($validator->fails()) {
