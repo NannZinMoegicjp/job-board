@@ -31,7 +31,11 @@ class CompanyController extends Controller
     //change password
     public function changePassword(Request $request){
         $validator = validator(request()->all(), [
-            'password'=>['bail','required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
+            'password'=>['bail','required', 'string', 'min:8', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
+            'password_confirmation'=>['bail','required','same:password'],
+        ],[
+            'password' => 'The password should contain at least 8 characters',
+            'password_confirmation' => 'The password confirmation does not match.',
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();

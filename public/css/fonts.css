@@ -11,10 +11,6 @@
     src: url("/public/fonts/Gotham-Font/Gotham-Bold.otf");
 }
 @font-face {
-    font-family: "Gotham-Medium";
-    src: url("/public/fonts/Gotham-Font/GothamMedium.ttf");
-}
-@font-face {
     font-family: "JosefinSans-Mediums";
     src: url("/public/fonts/Josefin_Sans/static/JosefinSans-Medium.ttf");
 }

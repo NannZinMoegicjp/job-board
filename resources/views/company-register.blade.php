@@ -3,15 +3,6 @@
 <div class="container">
     <div class="row my-3">
         <div class="col-md-10 offset-md-1">
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
             <form action="{{route('register.employer')}}" class="bg-white px-3 pb-2 rounded shadow" method="post"
                 enctype="multipart/form-data">
                 @csrf
@@ -29,7 +20,7 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="text" class="form-control @error('contactPerson') is-invalid @enderror"
-                            name="contactPerson" id="contactPerson" required>
+                            name="contactPerson" id="contactPerson" required value="{{ old('contactPerson') }}">
                         @error('contactPerson')
                         <span class="invalid-feedback">
                             <strong>{{ $message }}</strong>
@@ -44,16 +35,25 @@
                     <div class="col-md-7 col-12">
                         <input type="email" class="form-control @error('userEmail') is-invalid @enderror" required
                             name="userEmail" id="userEmail" value="{{ old('userEmail') }}">
+                        @error('userEmail')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
-                </div>
-
-                <div class="row mb-2">
+                 </div>
+<div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
                         <label for="phone">Phone</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="text" class="form-control @error('phone') is-invalid @enderror" min="0" required
                             placeholder="eg. 09454096528" id="phone" name="phone" value="{{ old('phone') }}">
+                        @error('phone')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -63,6 +63,14 @@
                     <div class="col-md-7 col-12">
                         <input type="password" class="form-control @error('password') is-invalid @enderror" required
                             name="password" id="password" value="{{ old('password') }}">
+                        @error('password')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror    
+                        <span class="invalid-feedback">***one lowercase letter, one uppercase letter, one digit, and one
+                            special
+                            character</span>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -71,12 +79,14 @@
                             password</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="password" class="form-control @error('password.confirmed') is-invalid @enderror"
+                        <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
                             required name="password_confirmation" id="password_confirmation"
                             value="{{ old('password_confirmation') }}">
-                        <span class="text-secondary">***one lowercase letter, one uppercase letter, one digit, and one
-                            special
-                            character</span>
+                        @error('password_confirmation')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <hr>
@@ -93,6 +103,11 @@
                     <div class="col-md-7 col-12"> <input type="text"
                             class="form-control @error('comName') is-invalid @enderror" required id="comName"
                             name="comName" value="{{old('comName')}}">
+                        @error('comName')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -100,7 +115,7 @@
                         <label for="estDate">Established date</label>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="date" class="form-control @error('estDate') is-invalid @enderror"
+                        <input type="date" class="form-control" max="{{ date('Y-m-d') }}"
                             placeholder="eastablished date" id="estDate" name="estDate" value="{{old('estDate')}}">
                     </div>
                 </div>
@@ -113,6 +128,11 @@
                         <input type="url" class="form-control @error('websiteLink') is-invalid @enderror"
                             name="websiteLink" id="websiteLink" placeholder="eg., https://studyrightnow-mdy.com"
                             value="{{old('websiteLink')}}">
+                        @error('websiteLink')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -123,6 +143,11 @@
                         <input type="file" class="form-control mb-1 @error('logofile') is-invalid @enderror" required
                             placeholder="Logo" name="logofile" id="logofile" value="{{old('logofile')}}"
                             accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp" onchange="displayImage(event)">
+                        @error('logofile')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                         <img id="previewImage" src="#" alt="Preview" style="display: none;" class="selectedImage">
                     </div>
                 </div>
@@ -133,6 +158,11 @@
                     <div class="col-md-7 col-12">
                         <input type="file" class="form-control mb-2 @error('images') is-invalid @enderror"
                             placeholder="images" name="images[]" id="images" multiple value="{{old('images')}}" onchange="previewImages(event)">
+                        @error('images')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                         <div id="image-preview-container"></div>
                     </div>
                 </div>

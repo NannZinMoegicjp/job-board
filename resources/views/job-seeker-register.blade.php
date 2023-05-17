@@ -3,17 +3,8 @@
 <div class="container">
     <div class="row my-3">
         <div class="col-md-8 offset-md-2">
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
             <form action="{{ route('register.jobseeker') }}" method="post" class="bg-white px-3 pb-2 rounded shadow-lg"
-                onsubmit="return check();" enctype="multipart/form-data">
+                enctype="multipart/form-data">
                 @csrf
                 <div id="error"></div>
                 <div>
@@ -25,9 +16,13 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="text" class="form-control @error('userName') is-invalid @enderror" required
-                            name="userName" id="userName" value="{{ old('userName') }}">
+                            name="userName" id="userName" value="{{ old('userName') }}" />
+                        @error('userName')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
-                    <div id="nameError" class="text-danger"></div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-3 offset-md-1 col-12">
@@ -35,8 +30,12 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="email" class="form-control @error('userEmail') is-invalid @enderror" required
-                            name="userEmail" id="userEmail" value="{{ old('userEmail') }}">
-                        <div id="emailError" class="text-danger"></div>
+                            name="userEmail" id="userEmail" value="{{ old('userEmail') }}" />
+                        @error('userEmail')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -47,8 +46,12 @@
                     <div class="col-md-7 col-12">
                         <input type="number" class="form-control @error('userPhoneNumber') is-invalid @enderror" min="0"
                             required placeholder="eg. 09454096728" name="userPhoneNumber" id="userPhoneNumber"
-                            value="{{ old('userPhoneNumber') }}">
-                        <div id="phoneNoError" class="text-danger"></div>
+                            value="{{ old('userPhoneNumber') }}" />
+                        @error('userPhoneNumber')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -57,13 +60,13 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="date" class="form-control @error('dob') is-invalid @enderror" required
-                            placeholder="dob" name="dob" id="dob" value="{{ old('dob') }}">
+                            placeholder="dob" name="dob" id="dob" value="{{ old('dob') }}" />
+                        @error('dob')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
-                    @error('dob')
-                    <span class="invalid-feedback" role="alert">
-                        <span class="alert alert-danger">{{ $message }}</span>
-                    </span>
-                    @enderror
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-3 offset-md-1 col-12">
@@ -71,7 +74,15 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="password" class="form-control @error('password') is-invalid @enderror" required
-                            name="password" id="password" value="{{ old('password') }}">
+                            name="password" id="password" value="{{ old('password') }}" />
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <span class="text-secondary">***one lowercase letter, one uppercase letter, one digit, and one
+                            special
+                            character</span>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -80,12 +91,14 @@
                             password</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="password" class="form-control @error('password.confirmed') is-invalid @enderror"
+                        <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
                             name="password_confirmation" id="password_confirmation"
-                            value="{{ old('password_confirmation') }}">
-                        <span class="text-secondary">***one lowercase letter, one uppercase letter, one digit, and one
-                            special
-                            character</span>
+                            value="{{ old('password_confirmation') }}" required/>
+                        @error('password_confirmation')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -96,7 +109,12 @@
                     <div class="col-md-7 col-12">
                         <input type="file" class="form-control mb-1 @error('profileImage') is-invalid @enderror"
                             name="profileImage" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp"
-                            id="profileImage" value="{{old('profileImage')}}" onchange="displayImage(event)" required>
+                            id="profileImage" value="{{old('profileImage')}}" onchange="displayImage(event)" required/>
+                        @error('profileImage')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                         <img id="previewImage" src="#" alt="Preview" style="display: none;" class="image-preview">
                     </div>
                 </div>
@@ -105,8 +123,8 @@
                         <label for="gender">Gender</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="radio" name="gender" id="female" value="female" required>Female
-                        <input type="radio" name="gender" id="male" value="male">Male
+                        <input type="radio" name="gender" id="female" value="female" required/>Female
+                        <input type="radio" name="gender" id="male" value="male"/>Male
                     </div>
                 </div>
                 <div class="row mb-3">
