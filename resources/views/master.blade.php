@@ -143,11 +143,6 @@
         </div>
         <p class="text-center text-secondary mb-0">Copyright © 2023 GIC. All Rights Reserved. Powered by: NZM</p>
     </footer>
-    <script>
-        setTimeout(function() {
-          $('.alert').fadeOut('fast');
-         }, 30000); // 20 seconds (time is in milliseconds)
-    </script>
 </body>
 
 </html>
