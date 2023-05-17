@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('payment_account_id');
-            $table->foreign('payment_account_id')->references('id')->on('payment_accounts')->onDelete('cascade')->onUpdate('cascade');;
+            $table->foreign('payment_account_id')->references('id')->on('payment_accounts')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('company_id');
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');;
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('credit_price_id');
-            $table->foreign('credit_price_id')->references('id')->on('credit_prices')->onDelete('cascade')->onUpdate('cascade');;
+            $table->foreign('credit_price_id')->references('id')->on('credit_prices')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('no_of_credit');
             $table->string('screenshot');
             $table->timestamps();

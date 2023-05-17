@@ -15,35 +15,36 @@
             $no=1;
             @endphp
             <thead>
-            <tr>
-                <th>No</th>
-                <th>Company Name</th>
-                <th>Ordered Date</th>
-                <th>Status</th>
-                <th>Confirmed Date</th>
-                <th></th>
-            </tr>
+                <tr class="align-middle">
+                    <th>No</th>
+                    <th>Company Name</th>
+                    <th>Ordered Date</th>
+                    <th>Status</th>
+                    <th>Confirmed Date</th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            @if (isset($confirmedOrders))
-            @foreach ($confirmedOrders as $corder)
-            <tr>
-                <td>{{$no++}}</td>
-                <td>{{$corder->order->company->company_name}}</td>                
-                <td>{{$corder->order->created_at->todatestring()}}</td>
-                @if($corder->is_confirmed) <td class="text-success">Accepted</td> @else <td class="text-danger">Rejected</td> @endif  
-                <td>{{$corder->created_at->todatestring()}}</td> 
-                <td>
-                <a href="{{url('/admin/order/confirmed/details/'.$corder->id)}}" class="text-center">
-                <button type="button" class="btn btn-primary">
-                 View details
-                </button>    
-                </a>
-                </td>            
-            </tr>
-            @endforeach
-            @endif
-            </tbody>            
+                @if (isset($confirmedOrders))
+                @foreach ($confirmedOrders as $corder)
+                <tr class="align-middle">
+                    <td>{{$no++}}</td>
+                    <td>{{$corder->order->company->company_name}}</td>
+                    <td>{{$corder->order->created_at->todatestring()}}</td>
+                    @if($corder->is_confirmed) <td class="text-success">Accepted</td> @else <td class="text-danger">
+                        Rejected</td> @endif
+                    <td>{{$corder->created_at->todatestring()}}</td>
+                    <td>
+                        <a href="{{url('/admin/order/confirmed/details/'.$corder->id)}}" class="text-center">
+                            <button type="button" class="btn btn-primary">
+                                View details
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                @endforeach
+                @endif
+            </tbody>
         </table>
     </div>
 </div>

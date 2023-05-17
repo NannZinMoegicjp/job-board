@@ -33,15 +33,17 @@ $job = $data['job'];
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12">
                 <label for="title">Title</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <input type="text" class="form-control" required name="title" id="title" value="{{$job->title}}"
-                    oninput="this.className = 'form-control'">
+                    oninput="this.className = 'form-control'">                
             </div>
         </div>
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12">
                 <label for="minSalary">Min Salary per month</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" required name="minSalary" id="minSalary"
@@ -51,6 +53,7 @@ $job = $data['job'];
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12">
                 <label for="maxSalary">Max Salary per month</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" required name="maxSalary" id="maxSalary"
@@ -60,6 +63,7 @@ $job = $data['job'];
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label for="openPosition">Open position</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" id="openPosition" name="openPosition"
@@ -69,6 +73,7 @@ $job = $data['job'];
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label>Gender</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12 d-flex">
                 @if($job->gender == 'both')
@@ -116,6 +121,7 @@ $job = $data['job'];
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label for="jobCategory">Job Category</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <select name="jobCategory" id="jobCategory" class="form-select">
@@ -134,6 +140,7 @@ $job = $data['job'];
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label for="expLevel">Experience level</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <select name="expLevel" id="expLevel" class="form-select">
@@ -152,6 +159,7 @@ $job = $data['job'];
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label for="empType">Employment type</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <select name="empType" id="empType" class="form-select">
@@ -170,6 +178,7 @@ $job = $data['job'];
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label for="address">Branch</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <select name="address" id="address" class="form-select">

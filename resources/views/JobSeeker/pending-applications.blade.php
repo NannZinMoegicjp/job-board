@@ -9,7 +9,7 @@
                 $no=1;
                 @endphp
                 <thead>
-                    <tr>
+                    <tr class="align-middle">
                         <th>No</th>
                         <th>Company</th>
                         <th>Title</th>
@@ -20,7 +20,7 @@
                 </thead>
                 <tbody>
                     @foreach ($data['applications'] as $application)
-                    <tr>
+                    <tr class="align-middle">
                         @if($application->job)
                         <td>{{$no++}}</td>
                         <td><a href="{{ route('company-details',[$application->job->address->company->id]) }}">{{$application->job->address->company->company_name}}</a></td>

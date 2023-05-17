@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('no_of_employee');
             $table->integer('no_of_credit')->default('0');
             $table->date('established_date')->nullable();    
-            $table->string('status')->default('employer')->change();     
             $table->timestamps();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

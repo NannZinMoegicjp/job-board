@@ -19,7 +19,7 @@ class CreditPriceController extends Controller
         $newprice->created_at = date('Y-m-d H:i:s');
         $newprice->updated_at = null;
         $newprice->save();
-        return redirect('/admin/pricing');
+        return redirect('/admin/pricing')->with('status','insert price successfully');
     }
     //update price
     public function updatePrice(Request $request,$id){
@@ -34,6 +34,6 @@ class CreditPriceController extends Controller
         $newprice->updated_at = null;
         $newprice->save();
         $price->save();
-        return redirect('/admin/pricing');
+        return redirect('/admin/pricing')->with('status','updated price successfully');
     }
 }

@@ -37,7 +37,7 @@
                 </div>
                 <div class="row my-2">
                     <div class="col"><i class="bi bi-calendar-check-fill date"></i>
-                        {{$job->created_at}}</div>
+                        {{$job->created_at->todatestring()}}</div>
                     <div class="col"><i class="bi bi-currency-dollar money"></i>Up to {{number_format($job->max_salary)}}
                     </div>
                 </div>

@@ -30,6 +30,7 @@
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12">
                 <label for="title" class="col-form-label">Title</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <input type="text" class="form-control" required name="title" id="title" value="{{ old('title') }}"
@@ -40,6 +41,7 @@
          <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12">
                 <label for="minSalary"  class="col-form-label">Min Salary per month</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='0' step="10000" class="form-control" required name="minSalary" id="minSalary"
@@ -49,6 +51,7 @@
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12">
                 <label for="maxSalary"  class="col-form-label">Max Salary per month</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='0' step="10000" class="form-control" required name="maxSalary" id="maxSalary"
@@ -58,6 +61,7 @@
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label for="openPosition"  class="col-form-label">Open position</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" id="openPosition" name="openPosition"
@@ -67,6 +71,7 @@
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label  class="col-form-label">Gender</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12 d-flex">
                 <div class="form-check me-2">
@@ -86,6 +91,7 @@
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label for="jobCategory"  class="col-form-label">Job Category</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <select name="jobCategory" id="jobCategory" class="form-select" required oninput="this.style.borderColor = 'grey'">
@@ -101,6 +107,7 @@
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label for="expLevel"  class="col-form-label">Experience level</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <select name="expLevel" id="expLevel" class="form-select"  required oninput="this.style.borderColor = 'grey'">
@@ -116,6 +123,7 @@
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label for="empType"  class="col-form-label">Employment type</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <select name="empType" id="empType" class="form-select"  required oninput="this.style.borderColor = 'grey'">
@@ -131,6 +139,7 @@
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
                 <label for="address"  class="col-form-label">Branch</label>
+                <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
                 <select name="address" id="address" class="form-select"  required oninput="this.style.borderColor = 'grey'">

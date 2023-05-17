@@ -123,11 +123,6 @@
             @show
         </div>
     </div>
-    <script>
-    setTimeout(function() {
-        $('.alert').fadeOut('fast');
-    }, 30000); // 30 seconds (time is in milliseconds)
-    </script>
     @yield('scripts')
 </body>
 

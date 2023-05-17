@@ -34,7 +34,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
-                        <label for="currentPass">Current password</label>
+                        <label for="currentPass">Current password</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="password" class="form-control" required name="currentPass" id="currentPass"
@@ -43,7 +43,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
-                        <label for="password">New password</label>
+                        <label for="password">New password</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="password" class="form-control @error('password.confirmed') is-invalid @enderror" required name="password" id="password"
@@ -52,7 +52,7 @@
                 </div> 
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
-                        <label for="password_confirmation">Confirm password</label>
+                        <label for="password_confirmation">Confirm password</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="password" class="form-control" required name="password_confirmation" id="password_confirmation"

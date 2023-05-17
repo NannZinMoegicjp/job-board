@@ -22,18 +22,18 @@
             $no=1;
             @endphp
             <thead>
-                <tr>
+                <tr class="align-middle">
                     <th>No</th>
                     <th>Title</th>
                     <th>Applicant</th>
                     <th>Applied date</th>
-                    <th>Cv file</th>
+                    <th style="width:30%">Cv file</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($applications as $application)
-                <tr>
+                <tr class="align-middle">
                     <td>{{$no++}}</td>
                     <td>{{$application->job->title}}</td>
                     <td>{{$application->jobSeeker->name}}</td>
@@ -42,8 +42,8 @@
                     <td><a onclick="return confirm('Want to download cv file?')" href="{{URL::asset('/applications/'.$application->cvfile)}}" download="{{$application->cvfile}}">{{$application->cvfile}}</a></td>
                     <td>
                         <div class="d-flex">
-                            <a href="{{url('/employer/application/shortlist/'.$application->id)}}"><i class="bi bi-check-circle-fill fs-4 text-success me-2"></i></a>
-                            <a href="{{url('/employer/application/reject/'.$application->id)}}"><i class="bi bi-x-circle-fill fs-4 text-danger"></i></a>
+                            <a href="{{url('/employer/application/shortlist/'.$application->id)}}"><i class="bi bi-check-circle-fill text-success me-2" title="accept application"></i></a>
+                            <a href="{{url('/employer/application/reject/'.$application->id)}}"><i class="bi bi-x-circle-fill text-danger" title="reject application"></i></a>
                         </div>
                     </td>
                 </tr>

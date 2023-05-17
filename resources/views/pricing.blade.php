@@ -4,10 +4,15 @@
     href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css" />
 @endsection
 @section('content')
-<div class="container my-4">
+<div class="container my-3">
     @if(session('error'))
-    <div class="alert alert-danger m-2">
+    <div class="alert alert-danger my-2">
         {{session('error')}}
+    </div>
+    @endif
+    @if(session('status'))
+    <div class="alert alert-success my-2">
+        {{session('status')}}
     </div>
     @endif
     <div class="row mb-3">
@@ -52,11 +57,10 @@
             @endif
         </div>
     </div>
-
     <div class="table-responsive">
         <table class="table table-striped" id="datatable">
             <thead>
-                <tr>
+                <tr class="align-middle">
                     <th>No</th>
                     <th>Price</th>
                     <th>Start Date</th>
@@ -65,7 +69,7 @@
             </thead>
             <tbody>
                 @foreach($data as $price)
-                <tr>
+                <tr class="align-middle">
                     <td>{{$no++}}</td>
                     <td>{{number_format($price["price"])}}</td>
                     <td>{{$price["created_at"]->toDateString()}}</td>
@@ -81,8 +85,7 @@
             </tbody>
         </table>
     </div>
-
-    <!-- update Modal -->
+    <!-- update price Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -102,7 +105,7 @@
                         </div>
                         <div class="row mb-2">
                             <div class="col-md-3 offset-md-2 col-form-label">
-                                <label for="newPrice">New Price</label>
+                                <label for="newPrice">New Price</label><span class="text-danger"> *</span>
                             </div>
                             <div class="col-md-5">
                                 <input type="number" min="0" name="newPrice" id="newPrice" class="myinput">
@@ -120,7 +123,7 @@
             </div>
         </div>
     </div>
-    <!-- insert Model -->
+    <!-- insert price Model -->
     <div class="modal fade" id="addprice" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="addpriceLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -134,7 +137,7 @@
                         @csrf
                         <div class="row mb-2">
                             <div class="col-md-3 offset-md-2 col-form-label">
-                                <label for="price">Price</label>
+                                <label for="price">Price</label><span class="text-danger"> *</span>
                             </div>
                             <div class="col-md-5">
                                 <input type="number" required min="0" name="price" id="price" class="myinput">
@@ -155,9 +158,6 @@
 </div>
 @endsection
 @section('scripts')
-{{-- <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js">
-</script> --}}
-
 <script type="text/javascript" charset="utf8"
     src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
 <script>

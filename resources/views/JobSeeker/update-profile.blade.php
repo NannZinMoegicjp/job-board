@@ -25,7 +25,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
-                        <label for="name">Name</label>
+                        <label for="name">Name</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="text" class="form-control" required name="name" id="name"
@@ -43,7 +43,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
-                        <label for="phone">Phone</label>
+                        <label for="phone">Phone</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="number" class="form-control" min="0" required placeholder="eg. 09454096528"
@@ -52,7 +52,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="dob">Date of birth</label>
+                        <label for="dob">Date of birth</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="date" class="form-control" id="dob" name="dob" value="{{$jobseeker['dob']}}">
@@ -60,7 +60,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="address">Address</label>
+                        <label for="address">Address</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <textarea class="form-control address" placeholder="Enter details address" required id="address"
@@ -69,7 +69,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="gender">Gender</label>
+                        <label for="gender">Gender</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         @if($jobseeker['gender'] == 'female')

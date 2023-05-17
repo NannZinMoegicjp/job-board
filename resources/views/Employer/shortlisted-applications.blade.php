@@ -12,7 +12,7 @@
             $no=1;
             @endphp
             <thead>
-                <tr>
+                <tr class="align-middle">
                     <th>No</th>
                     <th>Title</th>
                     <th>Applicant</th>
@@ -22,11 +22,11 @@
             </thead>
             <tbody>
                 @foreach ($applications as $application)
-                <tr>
+                <tr class="align-middle">
                     <td>{{$no++}}</td>
                     <td>{{$application->job->title}}</td>
                     <td>{{$application->jobSeeker->name}}</td>
-                    <td>{{$application->created_at}}</td>
+                    <td>{{$application->created_at->todatestring()}}</td>
                     <td><a onclick="return confirm('Want to download cv file?')" href="{{URL::asset('/applications/'.$application->cvfile)}}" download="{{$application->cvfile}}">{{$application->cvfile}}</a></td>
                 </tr>
                 @endforeach

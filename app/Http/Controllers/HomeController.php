@@ -137,7 +137,7 @@ class HomeController extends Controller
     public function applyJobs(Request $request, $id)
     {
         $validator = validator(request()->all(), [
-            'cvform' => 'required|max:5120',
+            'cvform' => 'required|mimes:doc,docx,pdf|max:5120',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);

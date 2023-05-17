@@ -19,7 +19,7 @@
             $no=1;
             @endphp
             <thead>
-                <tr>
+                <tr class="align-middle">
                     <th>No</th>
                     <th>No of credit</th>
                     <th>Price</th>
@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 @foreach ($awaitingOrders as $awaitingOrder)
-                <tr>
+                <tr class="align-middle">
                     @if($awaitingOrder)
                     <td>{{$no++}}</td>
                     <td>{{$awaitingOrder->no_of_credit}}</td>
@@ -57,7 +57,7 @@
             $no=1;
             @endphp
             <thead>
-                <tr>
+                <tr class="align-middle">
                     <th>No</th>
                     <th>No of credit</th>
                     <th>Price</th>
@@ -70,7 +70,7 @@
             </thead>
             <tbody>
                 @foreach ($confirmedOrders as $confirmedOrder)
-                <tr>
+                <tr class="align-middle">
                     @if($confirmedOrder)
                     <td>{{$no++}}</td>
                     <td>{{$confirmedOrder->order->no_of_credit}}</td>

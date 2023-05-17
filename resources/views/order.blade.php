@@ -22,7 +22,7 @@
                     $no=1;
                     @endphp
                     <thead>
-                        <tr>
+                        <tr class="align-middle">
                             <th>No</th>
                             <th>Company Name</th>
                             <th>No of credits</th>
@@ -35,7 +35,7 @@
                     <tbody>
                         @if (isset($awaitingOrders))
                         @foreach ($awaitingOrders as $order)
-                        <tr>
+                        <tr class="align-middle">
                             <td>{{$no++}}</td>
                             <td>{{$order->company->company_name}}</td>
                             <td>{{$order->no_of_credit}}</td>

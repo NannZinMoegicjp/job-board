@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone');
             $table->string('profile_image')->nullable();
-            $table->string('status')->default('admin')->change();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -83,7 +83,7 @@ class JobSeekerController extends Controller
             }
         }        
         $jobseeker->delete();
-        return redirect('/admin/job-seekers')->with('status', "deleted successfully");
+        return redirect('/admin/job-seekers')->with('status', "deleted jobseeker successfully");
     }
     public function pendingApplication(){
         $applications = Application::where('job_seeker_id',auth()->guard('jobseeker')->id())->orderBy('created_at','desc')->where('status','pending')->get();

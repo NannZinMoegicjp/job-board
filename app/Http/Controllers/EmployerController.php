@@ -28,7 +28,7 @@ class EmployerController extends Controller
         $applications = DB::table('applications')
             ->join('jobs', 'jobs.id', '=', 'applications.job_id')
             ->join('addresses', 'addresses.id', '=', 'jobs.address_id')
-            ->where('addresses.company_id', auth()->guard('employer')->id())   
+            ->where('addresses.company_id', auth()->guard('employer')->id())  
             ->select('applications.id')            
             ->count();
         $addrIDs = Address::select('id')->where('company_id',  auth()->guard('employer')->id())->get();

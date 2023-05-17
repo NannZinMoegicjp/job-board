@@ -27,7 +27,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
-                        <label for="name">Name</label>
+                        <label for="name">Name</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="text" class="form-control" required name="name" id="name"
@@ -45,7 +45,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
-                        <label for="phone">Phone</label>
+                        <label for="phone">Phone</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="number" class="form-control" min="0" required placeholder="eg. 09454096528"

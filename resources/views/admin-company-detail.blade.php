@@ -99,7 +99,6 @@
                         <span></span>
                         @endforeach</span>
                 </div>
-
                 <div class="mb-3">
                     <i class="bi bi-calendar2-week me-2"></i><span class="title">Established date</span> :
                     <span class="text-secondary">
@@ -122,32 +121,6 @@
             </div>
             @endforeach
         </div>
-        <!-- <div class="mydiv">
-            <h4 class="mb-4 title">All job openings</h4>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <tr>
-                        <th>Positions</th>
-                        <th>Posts</th>
-                        <th>Max Salary</th>
-                        <th>Job Location</th>
-                        <th>Last Posted</th>
-                        <th class="text-center"><a href="" class="text-decoration-none title">View all</a></th>
-                    </tr>
-                    <tr class="align-middle">
-                        <td><a href="" class="text-decoration-none title">
-                                <h6>Procurement Manager - Logistic/RPM</h6>
-                            </a></td>
-                        <td>3</td>
-                        <td>Negotiable</td>
-                        <td>Yangon</td>
-                        <td>15 Mar 2023</td>
-                        <td class="text-center"><a href="" class="text-decoration-none position"><button
-                                    class="btn btn-success"><span class="fw-bold">view job</span></button></a></td>
-                    </tr>
-                </table>
-            </div>
-        </div> -->
     </div>
     @endif
 </section>

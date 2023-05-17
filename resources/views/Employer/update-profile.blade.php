@@ -39,7 +39,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
-                        <label for="contactPerson">Contact Person</label>
+                        <label for="contactPerson">Contact Person</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="text" class="form-control @error('contactPerson') is-invalid @enderror" required name="contactPerson" id="contactPerson"
@@ -48,7 +48,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
-                        <label for="phone">Phone</label>
+                        <label for="phone">Phone</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="text" class="form-control @error('phone') is-invalid @enderror" min="0" placeholder="Phone, eg. 09454096528" id="phone"
@@ -63,7 +63,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="comName">Company name</label>
+                        <label for="comName">Company name</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12"> <input type="text" class="form-control @error('comName') is-invalid @enderror" id="comName" name="comName"
                             value="{{$company['company_name']}}">
@@ -99,7 +99,7 @@
                 @endforeach
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="state">Division/state</label>
+                        <label for="state">Division/state</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <select name="state" id="state" class="form-select" placeholder="Your division/state">
@@ -117,7 +117,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="city">City</label>
+                        <label for="city">City</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <select name="city" id="city" class="form-select">
@@ -135,7 +135,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="address">Address</label>
+                        <label for="address">Address</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <textarea class="form-control address" placeholder="Enter details address" id="address"
@@ -144,7 +144,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
-                        <label for="size">Number of employee</label>
+                        <label for="size">Number of employee</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
                         <select name="size" id="size" class="form-select">

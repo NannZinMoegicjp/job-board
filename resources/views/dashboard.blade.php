@@ -123,7 +123,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
-                            <tr>
+                            <tr class="align-middle">
                                 <th>No</th>
                                 <th>
                                     @if($data["creditData"]["type"] == 1)
@@ -139,7 +139,7 @@
                         </thead>
                         <tbody>
                             @foreach ($data["creditData"]["creditSold"] as $credit)
-                            <tr>
+                            <tr class="align-middle">
                                 <td>{{$no++;}}</td>
                                 <td>@if($data["creditData"]["type"] == 1)
                                     {{$credit->daily}}
@@ -261,7 +261,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
-                            <tr>
+                            <tr class="align-middle">
                                 <th>No</th>
                                 <th>
                                     @if($data["salesData"]["type"] == 1)
@@ -277,7 +277,7 @@
                         </thead>
                         <tbody>
                             @foreach ($data["salesData"]["sales"] as $sale)
-                            <tr>
+                            <tr class="align-middle">
                                 <td>{{$no++;}}</td>
                                 <td>@if($data["salesData"]["type"] == 1)
                                     {{$sale->daily}}

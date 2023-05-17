@@ -28,7 +28,7 @@
             $no=1;
             @endphp
             <thead>
-                <tr>
+                <tr class="align-middle">
                     <th>No</th>
                     <th>Title</th>
                     <th>Experience Level</th>
@@ -39,7 +39,7 @@
             </thead>
             <tbody>
                 @foreach ($jobs as $job)
-                <tr>
+                <tr class="align-middle">
                     <td>{{$no++}}</td>
                     <td>{{$job->title}}</td>
                     <td>{{$job->experienceLevel->name}}</td>                    
@@ -58,8 +58,7 @@
                             <a onclick='return confirm("Want to delete job?")'
                                 href="{{url('/employer/job/delete/'.$job->id)}}"><i
                                     class="bi bi-trash3-fill cancel me-2" title="delete job"></i></a>
-                        </div>
-                        
+                        </div> 
                     </td>
                 </tr>
                 @endforeach

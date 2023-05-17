@@ -68,7 +68,7 @@
         @empty
         <p>No jobs found.</p>
         @endforelse
-        {{ $jobs->links('bootstrap') }}
+        {{ $jobs->links('my-pagination') }}
     </div>
 </section>
 <script>

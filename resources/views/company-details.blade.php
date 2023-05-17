@@ -98,7 +98,6 @@
                         <th>Job Location</th>
                         <th>Last Posted</th>
                         <th></th>
-                        <!-- <th class="text-center"><a href="" class="text-decoration-none title">View all</a></th> -->
                     </tr>
                     @foreach($data['jobs'] as $job)
                     <tr class="align-middle">
@@ -106,7 +105,7 @@
                         <td>{{$job->open_position}}</td>
                         <td>{{$job->max_salary}}</td>
                         <td>{{$job->address->city->state->name}}</td>
-                        <td>{{$job->created_at}}</td>
+                        <td>{{$job->created_at->todatestring()}}</td>
                         <td class="text-center"><a href="{{url('/jobs/details/'.$job->id)}}" class="text-decoration-none position"><button
                                     class="btn greenBtn"><span class="fw-bold">view job</span></button></a></td>
                     </tr>

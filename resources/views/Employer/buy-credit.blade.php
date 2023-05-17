@@ -24,7 +24,8 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-4 offset-md-1 col-12 col-form-label">
-                    No of credit
+                    <label for="noOfCredit">No of credit</label>
+                    <span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-6 col-12">
                     <input type="number" min='1' name="noOfCredit" id="noOfCredit" required class="form-control"
@@ -40,8 +41,9 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-4 offset-md-1 col-12 col-form-label">
-                    Payment method
+                <div class="col-md-4 offset-md-1 col-12 ">
+                    <label for="paymentMethod" class="col-form-label">Payment method</label>
+                    <span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-6 col-12">
                     <select name="paymentMethod" id="paymentMethod" class="form-select" required>
@@ -53,8 +55,9 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-4 offset-md-1 col-12 col-form-label">
-                    Transfter to this account
+                <div class="col-md-4 offset-md-1 col-12">
+                    <label for="paymentAccount" class="col-form-label">Transfter to this account</label>
+                    <span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-6 col-12">
                     <select name="paymentAccount" id="paymentAccount" class="form-select" required>
@@ -66,6 +69,7 @@
             <div class="row mb-3">
                 <div class="col-md-4 offset-md-1 col-12 col-form-label">
                     <label for="screenshot" class="form-label">Transferred screenshot</label>
+                    <span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-6 col-12">
                     <input type="file" class="form-control" name="screenshot" id="screenshot"

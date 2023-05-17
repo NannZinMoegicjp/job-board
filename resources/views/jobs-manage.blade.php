@@ -23,7 +23,7 @@
             $no=1;
             @endphp
             <thead>
-            <tr>
+            <tr class="align-middle">
                 <th>No</th>
                 <th>Company</th>
                 <th>Title</th>
@@ -33,7 +33,7 @@
             </thead>
             <tbody>
             @foreach ($jobs as $job)
-            <tr>
+            <tr class="align-middle">
                 <td>{{$no++}}</td>
                 <td>{{$job->address->company->company_name}}</td>
                 <td>{{$job->title}}</td>
