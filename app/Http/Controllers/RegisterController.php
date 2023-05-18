@@ -39,8 +39,8 @@ class RegisterController extends Controller
             'phone'=>'Phone number should start with 09/+959 and have a maximum length of 11 characters.',
             'password' => 'The password should contain at least 8 characters',
             'password_confirmation' => 'The password confirmation does not match.',
-            'logofile'=>'File type for profile image should be one of jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp',
-            'images'=>'Images file type should be one of jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp'
+            'logofile'=>'Profile image should be one of jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp file',
+            'images'=>'Images should be one of jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp file'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();

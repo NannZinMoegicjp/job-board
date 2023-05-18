@@ -26,8 +26,8 @@ return new class extends Migration
             $table->foreign("employment_type_id")->references('id')->on('employment_types')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger("address_id");
             $table->foreign("address_id")->references('id')->on('addresses')->onDelete('cascade')->onUpdate('cascade');   
-            $table->mediumText('description')->nullable();   
-            $table->mediumText('requirement')->nullable();  
+            $table->mediumText('description');   
+            $table->mediumText('requirement');  
             $table->mediumText('benefit')->nullable();     
             $table->string('status');            
             $table->timestamps();

@@ -72,9 +72,14 @@
                     <span class="text-danger"> *</span>
                 </div>
                 <div class="col-md-6 col-12">
-                    <input type="file" class="form-control" name="screenshot" id="screenshot"
+                    <input type="file" class="form-control @error('screenshot') is-invalid @enderror" name="screenshot" id="screenshot"
                         value="{{old('screenshot')}}" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp"
                         required>
+                    @error('screenshot')
+                    <span class="invalid-feedback mb-1" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
             </div>
             <div class="row mb-3">

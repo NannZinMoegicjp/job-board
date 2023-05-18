@@ -1,31 +1,13 @@
 @extends('Employer.master_employer')
 @section('content')
 <div class="container-fluid">
-    <div class="row my-2">
-        @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-        @endif
-    </div>
-    <div class="row my-2">
-        @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-        @endif
-    </div>
-    <div class="row">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-            {{ $error }} <br>
-            @endforeach
-        </div>
-        @endif
-    </div>
-    <div class="row mb-3">
+    <div class="row my-3">
         <div class="col-md-7 col-12 mb-1">
+            @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+            @endif
             <form action="{{url('/employer/profile/update/'.$company->id)}}" class="bg-white px-3 pb-2 rounded shadow"
                 method="post" enctype="multipart/form-data">
                 @csrf
@@ -42,8 +24,14 @@
                         <label for="contactPerson">Contact Person</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="text" class="form-control @error('contactPerson') is-invalid @enderror" required name="contactPerson" id="contactPerson"
-                            value="{{$company['contact_person']}}">
+                        <input type="text" class="form-control @error('contactPerson') is-invalid @enderror"
+                            name="contactPerson" id="contactPerson"
+                            value="{{old('contactPerson',$company['contact_person'])}}">
+                        @error('contactPerson')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -51,8 +39,14 @@
                         <label for="phone">Phone</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="text" class="form-control @error('phone') is-invalid @enderror" min="0" placeholder="Phone, eg. 09454096528" id="phone"
-                            name="phone" value="{{$company['phone']}}">
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror" min="0"
+                            placeholder="Phone, eg. 09454096528" id="phone" name="phone"
+                            value="{{old('phone',$company['phone'])}}">
+                        @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <hr>
@@ -65,8 +59,14 @@
                     <div class="col-md-3 offset-md-1 col-12  col-form-label">
                         <label for="comName">Company name</label><span class="text-danger"> *</span>
                     </div>
-                    <div class="col-md-7 col-12"> <input type="text" class="form-control @error('comName') is-invalid @enderror" id="comName" name="comName"
-                            value="{{$company['company_name']}}">
+                    <div class="col-md-7 col-12">
+                        <input type="text" class="form-control @error('comName') is-invalid @enderror" id="comName"
+                            name="comName" value="{{old('comName',$company['company_name'])}}">
+                        @error('comName')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -74,8 +74,9 @@
                         <label for="estDate">Established date</label>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="date" class="form-control @error('estDate') is-invalid @enderror" placeholder="eastablished date" id="estDate"
-                            name="estDate" value="{{$company['established_date']}}">
+                        <input type="date" class="form-control" placeholder="eastablished date" id="estDate"
+                            name="estDate" value="{{old('estDate',$company['established_date'])}}"
+                            max="{{ date('Y-m-d') }}">
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -83,8 +84,14 @@
                         <label for="websiteLink">Website link</label>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="text" class="form-control @error('websiteLink') is-invalid @enderror" name="websiteLink" id="websiteLink"
-                            placeholder="https://studyrightnow-mdy.com" value="{{$company['websitelink']}}">
+                        <input type="text" class="form-control @error('websiteLink') is-invalid @enderror"
+                            name="websiteLink" id="websiteLink" placeholder="https://studyrightnow-mdy.com"
+                            value="{{old('websiteLink',$company['websitelink'])}}">
+                        @error('websiteLink')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 @php
@@ -138,8 +145,14 @@
                         <label for="address">Address</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <textarea class="form-control address" placeholder="Enter details address" id="address"
-                            name="address">{{$address->detail_address}}</textarea>
+                        <textarea class="form-control address @error('address') is-invalid @enderror"
+                            placeholder="Enter details address" id="address"
+                            name="address">{{old('address',$address->detail_address)}}</textarea>
+                        @error('address')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -189,9 +202,16 @@
                     <form action="{{url('/employer/profile/update/logo/'.$updateId)}}" method="post"
                         enctype="multipart/form-data">
                         @csrf
-                        <input type="file" class="form-control mb-2 @error('newlogofile') is-invalid @enderror" placeholder="Logo" name="newlogofile"
-                            id="newlogofile" value="{{old('newlogofile')}}" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp" required>
-                        <input type="submit" class="btn btn-outline-primary" value="upload new logo">
+                        <label for="newlogofile" class="col-form-label">New Logo</label><span class="text-danger"> *</span>
+                        <input type="file" class="form-control mb-2 @error('newlogofile') is-invalid @enderror"
+                            placeholder="Logo" name="newlogofile" id="newlogofile" value="{{old('newlogofile')}}"
+                            accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp">
+                        @error('newlogofile')
+                        <span class="invalid-feedback mb-1" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <input type="submit" class="btn btn-primary" value="upload new logo">
                     </form>
                 </div>
             </div>
@@ -213,7 +233,7 @@
                     </div>
                     @endif
                     @endforeach
-                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#addIndustry">
                         <i class="bi bi-plus"></i> Add more
                     </button>
@@ -233,9 +253,8 @@
                     </div>
                     @endif
                     @endforeach
-                    {{-- onclick="add(this);" --}}
-                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                        data-bs-target="#addBranchCity" >
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#addBranchCity">
                         <i class="bi bi-plus"></i> Add more
                     </button>
                 </div>
@@ -254,11 +273,11 @@
                                 @csrf
                                 <div class="row mb-2">
                                     <div class="col-md-4 col-form-label">
-                                        <label for="industry">Industry</label>
+                                        <label for="industry">Industry</label><span class="text-danger"> *</span>
                                     </div>
                                     <div class="col-md-7">
                                         <select name="industry" id="industry" class="form-select"
-                                            placeholder="Branch division/state">
+                                            placeholder="Branch division/state" required>
                                             <option value="">--choose industry--</option>
                                             @if(isset($industries))
                                             @foreach ($industries as $industry)
@@ -294,7 +313,7 @@
                                 @csrf
                                 <div class="row mb-2">
                                     <div class="col-md-4 col-form-label">
-                                        <label for="bstate">Branch State</label>
+                                        <label for="bstate">Branch State</label><span class="text-danger"> *</span>
                                     </div>
                                     <div class="col-md-7">
                                         <select name="bstate" id="bstate" class="form-select"
@@ -310,7 +329,7 @@
                                 </div>
                                 <div class="row mb-2">
                                     <div class="col-md-4 col-form-label">
-                                        <label for="bcity">Branch City</label>
+                                        <label for="bcity">Branch City</label><span class="text-danger"> *</span>
                                     </div>
                                     <div class="col-md-7">
                                         <select name="bcity" id="bcity" class="form-select" required>
@@ -346,11 +365,26 @@
             </div>
             @endforeach
         </div>
-        <form action="{{url('/employer/profile/add/images/'.$updateId)}}" method="post" enctype="multipart/form-data" class="mb-5">
+        <form action="{{url('/employer/profile/add/images/'.$updateId)}}" method="post" enctype="multipart/form-data"
+            class="mb-5">
             @csrf
-            <input type="file" class="form-control mb-2 @error('newPhotos') is-invalid @enderror" placeholder="" name="newPhotos[]" id="newPhotos" multiple accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp" required>
-            <input type="submit" class="btn btn-outline-primary" value="upload new photos">
-        </form>        
+            <div class="row">
+                <div class="col-md-2 text-md-end">
+                    <label for="newPhotos" class="col-form-label">New images</label><span class="text-danger"> *</span>
+                </div>
+                <div class="col-md-6">
+                    <input type="file" class="form-control mb-1 @error('newPhotos') is-invalid @enderror" placeholder=""
+                        name="newPhotos[]" id="newPhotos" multiple
+                        accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp">
+                    @error('newPhotos')
+                    <span class="invalid-feedback mb-1" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                    <input type="submit" class="btn btn-primary" value="upload new photos">
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 <script>
@@ -367,7 +401,7 @@ let hideDeleteIcon = (photo) => {
 @section('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-$(document).ready(function () {
+    $(document).ready(function () {
     $('#state').on('change', function () {
                     var stateId = this.value;
                     $("#city").html('<option value="">-- Select city --</option>');
@@ -401,5 +435,5 @@ $(document).ready(function () {
          });
     });
 });
-</script>    
+</script>
 @endsection

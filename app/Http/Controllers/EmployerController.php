@@ -58,7 +58,10 @@ class EmployerController extends Controller
         $order->credit_price_id = $request->input('priceId');
         $order->no_of_credit = $request->input('noOfCredit');
         $validator = validator(request()->all(), [
-            'screenshot' => 'mimes:jpeg,jpg,svg,gif,png|max:2048',
+            'screenshot' => 'mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp|max:2048',
+        ],[
+            'screenshot.mimes'=>'screenshot should be one of jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp file',
+            'screenshot.max'=>'screenshot should not be greater than 2Mb'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();

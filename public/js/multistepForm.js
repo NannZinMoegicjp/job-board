@@ -13,9 +13,9 @@ function showTab(n) {
     }
 
     if (n == (x.length - 1)) {
-        if(document.getElementById("post")){
+        if (document.getElementById("post")) {
             document.getElementById("nextBtn").innerHTML = "Post";
-        }else if(document.getElementById("update")){
+        } else if (document.getElementById("update")) {
             document.getElementById("nextBtn").innerHTML = "Update";
         }
     } else {
@@ -54,7 +54,9 @@ function validateForm() {
         // If a field is empty...
         if (y[i].value == "") {
             // add an "invalid" class to the field:
-            y[i].style.borderColor = "red";
+            y[i].classList.add("is-invalid");
+            y[i].nextElementSibling.classList.remove("d-none");
+            y[i].nextElementSibling.classList.add("d-inline-block");
             // and set the current valid status to false
             valid = false;
         }
@@ -64,16 +66,52 @@ function validateForm() {
         // If a field is empty...
         if (selectboxes[i].value == "") {
             // add an "invalid" class to the field:
-            selectboxes[i].style.borderColor = "red";
+            selectboxes[i].classList.add("is-invalid");
+            selectboxes[i].nextElementSibling.classList.remove("d-none");
+            selectboxes[i].nextElementSibling.classList.add("d-inline-block");
             // and set the current valid status to false
             valid = false;
         }
     }
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    var checked = false;
+
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+            checked = true;
+            break;
+        }
+    }
+    if (!checked) {
+        var genderError = document.getElementById("genderError");
+        genderError.classList.remove("d-none");
+        genderError.classList.add("d-inline-block");
+    }
+    var minSalary = document.getElementById('minSalary').value;
+    var maxSalary = document.getElementById('maxSalary').value;
+    var salaryError = false;
+    if (maxSalary < minSalary) {
+        var salaryError = document.getElementById("salaryError");
+        salaryError.classList.remove("d-none");
+        salaryError.classList.add("d-inline-block");
+        salaryError = true;
+    }
+    var emptyDesc = false;
+    var editor = tinymce.get("myeditorinstance1");
+    var value = editor.getContent();
+    if (currentTab == 1 && value.trim().length) {    
+        editor.getBody().classList.add("is-invalid");
+        var descriptionError = document.getElementById("descriptionError");
+        descriptionError.classList.remove("d-none");
+        descriptionError.classList.add("d-inline-block");
+        emptyDesc = true;
+    }
+    var result = valid && checked && !salaryError && !emptyDesc;
     // If the valid status is true, mark the step as finished and valid:
-    if (valid) {
+    if (result) {
         document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";
     }
-    return valid; // return the valid status
+    return result; // return the valid status
 }
 
 function fixStepIndicator(n) {

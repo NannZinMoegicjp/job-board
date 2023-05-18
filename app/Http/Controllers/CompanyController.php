@@ -71,12 +71,17 @@ class CompanyController extends Controller
         $validator = validator(request()->all(), [
             'contactPerson'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
             'phone' => ['required','regex:/^(\+?959|09)[0-9]{9}$/'],
-            'comName'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
-            'estDate' =>['nullable','date','before_or_equal:today'],
+            'comName'=>['required','string'],
             'websiteLink'=>['nullable','url','regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'],
             'address'=>['required','string']
         ], [
-            'password.confirmed' => 'The password field confirmation does not match.',
+            'contactPerson.required'=>'Please fill contact person',
+            'contactPerson.regex'=>'Contact person name must contain alphabets only', 
+            'phone.required'=>'Please fill phone number',
+            'phone.regex'=>'Phone number should start with 09/+959 and have a length of 11 characters',  
+            'comName'=>'Please fill company name',
+            'websiteLink'=>'Invalid website link,start with http:// or https://',
+            'address'=>'Please fill address'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -105,6 +110,10 @@ class CompanyController extends Controller
         $company = Company::find($id);
         $validator = validator(request()->all(), [
             'newlogofile' => 'required|mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp|max:2048',
+        ],[
+            'newlogofile.required'=>'Please select new logo image',
+            'newlogofile.mimes'=>'accept only jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp image',
+            'newlogofile.max'=>'photo size should not greater than 2MB'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -168,6 +177,9 @@ class CompanyController extends Controller
         $validator = validator(request()->all(), [
             'newPhotos'=>'required',
             'newPhotos.*' => 'required|mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp|max:2048',
+        ],[
+            'newPhotos.required'=>'Please select new photos',
+            'newPhotos.max'=>'photo size should not greater than 2MB'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
