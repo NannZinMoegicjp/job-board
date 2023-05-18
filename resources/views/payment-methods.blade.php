@@ -7,11 +7,9 @@
 <div class="container my-4">
     @if ($errors->any())
     <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+        @foreach ($errors->all() as $error)
+            <span>{{ $error }}</span><br>
+        @endforeach
     </div>
     @endif
     @if (session('status'))
@@ -158,7 +156,7 @@
                                 <label for="image">Image</label><span class="text-danger"> *</span>
                             </div>
                             <div class="col-md-5 myInputFile">
-                                <input type="file" required name="image" id="image" class="myinput">
+                                <input type="file" required name="image" id="image" class="myinput" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp">
                             </div>
                         </div>
                         <div class="row">
@@ -190,7 +188,7 @@
                                 <label for="updateName">Name</label><span class="text-danger"> *</span>
                             </div>
                             <div class="col-md-5">
-                                <input type="text" name="updateName" id="updateName" class="myinput" value="">
+                                <input type="text" name="updateName" id="updateName" class="myinput" value="" required>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -198,7 +196,7 @@
                                 <label for="updateImage">Image</label><span class="text-danger"> *</span>
                             </div>
                             <div class="col-md-5">
-                                <input type="file" name="updateImage" id="updateImage" class="myinput">
+                                <input type="file" name="updateImage" id="updateImage" class="myinput" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp">
                             </div>
                         </div>
                         <div class="row">

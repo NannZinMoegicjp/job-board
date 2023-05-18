@@ -1,26 +1,15 @@
 @extends('welcome')
 @section('content')
 <div class="container-fluid">
-    <div class="row my-2">
+    <div class="row my-3">
         @if (session('status'))
-        <div class="alert alert-success">
+        <div class="alert alert-success px-3">
             {{ session('status')}}
         </div>
         @endif
-    </div>
-    <div class="row">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-            {{ $error }} <br>
-            @endforeach
-        </div>
-        @endif
-    </div>
-    <div class="row my-3">
         <div class="col-md-7 col-12 mb-1">
-            <form action="{{url('/admin/profile/update')}}" class="bg-white px-3 pb-2 rounded shadow"
-                method="post" enctype="multipart/form-data">
+            <form action="{{url('/admin/profile/update')}}" class="bg-white px-3 pb-2 rounded shadow" method="post"
+                enctype="multipart/form-data">
                 @csrf
                 <div>
                     <h4 class="text-center py-4">Update Profile</h4>
@@ -30,8 +19,13 @@
                         <label for="name">Name</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="text" class="form-control" required name="name" id="name"
-                            value="{{$admin['name']}}">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" required name="name" id="name"
+                            value="@if(old('name')) {{old('name')}} @else {{$admin['name']}} @endif">
+                        @error('name')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -48,10 +42,14 @@
                         <label for="phone">Phone</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="number" class="form-control" min="0" required placeholder="eg. 09454096528"
-                            id="phone" name="phone" value="{{$admin['phone']}}">
+                        <input type="number" class="form-control @error('phone') is-invalid @enderror" required id="phone" name="phone" value="{{ old('phone', $admin['phone']) }}">
+                        @error('phone')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
-                </div>           
+                </div>
                 <div class="row mb-2">
                     <div class="col-md-3 offset-md-1 col-12">
                     </div>
@@ -69,17 +67,21 @@
                     <img src="{{URL::asset('images/admins/'.$admin->profile_image)}}" alt="" class="img img-fluid">
                 </div>
                 <div class="col-8">
-                    <form action="{{url('/admin/profile/update/image')}}" method="post"
-                        enctype="multipart/form-data">
+                    <form action="{{url('/admin/profile/update/image')}}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="file" class="form-control mb-2" name="newProfileImage"
-                            id="newProfileImage" value="{{old('logofile')}}" required>
+                        <input type="file" class="form-control mb-2 @error('newProfileImage') is-invalid @enderror" name="newProfileImage" id="newProfileImage"
+                            value="{{old('logofile')}}" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp" required>
+                        @error('newProfileImage')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                         <input type="submit" class="btn btn-outline-primary" value="upload new profile">
                     </form>
                 </div>
-            </div>         
-        </div>       
-        
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection

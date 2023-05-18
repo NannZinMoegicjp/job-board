@@ -1,27 +1,13 @@
 @extends('Employer.master_employer')
 @section('content')
 <div class="container-fluid">
-    @if (isset($status))
-    <div class="alert alert-success">
-        {{ $status }}
-    </div>
-    @endif
-    @if (isset($error))
-    <div class="alert alert-success">
-        {{ $error }}
-    </div>
-    @endif
-    <div class="row">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-            {{ $error }} <br>
-            @endforeach
-        </div>
-        @endif
-    </div>
     <div class="row my-3">
         <div class="col-md-8 offset-md-2 col-12 mb-1">
+            @if (isset($status))
+            <div class="alert alert-success">
+                {{ $status }}
+            </div>
+            @endif
             <form action="{{route('employer.change.password')}}" class="bg-white px-3 pb-2 rounded shadow" method="post"
                 enctype="multipart/form-data">
                 @csrf
@@ -33,8 +19,11 @@
                         <label for="currentPass">Current password</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="password" class="form-control" required name="currentPass" id="currentPass"
-                            value="{{old('currentPass')}}">                        
+                        <input type="password" class="form-control  @if(session('currentPassError')) is-invalid @endif"
+                            required name="currentPass" id="currentPass" value="{{old('currentPass')}}" />
+                        @if(session('currentPassError'))
+                        <span class="text-danger">{{ session('currentPassError') }}</span>
+                        @endif
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -42,8 +31,17 @@
                         <label for="password">New password</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="password" class="form-control  @error('password') is-invalid @enderror" required
-                            name="password" id="password" value="{{old('password')}}">
+                        <input type="password"
+                            class="form-control @error('password') is-invalid @enderror @if(session('newPassError')) is-invalid @endif"
+                            required name="password" id="password" value="{{old('password')}}">
+                        @error('password')
+                        <span class="invalid-feedback">
+                            <span class="text-danger">{{$message}}</span>
+                        </span>
+                        @enderror
+                        @if(session('newPassError'))
+                        <span class="text-danger">{{ session('newPassError') }}</span>
+                        @endif
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -51,10 +49,14 @@
                         <label for="password_confirmation">Confirm password</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="password" class="form-control  @error('password.confirmed') is-invalid @enderror"
+                        <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
                             required name="password_confirmation" id="password_confirmation"
                             value="{{old('password_confirmation')}}">
-                        <span>***one lowercase letter, one uppercase letter, one digit, and one special character</span>
+                        @error('password_confirmation')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">

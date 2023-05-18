@@ -27,6 +27,9 @@ class AdminController extends Controller
         $validator = validator(request()->all(), [
             'name'=>['required','string','regex:/^[a-zA-Z]+( [a-zA-Z]+)*$/'],
             'phone' => ['required','regex:/^(\+?959|09)[0-9]{9}$/'],
+        ],[
+            'name'=>'name must contain alphabets only',
+            'phone'=>'Phone number should start with 09/+959 and have a length of 11 characters.',
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -43,10 +46,12 @@ class AdminController extends Controller
         $userId = auth()->guard('admin')->id();
         $admin = Admin::find($userId);     
         $validator = validator(request()->all(), [
-            'newProfileImage' => 'required|mimes:jpeg,jpg,svg,gif,png|max:2048',
+            'newProfileImage' => 'required|mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp|max:2048',
+        ],[
+            'newProfileImage' => 'Image file type should be one of jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return back()->withErrors($validator)->withInput();
         }
         if ($admin->profile_image) {
             if (file_exists(public_path('images/admins/' . $admin->profile_image))) {
@@ -65,22 +70,27 @@ class AdminController extends Controller
     }
     //change password
     public function changePassword(Request $request){
-        $validator = validator(request()->all(), [
-            'password'=>['bail','required', 'string', 'min:8', 'confirmed', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
-        ]);
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }  
         $userId = auth()->guard('admin')->id();
-        $admin = Admin::find($userId);        
+        $admin = Admin::find($userId);                       
         if(Hash::check($request->input('currentPass'),$admin->password)){
+            $validator = validator(request()->all(), [
+                'password'=>['bail','required', 'string', 'min:8',  'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
+                'password_confirmation'=>['required','same:password']
+            ],[
+                'password'=>'password must have 8 characters including one lowercase letter, one uppercase letter, one digit, and one
+                special character',
+                'password_confirmation'=>'password confirmation does not match'
+            ]);
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            } 
             if(Hash::check($request->input('password'),$admin->password)){
-                return back()->with('error','Current password and New password is same.Please use new one.')->withInput();
+                return back()->with('newPassError','Current password and New password is same.Please use new one.')->withInput();
             }else{
                 $admin->password = Hash::make($request->input('password'));
             }            
         }else{
-            return back()->with('error','current password incorrect')->withInput();
+            return back()->with('currentPassError','current password incorrect')->withInput();
         }        
         $admin->save();
         return view('change-password')->with('status', 'changed password successfully');

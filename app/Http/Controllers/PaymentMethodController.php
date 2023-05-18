@@ -17,7 +17,11 @@ class PaymentMethodController extends Controller
     public function insert(Request $request){
         $data = new PaymentMethod();
         $validator = validator(request()->all(), [
-            'image' => 'required|mimes:jpeg,jpg,svg,gif,png|max:2048',
+            'name'=>'required|string',
+            'image' => 'required|mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp|max:2048',
+        ],[
+            'name'=>'Payment method name must be filled',
+            'image' => 'Payment method image should be one of jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp',
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -35,22 +39,26 @@ class PaymentMethodController extends Controller
     }
     //update payment method
     public function update(Request $request,$id){
-        $data = PaymentMethod::find($id);        
+        $data = PaymentMethod::find($id);   
+        $validator = validator(request()->all(), [
+            'updateName'=>'required|string',
+            'updateImage' => 'nullable|mimes:jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp|max:2048',
+        ],[
+            'updateName'=>'payment method name must be filled',
+            'updateImage' => 'Payment method image should be one of jpeg,jpg,svg,gif,png,tiff,jfif,bmp,webp',
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
         $data->name = $request->input('updateName');
-        if($request->hasFile('updateImage')){
-            $validator = validator(request()->all(), [
-                'image' => 'mimes:jpeg,jpg,svg,gif,png|max:2048',
-            ]);
-            if ($validator->fails()) {
-                return back()->withErrors($validator)->withInput();
-            }
+        if($request->hasFile('updateImage')){           
             if(file_exists(public_path('images/payment_methods/'.$data->image))){
                 unlink(public_path('images/payment_methods/'.$data->image));
-            }
+            }                  
             $logoImg = time() . "." . $request->file('updateImage')->getClientOriginalName();
             $request->updateImage->move(public_path('images/payment_methods'),$logoImg);
             $data->image = $logoImg;
-        }        
+        }              
         $data->save();
         return redirect('/admin/payment-methods')->with('status','updated payment method successfully');
     }

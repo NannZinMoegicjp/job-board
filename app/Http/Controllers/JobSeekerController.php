@@ -106,26 +106,27 @@ class JobSeekerController extends Controller
     }
     //job seeker change password
     public function changePassword(Request $request){
-        $validator = validator(request()->all(), [
-            'password'=>['bail','required', 'string', 'min:8', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
-            'password_confirmation'=>['bail','required','same:password'],
-        ],[
-            'password' => 'The password should contain at least 8 characters',
-            'password_confirmation' => 'The password confirmation does not match.',
-        ]);
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }  
         $userId = auth()->guard('jobseeker')->id();
-        $jobseeker = JobSeeker::find($userId);        
+        $jobseeker = JobSeeker::find($userId);                       
         if(Hash::check($request->input('currentPass'),$jobseeker->password)){
+            $validator = validator(request()->all(), [
+                'password'=>['bail','required', 'string', 'min:8',  'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/'],
+                'password_confirmation'=>['required','same:password']
+            ],[
+                'password'=>'password must have 8 characters including one lowercase letter, one uppercase letter, one digit, and one
+                special character',
+                'password_confirmation'=>'password confirmation does not match'
+            ]);
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            } 
             if(Hash::check($request->input('password'),$jobseeker->password)){
-                return back()->with('error','Current password and New password is same.Please use new one.')->withInput();
+                return back()->with('newPassError','Current password and New password is same.Please use new one.')->withInput();
             }else{
                 $jobseeker->password = Hash::make($request->input('password'));
             }            
         }else{
-            return back()->with('error','current password incorrect')->withInput();
+            return back()->with('currentPassError','current password incorrect')->withInput();
         }        
         $jobseeker->save();
         return view('JobSeeker.change-password')->with('status', 'changed password successfully.');

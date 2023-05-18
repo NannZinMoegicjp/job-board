@@ -1,15 +1,6 @@
 @extends('welcome')
 @section('content')
 <div class="container-fluid">
-    <div class="row">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-            {{ $error }} <br>
-            @endforeach
-        </div>
-        @endif
-    </div>
     <div class="row my-3">
         <div class="col-md-8 offset-md-2 col-12 mb-1">
             @if (isset($status))
@@ -28,12 +19,10 @@
                         <label for="currentPass">Current password</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="password" class="form-control" required name="currentPass" id="currentPass"
-                            value="{{old('currentPass')}}" @if(session('currentPassError')) is-invalid @endif>
+                        <input type="password" class="form-control  @if(session('currentPassError')) is-invalid @endif" required name="currentPass" id="currentPass"
+                            value="{{old('currentPass')}}" />
                         @if(session('currentPassError'))
-                        <span class="invalid-feedback">
-                            <strong>{{ session('currentPassError') }}</strong>
-                        </span>
+                        <span class="text-danger">{{ session('currentPassError') }}</span>
                         @endif
                     </div>
                 </div>
@@ -42,20 +31,16 @@
                         <label for="password">New password</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="password" class="form-control @error('password') is-invalid @enderror @if(isset($newPassError)) is-invalid @endif" required
+                        <input type="password" class="form-control @error('password') is-invalid @enderror @if(session('newPassError')) is-invalid @endif" required
                             name="password" id="password" value="{{old('password')}}">
                         @error('password')
                         <span class="invalid-feedback">
-                            <strong>{{ $message }}</strong>
+                        <span class="text-danger">{{$message}}</span>
                         </span>
                         @enderror
-                        @if (isset($newPassError))
-                        <span class="invalid-feedback">
-                            <strong>{{ $newPassError }}</strong>
-                        </span>
+                        @if(session('newPassError'))
+                        <span class="text-danger">{{ session('newPassError') }}</span>
                         @endif
-                        <span class="invalid-feedback">***one lowercase letter, one uppercase letter, one digit, and one
-                            special character</span>
                     </div>
                 </div>
                 <div class="row mb-2">
