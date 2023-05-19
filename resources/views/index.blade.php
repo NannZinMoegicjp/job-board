@@ -175,7 +175,6 @@
                         <img src="{{URL::asset('images/states/'.$state->image)}}" alt="" class="img-fluid">
                         <p class="p-1">
                             <span class="cityName">{{$state->name}}</span>
-                            <!-- (<span class="noOfJobs">{{$state->job_count}} jobs</span>) -->
                         </p>
                     </div>
                 </a>

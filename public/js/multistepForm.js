@@ -97,16 +97,27 @@ function validateForm() {
         salaryError = true;
     }
     var emptyDesc = false;
-    var editor = tinymce.get("myeditorinstance1");
-    var value = editor.getContent();
-    if (currentTab == 1 && value.trim().length) {    
-        editor.getBody().classList.add("is-invalid");
+    var editor1 = tinymce.get("myeditorinstance1");
+    var value1 = editor1.getContent();
+    if (currentTab == 1 && value1.trim().length<1) {  
+        editor1.getElement().classList.add("is-invalid");
         var descriptionError = document.getElementById("descriptionError");
         descriptionError.classList.remove("d-none");
         descriptionError.classList.add("d-inline-block");
         emptyDesc = true;
     }
-    var result = valid && checked && !salaryError && !emptyDesc;
+    var emptyRequirement = false;
+    var editor2 = tinymce.get("myeditorinstance2");
+    var value2 = editor2.getContent();
+    if (currentTab == 2 && value2.trim().length<1) {    
+        editor2.getBody().classList.add("is-invalid");
+        var requirementError = document.getElementById("requirementError");
+        requirementError.classList.remove("d-none");
+        requirementError.classList.add("d-inline-block");
+        emptyRequirement = true;
+    }
+    alert(emptyDesc);
+    var result = valid && checked && !salaryError && !emptyDesc && !emptyRequirement;
     // If the valid status is true, mark the step as finished and valid:
     if (result) {
         document.getElementsByClassName("stepIndicator")[currentTab].className += " finish";

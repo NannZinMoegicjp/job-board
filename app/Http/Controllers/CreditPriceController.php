@@ -7,7 +7,7 @@ use App\Models\CreditPrice;
 
 class CreditPriceController extends Controller
 {
-    //get all prices of credit price
+    //get all prices of credit
     public function index(){
         $data = CreditPrice::orderBy('created_at','desc')->get();
         return view('pricing')->with('data',$data);

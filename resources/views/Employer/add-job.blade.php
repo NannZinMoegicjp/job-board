@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <input type="text" class="form-control" required name="title" id="title" value="{{ old('title') }}"
-                    oninput="removeWarning(this);">
+                    >
                 <span class="invalid-feedback d-none">
                     <span class="text-danger"><strong>Please fill title</strong></span>
                 </span>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='0' step="10000" class="form-control" required name="minSalary" id="minSalary"
-                    value="{{ old('minSalary') }}" oninput="removeWarning(this);">
+                    value="{{ old('minSalary') }}" >
                 <span class="invalid-feedback d-none">
                     <span class="text-danger"><strong>Please fill minimum salary</strong></span>
                 </span>
@@ -60,7 +60,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='0' step="10000" class="form-control" required name="maxSalary" id="maxSalary"
-                    value="{{ old('maxSalary') }}" oninput="removeWarning(this);">
+                    value="{{ old('maxSalary') }}" >
                 <span class="invalid-feedback d-none">
                     <span class="text-danger"><strong>Please fill maximum salary</strong></span>
                 </span>
@@ -76,7 +76,7 @@
             </div>
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" id="openPosition" name="openPosition"
-                    value="{{old('openPosition')}}" oninput="removeWarning(this);">
+                    value="{{old('openPosition')}}" >
                 <span class="invalid-feedback d-none">
                     <span class="text-danger"><strong>Please fill open position</strong></span>
                 </span>
@@ -91,14 +91,14 @@
                 <div class="d-flex">
                     <div class="form-check me-2 col-form-label">
                         <input class="form-check-input" type="checkbox" value="female" id="female" name="female"
-                            @if(old('female')=='female' ) checked @endif onchange="removeCheckBoxWarning();">
+                            @if(old('female')=='female' ) checked @endif>
                         <label class="form-check-label" for="female">
                             Female
                         </label>
                     </div>
                     <div class="form-check col-form-label">
                         <input class="form-check-input" type="checkbox" value="male" id="male" name="male"
-                            @if(old('male')=='male' ) checked @endif onchange="removeCheckBoxWarning();">
+                            @if(old('male')=='male' ) checked @endif>
                         <label class="form-check-label" for="male">
                             Male
                         </label>
@@ -115,7 +115,7 @@
                 <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
-                <select name="jobCategory" id="jobCategory" class="form-select" required oninput="removeWarning(this);">
+                <select name="jobCategory" id="jobCategory" class="form-select" required >
                     <option value="">-- Select job category --</option>
                     @if(isset($data['jobCategories']))
                     @foreach ($data['jobCategories'] as $jobCat)
@@ -135,7 +135,7 @@
                 <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
-                <select name="expLevel" id="expLevel" class="form-select" required oninput="removeWarning(this);">
+                <select name="expLevel" id="expLevel" class="form-select" required >
                     <option value="">-- Select experience level --</option>
                     @if(isset($data['expLevels']))
                     @foreach ($data['expLevels'] as $expLev)
@@ -155,7 +155,7 @@
                 <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
-                <select name="empType" id="empType" class="form-select" required oninput="removeWarning(this);">
+                <select name="empType" id="empType" class="form-select" required >
                     <option value="">-- Select employment type --</option>
                     @if(isset($data['empTypes']))
                     @foreach ($data['empTypes'] as $empType)
@@ -175,7 +175,7 @@
                 <span class="text-danger"> *</span>
             </div>
             <div class="col-md-7 col-12">
-                <select name="address" id="address" class="form-select" required oninput="removeWarning(this);">
+                <select name="address" id="address" class="form-select" required >
                     <option value="">-- Select branch --</option>
                     @if(isset($data['addresses']))
                     @foreach ($data['addresses'] as $addr)
@@ -239,6 +239,11 @@
         var genderError = document.getElementById("genderError");
         genderError.classList.remove("d-inline-block");
         genderError.classList.add("d-none");
-    }    
+    }   
+    let removeTextareaWarning=()=>{
+        var descriptionError = document.getElementById("descriptionError");
+        descriptionError.classList.remove("d-inline-block");
+        descriptionError.classList.add("d-none");
+    }   
 </script>
 @endsection

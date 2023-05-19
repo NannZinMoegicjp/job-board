@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="text" class="form-control @error('contactPerson') is-invalid @enderror"
-                            name="contactPerson" id="contactPerson" required value="{{ old('contactPerson') }}">
+                            name="contactPerson" id="contactPerson"  value="{{ old('contactPerson') }}">
                         @error('contactPerson')
                         <span class="invalid-feedback">
                             <strong>{{ $message }}</strong>
@@ -33,7 +33,7 @@
                         <label for="userEmail">Email</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="email" class="form-control @error('userEmail') is-invalid @enderror" required
+                        <input type="email" class="form-control @error('userEmail') is-invalid @enderror" 
                             name="userEmail" id="userEmail" value="{{ old('userEmail') }}">
                         @error('userEmail')
                         <span class="invalid-feedback">
@@ -47,7 +47,7 @@
                         <label for="phone">Phone</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="text" class="form-control @error('phone') is-invalid @enderror" min="0" required
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror" min="0" 
                             placeholder="eg. 09454096528" id="phone" name="phone" value="{{ old('phone') }}">
                         @error('phone')
                         <span class="invalid-feedback">
@@ -61,7 +61,7 @@
                         <label for="password" class="col-form-label">Password</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" required
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" 
                             name="password" id="password" value="{{ old('password') }}">
                         @error('password')
                         <span class="invalid-feedback">
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
-                            required name="password_confirmation" id="password_confirmation"
+                             name="password_confirmation" id="password_confirmation"
                             value="{{ old('password_confirmation') }}">
                         @error('password_confirmation')
                         <span class="invalid-feedback">
@@ -101,7 +101,7 @@
                         <label for="comName">Company name</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12"> <input type="text"
-                            class="form-control @error('comName') is-invalid @enderror" required id="comName"
+                            class="form-control @error('comName') is-invalid @enderror"  id="comName"
                             name="comName" value="{{old('comName')}}">
                         @error('comName')
                         <span class="invalid-feedback">
@@ -140,7 +140,7 @@
                         <label for="logofile" class="form-label">Company Logo</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="file" class="form-control mb-1 @error('logofile') is-invalid @enderror" required
+                        <input type="file" class="form-control mb-1 @error('logofile') is-invalid @enderror" 
                             placeholder="Logo" name="logofile" id="logofile" value="{{old('logofile')}}"
                             accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp" onchange="displayImage(event)">
                         @error('logofile')
@@ -171,7 +171,7 @@
                         <label for="state">Division/state</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <select name="state" id="state" class="form-select" required>
+                        <select name="state" id="state" class="form-select @error('state') is-invalid @enderror" >
                             <option value="">-- Select State --</option>
                             @if(isset($data["states"]))
                             @foreach ($data["states"] as $state)
@@ -180,6 +180,11 @@
                             @endforeach
                             @endif
                         </select>
+                        @error('state')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -187,9 +192,14 @@
                         <label for="city">Township</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <select name="city" id="city" class="form-select" required>
+                        <select name="city" id="city" class="form-select @error('city') is-invalid @enderror" >
                             <option value="">-- Select city --</option>
                         </select>
+                        @error('city')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -197,8 +207,13 @@
                         <label for="address">Address</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <textarea class="form-control address" placeholder="Enter details address" required id="address"
+                        <textarea class="form-control address @error('address') is-invalid @enderror" placeholder="Enter details address"  id="address"
                             rows="4" name="address">{{old('address')}}</textarea>
+                            @error('address')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -206,7 +221,7 @@
                         <label for="industry">Main Industry</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <select name="industry[]" id="industry" class="form-select" multiple required>
+                        <select name="industry[]" id="industry" class="form-select @error('industry') is-invalid @enderror" multiple >
                             <option value="">-- Select industry --</option>
                             @if(isset($data["industries"]))
                             @foreach ($data["industries"] as $industry)
@@ -215,6 +230,11 @@
                             @endforeach
                             @endif
                         </select>
+                        @error('industry')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -222,7 +242,7 @@
                         <label for="size">Number of employee</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <select name="size" id="size" class="form-select" required>
+                        <select name="size" id="size" class="form-select @error('size') is-invalid @enderror" >
                             <option value="">-- Select no of employee --</option>
                             <option value="1-5" @if(old('size')=='1-5' ) selected @endif>1-5</option>
                             <option value="6-10" @if(old('size')=='6-10' ) selected @endif>6-10</option>
@@ -236,6 +256,11 @@
                             <option value="5000-10000" @if(old('size')=='5000-10000' ) selected @endif>5000-10000
                             </option>
                         </select>
+                        @error('size')
+                        <span class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -243,7 +268,7 @@
                     </div>
                     <div class="col-md-7 col-12 d-flex">
                         <input type="hidden" name="register_type" value="employer">
-                        <input type="submit" name="btnRegister" id="btnRegister" class="registerBtn btn me-2" required
+                        <input type="submit" name="btnRegister" id="btnRegister" class="registerBtn btn me-2" 
                             value="register">
                         <a href="{{route('home')}}"><input type="button" class="btn-secondary btn" value="Cancel"></a>
                     </div>

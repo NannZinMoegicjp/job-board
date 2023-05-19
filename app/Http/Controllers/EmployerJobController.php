@@ -16,14 +16,13 @@ class EmployerJobController extends Controller
     //get all jobs
     public function index(Request $request)
     {
-        $addrIDs = Address::select('id')->where('company_id', auth()->guard('employer')->id())->whereNull('deleted_at')->get();
+        $addrIDs = Address::select('id')->where('company_id', auth()->guard('employer')->id())->get();
         $jobs = Job::whereIn('address_id',$addrIDs)->where('status','active')->where('created_at','>',Carbon::today()->subMonths(6))->orderBy('created_at','desc')->get();
         return view('Employer.job-manage')->with("jobs",$jobs);
     }
     //show form to add job
     public function insertGet(Request $request)
     {
-        //need to get from logged in id
         $addrs = Address::where('company_id',  auth()->guard('employer')->id())->get();
         $jobCategories = JobCategory::orderBy('name')->get();
         $empTypes = EmploymentType::orderBy('name')->get();
@@ -77,7 +76,7 @@ class EmployerJobController extends Controller
         $company->save();
         return redirect('/employer/job/details/'.$job->id)->with('status','posted job successfully!');
     }
-    //show job data and show in update form
+    //get job data and show in update form
     public function updateGet(Request $request,$id)
     {
         $job = Job::find($id);

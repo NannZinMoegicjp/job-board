@@ -72,7 +72,7 @@ class EmployerController extends Controller
         $order->save();
         return redirect('/employer/buy/credit')->with('status','your purchase has been made. please wait for confirmation.');
     }
-    //get all applications to jobs of company
+    //get all job applications of company
     public function getApplications(Request $request){
         $addrIDs = Address::select('id')->where('company_id',  auth()->guard('employer')->id())->get();
         $jobIDs = Job::select('id')->whereIn('address_id', $addrIDs)->where('status','active')->get();

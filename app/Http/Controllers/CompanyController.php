@@ -24,11 +24,11 @@ class CompanyController extends Controller
         $companies = Company::orderByDesc('created_at')->get();;
         return view('companies-manage')->with('companies', $companies);
     }
-    //show change password form
+    //show change password form(for employer)
     public function changePasswordForm(){
         return view('Employer.change-password');
     }
-    //change password
+    //change password(for employer)
     public function changePassword(Request $request){
         $userId = auth()->guard('employer')->id();
         $employer = Company::find($userId);                       

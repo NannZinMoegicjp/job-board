@@ -38,6 +38,9 @@ $job = $data['job'];
             <div class="col-md-7 col-12">
                 <input type="text" class="form-control" required name="title" id="title" value="{{$job->title}}"
                     oninput="this.className = 'form-control'">                
+                    <span class="invalid-feedback d-none">
+                    <span class="text-danger"><strong>Please fill title</strong></span>
+                </span>
             </div>
         </div>
         <div class="row mb-2">
@@ -48,6 +51,9 @@ $job = $data['job'];
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" required name="minSalary" id="minSalary"
                     value="{{$job->min_salary}}" oninput="this.className = 'form-control'">
+                    <span class="invalid-feedback d-none">
+                    <span class="text-danger"><strong>Please fill minimum salary</strong></span>
+                </span>
             </div>
         </div>
         <div class="row mb-2">
@@ -58,6 +64,12 @@ $job = $data['job'];
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" required name="maxSalary" id="maxSalary"
                     value="{{$job->max_salary}}" oninput="this.className = 'form-control'">
+                    <span class="invalid-feedback d-none">
+                    <span class="text-danger"><strong>Please fill maximum salary</strong></span>
+                </span>
+                <span class="invalid-feedback d-none" id="salaryError">
+                    <span class="text-danger"><strong>Maximum salary should not less than minimum salary</strong></span>
+                </span>
             </div>
         </div>
         <div class="row mb-2">
@@ -68,6 +80,9 @@ $job = $data['job'];
             <div class="col-md-7 col-12">
                 <input type="number" min='1' class="form-control" id="openPosition" name="openPosition"
                     value="{{$job->open_position}}" oninput="this.className = 'form-control'">
+                    <span class="invalid-feedback d-none">
+                    <span class="text-danger"><strong>Please fill open position</strong></span>
+                </span>
             </div>
         </div>
         <div class="row mb-2">
@@ -75,7 +90,8 @@ $job = $data['job'];
                 <label>Gender</label>
                 <span class="text-danger"> *</span>
             </div>
-            <div class="col-md-7 col-12 d-flex">
+            <div class="col-md-7 col-12">
+                <div class="d-flex">
                 @if($job->gender == 'both')
                 <div class="form-check me-2">
                     <input class="form-check-input" type="checkbox" value="female" id="female" name="female" checked>
@@ -116,7 +132,12 @@ $job = $data['job'];
                     </label>
                 </div>
                 @endif
+                </div>
+                <div class="invalid-feedback d-none" id="genderError">
+                    <span class="text-danger"><strong>Please check one of female,male </strong></span>
+                </div>
             </div>
+            
         </div>
         <div class="row mb-2">
             <div class="col-md-3 offset-md-1 col-12  col-form-label">
@@ -135,6 +156,9 @@ $job = $data['job'];
                     @endforeach
                     @endif
                 </select>
+                <span class="invalid-feedback d-none">
+                    <span class="text-danger"><strong>Please select category</strong></span>
+                </span>
             </div>
         </div>
         <div class="row mb-2">
@@ -154,6 +178,9 @@ $job = $data['job'];
                     @endforeach
                     @endif
                 </select>
+                <span class="invalid-feedback d-none">
+                    <span class="text-danger"><strong>Please select experience level</strong></span>
+                </span>
             </div>
         </div>
         <div class="row mb-2">
@@ -173,6 +200,9 @@ $job = $data['job'];
                     @endforeach
                     @endif
                 </select>
+                <span class="invalid-feedback d-none">
+                    <span class="text-danger"><strong>Please select employment type</strong></span>
+                </span>
             </div>
         </div>
         <div class="row mb-2">
@@ -192,6 +222,9 @@ $job = $data['job'];
                     @endforeach
                     @endif
                 </select>
+                <span class="invalid-feedback d-none">
+                    <span class="text-danger"><strong>Please select branch</strong></span>
+                </span>
             </div>
         </div>
     </div>

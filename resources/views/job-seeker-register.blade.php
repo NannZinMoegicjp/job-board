@@ -15,8 +15,8 @@
                         <label for="userName" class="col-form-label">Name</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="text" class="form-control @error('userName') is-invalid @enderror" required
-                            name="userName" id="userName" value="{{ old('userName') }}" />
+                        <input type="text" class="form-control @error('userName') is-invalid @enderror" name="userName"
+                            id="userName" value="{{ old('userName') }}" />
                         @error('userName')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -29,7 +29,7 @@
                         <label for="userEmail" class="col-form-label">Email</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="email" class="form-control @error('userEmail') is-invalid @enderror" required
+                        <input type="email" class="form-control @error('userEmail') is-invalid @enderror"
                             name="userEmail" id="userEmail" value="{{ old('userEmail') }}" />
                         @error('userEmail')
                         <span class="invalid-feedback" role="alert">
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-md-7 col-12">
                         <input type="number" class="form-control @error('userPhoneNumber') is-invalid @enderror" min="0"
-                            required placeholder="eg. 09454096728" name="userPhoneNumber" id="userPhoneNumber"
+                            placeholder="eg. 09454096728" name="userPhoneNumber" id="userPhoneNumber"
                             value="{{ old('userPhoneNumber') }}" />
                         @error('userPhoneNumber')
                         <span class="invalid-feedback" role="alert">
@@ -59,8 +59,8 @@
                             birth</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="date" class="form-control @error('dob') is-invalid @enderror" required
-                            placeholder="dob" name="dob" id="dob" value="{{ old('dob') }}" />
+                        <input type="date" class="form-control @error('dob') is-invalid @enderror" placeholder="dob"
+                            name="dob" id="dob" value="{{ old('dob') }}" />
                         @error('dob')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -73,7 +73,7 @@
                         <label for="password" class="col-form-label">Password</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" required
+                        <input type="password" class="form-control @error('password') is-invalid @enderror"
                             name="password" id="password" value="{{ old('password') }}" />
                         @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -93,7 +93,7 @@
                     <div class="col-md-7 col-12">
                         <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
                             name="password_confirmation" id="password_confirmation"
-                            value="{{ old('password_confirmation') }}" required/>
+                            value="{{ old('password_confirmation') }}" />
                         @error('password_confirmation')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -109,7 +109,7 @@
                     <div class="col-md-7 col-12">
                         <input type="file" class="form-control mb-1 @error('profileImage') is-invalid @enderror"
                             name="profileImage" accept=".jpeg,.jpg,.svg,.gif,.png,.tiff,.jfif,.bmp,.webp"
-                            id="profileImage" value="{{old('profileImage')}}" onchange="displayImage(event)" required/>
+                            id="profileImage" value="{{old('profileImage')}}" onchange="displayImage(event)" />
                         @error('profileImage')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -123,8 +123,13 @@
                         <label for="gender">Gender</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <input type="radio" name="gender" id="female" value="female" required/>Female
-                        <input type="radio" name="gender" id="male" value="male"/>Male
+                        <input type="radio" name="gender" id="female" value="female" require class="@error('gender') is-invalid @enderror"/>Female
+                        <input type="radio" name="gender" id="male" value="male" />Male
+                        @error('gender')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -132,15 +137,20 @@
                             class="col-form-label">Address</label><span class="text-danger"> *</span>
                     </div>
                     <div class="col-md-7 col-12">
-                        <textarea class="form-control address" required id="address" name="address"
+                        <textarea class="form-control address @error('address') is-invalid @enderror" id="address" name="address"
                             rows="4">{{ old('address') }}</textarea>
+                        @error('address')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row my-4">
                     <div class="col-md-3 offset-md-1 col-12"></div>
                     <div class="col-md-7 col-12">
                         <input type="hidden" name="register_type" value="job_seeker">
-                        <input type="submit" name="btnRegister" id="btnRegister" class="registerBtn btn me-2" required
+                        <input type="submit" name="btnRegister" id="btnRegister" class="registerBtn btn me-2"
                             value="register">
                         <a href="{{route('home')}}"><input type="button" class="btn-secondary btn" value="Cancel"></a>
                     </div>

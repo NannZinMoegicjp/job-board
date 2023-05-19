@@ -11,9 +11,7 @@
                 <div class="row">
                     <div class="col-md-3 offset-md-1 p-2 d-flex flex-column justify-content-center align-items-center">
                         <img src="{{URL::asset('images/jobseekers/'.$jobseeker->image)}}" alt="" class="profileImg">
-                        <h5>{{$jobseeker->name}}</h5>
-                        <!-- <a href="{{url('/admin/job-seekers/update/'.$jobseeker->id)}}"><button type="button"
-                                class="btn btn-primary"><i class="bi bi-pencil-fill update"></i>Edit</button></a> -->
+                        <h5>{{$jobseeker->name}}</h5>                        
                     </div>
                     <div class="col-md-7">
                         <div class="row border-bottom p-2">
