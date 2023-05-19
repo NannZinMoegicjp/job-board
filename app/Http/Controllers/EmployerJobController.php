@@ -133,7 +133,7 @@ class EmployerJobController extends Controller
         if($company->no_of_credit > 0){
             return redirect()->route('insert.job');            
         }else{
-            return redirect()->route('employer.jobs')->with('noCredit', 'please buy credit to post jobs!');
+            return redirect()->route('employer.jobs')->with('noCredit', 'you have 0 credit left.please buy credit to post jobs!');
         }        
     }
     //view job detail

@@ -84,6 +84,7 @@ class AdminDashBoardController extends Controller
                 ->join('orders', 'order_confirmations.order_id', '=', 'orders.id')
                 ->join('credit_prices', 'orders.credit_price_id', '=', 'credit_prices.id')
                 ->whereYear('order_confirmations.created_at', '=', date('Y'))
+                ->where('is_confirmed', 1)
                 ->groupBy('month')
                 ->get();
         }

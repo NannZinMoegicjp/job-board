@@ -87,8 +87,8 @@ function validateForm() {
         genderError.classList.remove("d-none");
         genderError.classList.add("d-inline-block");
     }
-    var minSalary = document.getElementById('minSalary').value;
-    var maxSalary = document.getElementById('maxSalary').value;
+    var minSalary = parseInt(document.getElementById('minSalary').value);
+    var maxSalary = parseInt(document.getElementById('maxSalary').value);
     var salaryError = false;
     if (maxSalary < minSalary) {
         var salaryError = document.getElementById("salaryError");
@@ -116,7 +116,6 @@ function validateForm() {
         requirementError.classList.add("d-inline-block");
         emptyRequirement = true;
     }
-    alert(emptyDesc);
     var result = valid && checked && !salaryError && !emptyDesc && !emptyRequirement;
     // If the valid status is true, mark the step as finished and valid:
     if (result) {
